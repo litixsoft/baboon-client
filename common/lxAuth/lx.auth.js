@@ -27,7 +27,7 @@ angular.module('lx.auth', ['lx.auth.services'])
 
         $scope.login = function () {
 
-            auth.login($scope.username, $scope.password, function (err, res) {
+            lxAuth.login($scope.username, $scope.password, function (err, res) {
                 if (res && !err) {
                     $window.location.reload();
                 }
