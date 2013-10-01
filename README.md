@@ -31,6 +31,8 @@ Build the client app and start the server with grunt.
 
 ## Release History
 ### v0.0.1
+     * include and rename module
+### v0.0.1
      * initial structure
 
 ## Author
