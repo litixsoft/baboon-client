@@ -1,0 +1,26 @@
+{
+  "name": "baboon-client",
+  "version": "0.0.2",
+  "authors": [
+    "Timo Liebetrau <t.liebetrau@litixsoft.de>"
+  ],
+  "description": "Baboon Web Toolkit, client library.",
+  "keywords": [
+    "baboon",
+    "client",
+    "library"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/litixsoft/baboon-client",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test"
+  ],
+  "dependencies": {
+      "angular": "~1.0.7",
+      "angular-bootstrap": "~0.3.0",
+      "bootstrap-css": "~2.3.2",
+      "angular-ui-utils": "git@github.com:litixsoft/ui-utils.git#master"
+  }
+}
