@@ -30,8 +30,8 @@ Build the client app and start the server with grunt.
     $ grunt test
 
 ## Release History
-### v0.2
-     *
+### v0.0.1
+     * initial structure
 
 ## Author
 [Litixsoft GmbH](http://www.litixsoft.de)
