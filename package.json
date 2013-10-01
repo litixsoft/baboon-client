@@ -60,6 +60,14 @@
         "test": "grunt test"
     },
     "devDependencies": {
+        "grunt": "0.4.1",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-contrib-jshint": "~0.6.4",
+        "grunt-karma": "~0.6.2",
+        "grunt-open": "~0.2.2",
+        "karma-detect-browsers": "*",
+        "karma-coverage": "*",
+        "karma-junit-reporter": "*"
     },
     "dependencies": {
     }
