@@ -1,6 +1,6 @@
 /*global angular*/
-angular.module('baboon.nav', ['baboon.nav.directives'])
-    .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs',
+angular.module('lx.nav', ['lx.nav.directives'])
+    .controller('lxNavTreeViewCtrl', ['$scope', '$element', '$attrs',
         function ($scope, $element, $attrs) {
 
             if (typeof($scope[$attrs.itemlistAttr]) === 'undefined') {

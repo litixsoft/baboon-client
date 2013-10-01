@@ -1,6 +1,6 @@
 /*global angular*/
-angular.module('baboon.auth.services', [])
-    .factory('auth', ['$http', function ($http) {
+angular.module('lx.auth.services', [])
+    .factory('lxAuth', ['$http', function ($http) {
         var pub = {};
 
         pub.register = function (user, callback) {

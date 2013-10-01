@@ -1,10 +1,10 @@
 /*global angular*/
-angular.module('baboon.auth', ['baboon.auth.services'])
+angular.module('lx.auth', ['lx.auth.services'])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/api/auth/register', {templateUrl: '/baboon_auth/register.html'});
-        $routeProvider.when('/api/auth/forget', {templateUrl: '/baboon_auth/forget.html'});
+        $routeProvider.when('/api/auth/register', {templateUrl: '/lxAuth/register.html'});
+        $routeProvider.when('/api/auth/forget', {templateUrl: '/lxAuth/forget.html'});
     }])
-    .controller('baboon.auth.loginCtrl', ['$scope', '$window', 'auth', function ($scope, $window, auth) {
+    .controller('lxAuthLoginCtrl', ['$scope', '$window', 'lxAuth', function ($scope, $window, lxAuth) {
         var window = angular.element($window);
 
         $scope.$watch('openMenu', function (newval) {
