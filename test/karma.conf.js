@@ -9,7 +9,8 @@ module.exports = function (config) {
         files: [
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'bower_components/angular-ui-bootstrap/src/modal/modal.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'build/tmp/templates/**/*.js',
             'common/**/*.js',
             'optional/**/*.js'
         ],

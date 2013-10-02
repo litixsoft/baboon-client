@@ -11,14 +11,12 @@ describe('baboon message box', function () {
 
     describe('lxModal', function () {
         beforeEach(function () {
-
             inject(function ($injector, _$rootScope_, _$compile_, $templateCache) {
                 service = $injector.get('lxModal');
                 scope = _$rootScope_;
                 $compile = _$compile_;
                 $templateCache.put('/baboon_msgBox/msgBox.html', '<p>Hello</p>');
             });
-
         });
 
         it('should be initialized correctly', function () {

@@ -1,7 +1,7 @@
 /*global angular*/
-angular.module('lx.modal.directives',[])
-    .directive('draggableModal',['$document', function($document) {
-        return function(scope, element, attr) {
+angular.module('lx.modal.directives', [])
+    .directive('draggableModal', ['$document', function ($document) {
+        return function (scope, element) {
 
             var modalWindow = element.parent();
 
@@ -10,7 +10,7 @@ angular.module('lx.modal.directives',[])
                 cursor: 'pointer'
             });
 
-            element.bind('mousedown',function(event){
+            element.bind('mousedown', function (event) {
                 // Prevent default dragging of selected content
                 event.preventDefault();
 
@@ -25,7 +25,7 @@ angular.module('lx.modal.directives',[])
                 $document.bind('mouseup', mouseup);
             });
 
-            function offset(elm) {
+            function offset (elm) {
 //                try {return elm.offset();} catch(e) {}
                 var rawDom = elm[0];
                 var _x = 0;
@@ -35,10 +35,10 @@ angular.module('lx.modal.directives',[])
                 var scrollY = window.pageYOffset || body.scrollTop;
                 _x = rawDom.getBoundingClientRect().left + scrollX;
                 _y = rawDom.getBoundingClientRect().top + scrollY;
-                return { left: _x, top:_y };
+                return { left: _x, top: _y };
             }
 
-            function mousemove(event) {
+            function mousemove (event) {
                 modalWindow.css({
                     opacity: '0.4'
                 });
@@ -51,16 +51,16 @@ angular.module('lx.modal.directives',[])
                 });
             }
 
-            function mouseup() {
+            function mouseup () {
                 modalWindow.css({
                     opacity: '1'
                 });
                 $document.unbind('mousemove', mousemove);
                 $document.unbind('mouseup', mouseup);
             }
-        }
+        };
     }])
-    .directive('bbMsgbox', ['$rootScope','lxModal', function ($rootScope, lxModal){
+    .directive('bbMsgbox', ['$rootScope', 'lxModal', function ($rootScope, lxModal) {
         return {
             restrict: 'E,A',
             scope: {
@@ -72,11 +72,10 @@ angular.module('lx.modal.directives',[])
                 msgClass: '='
             },
             link: function (scope) {
-
-                scope.$watch('msgShow',function(value){
+                scope.$watch('msgShow', function (value) {
                     //if visible use factory to show msgbox
-                    if(value){
-                        lxModal.msgBox(scope.msgHeadline,scope.msgMessage,scope.msgType,scope.msgCbs,scope.msgClass);
+                    if (value) {
+                        lxModal.msgBox(scope.msgHeadline, scope.msgMessage, scope.msgType, scope.msgCbs, scope.msgClass);
                     }
                 });
             }

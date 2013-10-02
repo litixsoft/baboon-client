@@ -1,19 +1,19 @@
 /*global angular*/
 angular.module('lx.nav', ['lx.nav.directives'])
-    .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs','lxNavService',
+    .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs', 'lxNavService',
         function ($scope, $element, $attrs, lxNavService) {
 
-            function callback(data){
+            function callback (data) {
 
                 var treeData = [];
 
-                if($attrs.nrAttr===undefined){
-                    angular.forEach(data, function(value, key){
-                        treeData.push({'title' : value.title, 'route' : value.route, 'target' : value.target});
+                if ($attrs.nrAttr === undefined) {
+                    angular.forEach(data, function (value) {
+                        treeData.push({'title': value.title, 'route': value.route, 'target': value.target});
                     });
                     $scope.treeData = treeData;
                 } else {
-                    if($attrs.nrAttr <= data.length - 1){
+                    if ($attrs.nrAttr <= data.length - 1) {
                         $scope.treeData = data[$attrs.nrAttr].children;
                     }
                 }
@@ -47,8 +47,8 @@ angular.module('lx.nav', ['lx.nav.directives'])
         var pub = {};
         pub.navigation = [];
 
-        pub.httpGetNavData = function(id, callback){
-            $http.get('/lxNav/getNavData').success(function(data){
+        pub.httpGetNavData = function (id, callback) {
+            $http.get('/lxNav/getNavData').success(function (data) {
                 return callback(data.data);
             });
         };
@@ -58,7 +58,6 @@ angular.module('lx.nav', ['lx.nav.directives'])
 //        pub.getNavData = function(){
 //          return pub.navigation;
 //        };
-
 
         return pub;
 
