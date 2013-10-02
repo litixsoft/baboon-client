@@ -183,7 +183,7 @@ describe('lxPager', function () {
             setTimeout(function () {
                 expect(elementScope.refresh).not.toHaveBeenCalled();
                 expect(elementScope.refresh.calls.length).toEqual(0);
-            }, 250);
+            }, 750);
         });
 
         it('should ', function () {
