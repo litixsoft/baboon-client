@@ -79,10 +79,10 @@ module.exports = function (grunt) {
         },
         karma: {
             unit: {
-                configFile: 'karma.conf.js'
+                configFile: 'test/karma.conf.js'
             },
             ci: {
-                configFile: 'karma.conf.js',
+                configFile: 'test/karma.conf.js',
                 reporters: ['progress', 'junit'],
                 junitReporter: {
                     outputFile: 'build/reports/tests/baboon-client.xml',
@@ -90,17 +90,17 @@ module.exports = function (grunt) {
                 }
             },
             debug: {
-                configFile: 'karma.conf.js',
+                configFile: 'test/karma.conf.js',
                 detectBrowsers: {
                     enabled: false
                 },
                 singleRun: false
             },
             coverage: {
-                configFile: 'karma.coverage.conf.js'
+                configFile: 'test/karma.coverage.conf.js'
             },
             cobertura: {
-                configFile: 'karma.coverage.conf.js',
+                configFile: 'test/karma.coverage.conf.js',
                 coverageReporter: {
                     type: 'cobertura',
                     dir: 'build/reports/coverage'
