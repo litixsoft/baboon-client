@@ -1,4 +1,4 @@
-Baboon Client - a client library for Baboon Webtoolkit.
+Baboon Client - a client library for Baboon Webtoolkit. [![Build Status](https://travis-ci.org/litixsoft/baboon-client.png?branch=master)](https://travis-ci.org/litixsoft/baboon-client)
 
 _(Coming soon)_
 
