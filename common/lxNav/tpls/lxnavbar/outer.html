@@ -1,0 +1,3 @@
+<ul class="nav {{type}}">
+    <li class="{{data.hide}}" ng-class="{active: $uiRoute, dropdown: data.children.length}" ui-route="{{data[linkAttr]}}" ng-repeat="data in treeData"  ng-include="'baboon.nav.tpl/lxnavbar/inner.html'"></li>
+</ul>

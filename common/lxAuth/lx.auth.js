@@ -1,8 +1,8 @@
 /*global angular*/
-angular.module('lx.auth', ['lx.auth.services'])
+angular.module('lx.auth', ['lx.auth.services','lxAuth/tpls/register.html','lxAuth/tpls/forget.html'])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/api/auth/register', {templateUrl: '/lxAuth/register.html'});
-        $routeProvider.when('/api/auth/forget', {templateUrl: '/lxAuth/forget.html'});
+        $routeProvider.when('/api/auth/register', {templateUrl: 'lxAuth/tpls/register.html'});
+        $routeProvider.when('/api/auth/forget', {templateUrl: 'lxAuth/tpls/forget.html'});
     }])
     .controller('lxAuthLoginCtrl', ['$scope', '$window', 'lxAuth', function ($scope, $window, lxAuth) {
         var window = angular.element($window);

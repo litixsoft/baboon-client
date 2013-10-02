@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('lx.modal', ['lx.modal.directives'])
+angular.module('lx.modal', ['lx.modal.directives','lxModal/tpls/msgBox.html'])
     .controller('lxModalCtrl', ['$rootScope', '$scope', '$modalInstance', 'modalOptions', function ($rootScope, $scope, $modalInstance, modalOptions) {
 
         $scope.modalOptions = modalOptions;
@@ -97,8 +97,7 @@ angular.module('lx.modal', ['lx.modal.directives'])
                     modalOptions: function () { return modalOptions; }
                 },
                 keyboard: false,
-                templateUrl: '/baboon_msgBox/msgBox.html'
-//                template: htmlTemplate
+                templateUrl: 'lxModal/tpls/msgBox.html'
             });
 
         };
