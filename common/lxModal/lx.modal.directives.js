@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('lx.modal.directives',[])
-    .directive('draggable',['$document', function($document) {
+    .directive('draggableModal',['$document', function($document) {
         return function(scope, element, attr) {
 
             var modalWindow = element.parent();
