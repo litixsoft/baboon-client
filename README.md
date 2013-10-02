@@ -13,11 +13,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 install global dependencies:
 
-    $ npm install -g grunt-cli karma
+    $ npm install -g grunt-cli karma bower
 
 On linux use administrative rights to install global modules:
 
-    $ sudo npm install -g grunt-cli karma
+    $ sudo npm install -g grunt-cli karma bower
 
 
 Clone the baboon-client repository and install the dev dependencies to install the example and test suite deps.
@@ -30,10 +30,10 @@ Build the client app and start the server with grunt.
     $ grunt test
 
 ## Release History
+### v0.0.2
+* include and rename module
 ### v0.0.1
-     * include and rename module
-### v0.0.1
-     * initial structure
+* initial structure
 
 ## Author
 [Litixsoft GmbH](http://www.litixsoft.de)
