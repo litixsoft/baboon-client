@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
             ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
             ' */\n\n',
-        // Before generating any new files, remove any previously-created files.
+        // Before generating any new files, remove any previously-created files..
         clean: {
             karma: ['build/reports/tests'],
             lint: ['build/reports/lint'],
