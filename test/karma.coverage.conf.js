@@ -7,24 +7,11 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            '../lib_client/vendor/angular/angular.js',
-            '../lib_client/vendor/angular/angular-mocks.js',
-            '../lib_client/vendor/angular-ui-bootstrap/ui-bootstrap-0.7.0.js',
-            '../lib_client/vendor/angular-ui-utils/ui-utils.js',
-            '../lib_client/services/**/*.js',
-            '../lib_client/directives/**/*.js',
-            '../lib_client/module/**/*.js',
-            'test/fixtures/mocks.js',
-            'client/**/*.js',
-            '../lib_client/vendor/showdown/src/showdown.js'
-        ],
-
-        exclude: [
-            'client/public/**/*.js',
-            'client/common/*.js',
-            '../lib_client/services/**/*.spec.js',
-            '../lib_client/directives/**/*.spec.js',
-            '../lib_client/module/**/*.spec.js'
+            'bower_components/angular/angular.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-ui-bootstrap/src/modal/modal.js',
+            'common/**/*.js',
+            'optional/**/*.js'
         ],
 
         // use dots reporter, as travis terminal does not support escaping sequences
@@ -33,15 +20,13 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'client/app/**/*.js': 'coverage',
-            'client/common/**/*.js': 'coverage',
-            'client/toplevel/admin/**/*.js': 'coverage',
-            'client/toplevel/ui_examples/**/*.js': 'coverage'
+            'common/**/*.js': 'coverage',
+            'optional/**/*.js': 'coverage'
         },
 
         coverageReporter: {
             type: 'html',
-            dir: 'build/reports/coverage/client'
+            dir: 'build/reports/coverage'
         },
 
         // web server port
