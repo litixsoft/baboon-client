@@ -6,7 +6,26 @@ _(Coming soon)_
 _(Coming soon)_
 
 ### Install
-_(Coming soon)_
+install global dependencies:
+
+    $ npm install -g bower
+
+Usual baboon-client standard installation over bower registry:
+
+    $ bower install baboon-client
+
+[Learn more about usage of Bower](https://github.com/bower/bower#usage)
+
+**Special installations on GitHub**
+
+Github: master, current development status, release candidate:
+
+	$ bower install https://github.com/litixsoft/baboon-client.git#master
+
+Github: develop, very early stage of development, unstable:
+
+	$ bower install https://github.com/litixsoft/baboon-client.git#develop
+
 
 ## Contributing and test
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](http://gruntjs.com/).
@@ -20,8 +39,8 @@ On linux use administrative rights to install global modules:
     $ sudo npm install -g grunt-cli karma bower
 
 
-Clone the baboon-client repository and install the dev dependencies to install the example and test suite deps.
-Build the client app and start the server with grunt.
+Clone the baboon-client repository and install the dev dependencies and test suite deps.
+Test baboon-client with grunt.
 
     $ git clone https://github.com/litixsoft/baboon-client.git
     $ cd baboon-client
@@ -29,9 +48,13 @@ Build the client app and start the server with grunt.
     $ bower install
     $ grunt test
 
+Help us with your ideas. Write your code and test it.
+Write tests for your code. All tests must be successful. Make a pull request.
+
 ## Release History
 ### v0.0.2
 * include and rename module
+* tests
 
 ### v0.0.1
 * initial structure
