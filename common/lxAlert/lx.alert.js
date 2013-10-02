@@ -4,7 +4,7 @@ angular.module('lx.alert', [])
     .factory('lxAlert', ['$log', '$timeout', function ($log, $timeout) {
         var pub = {};
 
-        // timeout for show alert box
+        // timeout for show alert box.
         pub.timeout = 5000;
 
         // logLevel for $log
