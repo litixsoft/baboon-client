@@ -20,7 +20,7 @@
     ],
     "dependencies": {
         "angular": "~1.0.8",
-        "angular-ui-bootstrap": "~0.6.0",
+        "angular-bootstrap": "~0.6.0",
         "angular-ui-utils": "git@github.com:litixsoft/ui-utils.git#master",
         "bootstrap": "~3.0.0"
     },
