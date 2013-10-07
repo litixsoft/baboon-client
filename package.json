@@ -68,7 +68,8 @@
         "grunt-open": "~0.2.2",
         "karma-detect-browsers": "*",
         "karma-coverage": "*",
-        "karma-junit-reporter": "*"
+        "karma-junit-reporter": "*",
+        "load-grunt-tasks": "0.1.0"
     },
     "dependencies": {
     }

@@ -5,5 +5,5 @@
     <a ui-if="ngClickable" ng-click="methodAttr({name: data[linkAttr]})"><span translate>{{data[labelAttr]}}</span></a>
 </div>
 <ul class="display {{data.hide}}" ui-if="data.children.length">
-    <li ng-repeat="data in data.children" ng-include="'baboon.nav.tpl/lxtreeview/inner.html'"></li>
+    <li ng-repeat="data in data.children" ng-include="'lxNav/tpls/lxtreeview/inner.html'"></li>
 </ul>
