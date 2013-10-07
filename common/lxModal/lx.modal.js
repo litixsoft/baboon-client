@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('lx.modal', ['lx.modal.directives','lxModal/tpls/msgBox.html'])
+angular.module('lx.modal', ['lx.modal.directives', 'lxModal/tpls/msgBox.html'])
     .controller('lxModalCtrl', ['$rootScope', '$scope', '$modalInstance', 'modalOptions', function ($rootScope, $scope, $modalInstance, modalOptions) {
 
         $scope.modalOptions = modalOptions;

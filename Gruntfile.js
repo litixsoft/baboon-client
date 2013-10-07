@@ -28,7 +28,8 @@ module.exports = function (grunt) {
         clean: {
             karma: ['build/reports/tests'],
             lint: ['build/reports/lint'],
-            coverage: ['build/reports/coverage']
+            coverage: ['build/reports/coverage'],
+            tmp: ['build/tmp']
         },
         jshint: {
             options: {
@@ -70,6 +71,22 @@ module.exports = function (grunt) {
                 files: {
                     src: '<%= jshint_files_to_test %>'
                 }
+            }
+        },
+        html2js: {
+            common: {
+                options: {
+                    module: null, // no bundle module for all the html2js templates
+                    base: 'common'
+                },
+                files: [
+                    {
+                        expand: true,
+                        src: ['common/**/*.html'],
+                        ext: '.tpl.js',
+                        dest: 'build/tmp/templates/'
+                    }
+                ]
             }
         },
         open: {
@@ -114,13 +131,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-html2js');
 
     // Register tasks.
     grunt.registerTask('lint', ['jshint:test']);
-    grunt.registerTask('debug', ['karma:debug']);
-    grunt.registerTask('test', ['jshint:test', 'karma:unit']);
-    grunt.registerTask('cover', ['clean:coverage', 'jshint:test', 'karma:coverage', 'open:coverage']);
-    grunt.registerTask('ci', ['clean', 'jshint:jslint', 'jshint:checkstyle', 'karma:unit', 'karma:coverage', 'karma:cobertura']);
+    grunt.registerTask('debug', ['clean:tmp', 'html2js', 'karma:debug']);
+    grunt.registerTask('test', ['clean:tmp', 'html2js', 'jshint:test', 'karma:unit']);
+    grunt.registerTask('cover', ['clean:tmp', 'html2js', 'clean:coverage', 'jshint:test', 'karma:coverage', 'open:coverage']);
+    grunt.registerTask('ci', ['clean', 'html2js', 'jshint:jslint', 'jshint:checkstyle', 'karma:unit', 'karma:coverage', 'karma:cobertura']);
 
     // Default task.
     grunt.registerTask('default', ['test']);
