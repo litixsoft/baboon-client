@@ -3,6 +3,11 @@
 module.exports = function (grunt) {
     var path = require('path');
 
+    /**
+     * Gets the index.html file from the code coverage folder.
+     *
+     * @param {!string} folder The path to the code coverage folder.
+     */
     function getCoverageReport (folder) {
         var reports = grunt.file.expand(folder + '*/index.html');
 
@@ -12,6 +17,9 @@ module.exports = function (grunt) {
 
         return '';
     }
+
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
 
     // Project configuration.
     grunt.initConfig({
@@ -125,13 +133,6 @@ module.exports = function (grunt) {
             }
         }
     });
-
-    // Load tasks.
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-open');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-html2js');
 
     // Register tasks.
     grunt.registerTask('lint', ['jshint:test']);
