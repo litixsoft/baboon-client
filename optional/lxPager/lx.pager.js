@@ -27,6 +27,7 @@ angular.module('lx.pager', [])
                 '</div>' +
                 '</div>' +
                 '</div>',
+            
             replace: true,
             scope: {
                 count: '=',
