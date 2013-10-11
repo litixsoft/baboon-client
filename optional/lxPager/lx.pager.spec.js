@@ -29,8 +29,12 @@ describe('lxPager', function () {
         expect(elementScope.count).toBe(0);
         expect(elementScope.pageSize).toBe(5);
         expect(elementScope.currentPage).toBe(1);
-        expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 100]);
         expect(scope.getData).not.toHaveBeenCalled();
+
+        setTimeout(function () {
+            expect(elementScope.pageSizeOptions).toEqual([1, 5, 10]);
+            expect(scope.getData).not.toHaveBeenCalled();
+        }, 750);
     });
 
     it('should use the default page-Sizes if the page-Sizes injected through the attrs are no array', function () {
@@ -39,7 +43,22 @@ describe('lxPager', function () {
         scope.$digest();
         elementScope = element.scope();
 
-        expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 100]);
+        setTimeout(function () {
+            expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 100]);
+        }, 750);
+    });
+
+    it('should use the pageSize attribute when specified', function () {
+        element = angular.element('<lx-pager count="count" current-page="currentPage" page-size="50" on-paging="getData(pagingOptions)"></lx-pager>');
+        compile(element)(scope);
+        scope.$digest();
+        elementScope = element.scope();
+
+        setTimeout(function () {
+            expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 50, 100]);
+            expect(elementScope.pageSize).toBe(50);
+            expect(scope.getData).toHaveBeenCalled();
+        }, 750);
     });
 
     it('should parse the page-Sizes if the page-Sizes injected through the attrs is a ng-model', function () {
@@ -133,7 +152,7 @@ describe('lxPager', function () {
         expect(elementScope.currentPage).toBe(10);
     });
 
-    it('should ', function () {
+    it('should change the number of pages', function () {
         expect(elementScope.numberOfPages()).toBe(0);
         elementScope.count = 19;
 

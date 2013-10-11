@@ -3,31 +3,30 @@ angular.module('lx.pager', [])
     .directive('lxPager', function () {
         return {
             restrict: 'E',
-            template:   '<div class="row">' +
-                '<div class="btn-toolbar lx-pager">'+
+            template: '<div class="row">' +
+                '<div class="btn-toolbar lx-pager">' +
                 '<div class="btn-group">' +
                 '<button class="btn btn-primary" ng-click="firstPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-step-backward"></span></button>' +
                 '<button class="btn btn-primary" ng-click="previousPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-backward"></span></button>' +
-                '</div>'+
+                '</div>' +
                 '<div class="btn-group">' +
                 '<input class="form-control count-control" type="text" ng-model="currentPage">' +
-                '</div>'+
+                '</div>' +
                 '<div class="btn-group">' +
                 '<button class="btn btn-primary" ng-disabled="true">of {{numberOfPages()}}</button>' +
-                '</div>'+
+                '</div>' +
                 '<div class="btn-group">' +
                 '<button class="btn btn-primary" ng-click="nextPage()" ng-disabled="currentPage == numberOfPages()"><span class="glyphicon glyphicon-forward"></span></button>' +
                 '<button class="btn btn-primary" ng-click="lastPage()" ng-disabled="currentPage == numberOfPages()"><span class="glyphicon glyphicon-step-forward"></span></button>' +
-                '</div>'+
-                '<div class="btn-group">'+
+                '</div>' +
+                '<div class="btn-group">' +
                 '<select class="form-control" ng-model="pageSize" ng-options="p for p in pageSizeOptions"></select>' +
                 '</div>' +
-                '<div class="btn-group">'+
+                '<div class="btn-group">' +
                 '<button class="btn btn-primary" ng-disabled="true">{{count}} items</button>' +
                 '</div>' +
                 '</div>' +
                 '</div>',
-            
             replace: true,
             scope: {
                 count: '=',
@@ -45,7 +44,26 @@ angular.module('lx.pager', [])
                     var options = scope.$eval(value);
 
                     if (angular.isArray(options) && options.length > 0 && typeof options[0] === 'number') {
-                        scope.pageSizeOptions = options;
+                        scope.pageSizeOptions = options.sort(function (a, b) {
+                            return a - b;
+                        });
+                    }
+                });
+
+                // get page size options from attrs
+                attrs.$observe('pageSize', function (value) {
+                    var pageSize = scope.$eval(value);
+
+                    if (typeof pageSize === 'number') {
+                        if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
+                            // add pageSize to pageSizeOptions
+                            scope.pageSizeOptions.push(pageSize);
+                            scope.pageSizeOptions.sort(function (a, b) {
+                                return a - b;
+                            });
+                        }
+
+                        scope.pageSize = pageSize;
                     }
                 });
 
