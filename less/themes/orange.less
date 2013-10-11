@@ -1,46 +1,74 @@
-.table ng-form.inline-edit label .glyphicon {
+.table ng-form.inline-edit label.label-danger .glyphicon {
   color:white;
 }
 ng-form.inline-edit > .form-group{
   margin-bottom:0;
 }
-ng-form.inline-edit > .form-group .col-lg-10{
+ng-form.inline-edit > .form-group .lxvalidation{
+  position:relative;
   padding:0;
 }
-ng-form.inline-edit .form-group .col-lg-10 label {
+ng-form.inline-edit .form-group .lxvalidation label.label-danger {
   right:5px;
+  position:absolute;
 }
-.form-group .col-lg-10{
+.modal-dialog.modal-form{
+  width:90%;
+  max-width:1200px;
+}
+.modal-dialog.modal-form .modal-content{
+  border-radius: 9px;
+}
+.modal-dialog.modal-form .modal-header{
+  background: #f5f5f5;
+  border-radius: 9px 9px 0 0;
+}
+.modal-dialog.modal-form .modal-footer{
+  background: #f5f5f5;
+  border-radius:  0 0 9px 9px;
+}
+
+.form-group .lxvalidation{
   position:relative;
 }
-.form-group .col-lg-10 label{
-  /*background-color:#d9534f;*/
-  /*width:18px;height:18px;*/
-  /*border-radius:5px;*/
-  padding:0;
+.form-group.has-error .lxvalidation label{
   position:absolute;
-  top:5px;
   right:20px;
-  line-height: 18px;
+  top:7px;
+  width:20px;
+  height:20px;
+  border-radius:24px;
+  cursor:pointer;
+  padding:2px 4px;
 }
-.form-group .col-lg-10 label span[popover]{
-  display:inline-block;
-  width:23px;
-  height:23px;
+.form-group.has-error .lxvalidation .ui-resetwrap + label.label-danger{
+  right:45px;
+}
+ng-form.inline-edit .form-group.has-error .lxvalidation label.label-danger{
+  right:5px;
+}
+ng-form.inline-edit .form-group.has-error .lxvalidation .ui-resetwrap + label.label-danger{
+  right:30px;
+}
+.form-group.has-error .lxvalidation label.label-danger span[popover]{
+  display:block;
   position:absolute;
   top:0;
   left:0;
+  width:20px;
+  height:20px;
 }
-.form-group .col-lg-10 label .glyphicon{
-  height:23px;
-  width:23px;
-  line-height:19px;
-  background-position:center center;
+.form-group.has-error textarea,
+.form-group.has-error select,
+.form-group.has-error input{
+  background-color:rgb(255, 238, 238);
 }
-.form-group .col-lg-10 label .popover{
+.form-group.has-error .lxvalidation label.label-danger .popover{
   color:#555;
 }
-
+.form-group.has-error .lxvalidation label.label-danger .popover .popover-content{
+  white-space: nowrap;
+}
 .ui-resetwrap{
   position:relative;
 }
