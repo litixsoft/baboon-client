@@ -44,7 +44,9 @@ angular.module('lx.pager', [])
                     var options = scope.$eval(value);
 
                     if (angular.isArray(options) && options.length > 0 && typeof options[0] === 'number') {
-                        scope.pageSizeOptions = options;
+                        scope.pageSizeOptions = options.sort(function (a, b) {
+                            return a - b;
+                        });
                     }
                 });
 
@@ -54,9 +56,13 @@ angular.module('lx.pager', [])
 
                     if (typeof pageSize === 'number') {
                         if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
+                            // add pageSize to pageSizeOptions
                             scope.pageSizeOptions.push(pageSize);
-                            scope.pageSizeOptions.sort();
+                            scope.pageSizeOptions.sort(function (a, b) {
+                                return a - b;
+                            });
                         }
+
                         scope.pageSize = pageSize;
                     }
                 });
