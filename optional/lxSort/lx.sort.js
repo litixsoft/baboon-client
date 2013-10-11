@@ -3,8 +3,9 @@ angular.module('lx.sort', [])
     .directive('lxSort', function () {
         return {
             restrict: 'E',
-            template: '<div><span ng-click="sort()">{{field_title}}</span>' +
-                '<i ng-class="{\'icon-arrow-up\': sortOpts[field_name] == 1, \'icon-arrow-down\': sortOpts[field_name] == -1}"></i>' +
+            transclude: true,
+            template: '<div><span style="cursor: pointer;" ng-click="sort()" ng-transclude></span>' +
+                '<span ng-class="{\'glyphicon glyphicon-arrow-up\': sortOpts[field_name] == 1, \'glyphicon glyphicon-arrow-down\': sortOpts[field_name] == -1}"></span>' +
                 '</div>',
             replace: true,
             scope: {
@@ -12,7 +13,6 @@ angular.module('lx.sort', [])
                 onSorting: '&'
             },
             link: function (scope, element, attrs) {
-                scope.field_title = attrs.fieldTitle;
                 scope.field_name = attrs.fieldName;
                 scope.internalSortDir = 1;
 
