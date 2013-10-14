@@ -31,13 +31,16 @@ angular.module('lx.pager', [])
             scope: {
                 count: '=',
                 currentPage: '=',
-                onPaging: '&'
+                onPaging: '&',
+                pageSize: '@',
+                pageSizeOptions: '@'
             },
             link: function (scope, element, attrs) {
+                // default values
+                var defaultPageSizeOptions = [1, 5, 10, 25, 100];
+                var defaultPageSize = 10;
                 scope.currentPage = 1;
                 scope.count = 0;
-                scope.pageSize = 5;
-                scope.pageSizeOptions = [1, 5, 10, 25, 100];
 
                 // get page size options from attrs
                 attrs.$observe('pageSizes', function (value) {
@@ -47,6 +50,8 @@ angular.module('lx.pager', [])
                         scope.pageSizeOptions = options.sort(function (a, b) {
                             return a - b;
                         });
+                    } else if (!scope.pageSizeOptions) {
+                        scope.pageSizeOptions = defaultPageSizeOptions;
                     }
                 });
 
@@ -64,6 +69,8 @@ angular.module('lx.pager', [])
                         }
 
                         scope.pageSize = pageSize;
+                    } else if (!scope.pageSize) {
+                        scope.pageSize = defaultPageSize;
                     }
                 });
 
@@ -80,7 +87,7 @@ angular.module('lx.pager', [])
                  * @returns {number}
                  */
                 scope.skip = function () {
-                    return (scope.currentPage - 1) * scope.pageSize;
+                    return (scope.currentPage - 1) * (scope.pageSize || defaultPageSize);
                 };
 
                 /**
@@ -93,7 +100,7 @@ angular.module('lx.pager', [])
                         scope.pageSize = 1;
                     }
 
-                    return Math.ceil(scope.count / scope.pageSize);
+                    return Math.ceil(scope.count / (scope.pageSize || defaultPageSize));
                 };
 
                 /**
@@ -103,7 +110,7 @@ angular.module('lx.pager', [])
                  */
                 scope.getOptions = function () {
                     return {
-                        limit: scope.pageSize,
+                        limit: scope.pageSize || defaultPageSize,
                         skip: scope.skip()
                     };
                 };
@@ -113,7 +120,7 @@ angular.module('lx.pager', [])
                  */
                 scope.nextPage = function () {
                     var currentPage = scope.currentPage,
-                        count = currentPage * scope.pageSize;
+                        count = currentPage * scope.pageSize || defaultPageSize;
 
                     if (count < scope.count) {
                         scope.currentPage = ++currentPage;
