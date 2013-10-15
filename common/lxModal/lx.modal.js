@@ -17,9 +17,9 @@ angular.module('lx.modal', ['lx.modal.directives', 'lxModal/tpls/msgBox.html'])
             $scope.modalOptions.actionClose = $scope.modalOptions.callObj.cbClose;
             $scope.modalOptions.actionYes = $scope.modalOptions.callObj.cbYes;
             $scope.modalOptions.actionNo = $scope.modalOptions.callObj.cbNo;
-        } else {
+        } /*else {
             $scope.modalOptions.actionClose = true;
-        }
+        }*/
 
         $scope.reset = function () {
             if ($modalInstance) {
