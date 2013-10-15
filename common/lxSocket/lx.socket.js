@@ -41,7 +41,7 @@ angular.module('lx.socket', [])
             $log.error('connect_error: ', err);
 
             $rootScope.$apply(function () {
-                lxModal.msgBox('Could not connect to socket server!','', 'Error');
+                lxModal.msgBox('connectError', true ,'Could not connect to socket server!','', 'Error');
             });
         });
 
@@ -80,7 +80,7 @@ angular.module('lx.socket', [])
             $log.warn('Site Reload triggered by Server');
 
             $rootScope.$apply(function () {
-                lxModal.msgBox('','Session is expired! Please reload the site.', 'Warning', function () {
+                lxModal.msgBox('siteReload', true ,'Session is expired! Please reload the site.','', 'Error',function(){
                     window.location.reload();
                 });
             });
