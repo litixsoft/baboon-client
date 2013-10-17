@@ -6,12 +6,29 @@ angular.module('lx.validKeypress', [])
             scope: {
                 lxValidKeypress: '='
             },
-            link: function (scope, elm, attr) {
+            link: function (scope, elm) {
+
+                var index = 0;
+
+                function searchParent(element){
+                    index++;
+
+                    var parent = element.parent();
+
+                    if(parent.hasClass('has-error')){
+                        parent.removeClass('has-error');
+                    } else {
+                        if(index<10){
+                            searchParent(parent);
+                        }
+                    }
+                };
+
                 elm.bind('keypress', function() {
                     if(scope.lxValidKeypress){
-                        scope.$apply(function() {
-                            scope.lxValidKeypress = false;
-                        });
+
+                        searchParent(elm);
+
                     }
                 });
             }
