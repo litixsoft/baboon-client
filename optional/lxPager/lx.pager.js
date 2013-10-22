@@ -33,7 +33,7 @@ angular.module('lx.pager', [])
                 currentPage: '=',
                 onPaging: '&',
                 pageSize: '@',
-                pageSizeOptions: '@'
+                pageSizes: '@'
             },
             link: function (scope, element, attrs) {
                 // default values
@@ -60,6 +60,8 @@ angular.module('lx.pager', [])
                     var pageSize = scope.$eval(value);
 
                     if (typeof pageSize === 'number') {
+                        scope.pageSizeOptions = scope.pageSizeOptions || defaultPageSizeOptions;
+
                         if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
                             // add pageSize to pageSizeOptions
                             scope.pageSizeOptions.push(pageSize);
@@ -69,7 +71,7 @@ angular.module('lx.pager', [])
                         }
 
                         scope.pageSize = pageSize;
-                    } else if (!scope.pageSize) {
+                    } else if (typeof scope.pageSize !== 'number') {
                         scope.pageSize = defaultPageSize;
                     }
                 });
