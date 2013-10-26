@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('lx.transport', ['lx.rest', 'lx.socket'])
-    .factory('lx.transport', ['$rootScope', 'REST', 'SocketIO', function ($rootScope, REST, SocketIO) {
+    .factory('lxTransport', ['$rootScope', 'REST', 'SocketIO', function ($rootScope, REST, SocketIO) {
         /**
          * Transport-Service
          *
