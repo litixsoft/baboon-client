@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('lx.nav.directives',['lxNav/tpls/lxnavbar/outer.html', 'lxNav/tpls/lxnavbar/inner.html', 'lxNav/tpls/lxtreeview/outer.html', 'lxNav/tpls/lxtreeview/inner.html'])
+angular.module('lx.nav.directives',['lx/nav/tpls/lxnavbar/outer.html', 'lxNav/tpls/lxnavbar/inner.html', 'lxNav/tpls/lxtreeview/outer.html', 'lxNav/tpls/lxtreeview/inner.html'])
     .directive('lxtreeview', function () {
         return {
             restrict: 'E',

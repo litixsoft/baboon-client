@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('lx.nav.directives',['nav/tpls/navbar/outer.html', 'nav/tpls/navbar/inner.html', 'nav/tpls/treeview/outer.html', 'nav/tpls/treeview/inner.html'])
+angular.module('lx.nav.directives',['lx/nav/tpls/navbar/outer.html', 'lx/nav/tpls/navbar/inner.html', 'lx/nav/tpls/treeview/outer.html', 'lx/nav/tpls/treeview/inner.html'])
     .directive('treeview', function () {
         return {
             restrict: 'E',
@@ -17,7 +17,7 @@ angular.module('lx.nav.directives',['nav/tpls/navbar/outer.html', 'nav/tpls/navb
                 methodAttr: '&',
                 nrAttr: '@'
             },
-            templateUrl: 'nav/tpls/treeview/outer.html'
+            templateUrl: 'lx/nav/tpls/treeview/outer.html'
 //        templateUrl: 'baboon.nav.tpl/#{attr.templateAttr}/outer.html'
         };
     })
@@ -37,6 +37,6 @@ angular.module('lx.nav.directives',['nav/tpls/navbar/outer.html', 'nav/tpls/navb
                 ngModel: '@',
                 nrAttr: '@'
             },
-            templateUrl: 'nav/tpls/navbar/outer.html'
+            templateUrl: 'lx/nav/tpls/navbar/outer.html'
         };
     });
