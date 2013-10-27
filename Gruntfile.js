@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        jshint_files_to_test: ['Gruntfile.js', 'common/**/*.js', 'optional/**/*.js'],
+        jshint_files_to_test: ['Gruntfile.js', 'modules/**/*.js'],
         banner: '/*!\n' +
             ' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
             '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
@@ -85,12 +85,12 @@ module.exports = function (grunt) {
             common: {
                 options: {
                     module: null, // no bundle module for all the html2js templates
-                    base: 'common'
+                    base: 'modules'
                 },
                 files: [
                     {
                         expand: true,
-                        src: ['common/**/*.html'],
+                        src: ['modules/**/*.html'],
                         ext: '.tpl.js',
                         dest: 'build/tmp/templates/'
                     }
