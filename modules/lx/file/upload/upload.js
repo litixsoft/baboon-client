@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('lx.file.upload', [])
-    .directive('lx.file.upload', function () {
+    .directive('lxFileUpload', function () {
         return {
             scope: {
                 onFilesSelected: '&'
