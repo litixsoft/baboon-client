@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('lx.inline.edit', [])
-    .factory('lx.inline.edit', function () {
+    .factory('lxInlineEdit', function () {
         return function () {
             var pub = {},
                 master = {};
