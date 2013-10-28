@@ -108,6 +108,7 @@ module.exports = function (grunt) {
             },
             ci: {
                 configFile: 'test/karma.conf.js',
+                colors: false,
                 reporters: ['progress', 'junit'],
                 junitReporter: {
                     outputFile: 'build/reports/tests/baboon-client.xml',
@@ -122,14 +123,16 @@ module.exports = function (grunt) {
                 singleRun: false
             },
             coverage: {
-                configFile: 'test/karma.coverage.conf.js'
+                configFile: 'test/karma.coverage.conf.js',
+                colors: false
             },
             cobertura: {
                 configFile: 'test/karma.coverage.conf.js',
                 coverageReporter: {
                     type: 'cobertura',
                     dir: 'build/reports/coverage'
-                }
+                },
+                colors: false
             }
         }
     });
