@@ -55,6 +55,8 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
          * @param {function(?object, ?object=)} callback - The callback from application.
          */
         function transportCallback (data, callback) {
+            $rootScope.isLoading = false;
+
             if (data.error) {
                 callback(data.error);
             } else {
@@ -100,6 +102,8 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
                 if (typeof data !== 'object') {
                     throw new TypeError('Param "data" parameter must be of type object!');
                 }
+
+                $rootScope.isLoading = true;
 
                 // check if socket is enabled and use rest or socket for transport
                 if ($rootScope.socketEnabled) {
