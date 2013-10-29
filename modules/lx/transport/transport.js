@@ -1,6 +1,7 @@
 /*global angular*/
 angular.module('lx.transport', ['lx.rest', 'lx.socket'])
-    .factory('lxTransport', ['$rootScope', 'REST', 'SocketIO', function ($rootScope, REST, SocketIO) {
+    .factory('lxTransport', ['$rootScope', 'REST', 'SocketIO', 'USE_SOCKET',
+        function ($rootScope, REST, SocketIO, USE_SOCKET) {
         /**
          * Transport-Service
          *
@@ -43,7 +44,7 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
         var socket;
 
         // socket.IO default instance
-        if ($rootScope.config.transport.socket.enable) {
+        if (USE_SOCKET) {
             socket = new SocketIO();
         }
 
