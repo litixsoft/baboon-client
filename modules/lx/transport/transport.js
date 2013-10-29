@@ -73,9 +73,6 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
         }
 
         return {
-
-
-
             /**
              * Emits transport fire event to socket or request post to server.
              * Rest route is socket event name + baseUrl.

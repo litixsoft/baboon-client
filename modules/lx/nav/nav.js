@@ -43,8 +43,8 @@ angular.module('lx.nav', ['lx.nav.directives'])
         }
     ])
     .service('lxNavService', ['$http', function ($http) {
-
         var pub = {};
+
         pub.navigation = [];
 
         pub.httpGetNavData = function (id, callback) {
@@ -53,12 +53,5 @@ angular.module('lx.nav', ['lx.nav.directives'])
             });
         };
 
-//        pub.httpGetNavData(1);
-
-//        pub.getNavData = function(){
-//          return pub.navigation;
-//        };
-
         return pub;
-
     }]);
