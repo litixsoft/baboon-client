@@ -42,13 +42,13 @@ angular.module('lx.nav', ['lx.nav.directives'])
             };
         }
     ])
-    .service('lxNavService', ['$http', function ($http) {
+    .service('lxNavService', ['REST', function ($http) {
 
         var pub = {};
         pub.navigation = [];
 
         pub.httpGetNavData = function (id, callback) {
-            $http.get('/lxNav/getNavData').success(function (data) {
+            $http.get('/api/lxNav/getNavData').success(function (data) {
                 return callback(data.data);
             });
         };

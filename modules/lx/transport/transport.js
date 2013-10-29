@@ -40,9 +40,12 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
 
         // rest default instance
         var rest = new REST();
+        var socket;
 
         // socket.IO default instance
-        var socket = new SocketIO();
+        if ($rootScope.config.transport.socket.enable) {
+            socket = new SocketIO();
+        }
 
         /**
          * Converts the transport callbacks to a standard callback for the application.
@@ -68,6 +71,9 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
         }
 
         return {
+
+
+
             /**
              * Emits transport fire event to socket or request post to server.
              * Rest route is socket event name + baseUrl.
