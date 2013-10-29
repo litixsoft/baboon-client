@@ -42,7 +42,7 @@ angular.module('lx.nav', ['lx.nav.directives'])
             };
         }
     ])
-    .service('lxNavService', ['REST', function ($http) {
+    .service('lxNavService', ['$http', function ($http) {
 
         var pub = {};
         pub.navigation = [];
