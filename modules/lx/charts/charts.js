@@ -38,23 +38,17 @@ angular.module('lx.charts', [])
     })
     .factory('lxChartsColorUtil', function() {
 
-            var util = {};
+        var util = {};
 
-            // default colorscale to use
-            var colorScale = new chroma.ColorScale({
-                colors: ['#000000','#ff0000','#ffff00','#008000'],
-                positions: [0,.25,.50,1],
-                mode: 'rgb'
-            })
+        var colorScale = chroma.scale(['#000000','#ff0000','#ffff00','#008000']);
 
-            // returns color based on range
-            util.getColorFromDefaultScale = function(value) {
-                return colorScale.getColor(value);//.hex();
-            }
+        util.getColorFromDefaultScale = function(value) {
+            return colorScale(value).hex();
+        }
 
-            return util;
+        return util;
 
-     })
+    })
     .controller('LxChartsCtrl', ['$scope', '$element', '$attrs','lxChartsColorUtil','lxChartsConfig',
         function (scope, element, attrs, util, cfg) {
 
