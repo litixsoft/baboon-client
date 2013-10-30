@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('lx.auth', ['lx.auth.services','lx/auth/tpls/register.html','lx/auth/tpls/forget.html'])
+angular.module('lx.auth', ['lx.auth.services','lx.auth.directives','lx/auth/tpls/register.html','lx/auth/tpls/forget.html'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/api/auth/register', {templateUrl: 'lx/auth/tpls/register.html'});
         $routeProvider.when('/api/auth/forget', {templateUrl: 'lx/auth/tpls/forget.html'});
