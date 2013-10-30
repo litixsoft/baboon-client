@@ -81,7 +81,7 @@ module.exports = function (grunt) {
             }
         },
         html2js: {
-            common: {
+            modules: {
                 options: {
                     module: null, // no bundle module for all the html2js templates
                     base: 'modules'
