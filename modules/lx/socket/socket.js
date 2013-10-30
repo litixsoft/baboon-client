@@ -73,11 +73,15 @@ angular.module('lx.socket', [])
             // socket connect_error event
             socket.on('connect_error', function (err) {
                 $log.error('socket.io connect_error: ', err);
+
+                setSocketState(false);
             });
 
             // socket connect_timeout event
             socket.on('connect_timeout', function () {
                 $log.error('socket.io connect_timeout...');
+
+                setSocketState(false);
             });
 
             // socket reconnect event, change transportSocket to true
@@ -91,16 +95,22 @@ angular.module('lx.socket', [])
             socket.on('reconnecting', function () {
                 var reconnectionAttempts = arguments[1] || 0;
                 $log.log('Try to reconnect with: ' + socket.socket.transport.name + ', attempt: ' + reconnectionAttempts);
+
+                setSocketState(false);
             });
 
             // socket reconnect_error
             socket.on('reconnect_error', function (err) {
                 $log.error('socket.io reconnect_error: ', err);
+
+                setSocketState(false);
             });
 
             // socket reconnect_failed
             socket.on('reconnect_failed', function () {
                 $log.error('socket.io reconnect_failed');
+
+                setSocketState(false);
             });
 
             return {

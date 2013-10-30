@@ -1,6 +1,7 @@
 /*global angular*/
 angular.module('lx.transport', ['lx.rest', 'lx.socket'])
-    .factory('lxTransport', ['$rootScope', 'REST', 'SocketIO', function ($rootScope, REST, SocketIO) {
+    .factory('lxTransport', ['$rootScope', 'REST', 'SocketIO', 'USE_SOCKET',
+        function ($rootScope, REST, SocketIO, USE_SOCKET) {
         /**
          * Transport-Service
          *
@@ -40,9 +41,12 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
 
         // rest default instance
         var rest = new REST();
+        var socket;
 
         // socket.IO default instance
-        var socket = new SocketIO();
+        if (USE_SOCKET) {
+            socket = new SocketIO();
+        }
 
         /**
          * Converts the transport callbacks to a standard callback for the application.
@@ -55,6 +59,8 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
          * @param {function(?object, ?object=)} callback - The callback from application.
          */
         function transportCallback (data, callback) {
+            $rootScope.isLoading = false;
+
             if (data.error) {
                 callback(data.error);
             } else {
@@ -100,6 +106,8 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
                 if (typeof data !== 'object') {
                     throw new TypeError('Param "data" parameter must be of type object!');
                 }
+
+                $rootScope.isLoading = true;
 
                 // check if socket is enabled and use rest or socket for transport
                 if ($rootScope.socketEnabled) {
