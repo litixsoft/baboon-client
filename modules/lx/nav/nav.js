@@ -1,25 +1,31 @@
 /*global angular*/
 angular.module('lx.nav', ['lx.nav.directives'])
-    .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs', 'lxNavService',
-        function ($scope, $element, $attrs, lxNavService) {
+    .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs',// 'lxNavService',
+        function ($scope, $element, $attrs){ //, lxNavService) {
 
-            function callback (data) {
-
-                var treeData = [];
-
-                if ($attrs.nrAttr === undefined) {
-                    angular.forEach(data, function (value) {
-                        treeData.push({'title': value.title, 'route': value.route, 'target': value.target});
-                    });
-                    $scope.treeData = treeData;
-                } else {
-                    if ($attrs.nrAttr <= data.length - 1) {
-                        $scope.treeData = data[$attrs.nrAttr].children;
-                    }
-                }
+            if (typeof($scope[$attrs.itemlistAttr]) === 'undefined') {
+                $scope.treeData = $scope.itemlistAttr;
+            } else {
+                $scope.treeData = $scope[$attrs.itemlistAttr];
             }
 
-            lxNavService.httpGetNavData($attrs.nrAttr, callback);
+//            function callback (data) {
+//
+//                var treeData = [];
+//
+//                if ($attrs.nrAttr === undefined) {
+//                    angular.forEach(data, function (value) {
+//                        treeData.push({'title': value.title, 'route': value.route, 'target': value.target});
+//                    });
+//                    $scope.treeData = treeData;
+//                } else {
+//                    if ($attrs.nrAttr <= data.length - 1) {
+//                        $scope.treeData = data[$attrs.nrAttr].children;
+//                    }
+//                }
+//            }
+//
+//            lxNavService.httpGetNavData($attrs.nrAttr, callback);
 
             $scope.ngClickable = typeof($attrs.methodAttr) !== 'undefined';
 
