@@ -1,9 +1,9 @@
 <div class="list-item"  ng-class="{active: $uiRoute}" ui-route="{{data[linkAttr]}}">
     <div class="opensub {{data.hide}}" ng-show="data.children" ng-click="toggleShow(data)"></div>
     <div class="nav-icon {{data[iconAttr]}}"></div>
-    <a ui-if="!ngClickable" ng-href="{{data[linkAttr]}}" target="{{data[targetAttr]}}"><span translate>{{data[labelAttr]}}</span></a>
-    <a ui-if="ngClickable" ng-click="methodAttr({name: data[linkAttr]})"><span translate>{{data[labelAttr]}}</span></a>
+    <a ng-if="!ngClickable" ng-href="{{data[linkAttr]}}" target="{{data[targetAttr]}}"><span translate>{{data[labelAttr]}}</span></a>
+    <a ng-if="ngClickable" ng-click="methodAttr({name: data[linkAttr]})"><span translate>{{data[labelAttr]}}</span></a>
 </div>
-<ul class="display {{data.hide}}" ui-if="data.children.length">
+<ul class="display {{data.hide}}" ng-if="data.children.length">
     <li ng-repeat="data in data.children" ng-include="'lx/nav/tpls/treeview/inner.html'"></li>
 </ul>
