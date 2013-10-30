@@ -30,7 +30,7 @@ angular.module('lx.pager', [])
             replace: true,
             scope: {
                 count: '=',
-                currentPage: '=',
+                currentPage: '=?',
                 onPaging: '&',
                 pageSize: '@',
                 pageSizes: '@'

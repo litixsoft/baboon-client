@@ -18,7 +18,7 @@ describe('lxPager', function () {
         spyOn(scope, 'getData');
 
         // create pager element
-        element = angular.element('<lx-pager count="count" current-page="currentPage" page-sizes="{{ pageSizes }}" on-paging="getData(pagingOptions)"></lx-pager>');
+        element = angular.element('<lx-pager count="count" page-sizes="{{ pageSizes }}" on-paging="getData(pagingOptions)"></lx-pager>');
         compile(element)(scope);
         scope.$digest();
     }));
@@ -30,7 +30,7 @@ describe('lxPager', function () {
         expect(elementScope.currentPage).toBe(1);
         expect(scope.getData).not.toHaveBeenCalled();
 
-        expect(elementScope.pageSize).toBeUndefined();
+        expect(elementScope.pageSize).toBe(10);
         expect(elementScope.pageSizeOptions).toEqual([1, 5, 10]);
         expect(scope.getData).not.toHaveBeenCalled();
     });
@@ -230,7 +230,11 @@ describe('lxPager', function () {
             expect(spy.calls.length).toEqual(0);
         });
 
-        it('should refresh the data when thr current page is changed', function () {
+        it('should refresh the data when the current page is changed', function () {
+            element = angular.element('<lx-pager count="count" current-page="currentPage" on-paging="getData(pagingOptions)"></lx-pager>');
+            compile(element)(scope);
+            scope.$digest();
+
             var elementScope = element.scope();
             spyOn(elementScope, 'refresh');
             var spy = elementScope.refresh;
