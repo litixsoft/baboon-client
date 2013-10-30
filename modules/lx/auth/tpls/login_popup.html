@@ -31,12 +31,12 @@
 
                             </div>
                         </div>
-                        <div class="row" ui-if="authFailed">
+                        <div class="row" ng-if="authFailed">
                             <div class="col-lg-offset-1 alert alert-danger">
                                 <span style="white-space:normal;">{{ 'AUTH_FAILED' | translate }}</span>
                             </div>
                         </div>
-                        <div class="row" ui-if="serverError">
+                        <div class="row" ng-if="serverError">
                             <div class="col-lg-offset-1">
                                 <div class="alert alert-danger">
                                     <span style="white-space:normal;">{{ 'SERVER_ERROR' | translate }}</span>
