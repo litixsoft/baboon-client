@@ -1,7 +1,7 @@
 /*global angular*/
 angular.module('lx.nav', ['lx.nav.directives'])
     .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs', 'lxNavService',
-        function ($scope, $element, $attrs, lxNavService) {
+        function ($scope, $element, $attrs) {
 
             if (typeof($scope[$attrs.itemlistAttr]) === 'undefined') {
                 $scope.treeData = $scope.itemlistAttr;
