@@ -1,4 +1,6 @@
-Baboon Client - a client library for Baboon Webtoolkit. [![Build Status](https://travis-ci.org/litixsoft/baboon-client.png?branch=master)](https://travis-ci.org/litixsoft/baboon-client)
+# baboon client [![Build Status](https://travis-ci.org/litixsoft/baboon-client.png?branch=master)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.png)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.png)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
+
+> A client library for baboon webtoolkit.
 
 _(Coming soon)_
 
@@ -52,6 +54,9 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
+### v0.3.0
+* sync with baboon actual version
+
 ### v0.0.2
 * include and rename module
 * tests

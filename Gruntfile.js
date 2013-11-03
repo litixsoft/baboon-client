@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        jshint_files_to_test: ['Gruntfile.js', 'common/**/*.js', 'optional/**/*.js'],
+        jshint_files_to_test: ['Gruntfile.js', 'modules/**/*.js'],
         banner: '/*!\n' +
             ' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
             '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
@@ -44,7 +44,6 @@ module.exports = function (grunt) {
                 bitwise: true,
                 curly: true,
                 eqeqeq: true,
-                forin: true,
                 immed: true,
                 latedef: true,
                 newcap: true,
@@ -82,15 +81,15 @@ module.exports = function (grunt) {
             }
         },
         html2js: {
-            common: {
+            modules: {
                 options: {
                     module: null, // no bundle module for all the html2js templates
-                    base: 'common'
+                    base: 'modules'
                 },
                 files: [
                     {
                         expand: true,
-                        src: ['common/**/*.html'],
+                        src: ['modules/**/*.html'],
                         ext: '.tpl.js',
                         dest: 'build/tmp/templates/'
                     }
@@ -108,6 +107,7 @@ module.exports = function (grunt) {
             },
             ci: {
                 configFile: 'test/karma.conf.js',
+                colors: false,
                 reporters: ['progress', 'junit'],
                 junitReporter: {
                     outputFile: 'build/reports/tests/baboon-client.xml',
@@ -122,14 +122,16 @@ module.exports = function (grunt) {
                 singleRun: false
             },
             coverage: {
-                configFile: 'test/karma.coverage.conf.js'
+                configFile: 'test/karma.coverage.conf.js',
+                colors: false
             },
             cobertura: {
                 configFile: 'test/karma.coverage.conf.js',
                 coverageReporter: {
                     type: 'cobertura',
                     dir: 'build/reports/coverage'
-                }
+                },
+                colors: false
             }
         }
     });
@@ -139,7 +141,7 @@ module.exports = function (grunt) {
     grunt.registerTask('debug', ['clean:tmp', 'html2js', 'karma:debug']);
     grunt.registerTask('test', ['clean:tmp', 'html2js', 'jshint:test', 'karma:unit']);
     grunt.registerTask('cover', ['clean:tmp', 'html2js', 'clean:coverage', 'jshint:test', 'karma:coverage', 'open:coverage']);
-    grunt.registerTask('ci', ['clean', 'html2js', 'jshint:jslint', 'jshint:checkstyle', 'karma:unit', 'karma:coverage', 'karma:cobertura']);
+    grunt.registerTask('ci', ['clean', 'html2js', 'jshint:jslint', 'jshint:checkstyle', 'karma:ci', 'karma:coverage', 'karma:cobertura']);
 
     // Default task.
     grunt.registerTask('default', ['test']);

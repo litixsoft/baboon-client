@@ -11,8 +11,7 @@ module.exports = function (config) {
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'build/tmp/templates/**/*.js',
-            'common/**/*.js',
-            'optional/**/*.js'
+            'modules/**/*.js'
         ],
 
         // use dots reporter, as travis terminal does not support escaping sequences
@@ -21,8 +20,7 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'common/**/*.js': 'coverage',
-            'optional/**/*.js': 'coverage'
+            'modules/**/*.js': 'coverage'
         },
 
         coverageReporter: {
