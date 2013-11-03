@@ -54,7 +54,7 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
-### v0.3.0
+### v0.2.5
 * sync with baboon actual version
 
 ### v0.0.2
