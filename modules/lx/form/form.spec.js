@@ -117,6 +117,9 @@ describe('lx form service', function () {
                     form = {
                         errors: {
                             id: 'required'
+                        },
+                        $setPristine: function () {
+
                         }
                     };
 

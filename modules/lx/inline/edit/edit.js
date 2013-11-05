@@ -27,6 +27,9 @@ angular.module('lx.inline.edit', [])
                 if (form) {
                     // reset form errors
                     form.errors = {};
+
+                    // set form to pristine state
+                    form.$setPristine();
                 }
 
                 // reset model

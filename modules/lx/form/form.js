@@ -18,6 +18,9 @@ angular.module('lx.form', [])
                 if (form) {
                     // clear form errors
                     form.errors = {};
+
+                    // set form to pristine state
+                    form.$setPristine();
                 }
 
                 // reset model
