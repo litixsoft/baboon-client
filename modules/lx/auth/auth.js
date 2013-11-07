@@ -4,8 +4,16 @@ angular.module('lx.auth', ['lx.auth.services','lx.auth.directives','lx/auth/tpls
         $routeProvider.when('/api/auth/register', {templateUrl: 'lx/auth/tpls/register.html'});
         $routeProvider.when('/api/auth/forget', {templateUrl: 'lx/auth/tpls/forget.html'});
     }])
-    .controller('lxAuthLoginCtrl', ['$scope', '$window', 'lxAuth', function ($scope, $window, lxAuth) {
+    .controller('lxAuthLoginCtrl', ['$scope', '$window', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
         var window = angular.element($window);
+
+        $scope.isAuth = false;
+        $scope.user = '';
+
+        $http.get('/api/lxAuth/getAuthData').success(function (data) {
+            $scope.user = data.user;
+            $scope.isAuth = data.isAuth;
+        });
 
         $scope.$watch('openMenu', function (newval) {
             if (newval) {

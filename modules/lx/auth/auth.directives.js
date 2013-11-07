@@ -1,5 +1,14 @@
 /*global angular*/
 angular.module('lx.auth.directives',['lx/auth/tpls/login_popup.html', 'lx/auth/tpls/logout_popup.html'])
+    .directive('lxAuthPopup', function () {
+        return {
+            restrict: 'E',
+            controller: 'lxAuthLoginCtrl',
+            transclude: true,
+            replace: true,
+            templateUrl: 'lx/auth/tpls/auth_popup.html'
+        };
+    })
     .directive('lxLoginPopup', function () {
         return {
             restrict: 'E',
