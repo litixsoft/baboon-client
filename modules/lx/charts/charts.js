@@ -148,7 +148,6 @@ angular.module('lx.charts', [])
                 oldStart = 0;
                 scope.setData();
                 setMax();
-                console.log(scope.arcdata);
                 if (scope.chartType === 'bars') {
                     updateBars();
                 } else if (scope.chartType === 'ring') {
