@@ -40,7 +40,7 @@ angular.module('lx.auth', ['lx.auth.services','lx.auth.directives','lx/auth/tpls
                     $window.location.reload();
                 }
                 else {
-                    if (err.status === 403) {
+                    if (err.status === 403 || err.status === 401) {
                         $scope.authFailed = true;
                     }
                     else {
