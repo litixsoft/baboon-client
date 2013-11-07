@@ -67,8 +67,10 @@ angular.module('lx.charts', [])
             scope.keyValue = true;
             scope.keys = [];
             scope.max = 0;
+            scope.largest = 10;
             scope.name = '';
             scope.score = '';
+            scope.valueUnit;
 
             //$watch all attributes of the directive for changes and if so call startUpdate()
             scope.$watch('lxD3ChartType', function (value) {
@@ -116,6 +118,16 @@ angular.module('lx.charts', [])
                 }
             });
 
+            scope.$watch('lxD3Unit', function (value) {
+
+                if (scope.valueUnit === undefined) {
+                    scope.valueUnit = value;
+                } else {
+                    scope.valueUnit = value;
+                    startUpdate();
+                }
+            });
+
             scope.$watch('lxD3Data', function (value) {
                 if (value && value.length > 0) {
                     scope.arcdata = value;
@@ -136,7 +148,7 @@ angular.module('lx.charts', [])
                 oldStart = 0;
                 scope.setData();
                 setMax();
-
+                console.log(scope.arcdata);
                 if (scope.chartType === 'bars') {
                     updateBars();
                 } else if (scope.chartType === 'ring') {
@@ -150,21 +162,25 @@ angular.module('lx.charts', [])
             //calculates the sum of the second dimension  0.2+ 0.5 ...  stores value in scope.max
             function setMax () {
                 scope.max = 0;
+                var temp = [];
                 angular.forEach(scope.arcdata, function (value) {
                     if (parseFloat(value[scope.dim2])) {
                         scope.max += parseFloat(value[scope.dim2]);
+                        temp.push(parseFloat(value[scope.dim2]));
                     }
                 });
+                var largest = Math.max.apply(Math, temp);
+                scope.largest = Math.round(largest*1.1);
             }
 
             //calculates the different color depending on the values of each bar or ring-arc
             function getColor (d) {
                 if (scope.keyValue) {
-                    return util.getColorFromDefaultScale((parseFloat(d[scope.dim2]) / 10));
+                    return util.getColorFromDefaultScale((parseFloat(d[scope.dim2]) / scope.largest));
                 } else {
                     for (var key in d) {
                         if (d.hasOwnProperty(key)) {
-                            return util.getColorFromDefaultScale((parseFloat(d[key]) / 10));
+                            return util.getColorFromDefaultScale((parseFloat(d[key]) / scope.largest));
                         }
                         break;
                     }
@@ -251,12 +267,15 @@ angular.module('lx.charts', [])
                         .attr('fill', '#ffffff')
                         .attr('opacity', 0.5);
 
+
+                    var unit = '%';
                     pub.textGroup = pub.rootSvg.append('svg:g');
                     // add the text fields we'll use for output
-                    pub.textGroup.selectAll('text').data([0, 1]).enter()
+                    pub.textGroup.selectAll('text').data([0, 1, 2]).enter()
                         .append('svg:text')
                         .attr('width', 50)
                         .attr('class', 'output');
+
                     pub.textGroup
                         .attr('transform', 'translate(' + w / 2 + ',' + h / 2 + ')');
 
@@ -332,9 +351,21 @@ angular.module('lx.charts', [])
                     scoreText.text(score);
                     var scoreTextBox = scoreText.node().getBBox();
                     scoreText.attr('transform', 'translate(-' + scoreTextBox.width / 2 + ',' + scoreTextBox.height / 1.1 + ')');
+                    scoreText.attr('class', 'outputValue');
+
+                    var unitText = d3.select(scope.svgElement.textGroup.selectAll('text')[0][2]);
+                    if(score != ''){
+                        unitText.text(scope.valueUnit);
+                    } else {
+                        unitText.text('');
+                    }
+                    var unitTextBox = unitText.node().getBBox();
+                    unitText.attr('transform', 'translate(' + (scoreTextBox.width+unitTextBox.width-15) / 2 + ',' + scoreTextBox.height / 1.1 + ')');
+                    unitText.attr('class', 'outputUnit');
 
                     scope.name = name;
                     scope.score = score;
+//                    scope.unit = unit;
                 }
 
                 d3.select(element[0]).select('svg').remove();
@@ -604,7 +635,8 @@ angular.module('lx.charts', [])
                 lxD3Dim2: '=',
                 lxD3Sort: '=',
                 lxD3SortDim: '=',
-                lxD3Align: '='
+                lxD3Align: '=',
+                lxD3Unit: '='
             }
         };
     });

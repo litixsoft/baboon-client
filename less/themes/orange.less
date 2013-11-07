@@ -1040,3 +1040,60 @@ markdown img:hover{
 .boxed-shadow{
   box-shadow:0 1px 6px rgba(0,0,0,0.35);background:#f6f6f6;border-radius: 9px;border:1px solid rgba(255,255,255,0.9);margin:20px 0;padding:20px;
 }
+
+
+/* ---------------- charts -------------------------------------- */
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.output{
+  color:#888;
+  font-size: 1em;
+  fill: #777;
+}
+.outputValue{
+  font-weight:bold;
+  font-size: 3.5em;
+  fill: #555;
+}
+.outputUnit{
+  color:#888;
+  font-size: 1.3em;
+  fill: #777;
+}
+
+.barValue{
+  font-size:1em;
+  font-weight:bold;
+  fill: #666666;
+  padding-left:30px;
+}
+.x.axis .domain,
+.y.axis .domain,
+.tick line{
+  stroke:#ddd;
+}
+.tick text{
+  font-size:0.9em;
+  fill: #777;
+  shape-rendering: crispEdges;
+}
+
+.dashed-line{
+  stroke: #ff0000;
+  stroke-width: 0.3;
+  stroke-dasharray: "3, 3" ;
+}
+
