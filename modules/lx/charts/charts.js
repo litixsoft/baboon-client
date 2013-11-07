@@ -70,7 +70,7 @@ angular.module('lx.charts', [])
             scope.largest = 10;
             scope.name = '';
             scope.score = '';
-            scope.valueUnit;
+            scope.valueUnit = null;
 
             //$watch all attributes of the directive for changes and if so call startUpdate()
             scope.$watch('lxD3ChartType', function (value) {
@@ -267,7 +267,7 @@ angular.module('lx.charts', [])
                         .attr('opacity', 0.5);
 
 
-                    var unit = '%';
+
                     pub.textGroup = pub.rootSvg.append('svg:g');
                     // add the text fields we'll use for output
                     pub.textGroup.selectAll('text').data([0, 1, 2]).enter()
@@ -353,7 +353,7 @@ angular.module('lx.charts', [])
                     scoreText.attr('class', 'outputValue');
 
                     var unitText = d3.select(scope.svgElement.textGroup.selectAll('text')[0][2]);
-                    if(score != ''){
+                    if(score !== ''){
                         unitText.text(scope.valueUnit);
                     } else {
                         unitText.text('');
