@@ -54,6 +54,9 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
+### v0.2.7
+* remove passport auth
+
 ### v0.2.6
 * integrate charts
 * update design
