@@ -54,6 +54,13 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
+### v0.2.6
+* integrate charts
+* update design
+* update auth
+* bugfixes
+* refactoring
+
 ### v0.2.5
 * sync with baboon actual version
 
