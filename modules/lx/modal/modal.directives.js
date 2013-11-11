@@ -18,7 +18,7 @@ angular.module('lx.modal.directives', [])
                 startY = event.screenY;
 
                 var modalpos = offset(modalWindow);
-                modalX = modalpos.left + 280;
+                modalX = modalpos.left;// + 280;
                 modalY = modalpos.top;
 
                 $document.bind('mousemove', mousemove);
