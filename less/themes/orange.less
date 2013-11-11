@@ -952,7 +952,8 @@ ul.nav.nav-pills > li + li {
   display:block;
 
   .lx-modal-msg:not(.standard) .modal-header{
-    background: -webkit-linear-gradient(top,#ff9600,#f36d14);
+//    background: -webkit-linear-gradient(top,#ff9600,#f36d14);
+    .gradientFromTop('ff9600','f36d14');  //creates gradients for all browsers
     border-radius:6px 6px 0 0;
     border-bottom:1px solid #333333;
   }
@@ -1001,7 +1002,8 @@ ul.nav.nav-pills > li + li {
     text-shadow:none;
   }
   .lx-modal-msg:not(.standard) .modal-footer .btn:hover{
-    background: -webkit-linear-gradient(top,#ff9600,#f36d14);
+//    background: -webkit-linear-gradient(top,#ff9600,#f36d14);
+    .gradientFromTop('ff9600','f36d14');  //creates gradients for all browsers
     color:white;
     text-shadow:0 1px 1px rgba(0,0,0,0.5);
   }
