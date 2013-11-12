@@ -3,6 +3,7 @@ angular.module('lx.auth', ['lx.auth.services','lx.auth.directives','lx/auth/tpls
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/auth/register', {templateUrl: 'lx/auth/tpls/register.html', controller: 'lxAuthRegisterCtrl'});
         $routeProvider.when('/auth/forget', {templateUrl: 'lx/auth/tpls/forget.html', controller: 'lxAuthForgotCtrl'});
+        $routeProvider.when('/auth/login', {templateUrl: 'lx/auth/tpls/auth_view.html', controller: 'lxAuthLoginCtrl'});
     }])
     .controller('lxAuthLoginCtrl', ['$scope', '$window', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
         var window = angular.element($window);
@@ -62,8 +63,16 @@ angular.module('lx.auth', ['lx.auth.services','lx.auth.directives','lx/auth/tpls
             }
         });
     }])
+    .controller('lxAuthLoginCtrl', ['$scope', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
+
+    }])
     .controller('lxAuthRegisterCtrl', ['$scope', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
 
+        $scope.user = {};
+
+        $scope.register = function() {
+            console.log($scope.user);
+        };
     }])
     .controller('lxAuthForgotCtrl', ['$scope', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
 

@@ -3,12 +3,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{ 'REGISTER' | translate }}</div>
             <div class="panel-body">
-                <form class="form-horizontal" ng-submit="login()" name="loginForm">
+                <form class="form-horizontal" ng-submit="register()" name="registerForm" novalidate>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="username">{{ 'USERNAME' | translate }}</label>
-
                         <div class="col-md-10">
-                            <input type="text" ng-model="username" id="username"
+                            <input type="text" ng-model="user.username" id="username"
                                    placeholder="{{ 'ENTER_USERNAME' | translate }}" class="form-control">
                         </div>
                     </div>
@@ -16,7 +15,7 @@
                         <label class="col-md-2 control-label" for="displayName">{{ 'DISPLAY_NAME' | translate }}</label>
 
                         <div class="col-md-10">
-                            <input type="text" ng-model="displayName" id="displayName"
+                            <input type="text" ng-model="user.displayName" id="displayName"
                                    placeholder="{{ 'ENTER_DISPLAY_NAME' | translate }}" class="form-control">
                         </div>
                     </div>
@@ -24,7 +23,7 @@
                         <label class="col-md-2 control-label" for="email">{{ 'EMAIL' | translate }}</label>
 
                         <div class="col-md-10">
-                            <input type="text" ng-model="email" id="email" placeholder="{{ 'ENTER_EMAIL' | translate }}"
+                            <input type="text" ng-model="user.email" id="email" placeholder="{{ 'ENTER_EMAIL' | translate }}"
                                    class="form-control">
                         </div>
                     </div>
@@ -32,7 +31,7 @@
                         <label class="col-md-2 control-label" for="email2">{{ 'EMAIL_REPEAT' | translate }}</label>
 
                         <div class="col-md-10">
-                            <input type="text" ng-model="email2" id="email2"
+                            <input type="text" ng-model="user.email2" id="email2"
                                    placeholder="{{ 'ENTER_EMAIL' | translate }}" class="form-control">
                         </div>
                     </div>
@@ -40,7 +39,7 @@
                         <label class="col-md-2 control-label" for="password">{{ 'PASSWORD' | translate }}</label>
 
                         <div class="col-md-10">
-                            <input type="text" ng-model="password" id="password"
+                            <input type="text" ng-model="user.password" id="password"
                                    placeholder="{{ 'ENTER_PASSWORD' | translate }}" class="form-control">
                         </div>
                     </div>
@@ -49,7 +48,7 @@
                             }}</label>
 
                         <div class="col-md-10">
-                            <input type="text" ng-model="password2" id="password2"
+                            <input type="text" ng-model="user.password2" id="password2"
                                    placeholder="{{ 'ENTER_PASSWORD' | translate }}" class="form-control">
                         </div>
                     </div>
