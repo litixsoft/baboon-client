@@ -63,9 +63,9 @@ angular.module('lx.auth', ['lx.auth.services','lx.auth.directives','lx/auth/tpls
             }
         });
     }])
-    .controller('lxAuthLoginCtrl', ['$scope', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
-
-    }])
+//    .controller('lxAuthLoginCtrl', ['$scope', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
+//
+//    }])
     .controller('lxAuthRegisterCtrl', ['$scope', 'lxAuth', '$http', function ($scope, $window, lxAuth, $http) {
 
         $scope.user = {};
