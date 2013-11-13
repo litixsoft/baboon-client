@@ -54,7 +54,7 @@ angular.module('lx.nav', ['lx.nav.directives'])
         pub.navigation = [];
 
         pub.httpGetNavData = function (id, callback) {
-            $http.get('/api/lxNav/getNavData').success(function (data) {
+            $http.post('/api/v1/nav/getNavData').success(function (data) {
                 return callback(data.data);
             });
         };

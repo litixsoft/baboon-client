@@ -8,7 +8,7 @@ angular.module('lx.session', [])
         pub.setData = function (key, value, callback) {
 
             if (arguments.length === 3) {
-                $http.post('/api/session/setData', {key: key, value: value})
+                $http.post('/api/v1/session/setData', {key: key, value: value})
                     .success(function (data) {
                         callback(null, data);
                     })
@@ -28,7 +28,7 @@ angular.module('lx.session', [])
                 callback = key;
                 key = null;
 
-                $http.post('/api/session/deleteData')
+                $http.post('/api/v1/session/deleteData')
                     .success(function (data) {
                         callback(null, data);
                     })
@@ -37,7 +37,7 @@ angular.module('lx.session', [])
                     });
             }
             else {
-                $http.post('/api/session/deleteData', {key: key})
+                $http.post('/api/v1/session/deleteData', {key: key})
                     .success(function (data) {
                         callback(null, data);
                     })
@@ -53,7 +53,7 @@ angular.module('lx.session', [])
             if (arguments.length === 1) {
                 callback = key;
                 key = null;
-                $http.post('/api/session/getData')
+                $http.post('/api/v1/session/getData')
                     .success(function (data) {
                         callback(null, data);
                     })
@@ -62,7 +62,7 @@ angular.module('lx.session', [])
                     });
             }
             else {
-                $http.post('/api/session/getData', {key: key})
+                $http.post('/api/v1/session/getData', {key: key})
                     .success(function (data) {
                         callback(null, data);
                     })
@@ -74,7 +74,7 @@ angular.module('lx.session', [])
 
         // check session and set activity time
         pub.getLastActivity = function (callback) {
-            $http.post('/api/session/getLastActivity')
+            $http.post('/api/v1/session/getLastActivity')
                 .success(function (data) {
                     callback(null, data);
                 })
@@ -85,7 +85,7 @@ angular.module('lx.session', [])
 
         // check session and set activity time
         pub.setActivity = function (callback) {
-            $http.post('/api/session/setActivity')
+            $http.post('/api/v1/session/setActivity')
                 .error(function (data, status) {
                     callback({status: status, data: data});
                 });

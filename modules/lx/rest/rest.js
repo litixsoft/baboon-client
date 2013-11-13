@@ -8,7 +8,7 @@ angular.module('lx.rest', [])
          */
         return function (url) {
             var pub = {},
-                baseUrl = url || '/api/';
+                baseUrl = url || '/api/v1/';
 
             // check baseUrl
             if (typeof baseUrl !== 'string') {
