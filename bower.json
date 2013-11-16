@@ -1,33 +1,36 @@
 {
-  "name": "baboon-client",
-  "version": "0.2.8",
-  "authors": [
-    "Timo Liebetrau <t.liebetrau@litixsoft.de>"
-  ],
-  "description": "Baboon Web Toolkit, client library.",
-  "keywords": [
-    "baboon",
-    "client",
-    "library"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/litixsoft/baboon-client",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "test",
-    "bower_components"
-  ],
-  "dependencies": {
-    "angular": "1.2.0-rc.3",
-    "angular-bootstrap": "~0.6.0",
-    "angular-ui-utils": "https://github.com/litixsoft/ui-utils.git#master",
-    "bootstrap": "~3.0.0",
-    "d3": "~3.3.9",
-    "chroma-js": "~0.5.3",
-    "angular-animate": "1.2.0-rc.3"
-  },
-  "devDependencies": {
-    "angular-mocks": "1.2.0-rc.3"
-  }
+    "name": "baboon-client",
+    "version": "0.2.8",
+    "authors": [
+        "Timo Liebetrau <t.liebetrau@litixsoft.de>"
+    ],
+    "description": "Baboon Web Toolkit, client library.",
+    "keywords": [
+        "baboon",
+        "client",
+        "library"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/litixsoft/baboon-client",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "test",
+        "bower_components"
+    ],
+    "dependencies": {
+        "angular": "1.2.1",
+        "angular-bootstrap": "~0.6.0",
+        "angular-ui-utils": "https://github.com/litixsoft/ui-utils.git#master",
+        "bootstrap": "~3.0.0",
+        "d3": "~3.3.9",
+        "chroma-js": "~0.5.3",
+        "angular-animate": "1.2.0"
+    },
+    "devDependencies": {
+        "angular-mocks": "1.2.1"
+    },
+    "resolutions": {
+        "angular": "1.2.1"
+    }
 }
