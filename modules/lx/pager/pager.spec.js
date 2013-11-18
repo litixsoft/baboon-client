@@ -1,5 +1,5 @@
-/*global angular, describe, beforeEach, inject, it, expect, spyOn, xdescribe */
-xdescribe('lxPager', function () {
+/*global angular, describe, beforeEach, inject, it, expect, spyOn */
+describe('lxPager', function () {
     var element, compile, scope;
 
     beforeEach(module('lx.pager'));
@@ -24,14 +24,14 @@ xdescribe('lxPager', function () {
     }));
 
     it('should be initialized correctly', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.count).toBe(0);
-        //expect(elementScope.currentPage).toBe(1);
+        expect(elementScope.currentPage).toBe(1);
         expect(scope.getData).not.toHaveBeenCalled();
 
-        //expect(elementScope.pageSize).toBe(10);
-        //expect(elementScope.pageSizeOptions).toEqual([1, 5, 10]);
+        expect(elementScope.pageSize).toBe(10);
+        expect(elementScope.pageSizeOptions).toEqual([1, 5, 10]);
         expect(scope.getData).not.toHaveBeenCalled();
     });
 
@@ -41,7 +41,7 @@ xdescribe('lxPager', function () {
         compile(element)(scope);
         scope.$digest();
         scope.$digest();
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         scope.$digest();
         expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 100]);
@@ -52,7 +52,7 @@ xdescribe('lxPager', function () {
         element = angular.element('<lx-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
         compile(element)(scope);
         scope.$digest();
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.pageSize).toBe(10);
     });
@@ -62,7 +62,7 @@ xdescribe('lxPager', function () {
         element = angular.element('<lx-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
         compile(element)(scope);
         scope.$digest();
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 50, 100]);
         expect(elementScope.pageSize).toBe(50);
@@ -74,13 +74,13 @@ xdescribe('lxPager', function () {
         element = angular.element('<lx-pager count="count" current-page="currentPage" page-sizes="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
         compile(element)(scope);
         scope.$digest();
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.pageSizeOptions).toEqual([1, 2, 3]);
     });
 
     it('should have a function skip() which returns the skip value', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.skip()).toBe(0);
 
@@ -94,7 +94,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should have a function numberOfPages() which returns number of pages', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.numberOfPages()).toBe(0);
 
@@ -108,7 +108,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should have a function getOptions() which returns the paging options', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.getOptions()).toEqual({limit: 10, skip: 0});
 
@@ -122,7 +122,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should have a function nextPage() which should page to the next page', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
         elementScope.nextPage();
         expect(elementScope.currentPage).toBe(1);
 
@@ -133,7 +133,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should have a function previousPage() which should page to the previousPage page', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
         elementScope.previousPage();
         expect(elementScope.currentPage).toBe(1);
 
@@ -145,7 +145,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should have a function firstPage() which should page to the first page', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
         elementScope.firstPage();
         expect(elementScope.currentPage).toBe(1);
 
@@ -157,7 +157,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should have a function lastPage() which should page to the last page', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         elementScope.lastPage();
         expect(elementScope.currentPage).toBe(1);
@@ -170,7 +170,7 @@ xdescribe('lxPager', function () {
     });
 
     it('should change the number of pages', function () {
-        var elementScope = element.scope();
+        var elementScope = element.isolateScope();
 
         expect(elementScope.currentPage).toBe(1);
         expect(elementScope.numberOfPages()).toBe(0);
@@ -190,7 +190,7 @@ xdescribe('lxPager', function () {
 
     describe('has a function refresh() which', function () {
         it('should call the controller function', function () {
-            var elementScope = element.scope();
+            var elementScope = element.isolateScope();
             var spy = scope.getData;
             elementScope.refresh();
 
@@ -209,7 +209,7 @@ xdescribe('lxPager', function () {
 //        });
 
         it('should refresh the data when the count changes', function () {
-            var elementScope = element.scope();
+            var elementScope = element.isolateScope();
             spyOn(elementScope, 'refresh');
             var spy = elementScope.refresh;
             elementScope.currentPage = 99;
@@ -223,7 +223,7 @@ xdescribe('lxPager', function () {
         });
 
         it('should not refresh the data when the count changes but the current page is smaller than the number of pages', function () {
-            var elementScope = element.scope();
+            var elementScope = element.isolateScope();
             spyOn(elementScope, 'refresh');
             var spy = elementScope.refresh;
             elementScope.count = 7;
@@ -237,7 +237,7 @@ xdescribe('lxPager', function () {
             compile(element)(scope);
             scope.$digest();
 
-            var elementScope = element.scope();
+            var elementScope = element.isolateScope();
             spyOn(elementScope, 'refresh');
             var spy = elementScope.refresh;
             scope.currentPage = 55;
