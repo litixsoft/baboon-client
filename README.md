@@ -54,6 +54,12 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
+### v0.2.9
+* update angular to v1.2.2
+* update angular-translate to v1.1.1
+* add transport.rest() to make rest only calls over the transport layer
+* update navigation and session to use transport.rest()
+
 ### v0.2.8
 * update api/v1
 * remove auth
