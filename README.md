@@ -4,10 +4,7 @@
 
 _(Coming soon)_
 
-## Documentation
-_(Coming soon)_
-
-### Install
+## Install
 install global dependencies:
 
     $ npm install -g bower
@@ -59,6 +56,7 @@ Write tests for your code. All tests must be successful. Make a pull request.
 * update angular-translate to v1.1.1
 * add transport.rest() to make rest only calls over the transport layer
 * update navigation and session to use transport.rest()
+* add .jshintrc
 
 ### v0.2.8
 * update api/v1

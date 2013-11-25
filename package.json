@@ -1,7 +1,7 @@
 {
     "name": "baboon-client",
     "description": "Baboon Web Toolkit, client library.",
-    "version": "0.2.8",
+    "version": "0.2.9",
     "homepage": "https://github.com/litixsoft/baboon-client",
     "author": {
         "name": "Litixsoft GmbH",
@@ -60,9 +60,9 @@
         "test": "grunt test"
     },
     "devDependencies": {
-        "grunt": "0.4.1",
+        "grunt": "0.4.2",
         "grunt-contrib-clean": "~0.5.0",
-        "grunt-contrib-jshint": "~0.7.1",
+        "grunt-contrib-jshint": "~0.7.2",
         "grunt-html2js": "~0.1.9",
         "grunt-karma": "~0.6.2",
         "grunt-open": "~0.2.2",
