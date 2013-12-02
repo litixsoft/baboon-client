@@ -16,8 +16,8 @@ angular.module('lx.pager', [])
                 '<button class="btn btn-primary" ng-disabled="true">of {{numberOfPages()}}</button>' +
                 '</div>' +
                 '<div class="btn-group">' +
-                '<button class="btn btn-primary" ng-click="nextPage()" ng-disabled="currentPage == numberOfPages()"><span class="glyphicon glyphicon-forward"></span></button>' +
-                '<button class="btn btn-primary" ng-click="lastPage()" ng-disabled="currentPage == numberOfPages()"><span class="glyphicon glyphicon-step-forward"></span></button>' +
+                '<button class="btn btn-primary" ng-click="nextPage()" ng-disabled="currentPage >= numberOfPages()"><span class="glyphicon glyphicon-forward"></span></button>' +
+                '<button class="btn btn-primary" ng-click="lastPage()" ng-disabled="currentPage >= numberOfPages()"><span class="glyphicon glyphicon-step-forward"></span></button>' +
                 '</div>' +
                 '<div class="btn-group">' +
                 '<select class="form-control" ng-model="pageSize" ng-options="p for p in pageSizeOptions"></select>' +
