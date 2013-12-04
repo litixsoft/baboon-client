@@ -88,6 +88,12 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'test/karma.conf.js'
             },
+            chrome: {
+                configFile: 'test/karma.conf.js',
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
             ci: {
                 configFile: 'test/karma.conf.js',
                 colors: false,
