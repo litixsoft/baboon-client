@@ -90,6 +90,7 @@ module.exports = function (grunt) {
             },
             chrome: {
                 configFile: 'test/karma.conf.js',
+                logLevel: 'DEBUG',
                 detectBrowsers: {
                     enabled: false
                 }
