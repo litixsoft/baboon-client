@@ -129,6 +129,7 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', ['jshint:test']);
     grunt.registerTask('debug', ['clean:tmp', 'html2js', 'karma:debug']);
     grunt.registerTask('test', ['clean:tmp', 'html2js', 'jshint:test', 'karma:unit']);
+    grunt.registerTask('demo', ['clean:tmp', 'html2js', 'jshint:test', 'karma:chrome']);
     grunt.registerTask('cover', ['clean:tmp', 'html2js', 'clean:coverage', 'jshint:test', 'karma:coverage', 'open:coverage']);
     grunt.registerTask('ci', ['clean', 'html2js', 'jshint:jslint', 'jshint:checkstyle', 'karma:ci', 'karma:coverage', 'karma:cobertura']);
 
