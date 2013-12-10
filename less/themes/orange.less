@@ -666,13 +666,15 @@ ul.nav.nav-pills > li + li {
 /*-------------------------------------------*/
 .navCol{
   ul.navlist{
-    display:table;
     list-style-type: none;
     margin:49px 0 0 0;
     background-color:#25272a;
     border-top:1px solid #24282c;
     border-bottom:1px solid #4a4f58;
     padding:0;
+    width: 100%;
+    display: table;
+    white-space: nowrap;
 
     ul{
       display:block;
@@ -698,7 +700,6 @@ ul.nav.nav-pills > li + li {
 
     div.list-item {
       display:block;
-      min-width:300px;
       background:#3c4148;
       color:#c2cad6;
       border-bottom:1px solid #24282c;
@@ -715,6 +716,8 @@ ul.nav.nav-pills > li + li {
         text-decoration:none;
         color:#c2cad6;
       }
+
+      .spacer {margin-left:26px;}
 
       span{
         font-size:14px;
