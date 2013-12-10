@@ -69,6 +69,7 @@
         "karma-detect-browsers": "*",
         "karma-coverage": "*",
         "karma-junit-reporter": "*",
+        "karma-mocha-reporter": "*",
         "load-grunt-tasks": "0.2.0"
     },
     "dependencies": {
