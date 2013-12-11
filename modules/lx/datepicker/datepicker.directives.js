@@ -36,7 +36,8 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                 var autoScroll = false; //true if scroll through the years by holding down the keys
                 var mainPick = document.getElementById($scope.inputID); //get input with datepicker by id (cause angular $element parent has selectors)
                 var scrollCont = mainPick.getElementsByClassName('lx-datepicker-year-container')[0]; //get scroll container
-                var datepicker = angular.element(mainPick.getElementsByClassName('lx-datepicker')[0]); //get datepicker
+                var dateElement = mainPick.getElementsByClassName('lx-datepicker');
+                var datepicker = angular.element(dateElement[0]); //get datepicker
 
                 var off = { //datepicker offset in browser window, used to move datepicker if not fully visible in view
                     top: 40,
@@ -59,29 +60,23 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  */
                 function checkPosition(){
 
-                    var dimDP = {
-                        width: datepicker.clientWidth+2,
-                        height: datepicker.clientHeight+2,
-                        top: datepicker.offset().top,
-                        left: datepicker.offset().left,
-                        right: datepicker.offset().left+500,
-                        bottom: datepicker.offset().top+310
-                    };
+                    var rect = dateElement[0].getBoundingClientRect();
+
                     var dimBrowser = {
                         width: $window.innerWidth,
                         height: $window.innerHeight
                     };
 
-                    if( dimDP.bottom > dimBrowser.height - 20 ){
-                        off.top -= ( dimDP.bottom - (dimBrowser.height - 20));
+                    if( rect.bottom > dimBrowser.height - 20 ){
+                        off.top -= ( rect.bottom - (dimBrowser.height - 20));
                         datepicker.css('top',off.top+'px');
                     } else {
                         datepicker.css('top',off.top+'px');
                     }
 
 
-                    if( dimDP.right > dimBrowser.width - 20 ){
-                        off.left -= ( dimDP.right - (dimBrowser.width - 20));
+                    if( rect.right > dimBrowser.width - 20 ){
+                        off.left -= ( rect.right - (dimBrowser.width - 20));
                         datepicker.css('left',off.left+'px');
                     } else {
                         datepicker.css('left',off.left+'px');
