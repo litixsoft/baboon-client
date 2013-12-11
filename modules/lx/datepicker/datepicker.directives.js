@@ -36,12 +36,57 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                 var autoScroll = false; //true if scroll through the years by holding down the keys
                 var mainPick = document.getElementById($scope.inputID); //get input with datepicker by id (cause angular $element parent has selectors)
                 var scrollCont = mainPick.getElementsByClassName('lx-datepicker-year-container')[0]; //get scroll container
+                var datepicker = angular.element(mainPick.getElementsByClassName('lx-datepicker')[0]); //get datepicker
 
+                var off = { //datepicker offset in browser window, used to move datepicker if not fully visible in view
+                    top: 40,
+                    left: 0
+                };
 
                 $element.removeAttr('class');
                 $element.removeAttr('type');
 
 
+                angular.element($window).bind('resize',function(){
+                    if($scope.visible){
+                        checkPosition();
+                    }
+                });
+
+                /**
+                 * moving datepicker if not fully in view
+                 *
+                 */
+                function checkPosition(){
+
+                    var dimDP = {
+                        width: datepicker.clientWidth+2,
+                        height: datepicker.clientHeight+2,
+                        top: datepicker.offset().top,
+                        left: datepicker.offset().left,
+                        right: datepicker.offset().left+500,
+                        bottom: datepicker.offset().top+310
+                    };
+                    var dimBrowser = {
+                        width: $window.innerWidth,
+                        height: $window.innerHeight
+                    };
+
+                    if( dimDP.bottom > dimBrowser.height - 20 ){
+                        off.top -= ( dimDP.bottom - (dimBrowser.height - 20));
+                        datepicker.css('top',off.top+'px');
+                    } else {
+                        datepicker.css('top',off.top+'px');
+                    }
+
+
+                    if( dimDP.right > dimBrowser.width - 20 ){
+                        off.left -= ( dimDP.right - (dimBrowser.width - 20));
+                        datepicker.css('left',off.left+'px');
+                    } else {
+                        datepicker.css('left',off.left+'px');
+                    }
+                }
 
                 /**
                  * fill Array with a range of numbers start with maxYear ends with minYear
@@ -350,6 +395,13 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                 $scope.$watch('visible',function(newValue){
 
                     if(newValue){ //if visible
+
+                        off = {
+                            top: 40,
+                            left: 0
+                        };
+                        checkPosition();
+
                         if($scope.selectedDayShort!=='' ){ //fill selectedDay with ngmodel if open datepicker
                             if($scope.ngModel){ // if the model has a date
                                 $scope.selectedDay = angular.copy($scope.ngModel);
