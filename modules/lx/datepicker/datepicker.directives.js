@@ -18,7 +18,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
             link: function($scope, $element, $attrs, $ctrls) {
 
                 $scope.visible = false; //is datepicker popup visible
-                $scope.divider = getDivider($scope.lxDatepicker); //the character used to divide the date numbers 12.2.2013
+                $scope.divider = ''; //the character used to divide the date numbers 12.2.2013
                 $scope.placeholder = $scope.lxDatepicker; //placeholder text for the input
                 $scope.selectedDay = new Date(); //the selected date, initialized with todays date
                 $scope.selectedDayShort = ''; //selected date formated as 12.3.2004
@@ -28,8 +28,8 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     day: $scope.selectedDay.getDate(),
                     month: $scope.selectedDay.getMonth(),
                     year: $scope.selectedDay.getFullYear()
-                }
-                $scope.yearNames = fillRange();
+                };
+                $scope.yearNames = [];
                 $scope.monthNames = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
                 $scope.dayNames = ['KW','Mo','Di','Mi','Do','Fr','Sa','So'];
 
@@ -90,7 +90,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         var y = parseInt(parts[2], 10);
                         var date = new Date(y,m-1,d);
 
-                        if (date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d) {
+                        if (date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d) {
                             return true;
                         } else {
                             return false;
@@ -128,7 +128,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         firstDay: firstDayOfMonth.getDay(),
                         daysLastMonth: lastMonthDays.getDate(),
                         daysCurrentMonth: daysOfCurrentMonth.getDate()
-                    }
+                    };
                     return startPoint;
                 }
 
@@ -177,7 +177,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         var temp = {
                             kw: (startpoint.currentKW+i),
                             days: days
-                        }
+                        };
                         $scope.month.push(temp);
                     }
                     return $scope.month;
@@ -208,7 +208,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     var month = $scope.selectedDay.getMonth()+1;
                     if(month<10){ month = '0'+month; }
 
-                    $scope.selectedDayShort = (day+""+$scope.divider+""+month+""+$scope.divider+""+$scope.selectedDay.getFullYear());
+                    $scope.selectedDayShort = (day+''+$scope.divider+''+month+''+$scope.divider+''+$scope.selectedDay.getFullYear());
                 }
 
                 /**
@@ -285,7 +285,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     var valid = {
                         required: true,
                         date: true
-                    }
+                    };
 
                     $ctrls.$dirty = true;
 
@@ -350,7 +350,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                 $scope.$watch('visible',function(newValue){
 
                     if(newValue){ //if visible
-                        if($scope.selectedDayShort!='' ){ //fill selectedDay with ngmodel if open datepicker
+                        if($scope.selectedDayShort!=='' ){ //fill selectedDay with ngmodel if open datepicker
                             if($scope.ngModel){ // if the model has a date
                                 $scope.selectedDay = angular.copy($scope.ngModel);
                             } else { //if no value then use today's date
@@ -378,6 +378,9 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 
                 /* -------- start ------------- */
                 checkIfIsRequired();
+
+                $scope.divider = getDivider($scope.lxDatepicker);
+                $scope.yearNames = fillRange();
 
                 //begin with building the datepicker
                 createDays($scope.selectedDay);
