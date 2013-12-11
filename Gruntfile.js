@@ -98,7 +98,7 @@ module.exports = function (grunt) {
             ci: {
                 configFile: 'test/karma.conf.js',
                 colors: false,
-                reporters: ['progress', 'junit'],
+                reporters: ['mocha', 'junit'],
                 junitReporter: {
                     outputFile: 'build/reports/tests/baboon-client.xml',
                     suite: 'baboon_client'
