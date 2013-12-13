@@ -346,13 +346,19 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 
                     } else {
 
-                        valid.date = false; //date is not valid show errors
-
-                        if($scope.isRequired && $scope.selectedDayShort.length < 1){
-                            valid.required = false;
-                        } else if(!$scope.isRequired && $scope.selectedDayShort.length < 1){
-                            valid.date = true;
+                        if($scope.selectedDayShort.length < 1){
+                            if($scope.isRequired){
+                                valid.required = false;
+                                valid.date = true;
+                            } else {
+                                valid.required = true;
+                                valid.date = false;
+                            }
+                        } else {
+                            valid.required = true;
+                            valid.date = false;
                         }
+
                     }
 
                     $ctrls.$setValidity('date', valid.date); //true or false
@@ -454,3 +460,4 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
             }
         };
     });
+
