@@ -312,7 +312,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     $scope.ngModel = new Date(''+$scope.selectedDay); //set the model with the new selected date
                     $scope.visible = false; // hide the datepicker
                     $ctrls.$dirty = false; //validation: input not dirty
-                    $ctrls.$setValidity('date', false); //set validation of a wrong date to false
+                    $ctrls.$setValidity('date', true); //set validation of a wrong date to false
                     updateInput(); //update the input
                 };
 
@@ -397,16 +397,16 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         };
                         checkPosition();
 
-                        if($scope.selectedDayShort!=='' ){ //fill selectedDay with ngmodel if open datepicker
-                            if($scope.ngModel){ // if the model has a date
-                                $scope.selectedDay = angular.copy($scope.ngModel);
-                            } else { //if no value then use today's date
-                                $scope.selectedDay = new Date();
-                            }
-                        }
+//                        if($scope.selectedDayShort!=='' ){ //fill selectedDay with ngmodel if open datepicker
+//                            if($scope.ngModel){ // if the model has a date
+//                                $scope.selectedDay = angular.copy(new Date($scope.ngModel));
+//                            } else { //if no value then use today's date
+//                                $scope.selectedDay = new Date();
+//                            }
+//                        }
 
                         var offsetTop = ( $scope.yearNames.indexOf($scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
-
+                        console.log(offsetTop);
                         setTimeout(function(){
                             scrollCont.scrollTop = offsetTop; // auto scroll to selected year
                             angular.element($window).bind('keydown',function(ev){
@@ -429,11 +429,24 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                 $scope.divider = getDivider($scope.lxDatepicker);
                 $scope.yearNames = fillRange();
 
-                //begin with building the datepicker
-                createDays($scope.selectedDay);
+                $scope.$watch('ngModel',function(){
 
-                //fill start date with ng-model
-                $scope.selectedDayShort = $scope.ngModel.getDate()+''+$scope.divider+''+($scope.ngModel.getMonth()+1)+''+$scope.divider+''+$scope.ngModel.getFullYear();
+                    var test = new Date($scope.ngModel);
+
+                    if(test.toString() !== 'Invalid Date'){
+                        $scope.selectedDay = test;
+                        $scope.selectedDayShort = test.getDate()+''+$scope.divider+''+(test.getMonth()+1)+''+$scope.divider+''+test.getFullYear();
+
+                    } else {
+                        $scope.selectedDay = new Date();
+                    }
+                    createDays($scope.selectedDay);
+                });
+
+
+
+
+
 
                 function update(){
                     createDays($scope.selectedDay);
