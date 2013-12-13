@@ -432,6 +432,9 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                 //begin with building the datepicker
                 createDays($scope.selectedDay);
 
+                //fill start date with ng-model
+                $scope.selectedDayShort = $scope.ngModel.getDate()+''+$scope.divider+''+($scope.ngModel.getMonth()+1)+''+$scope.divider+''+$scope.ngModel.getFullYear();
+
                 function update(){
                     createDays($scope.selectedDay);
                 }
