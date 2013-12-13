@@ -247,7 +247,6 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 
                     var month = $scope.selectedDay.getMonth()+1;
                     if(month<10){ month = '0'+month; }
-
                     $scope.selectedDayShort = (day+''+$scope.divider+''+month+''+$scope.divider+''+$scope.selectedDay.getFullYear());
                 }
 
@@ -313,7 +312,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     $scope.visible = false; // hide the datepicker
                     $ctrls.$dirty = false; //validation: input not dirty
                     $ctrls.$setValidity('date', true); //set validation of a wrong date to false
-                    updateInput(); //update the input
+//                    updateInput(); //update the input
                 };
 
                 /**
@@ -343,7 +342,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         valid.date = true; //date is valid no need to show error
                         valid.required = true; //required is valid no need to show error
 
-                        updateInput(); //fill the input with zeros if necessary
+//                        updateInput(); //fill the input with zeros if necessary
 
                     } else {
 
@@ -406,7 +405,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 //                        }
 
                         var offsetTop = ( $scope.yearNames.indexOf($scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
-                        console.log(offsetTop);
+
                         setTimeout(function(){
                             scrollCont.scrollTop = offsetTop; // auto scroll to selected year
                             angular.element($window).bind('keydown',function(ev){
@@ -436,7 +435,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     if(test.toString() !== 'Invalid Date'){
                         $scope.selectedDay = test;
                         $scope.selectedDayShort = test.getDate()+''+$scope.divider+''+(test.getMonth()+1)+''+$scope.divider+''+test.getFullYear();
-
+                        updateInput(); //fill the input with zeros if necessary
                     } else {
                         $scope.selectedDay = new Date();
                     }
