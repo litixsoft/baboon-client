@@ -1191,3 +1191,128 @@ markdown img:hover{
   /*right:0px;*/
   right:-340px;
 }
+
+/* --------------- lxDatepicker -------------- */
+.has-error .input-group-btn .btn{
+  //  color: #FFF;
+  //  background-color: #D9534F;
+  border-left-color: #D43F3A;
+}
+
+.has-error .input-group-btn .btn:hover,
+.has-error .input-group-btn .btn:focus,
+.has-error .input-group-btn .btn:active,
+.has-error .input-group-btn .btn.active{
+  //  color: #ffffff;
+  //  background-color: #d2322d;
+  border-left-color: #ac2925;
+}
+
+.form-group.has-error .lxvalidation div[lx-datepicker] + label.label-danger{
+  right:auto;
+  left:110px;
+}
+
+.lx-datepicker{
+  //  background:#eee;
+  .gradientFromTop('fcfcfc','eeeeee');
+  border-radius:7px;box-shadow:0 1px 17px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.5);text-align: center;padding:0;width:500px;
+  position:absolute;top:40px;left:0;z-index:9999;
+
+  .lx-datepicker-body{
+    padding:20px 0 10px 0;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .lx-datepicker-year{
+      border-right:1px solid rgba(255,255,255,0.5);
+      //  border-left:1px solid rgba(255,255,255,0.5);
+      height:228px;padding:50px 0;position:relative;
+      overflow:hidden;
+
+      ul{
+        list-style-type: none;padding:0;margin:auto 0;
+      }
+      .lx-datepicker-year-btn{
+        position:absolute;font-size:24px;left:50%;margin-left:-12px;width:24px;height:24px;
+      }
+      .lx-datepicker-year-btn:hover{
+        cursor:pointer;color:#888;
+      }
+      .lx-datepicker-year-btn.year-up{
+        top:0;
+      }
+      .lx-datepicker-year-btn.year-down{
+        bottom:3px;
+      }
+      .lx-datepicker-year-container{
+        display:block;height:100%;width:120%;overflow-x:hidden;overflow-y:scroll;/*font-weight:bolder;*/font-size: 17px;
+      }
+    }
+
+    .lx-datepicker-month{
+      border-right:1px solid rgba(255,255,255,0.5);border-left:1px solid rgba(0,0,0,0.1);
+      //  border-left:1px solid rgba(255,255,255,0.5);border-right:1px solid rgba(0,0,0,0.1);
+      padding:0 5px;
+
+      ul{
+        list-style-type: none;padding:0 0 0 15px;margin:auto 0;font-size:0.928em;line-height:19px;text-align: left;
+      }
+
+    }
+
+    .lx-datepicker-day{
+      border-left:1px solid rgba(0,0,0,0.1);
+      //  border-right:1px solid rgba(0,0,0,0.1);
+      table{
+        width:100%;text-align: center;
+
+        thead{
+
+          th{
+            text-align: center;width:37px;padding-bottom:15px;
+          }
+          th:first-child{
+            padding-right:20px;
+            text-align:left;
+          }
+        }
+
+        tbody{
+          td:first-child{
+            text-align: left;
+          }
+        }
+      }
+
+      .btn.btn-default.other{
+        background:#ddd;color:#777;
+      }
+
+      .btn.btn-default.today:not(.btn-primary){
+        background-color:rgba(0,255,0,0.1);
+
+      }
+    }
+
+    .lx-datepicker-year ul li:hover,
+    .lx-datepicker-month ul li:hover{
+      font-weight:bold;cursor:pointer;
+    }
+
+    .active{
+      font-weight: bold;color:#428BCA;
+    }
+  }
+
+  .lx-datepicker-footer{
+    margin-top:10px;background:rgba(0,0,0,0.05);border-radius: 0 0 7px 7px;
+
+    .lx-datepicker-btn{
+      margin:5px 17px 5px 0;
+    }
+  }
+}
