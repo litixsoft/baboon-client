@@ -13,9 +13,11 @@ angular.module('lx.nav', ['lx.nav.directives'])
                     });
                     $scope.treeData = treeData;
                 } else {
-                    if ($attrs.nrAttr <= data.length - 1) {
-                        $scope.treeData = data[$attrs.nrAttr].children;
-                    }
+                    angular.forEach(data, function (value) {
+                        if(value.title === $attrs.nrAttr){
+                            $scope.treeData = value.children;
+                        }
+                    });
                 }
             }
 
