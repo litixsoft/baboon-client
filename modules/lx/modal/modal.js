@@ -93,6 +93,7 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
                 backdrop: backdrop, //static, true, false
                 modalFade: true,
                 controller: 'lxModalCtrl',
+                windowClass: 'lx-modal-msg',
                 resolve: {
                     modalOptions: function () { return modalOptions; }
                 },
