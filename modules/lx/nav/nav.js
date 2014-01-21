@@ -3,6 +3,8 @@ angular.module('lx.nav', ['lx.nav.directives'])
     .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs', 'lxTransport', '$log',
         function ($scope, $element, $attrs, transport, $log) {
 
+            $scope.currentLink = '';
+
             function callback (data) {
 
                 var treeData = [];
@@ -49,6 +51,10 @@ angular.module('lx.nav', ['lx.nav.directives'])
                 } else {
                     data.hide = '';
                 }
+            };
+
+            $scope.openLink = function(value){
+                $scope.currentLink = value;
             };
         }
     ]);
