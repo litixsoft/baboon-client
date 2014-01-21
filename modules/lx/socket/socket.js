@@ -121,6 +121,9 @@ angular.module('lx.socket', [])
                     socket.emit(eventName, data, function (data) {
                         callback(data);
                     });
+                },
+                removeAllListeners: function (eventName) {
+                    socket.removeAllListeners(eventName);
                 }
             };
         };

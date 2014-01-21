@@ -42,6 +42,27 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
 
             return {
                 /**
+                 * Listen for socket events
+                 *
+                 * @param {!string} event The name of the socket event.
+                 * @param {!function(object)} callback The callback function.
+                 */
+                on: function (event, callback) {
+                    if ($rootScope.socketEnabled) {
+                        // remove all registered events
+                        socket.removeAllListeners(event);
+
+                        // register new listener
+                        socket.on(event, function () {
+                            var args = arguments;
+
+                            $rootScope.$apply(function () {
+                                callback.apply(socket, args);
+                            });
+                        });
+                    }
+                },
+                /**
                  * Emits transport fire event to socket or request post to server.
                  * Rest route is socket event name + baseUrl.
                  *
