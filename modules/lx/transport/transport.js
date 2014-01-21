@@ -25,7 +25,7 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
              * @param {!object} data - Transport data object.
              * @param {function(?object, ?object=)} callback - The callback from application.
              */
-            function transportCallback(data, callback) {
+            function transportCallback (data, callback) {
                 $rootScope.isLoading = false;
 
                 if (data.error) {
@@ -48,19 +48,17 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
                  * @param {!function(object)} callback The callback function.
                  */
                 on: function (event, callback) {
-                    if ($rootScope.socketEnabled) {
-                        // remove all registered events
-                        socket.removeAllListeners(event);
+                    // remove all registered events
+                    socket.removeAllListeners(event);
 
-                        // register new listener
-                        socket.on(event, function () {
-                            var args = arguments;
+                    // register new listener
+                    socket.on(event, function () {
+                        var args = arguments;
 
-                            $rootScope.$apply(function () {
-                                callback.apply(socket, args);
-                            });
+                        $rootScope.$apply(function () {
+                            callback.apply(socket, args);
                         });
-                    }
+                    });
                 },
                 /**
                  * Emits transport fire event to socket or request post to server.
