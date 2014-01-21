@@ -51,6 +51,15 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
+### v0.3.0
+* add function transport.on() to listen to socket events
+* add lxDatepicker directive
+* add lx-radio and lx-checkbox directives to have radio buttons and checkboxes that looks the same in every browser and OS
+* highlight the active link in the menu
+* make menu responsive
+* fix error in lx.pager that button 'next Page' and 'last Page' are enabled when current page is greater than number of pages
+* navigation now uses names instead of numbers to find children
+
 ### v0.2.9
 * update angular to v1.2.2
 * update angular-translate to v1.1.1
