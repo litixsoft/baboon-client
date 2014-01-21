@@ -53,8 +53,10 @@ angular.module('lx.nav', ['lx.nav.directives'])
                 }
             };
 
-            $scope.openLink = function(value){
-                $scope.currentLink = value;
+            $scope.openLink = function (value) {
+                if(value){
+                    $scope.currentLink = value;
+                }
             };
         }
     ]);
