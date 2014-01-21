@@ -1323,3 +1323,48 @@ markdown img:hover{
     }
   }
 }
+
+/*-------lx-Radio-----lx-Checkbox--------*/
+@lxRed: #E65B44;
+@lxRedDisabled: #e7a398;
+
+.lx-checkbox{
+  border: 1px solid #ccc;border-radius: 4px;width:20px;height:20px; display:inline-block;float:left;margin-left:-20px;padding:0 2px;
+}
+.lx-checkbox.disabled{
+  border: 1px solid #e0e0e0;background:#f2f2f2;cursor: default;
+}
+.lx-checkbox.lx-checked{
+  border: 1px solid @lxRed;
+  background:@lxRed;
+}
+.lx-checkbox.lx-checked.disabled{
+  border: 1px solid @lxRedDisabled;
+  background: @lxRedDisabled;
+  color:#eee;
+}
+
+.lx-radio{
+  border: 1px solid #ccc;border-radius: 14px;width:20px;height:20px; display:inline-block;float:left;margin-left:-20px;padding:0 2px;
+}
+.lx-radio.lx-checked{
+  border: 1px solid @lxRed;
+  background:@lxRed;
+}
+.lx-radio .radio-point{
+  width:14px;height:14px;border-radius:15px;border:3px solid white;display:inline-block;margin-top:2px;color:white;
+}
+
+.lx-radio.disabled{
+  border: 1px solid #e0e0e0;background:#f2f2f2;cursor: default;
+}
+.lx-radio.disabled.lx-checked{
+  border: 1px solid @lxRedDisabled;
+  background: @lxRedDisabled;
+}
+.lx-radio.disabled .radio-point{
+  border-color:transparent;
+}
+.lx-radio.disabled.lx-checked  .radio-point{
+  border-color:#eee;
+}
