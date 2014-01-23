@@ -299,6 +299,9 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 
                     if(!number.in){ //if clicked number is in last or next month
                         var month;
+
+                        $scope.selectedDay.setDate(2);
+
                         if(number.nr>20){ //next month
                             month = $scope.selectedDay.getMonth()-1;
                         }
@@ -307,6 +310,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         }
                         $scope.selectedDay.setMonth(month); //set the correct month
                     }
+
                     $scope.selectedDay.setDate(number.nr); //set the day
                     $scope.selectedDay.setHours(5); // set hours of time to 5 o clock
                     $scope.ngModel = new Date(''+$scope.selectedDay); //set the model with the new selected date
