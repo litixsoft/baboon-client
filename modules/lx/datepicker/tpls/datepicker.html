@@ -1,8 +1,8 @@
 <div style="display:inline">
     <div class="input-group" style="width:160px;">
-        <input type="text" ng-model="selectedDayShort" id="{{inputID}}" name="{{inputName}}" ng-blur="getInput()" class="form-control" placeholder="{{placeholder}}">
+        <input type="text" ng-model="selectedDayShort" id="{{inputID}}" ng-readonly="ngReadonly" name="{{inputName}}" ng-blur="getInput()" class="form-control" placeholder="{{placeholder}}">
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button" ng-click="visible = !visible"><span class="glyphicon glyphicon-calendar"></span></button>
+            <button class="btn btn-default" type="button" ng-click="visible = !visible" ng-class="{disabled : ngReadonly}"><span class="glyphicon glyphicon-calendar"></span></button>
         </span>
     </div>
     <div class="lx-datepicker" ng-show="visible">

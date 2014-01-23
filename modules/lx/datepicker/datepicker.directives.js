@@ -12,6 +12,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
             replace: true,
             scope: {
                 ngModel: '=',
+                ngReadonly: '=',
                 lxDatepicker: '='
             },
             templateUrl: 'lx/datepicker/tpls/datepicker.html',
