@@ -17,9 +17,10 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
             $scope.modalOptions.actionClose = $scope.modalOptions.callObj.cbClose;
             $scope.modalOptions.actionYes = $scope.modalOptions.callObj.cbYes;
             $scope.modalOptions.actionNo = $scope.modalOptions.callObj.cbNo;
-        } /*else {
-            $scope.modalOptions.actionClose = true;
-        }*/
+        }
+        /*else {
+         $scope.modalOptions.actionClose = true;
+         }*/
 
         $scope.reset = function () {
             if ($modalInstance) {
@@ -69,24 +70,22 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
          * @param {function=} callback The callback action when click the ok button in the modal window OR {object=} object with multible callbacks
          * @param {string=} cssClass an optinal css class to manipulate the msgbox style
          */
-
         var pub = {};
 
         pub.updateMsg = function (id, message) {
             $rootScope.$emit(id, message);
         };
 
-        pub.msgBox = function (id, backdrop, headline, message, type, callObj, cssClass) {
-
+        pub.msgBox = function (id, backdrop, headline, message, type, callObj, cssClass, buttonTextValues) {
             var self = this;
-
             var modalOptions = {
                 msgId: id,
                 headline: headline,
                 message: message,
                 type: type,
                 callObj: callObj,
-                cssClass: cssClass
+                cssClass: cssClass,
+                buttonTextValues: buttonTextValues
             };
 
             self.modalInstance = $modal.open({
@@ -100,7 +99,6 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
                 keyboard: false,
                 templateUrl: 'lx/modal/tpls/msgBox.html'
             });
-
         };
 
         pub.reset = function () {
@@ -108,5 +106,4 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
         };
 
         return pub;
-
     }]);

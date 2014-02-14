@@ -95,7 +95,7 @@ angular.module('lx.alert', [])
 
         // show error alert message
         pub.error = function (message) {
-            show('error', message);
+            show('danger', message);
         };
 
         return pub;

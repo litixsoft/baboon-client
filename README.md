@@ -51,6 +51,13 @@ Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
 ## Release History
+### v0.3.1
+* add directive lxReset (adds a x-Button to clear an input)
+* fix error in lxDatepicker directive
+* change type 'error' to 'danger' in lxAlert to match new bootstrap v3.0.0 css classes
+* add new param buttonTextValues to lxModal when opening a new modal window to override the text values of the buttons
+* update angular to v1.2.12
+
 ### v0.3.0
 * add function transport.on() to listen to socket events
 * add lxDatepicker directive
