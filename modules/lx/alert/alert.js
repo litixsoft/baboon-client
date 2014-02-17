@@ -35,7 +35,7 @@ angular.module('lx.alert', [])
             if (pub.logLevel === 'warning') {
                 level = 2;
             }
-            if (pub.logLevel === 'error') {
+            if (pub.logLevel === 'danger') {
                 level = 1;
             }
 
@@ -48,7 +48,7 @@ angular.module('lx.alert', [])
             if (type === 'warning' && level >= 2) {
                 $log.warn(type + ': ' + msg);
             }
-            if (type === 'error' && level >= 1) {
+            if (type === 'danger' && level >= 1) {
                 $log.error(type + ': ' + msg);
             }
         };
