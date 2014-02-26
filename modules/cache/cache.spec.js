@@ -1,4 +1,4 @@
-/*global describe, it, expect, beforeEach, inject, module */
+
 'use strict';
 
 describe('bb.cache', function () {
