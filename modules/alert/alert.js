@@ -1,7 +1,8 @@
-/*global angular*/
-angular.module('lx.alert', [])
+'use strict';
+
+angular.module('bb.alert', [])
     // Service for angular-ui alert handling
-    .factory('lxAlert', ['$log', '$timeout', function ($log, $timeout) {
+    .factory('bbAlert', ['$log', '$timeout', function ($log, $timeout) {
         var pub = {};
 
         // timeout for show alert box.
