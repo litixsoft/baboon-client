@@ -1,4 +1,3 @@
-/*global describe, it, expect, beforeEach, inject, module */
 'use strict';
 
 describe('baboon message box', function () {
@@ -6,13 +5,13 @@ describe('baboon message box', function () {
 
     beforeEach(function () {
         module('ui.bootstrap.modal');
-        module('lx.modal');
+        module('bbc.modal');
     });
 
-    describe('lxModal', function () {
+    describe('bbcModal', function () {
         beforeEach(function () {
             inject(function ($injector, _$rootScope_, _$compile_, $templateCache) {
-                service = $injector.get('lxModal');
+                service = $injector.get('bbcModal');
                 scope = _$rootScope_;
                 $compile = _$compile_;
                 $templateCache.put('/baboon_msgBox/msgBox.html', '<p>Hello</p>');

@@ -1,9 +1,10 @@
-/*global angular*/
-angular.module('lx.nav.directives',['lx/nav/tpls/navbar/outer.html', 'lx/nav/tpls/navbar/inner.html', 'lx/nav/tpls/treeview/outer.html', 'lx/nav/tpls/treeview/inner.html'])
-    .directive('treeview', function () {
+'use strict';
+
+angular.module('bbc.nav.directives',['nav/tpls/navbar/outer.html', 'nav/tpls/navbar/inner.html', 'nav/tpls/treeview/outer.html', 'nav/tpls/treeview/inner.html'])
+    .directive('bbcTreeview', function () {
         return {
             restrict: 'E',
-            controller: 'LxTreeViewCtrl',
+            controller: 'BbcTreeViewCtrl',
             transclude: false,
             replace: true,
             scope: {
@@ -17,14 +18,14 @@ angular.module('lx.nav.directives',['lx/nav/tpls/navbar/outer.html', 'lx/nav/tpl
                 methodAttr: '&',
                 nrAttr: '@'
             },
-            templateUrl: 'lx/nav/tpls/treeview/outer.html'
+            templateUrl: 'nav/tpls/treeview/outer.html'
 //        templateUrl: 'baboon.nav.tpl/#{attr.templateAttr}/outer.html'
         };
     })
-    .directive('bootnav', function () {
+    .directive('bbcBootnav', function () {
         return {
             restrict: 'E',
-            controller: 'LxTreeViewCtrl',
+            controller: 'BbcTreeViewCtrl',
             transclude: false,
             replace: true,
             scope: {
@@ -37,6 +38,6 @@ angular.module('lx.nav.directives',['lx/nav/tpls/navbar/outer.html', 'lx/nav/tpl
                 ngModel: '@',
                 nrAttr: '@'
             },
-            templateUrl: 'lx/nav/tpls/navbar/outer.html'
+            templateUrl: 'nav/tpls/navbar/outer.html'
         };
     });

@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.sort', [])
-    .directive('lxSort', function () {
+'use strict';
+
+angular.module('bbc.sort', [])
+    .directive('bbcSort', function () {
         return {
             restrict: 'E',
             transclude: true,

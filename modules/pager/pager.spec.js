@@ -1,8 +1,9 @@
-/*global angular, describe, beforeEach, inject, it, expect, spyOn */
-describe('lxPager', function () {
+'use strict';
+
+describe('bbcPager', function () {
     var element, compile, scope;
 
-    beforeEach(module('lx.pager'));
+    beforeEach(module('bbc.pager'));
 
     beforeEach(inject(function ($compile, $rootScope) {
         compile = $compile;
@@ -18,7 +19,7 @@ describe('lxPager', function () {
         spyOn(scope, 'getData');
 
         // create pager element
-        element = angular.element('<lx-pager count="count" page-sizes="{{ pageSizes }}" on-paging="getData(pagingOptions)"></lx-pager>');
+        element = angular.element('<bbc-pager count="count" page-sizes="{{ pageSizes }}" on-paging="getData(pagingOptions)"></bbc-pager>');
         compile(element)(scope);
         scope.$digest();
     }));
@@ -37,7 +38,7 @@ describe('lxPager', function () {
 
     it('should use the default page-Sizes if the page-Sizes injected through the attrs are no array', function () {
         scope.val = 23;
-        element = angular.element('<lx-pager count="count" current-page="currentPage" page-sizes="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" page-sizes="{{ val }}" on-paging="getData(pagingOptions)"></bbc-pager>');
         compile(element)(scope);
         scope.$digest();
         scope.$digest();
@@ -49,7 +50,7 @@ describe('lxPager', function () {
 
     it('should use the default page-Sizes if the page-Size injected through the attrs are no array', function () {
         scope.val = 'dd';
-        element = angular.element('<lx-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></bbc-pager>');
         compile(element)(scope);
         scope.$digest();
         var elementScope = element.isolateScope();
@@ -59,7 +60,7 @@ describe('lxPager', function () {
 
     it('should use the pageSize attribute when specified', function () {
         scope.val = 50;
-        element = angular.element('<lx-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></bbc-pager>');
         compile(element)(scope);
         scope.$digest();
         var elementScope = element.isolateScope();
@@ -71,7 +72,7 @@ describe('lxPager', function () {
 
     it('should parse the page-Sizes if the page-Sizes injected through the attrs', function () {
         scope.val = [1, 2, 3];
-        element = angular.element('<lx-pager count="count" current-page="currentPage" page-sizes="{{ val }}" on-paging="getData(pagingOptions)"></lx-pager>');
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" page-sizes="{{ val }}" on-paging="getData(pagingOptions)"></bbc-pager>');
         compile(element)(scope);
         scope.$digest();
         var elementScope = element.isolateScope();
@@ -81,43 +82,34 @@ describe('lxPager', function () {
 
     it('should have a function skip() which returns the skip value', function () {
         var elementScope = element.isolateScope();
-
         expect(elementScope.skip()).toBe(0);
 
         elementScope.currentPage = 5;
-
         expect(elementScope.skip()).toBe(40);
 
         elementScope.pageSize = 1;
-
         expect(elementScope.skip()).toBe(4);
     });
 
     it('should have a function numberOfPages() which returns number of pages', function () {
         var elementScope = element.isolateScope();
-
         expect(elementScope.numberOfPages()).toBe(0);
 
         elementScope.count = 5;
-
         expect(elementScope.numberOfPages()).toBe(1);
 
         elementScope.pageSize = 0;
-
         expect(elementScope.numberOfPages()).toBe(5);
     });
 
     it('should have a function getOptions() which returns the paging options', function () {
         var elementScope = element.isolateScope();
-
         expect(elementScope.getOptions()).toEqual({limit: 10, skip: 0});
 
         elementScope.pageSize = 3;
-
         expect(elementScope.getOptions()).toEqual({limit: 3, skip: 0});
 
         elementScope.currentPage = 5;
-
         expect(elementScope.getOptions()).toEqual({limit: 3, skip: 12});
     });
 
@@ -197,16 +189,30 @@ describe('lxPager', function () {
             expect(spy).toHaveBeenCalled();
         });
 
-//        it('should refresh the data when the pageSize changes', function () {
-//            var elementScope = element.scope();
-//            spyOn(elementScope, 'refresh');
-//            var spy = elementScope.refresh;
-//            elementScope.pageSize = 7;
-//            elementScope.$digest();
-//
-//            expect(spy).toHaveBeenCalled();
-//            expect(spy.calls.length).toEqual(1);
-//        });
+        it('should refresh the data when the pageSize changes', function () {
+            var elementScope = element.isolateScope();
+            spyOn(elementScope, 'refresh');
+            var spy = elementScope.refresh;
+            elementScope.currentPage = 1;
+            elementScope.count = 14;
+            elementScope.pageSize = 7;
+            elementScope.$digest();
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy.calls.length).toEqual(1);
+        });
+
+        it('should do nothing the data when the pageSize changes with same value', function () {
+            var elementScope = element.isolateScope();
+            spyOn(elementScope, 'refresh');
+            var spy = elementScope.refresh;
+            elementScope.currentPage = 1;
+            elementScope.count = 20;
+            elementScope.pageSize = 10;
+            elementScope.$digest();
+
+            expect(spy).not.toHaveBeenCalled();
+        });
 
         it('should refresh the data when the count changes', function () {
             var elementScope = element.isolateScope();
@@ -233,7 +239,7 @@ describe('lxPager', function () {
         });
 
         it('should refresh the data when the current page is changed', function () {
-            element = angular.element('<lx-pager count="count" current-page="currentPage" on-paging="getData(pagingOptions)"></lx-pager>');
+            element = angular.element('<bbc-pager count="count" current-page="currentPage" on-paging="getData(pagingOptions)"></bbc-pager>');
             compile(element)(scope);
             scope.$digest();
 

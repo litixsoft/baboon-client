@@ -1,14 +1,13 @@
-
 'use strict';
 
-describe('bb.cache', function () {
+describe('bbc.cache', function () {
     var service;
 
     beforeEach(function () {
-        module('bb.cache');
+        module('bbc.cache');
 
         inject(function ($injector) {
-            service = $injector.get('bbCache');
+            service = $injector.get('bbcCache');
         });
     });
 
@@ -25,14 +24,13 @@ describe('bb.cache', function () {
 
         service.test = 1;
         service.obj = data;
-
         data.age = 10;
 
         expect(service.test).toBe(1);
         expect(service.obj).toEqual({name: 'wayne', age: 10});
 
         inject(function ($injector) {
-            var serviceRef = $injector.get('bbCache');
+            var serviceRef = $injector.get('bbcCache');
 
             expect(serviceRef.test).toBe(1);
             expect(serviceRef.obj).toEqual({name: 'wayne', age: 10});

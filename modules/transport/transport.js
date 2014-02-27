@@ -1,7 +1,7 @@
-/*global angular*/
-angular.module('lx.transport', ['lx.rest', 'lx.socket'])
-    .factory('lxTransport', ['$rootScope', 'REST', 'SocketIO', 'USE_SOCKET',
-        function ($rootScope, REST, SocketIO, USE_SOCKET) {
+'use strict';
+
+angular.module('bbc.transport', ['bbc.rest', 'bbc.socket'])
+    .factory('bbcTransport', function ($rootScope, REST, SocketIO, USE_SOCKET) {
 
             // set socket transport to false
             $rootScope.socketEnabled = false;
@@ -157,4 +157,4 @@ angular.module('lx.transport', ['lx.rest', 'lx.socket'])
                     });
                 }
             };
-        }]);
+        });

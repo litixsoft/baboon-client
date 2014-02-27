@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
-    .controller('lxModalCtrl', ['$rootScope', '$scope', '$modalInstance', 'modalOptions', function ($rootScope, $scope, $modalInstance, modalOptions) {
+'use strict';
+
+angular.module('bbc.modal', ['bbc.modal.directives', 'modal/tpls/msgBox.html'])
+    .controller('bbcModalCtrl', function ($rootScope, $scope, $modalInstance, modalOptions) {
 
         $scope.modalOptions = modalOptions;
 
@@ -58,8 +59,8 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
             }
             $scope.reset();
         };
-    }])
-    .service('lxModal', ['$rootScope', '$modal', function ($rootScope, $modal) {
+    })
+    .service('bbcModal', function ($rootScope, $modal) {
         /**
          * Opens the modal window.
          *
@@ -92,13 +93,13 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
             self.modalInstance = $modal.open({
                 backdrop: backdrop, //static, true, false
                 modalFade: true,
-                controller: 'lxModalCtrl',
-                windowClass: 'lx-modal-msg',
+                controller: 'BbcModalCtrl',
+                windowClass: 'bbc-modal-msg',
                 resolve: {
                     modalOptions: function () { return modalOptions; }
                 },
                 keyboard: false,
-                templateUrl: 'lx/modal/tpls/msgBox.html'
+                templateUrl: 'modal/tpls/msgBox.html'
             });
 
         };
@@ -109,4 +110,4 @@ angular.module('lx.modal', ['lx.modal.directives', 'lx/modal/tpls/msgBox.html'])
 
         return pub;
 
-    }]);
+    });

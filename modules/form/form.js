@@ -1,7 +1,8 @@
-/*global angular*/
-angular.module('lx.form', [])
+'use strict';
+
+angular.module('bbc.form', [])
     // form service with cache
-    .factory('lxForm', ['lxCache', function (lxCache) {
+    .factory('bbcForm', function (bbcCache) {
         return function (modelName, key) {
             var pub = {},
                 master = {};
@@ -27,11 +28,11 @@ angular.module('lx.form', [])
                 pub.model = angular.copy(master);
 
                 if (key) {
-                    // reset model in lxCache
+                    // reset model in bbcCache
                     if (pub.model[key]) {
-                        lxCache[pub.model[key]] = pub.model;
+                        bbcCache[pub.model[key]] = pub.model;
                     } else {
-                        lxCache[modelName] = pub.model;
+                        bbcCache[modelName] = pub.model;
                     }
                 }
             };
@@ -46,29 +47,29 @@ angular.module('lx.form', [])
             };
 
             /**
-             * Tries to load the model from lxCache.
+             * Tries to load the model from bbcCache.
              *
              * @param {string=} key The key of the model.
              * @returns {boolean}
              */
             pub.hasLoadedModelFromCache = function (key) {
-                if (key && lxCache[key]) {
-                    // load from lxCache
-                    pub.model = lxCache[key];
+                if (key && bbcCache[key]) {
+                    // load from bbcCache
+                    pub.model = bbcCache[key];
 
-                    if (lxCache[key + '_Master']) {
-                        // load master from lxCache
-                        master = lxCache[key + '_Master'];
+                    if (bbcCache[key + '_Master']) {
+                        // load master from bbcCache
+                        master = bbcCache[key + '_Master'];
                     }
 
                     return true;
                 } else if (!key) {
-                    if (lxCache[modelName]) {
-                        // load from lxCache
-                        pub.model = lxCache[modelName];
+                    if (bbcCache[modelName]) {
+                        // load from bbcCache
+                        pub.model = bbcCache[modelName];
                     } else {
-                        // set lxCache
-                        lxCache[modelName] = pub.model;
+                        // set bbcCache
+                        bbcCache[modelName] = pub.model;
                     }
 
                     return true;
@@ -81,12 +82,12 @@ angular.module('lx.form', [])
              * Sets the model.
              *
              * @param {object} model The model.
-             * @param {boolean} resetCache Specifies if the lxCache should be resettet.
+             * @param {boolean} resetCache Specifies if the bbcCache should be resettet.
              */
             pub.setModel = function (model, resetCache) {
                 if (!pub.model[key] && resetCache) {
-                    // no key -> create, delete model from lxCache
-                    delete lxCache[modelName];
+                    // no key -> create, delete model from bbcCache
+                    delete bbcCache[modelName];
                 }
 
                 // set model
@@ -94,13 +95,13 @@ angular.module('lx.form', [])
                 master = angular.copy(model);
 
                 if (resetCache) {
-                    // reset lxCache
-                    delete lxCache[model[key]];
-                    delete lxCache[model[key] + '_Master'];
+                    // reset bbcCache
+                    delete bbcCache[model[key]];
+                    delete bbcCache[model[key] + '_Master'];
                 } else {
-                    // set lxCache
-                    lxCache[model[key]] = pub.model;
-                    lxCache[model[key] + '_Master'] = master;
+                    // set bbcCache
+                    bbcCache[model[key]] = pub.model;
+                    bbcCache[model[key] + '_Master'] = master;
                 }
             };
 
@@ -124,4 +125,4 @@ angular.module('lx.form', [])
 
             return pub;
         };
-    }]);
+    });

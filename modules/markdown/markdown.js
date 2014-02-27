@@ -1,6 +1,7 @@
-/*global angular, Showdown*/
-angular.module('lx.markdown', [])
-    .directive('lxMarkdown', function () {
+'use strict';
+
+angular.module('bbc.markdown', [])
+    .directive('bbcMarkdown', function () {
         var converter = new Showdown.converter();
 
         return {

@@ -1,18 +1,17 @@
-/*global describe, it, expect, beforeEach, inject, module */
 'use strict';
 
-describe('lx form service', function () {
+describe('bbc form service', function () {
     var service;
 
     beforeEach(function () {
-        module('lx.cache');
-        module('lx.form');
+        module('bbc.cache');
+        module('bbc.form');
     });
 
-    describe('lxForm', function () {
+    describe('bbcForm', function () {
         beforeEach(function () {
             inject(function ($injector) {
-                service = $injector.get('lxForm')('test', 'id');
+                service = $injector.get('bbcForm')('test', 'id');
             });
         });
 
@@ -49,7 +48,7 @@ describe('lx form service', function () {
                 expect(service.model).toEqual(data);
 
                 inject(function ($injector) {
-                    var cache = $injector.get('lxCache');
+                    var cache = $injector.get('bbcCache');
 
                     expect(cache[1]).toEqual(data);
                     expect(cache['1_Master']).toEqual(data);
@@ -65,7 +64,7 @@ describe('lx form service', function () {
                 expect(service.model).toEqual(data);
 
                 inject(function ($injector) {
-                    var cache = $injector.get('lxCache');
+                    var cache = $injector.get('bbcCache');
 
                     expect(cache[1]).toBeUndefined();
                     expect(cache['1_Master']).toBeUndefined();
@@ -76,7 +75,7 @@ describe('lx form service', function () {
                 var data = {name: 'wayne', age: 99};
 
                 inject(function ($injector) {
-                    var cache = $injector.get('lxCache');
+                    var cache = $injector.get('bbcCache');
 
                     cache.test = 123;
                     service.setModel(data, true);
@@ -102,7 +101,7 @@ describe('lx form service', function () {
                 expect(service.model).toEqual({id: 1, name: 'wayne', age: 99});
 
                 inject(function ($injector) {
-                    var cache = $injector.get('lxCache');
+                    var cache = $injector.get('bbcCache');
 
                     expect(cache[1]).toEqual({id: 1, name: 'wayne', age: 99});
                 });
@@ -144,7 +143,7 @@ describe('lx form service', function () {
                 expect(service.model).toEqual({name: 'wayne', age: 99});
 
                 inject(function ($injector) {
-                    var cache = $injector.get('lxCache');
+                    var cache = $injector.get('bbcCache');
 
                     expect(cache.test).toEqual({name: 'wayne', age: 99});
                 });

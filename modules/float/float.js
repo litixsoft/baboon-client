@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.float', [])
-    .directive('lxFloat', function () {
+'use strict';
+
+angular.module('bbc.float', [])
+    .directive('bbcFloat', function () {
         var FLOAT_REGEXP = /^\-?\d+((\.|,)?(\d+)?)?$/;
 
         function roundToDecimal (number, decimal) {
@@ -23,7 +24,7 @@ angular.module('lx.float', [])
                 var numberOfDigits = 2;
 
                 // get the number of digits from attr
-                attrs.$observe('lxFloat', function (value) {
+                attrs.$observe('bbcFloat', function (value) {
                     value = scope.$eval(value);
 
                     if (typeof value === 'number') {

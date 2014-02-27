@@ -1,13 +1,14 @@
-/*global angular*/
-angular.module('lx.session', [])
+'use strict';
+
+angular.module('bbc.session', [])
     // Service for session handling
-    .factory('lxSession', ['$rootScope', '$log', 'lxTransport', function ($rootScope, $log, transport) {
+    .factory('bbcSession', function ($rootScope, $log, bbcTransport) {
         var pub = {};
 
         // save key value in session
         pub.setData = function (key, value, callback) {
             if (arguments.length === 3) {
-                transport.rest('session/setData', {key: key, value: value}, callback);
+                bbcTransport.rest('session/setData', {key: key, value: value}, callback);
             }
             else {
                 $log.error('parameter error, required key, value and callback');
@@ -16,7 +17,6 @@ angular.module('lx.session', [])
 
         // delete key value in session
         pub.deleteData = function (key, callback) {
-
             var data = {};
 
             if (arguments.length === 1) {
@@ -27,12 +27,11 @@ angular.module('lx.session', [])
                 data = {key: key};
             }
 
-            transport.rest('session/deleteData', data, callback);
+            bbcTransport.rest('session/deleteData', data, callback);
         };
 
         // get key value from session
         pub.getData = function (key, callback) {
-
             var data = {};
 
             if (arguments.length === 1) {
@@ -42,18 +41,18 @@ angular.module('lx.session', [])
                 data = {key: key};
             }
 
-            transport.rest('session/getData', data, callback);
+            bbcTransport.rest('session/getData', data, callback);
         };
 
         // check session and set activity time
         pub.getLastActivity = function (callback) {
-            transport.rest('session/getLastActivity', {}, callback);
+            bbcTransport.rest('session/getLastActivity', {}, callback);
         };
 
         // check session and set activity time
         pub.setActivity = function (callback) {
-            transport.rest('session/setActivity', {}, callback);
+            bbcTransport.rest('session/setActivity', {}, callback);
         };
 
         return pub;
-    }]);
+    });

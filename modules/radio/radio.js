@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.radio', ['lx.radio.directives'])
-    .controller('lxRadioCtrl', ['$scope', function ($scope) {
+'use strict';
+
+angular.module('bbc.radio', ['bbc.radio.directives'])
+    .controller('BbcRadioCtrl', function ($scope) {
         $scope.isChecked = false;
         $scope.hasValue = '';
         $scope.isDisabled = false;
@@ -33,6 +34,4 @@ angular.module('lx.radio', ['lx.radio.directives'])
                 }
             }
         };
-    }]);
-
-
+    });

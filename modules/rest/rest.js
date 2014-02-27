@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.rest', [])
-    .factory('REST', ['$http', function ($http) {
+'use strict';
+
+angular.module('bbc.rest', [])
+    .factory('REST', function ($http) {
         /**
          * REST
          *
@@ -66,4 +67,4 @@ angular.module('lx.rest', [])
 
             return pub;
         };
-    }]);
+    });

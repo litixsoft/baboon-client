@@ -1,7 +1,8 @@
-/*global angular, io*/
-angular.module('lx.socket', [])
+'use strict';
+
+angular.module('bbc.socket', [])
     // Wrapper service for socket.io
-    .factory('SocketIO', ['$rootScope', '$window', '$location', '$log', function ($rootScope, $window, $location, $log) {
+    .factory('SocketIO', function ($rootScope, $window, $location, $log) {
         function setSocketState (isSocketEnabled) {
             $rootScope.$apply(function () {
                 $rootScope.socketEnabled = isSocketEnabled;
@@ -53,20 +54,17 @@ angular.module('lx.socket', [])
             // socket disconnect event, change transportSocket to false.
             socket.on('disconnect', function () {
                 $log.warn('Lost connection to socket.io.');
-
                 setSocketState(false);
             });
 
             // socket connect event, change transportSocket to true.
             socket.on('connect', function () {
                 $log.info('socket.io connected with: ' + socket.socket.transport.name);
-
                 setSocketState(true);
             });
 
             socket.on('error', function (reason) {
                 $log.error('socket.io connect error. ', reason);
-
                 setSocketState(false);
             });
 
@@ -80,14 +78,12 @@ angular.module('lx.socket', [])
             // socket connect_timeout event
             socket.on('connect_timeout', function () {
                 $log.error('socket.io connect_timeout...');
-
                 setSocketState(false);
             });
 
             // socket reconnect event, change transportSocket to true
             socket.on('reconnect', function (transport) {
                 $log.log('socket.io reconnect with: ' + transport);
-
                 setSocketState(true);
             });
 
@@ -102,14 +98,12 @@ angular.module('lx.socket', [])
             // socket reconnect_error
             socket.on('reconnect_error', function (err) {
                 $log.error('socket.io reconnect_error: ', err);
-
                 setSocketState(false);
             });
 
             // socket reconnect_failed
             socket.on('reconnect_failed', function () {
                 $log.error('socket.io reconnect_failed');
-
                 setSocketState(false);
             });
 
@@ -127,8 +121,8 @@ angular.module('lx.socket', [])
                 }
             };
         };
-    }])
-    .factory('lxSocket', ['$rootScope', '$window', '$location', '$log', 'lxModal', function ($rootScope, $window, $location, $log, lxModal) {
+    })
+    .factory('bbcSocket', function ($rootScope, $window, $location, $log, bbcModal) {
         var protocol = $window.location.protocol,
             hostname = $window.location.hostname,
             port = $window.location.port,
@@ -156,7 +150,7 @@ angular.module('lx.socket', [])
             $log.error('Lost connection to Socket.IO');
 
             $rootScope.$apply(function () {
-                lxModal.msgBox('socketLost', true, 'Lost connection to server!', '', 'Warning');
+                bbcModal.msgBox('socketLost', true, 'Lost connection to server!', '', 'Warning');
             });
         });
 
@@ -168,7 +162,7 @@ angular.module('lx.socket', [])
             $log.error('connect_error: ', err);
 
             $rootScope.$apply(function () {
-                lxModal.msgBox('connectError', true, 'Could not connect to socket server!', '', 'Error');
+                bbcModal.msgBox('connectError', true, 'Could not connect to socket server!', '', 'Error');
             });
         });
 
@@ -179,7 +173,7 @@ angular.module('lx.socket', [])
         socket.on('reconnect', function (transport) {
             $log.log('socket.io reconnect with: ' + transport);
 
-            lxModal.reset(); //close
+            bbcModal.reset(); //close
 
         });
 
@@ -188,9 +182,9 @@ angular.module('lx.socket', [])
             $log.log('Try to reconnect with: ' + socket.socket.transport.name + ', attempt: ' + reconnectionAttempts);
 
             if (reconnectionAttempts === 1) {
-                lxModal.updateMsg('socketLost', ' Trying to reconnect. Attempt: ' + reconnectionAttempts);
+                bbcModal.updateMsg('socketLost', ' Trying to reconnect. Attempt: ' + reconnectionAttempts);
             } else {
-                lxModal.updateMsg('socketLost', ' Trying to reconnect. Attempt: ' + reconnectionAttempts);
+                bbcModal.updateMsg('socketLost', ' Trying to reconnect. Attempt: ' + reconnectionAttempts);
             }
 
         });
@@ -207,7 +201,7 @@ angular.module('lx.socket', [])
             $log.warn('Site Reload triggered by Server');
 
             $rootScope.$apply(function () {
-                lxModal.msgBox('siteReload', true, 'Session is expired! Please reload the site.', '', 'Error', function () {
+                bbcModal.msgBox('siteReload', true, 'Session is expired! Please reload the site.', '', 'Error', function () {
                     window.location.reload();
                 });
             });
@@ -236,5 +230,4 @@ angular.module('lx.socket', [])
                 });
             }
         };
-    }]);
-
+    });

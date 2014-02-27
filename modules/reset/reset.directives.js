@@ -1,10 +1,11 @@
-/*global angular*/
-angular.module('lx.reset.directives', [])
-    .value('lxResetConfig',null)
-    .directive('lxReset', ['lxResetConfig', function (lxResetConfig) {
+'use strict';
+
+angular.module('bbc.reset.directives', [])
+    .value('bbcResetConfig',null)
+    .directive('bbcReset', function (bbcResetConfig) {
         var resetValue = null;
-        if (lxResetConfig !== undefined){
-            resetValue = lxResetConfig;
+        if (bbcResetConfig !== undefined){
+            resetValue = bbcResetConfig;
         }
         return {
             require: 'ngModel',
@@ -25,5 +26,4 @@ angular.module('lx.reset.directives', [])
                 });
             }
         };
-
-    }]);
+    });

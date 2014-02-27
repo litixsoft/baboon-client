@@ -27,6 +27,10 @@
         "expect": false,
         "inject": false,
         "it": false,
-        "spyOn": false
+        "spyOn": false,
+        "Showdown": false,
+        "io": false,
+        "d3": false,
+        "chroma": false
     }
 }

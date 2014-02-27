@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.file.upload', [])
-    .directive('lxFileUpload', function () {
+'use strict';
+
+angular.module('bbc.file.upload', [])
+    .directive('bbcFileUpload', function () {
         return {
             scope: {
                 onFilesSelected: '&'
@@ -17,7 +18,6 @@ angular.module('lx.file.upload', [])
                             result.push(files[i]);
                         }
 
-                        // call scope function
                         scope.$apply(function () {
                             scope.onFilesSelected({files: result});
                         });

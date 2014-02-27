@@ -1,8 +1,9 @@
-/*global angular, describe, beforeEach, inject, it, expect */
-describe('lxInteger', function () {
+'use strict';
+
+describe('bbcInteger', function () {
     var scope, form;
 
-    beforeEach(module('lx.integer'));
+    beforeEach(module('bbc.integer'));
 
     beforeEach(inject(function ($compile, $rootScope) {
         // init scope
@@ -10,8 +11,8 @@ describe('lxInteger', function () {
 
         var element = angular.element(
             '<form name="form">' +
-                '<intput type="text" ng-model="model.val" name="val" lx-integer />' +
-            '</form>'
+                '<intput type="text" ng-model="model.val" name="val" bbc-integer />' +
+                '</form>'
         );
 
         scope.model = {};
@@ -75,6 +76,25 @@ describe('lxInteger', function () {
     it('should pass with null', function() {
         form.val.$setViewValue(null);
         expect(scope.model.val).toBeNull();
+        expect(form.val.$valid).toBe(true);
+    });
+
+    it('should return null if model is null', function() {
+        scope.model.val = null;
+        scope.$digest();
+        expect(form.val.$viewValue).toBe(null);
+        expect(form.val.$valid).toBe(true);
+    });
+
+    it('should not pass if model is NaN', function() {
+        scope.model.val = 'NaN';
+        scope.$digest();
+        expect(form.val.$valid).toBe(false);
+    });
+
+    it('should pass with valid model', function() {
+        scope.model.val = 1;
+        scope.$digest();
         expect(form.val.$valid).toBe(true);
     });
 });

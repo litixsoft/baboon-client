@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.inline.edit', [])
-    .factory('lxInlineEdit', function () {
+'use strict';
+
+angular.module('bbc.inline.edit', [])
+    .factory('bbcInlineEdit', function () {
         return function () {
             var pub = {},
                 master = {};

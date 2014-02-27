@@ -1,9 +1,10 @@
-/*global angular*/
-angular.module('lx.radio.directives', ['lx/radio/tpls/radio.html'])
-    .directive('lxRadio', function () {
+'use strict';
+
+angular.module('bbc.radio.directives', ['radio/tpls/radio.html'])
+    .directive('bbcRadio', function () {
         return {
             restrict: 'A',
-            controller: 'lxRadioCtrl',
+            controller: 'BbcRadioCtrl',
             transclude: false,
             replace: true,
             scope: {
@@ -11,7 +12,7 @@ angular.module('lx.radio.directives', ['lx/radio/tpls/radio.html'])
                 value: '@',
                 disabled: '@'
             },
-            templateUrl: 'lx/radio/tpls/radio.html'
+            templateUrl: 'radio/tpls/radio.html'
         };
     });
 

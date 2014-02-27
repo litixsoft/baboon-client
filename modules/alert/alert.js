@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('bb.alert', [])
+angular.module('bbc.alert', [])
     // Service for angular-ui alert handling
-    .factory('bbAlert', ['$log', '$timeout', function ($log, $timeout) {
+    .factory('bbcAlert', function ($log, $timeout) {
         var pub = {};
 
         // timeout for show alert box.
@@ -100,4 +100,4 @@ angular.module('bb.alert', [])
         };
 
         return pub;
-    }]);
+    });

@@ -1,12 +1,10 @@
-/*global angular*/
-angular.module('lx.nav', ['lx.nav.directives'])
-    .controller('LxTreeViewCtrl', ['$scope', '$element', '$attrs', 'lxTransport', '$log',
-        function ($scope, $element, $attrs, transport, $log) {
+'use strict';
 
+angular.module('bbc.nav', ['bbc.nav.directives'])
+    .controller('BbcTreeViewCtrl', function ($scope, $element, $attrs, transport, $log) {
             $scope.currentLink = '';
 
             function callback (data) {
-
                 var treeData = [];
 
                 if ($attrs.nrAttr === undefined) {
@@ -38,10 +36,10 @@ angular.module('lx.nav', ['lx.nav.directives'])
             $scope.type = $attrs.typeAttr;
 
             $scope.toggleShow = function (data) {
-                if (data.hide === 'lxclose' || data.hide === undefined) {
-                    data.hide = 'lxopen';
+                if (data.hide === 'bbcclose' || data.hide === undefined) {
+                    data.hide = 'bbcopen';
                 } else {
-                    data.hide = 'lxclose';
+                    data.hide = 'bbcclose';
                 }
             };
 
@@ -59,4 +57,4 @@ angular.module('lx.nav', ['lx.nav.directives'])
                 }
             };
         }
-    ]);
+    );

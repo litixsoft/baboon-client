@@ -1,2 +1,3 @@
-/*global angular*/
-angular.module('lx.datepicker', ['lx.datepicker.directives']);
+'use strict';
+
+angular.module('bbc.datepicker', ['bbc.datepicker.directives']);

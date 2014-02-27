@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('bb.cache', [])
+angular.module('bbc.cache', [])
     // Super simple client cache
-    .factory('bbCache', function () {
+    .factory('bbcCache', function () {
         return {};
     });

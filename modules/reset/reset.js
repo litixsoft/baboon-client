@@ -1,4 +1,5 @@
-/*global angular*/
-angular.module('lx.reset', ['lx.reset.directives']);
+'use strict';
+
+angular.module('bbc.reset', ['bbc.reset.directives']);
 
 

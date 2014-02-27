@@ -1,10 +1,11 @@
-/*global angular*/
-angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html'])
-    .constant('lxDatepickerConfig', {
+'use strict';
+
+angular.module('bbc.datepicker.directives',['datepicker/tpls/datepicker.html'])
+    .constant('bbcDatepickerConfig', {
         minYear: 1880,
         maxYear: 2100
     })
-    .directive('lxDatepicker', function ($window,lxDatepickerConfig) {
+    .directive('bbcDatepicker', function ($window, bbcDatepickerConfig) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -13,14 +14,14 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
             scope: {
                 ngModel: '=',
                 ngReadonly: '=',
-                lxDatepicker: '='
+                bbcDatepicker: '='
             },
-            templateUrl: 'lx/datepicker/tpls/datepicker.html',
+            templateUrl: 'datepicker/tpls/datepicker.html',
             link: function($scope, $element, $attrs, $ctrls) {
 
                 $scope.visible = false; //is datepicker popup visible
                 $scope.divider = ''; //the character used to divide the date numbers 12.2.2013
-                $scope.placeholder = $scope.lxDatepicker; //placeholder text for the input
+                $scope.placeholder = $scope.bbcDatepicker; //placeholder text for the input
                 $scope.selectedDay = new Date(); //the selected date, initialized with todays date
                 $scope.selectedDayShort = ''; //selected date formated as 12.3.2004
                 $scope.inputID = $attrs.id; //id of the input field
@@ -36,8 +37,8 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 
                 var autoScroll = false; //true if scroll through the years by holding down the keys
                 var mainPick = document.getElementById($scope.inputID); //get input with datepicker by id (cause angular $element parent has selectors)
-                var scrollCont = mainPick.getElementsByClassName('lx-datepicker-year-container')[0]; //get scroll container
-                var dateElement = mainPick.getElementsByClassName('lx-datepicker');
+                var scrollCont = mainPick.getElementsByClassName('bbc-datepicker-year-container')[0]; //get scroll container
+                var dateElement = mainPick.getElementsByClassName('bbc-datepicker');
                 var datepicker = angular.element(dateElement[0]); //get datepicker
 
                 var off = { //datepicker offset in browser window, used to move datepicker if not fully visible in view
@@ -47,7 +48,6 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
 
                 $element.removeAttr('class');
                 $element.removeAttr('type');
-
 
                 angular.element($window).bind('resize',function(){
                     if($scope.visible){
@@ -60,9 +60,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  *
                  */
                 function checkPosition(){
-
                     var rect = dateElement[0].getBoundingClientRect();
-
                     var dimBrowser = {
                         width: $window.innerWidth,
                         height: $window.innerHeight
@@ -91,7 +89,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  */
                 function fillRange(){
                     var range = [];
-                    for(var i = lxDatepickerConfig.maxYear; i >= lxDatepickerConfig.minYear; i--) {
+                    for(var i = bbcDatepickerConfig.maxYear; i >= bbcDatepickerConfig.minYear; i--) {
                         range.push(i);
                     }
                     return range;
@@ -104,9 +102,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  * @returns {string} ./-
                  */
                 function getDivider(dateFormat){
-
                     var divider  = '.';
-
                     var chars = dateFormat.split('');
                     if(chars.indexOf('.')>=0){ divider = '.'; }
                     if(chars.indexOf('/')>=0){ divider = '/'; }
@@ -122,7 +118,6 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  * @returns {boolean}
                  */
                 function validateDate(selectedDayShort){
-
                     var parts = selectedDayShort.split(getDivider(selectedDayShort));
                     if(parts.length === 3){
 
@@ -131,11 +126,13 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                         var y = parseInt(parts[2], 10);
                         var date = new Date(y,m-1,d);
 
-                        if (date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d) {
+/*                        if (date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d) {
                             return true;
                         } else {
                             return false;
-                        }
+                        }*/
+                        // Dominic Test!!!
+                        return date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d;
                     }
                 }
 
@@ -145,22 +142,23 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  * @param {object} date
                  * @returns {object} with all values to start creating the days of the selected month
                  */
-                function getCalendarValues(selectedDay){
-
+                function getCalendarValues(selectedDay) {
                     var currentYear = selectedDay.getFullYear();
                     var currentMonth = selectedDay.getMonth();
                     var firstDayOfMonth = new Date(currentYear,currentMonth,1);
                     var lastDayOfYear = new Date(currentYear,11,31);
-
                     var firstWednesday = new Date(new Date(currentYear,0,4).getTime() + (3-((new Date(currentYear,0,4).getDay()+6) % 7)) * 86400000); //erster Donnerstag im Jahr, international festgelegt
                     var calendarWeek = Math.floor(1.5 + (firstDayOfMonth.getTime() - firstWednesday.getTime()) / 86400000/7);
                     var lastCalendarWeek = Math.floor(1.5 + (lastDayOfYear.getTime() - firstWednesday.getTime()) / 86400000/7);
-
                     var nextMonth = selectedDay.getMonth()+1;
-                    if(nextMonth>11){nextMonth=0;currentYear++;}
+
+                    if(nextMonth>11){
+                        nextMonth = 0;
+                        currentYear++;
+                    }
+
                     var firstDayNextMonth = new Date(currentYear,nextMonth,1);
                     var daysOfCurrentMonth = new Date(firstDayNextMonth-1);
-
                     var lastMonthDays = new Date(firstDayOfMonth-1);
 
                     var startPoint = {
@@ -179,8 +177,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  * @param {object} selected date
                  * @returns {object} with the days of this, the last and the next month to fill a 7x6 matrix
                  */
-                function createDays(selectedDay){
-
+                function createDays(selectedDay) {
                     var startpoint = getCalendarValues(selectedDay);
                     var startDaySecondWeek = 0;
                     $scope.month = [];
@@ -228,27 +225,31 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  * Checks if the inputfield is required
                  */
                 function checkIfIsRequired(){
-
                     setTimeout(function(){
-                        if($ctrls.$error.required){
+                       /* if($ctrls.$error.required){
                             $scope.isRequired = true;
                         } else {
                             $scope.isRequired = false;
-                        }
-                    },10);
+                        }*/
+                        // Dominic Test!!!
+                        $scope.isRequired = $ctrls.$error.required;
+                    }, 10);
                 }
 
                 /**
                  * Fills the day and month with 0 for format xx.xx.xxxx
                  */
                 function updateInput(){ //fills the input field and fills date up with 0zeros if day or month are smaller than 10 example: 7 -> 07
-
                     var day = $scope.selectedDay.getDate();
-                    if(day<10){ day = '0'+day; }
+                    if(day < 10) {
+                        day = '0' + day;
+                    }
 
                     var month = $scope.selectedDay.getMonth()+1;
-                    if(month<10){ month = '0'+month; }
-                    $scope.selectedDayShort = (day+''+$scope.divider+''+month+''+$scope.divider+''+$scope.selectedDay.getFullYear());
+                    if(month < 10) {
+                        month = '0' + month;
+                    }
+                    $scope.selectedDayShort = (day + '' + $scope.divider + '' + month + '' + $scope.divider + '' + $scope.selectedDay.getFullYear());
                 }
 
                 /**
@@ -295,8 +296,7 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                  *
                  * @param {string} format 1 - 31
                  */
-                $scope.dayClick = function(number){
-
+                $scope.dayClick = function(number) {
                     if(!number.in){ //if clicked number is in last or next month
                         var month;
 
@@ -426,21 +426,16 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                                     });
                                 }
                             });
-
                         },10);
                     }
                 });
 
-
-
                 /* -------- start ------------- */
                 checkIfIsRequired();
-
-                $scope.divider = getDivider($scope.lxDatepicker);
+                $scope.divider = getDivider($scope.bbcDatepicker);
                 $scope.yearNames = fillRange();
 
-                $scope.$watch('ngModel',function(){
-
+                $scope.$watch('ngModel',function() {
                     var test = new Date($scope.ngModel);
 
                     if(test.toString() !== 'Invalid Date'){
@@ -453,15 +448,9 @@ angular.module('lx.datepicker.directives',['lx/datepicker/tpls/datepicker.html']
                     createDays($scope.selectedDay);
                 });
 
-
-
-
-
-
                 function update(){
                     createDays($scope.selectedDay);
                 }
-
             }
         };
     });

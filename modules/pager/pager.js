@@ -1,6 +1,7 @@
-/*global angular */
-angular.module('lx.pager', [])
-    .directive('lxPager', function () {
+'use strict';
+
+angular.module('bbc.pager', [])
+    .directive('bbcPager', function () {
         return {
             restrict: 'E',
             template: '<div class="row">' +
@@ -60,7 +61,7 @@ angular.module('lx.pager', [])
                     var pageSize = scope.$eval(value);
 
                     if (typeof pageSize === 'number') {
-                        scope.pageSizeOptions = scope.pageSizeOptions || defaultPageSizeOptions;
+                        scope.pageSizeOptions = scope.pageSizeOptions;
 
                         if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
                             // add pageSize to pageSizeOptions

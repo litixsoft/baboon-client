@@ -1,16 +1,17 @@
-/*global angular*/
-angular.module('lx.checkbox.directives', ['lx/checkbox/tpls/checkbox.html'])
-    .directive('lxCheckbox', function () {
+'use strict';
+
+angular.module('bbc.checkbox.directives', ['checkbox/tpls/checkbox.html'])
+    .directive('bbcCheckbox', function () {
         return {
             restrict: 'A',
-            controller: 'lxCheckboxCtrl',
+            controller: 'BbcCheckboxCtrl',
             transclude: false,
             replace: true,
             scope: {
                 ngModel: '=',
                 disabled: '@'
             },
-            templateUrl: 'lx/checkbox/tpls/checkbox.html'
+            templateUrl: 'modules/checkbox/tpls/checkbox.html'
         };
     });
 

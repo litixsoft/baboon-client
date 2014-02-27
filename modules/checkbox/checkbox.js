@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.checkbox', ['lx.checkbox.directives'])
-    .controller('lxCheckboxCtrl', ['$scope', function ($scope) {
+'use strict';
+
+angular.module('bbc.checkbox', ['bbc.checkbox.directives'])
+    .controller('BbcCheckboxCtrl', function ($scope) {
         $scope.isChecked = false;
         $scope.isDisabled = false;
 
@@ -27,6 +28,4 @@ angular.module('lx.checkbox', ['lx.checkbox.directives'])
                 }
             }
         };
-    }]);
-
-
+    });

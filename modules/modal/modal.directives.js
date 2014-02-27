@@ -1,6 +1,7 @@
-/*global angular*/
-angular.module('lx.modal.directives', [])
-    .directive('draggableModal', ['$document', function ($document) {
+'use strict';
+
+angular.module('bbc.modal.directives', [])
+    .directive('draggableModal', function ($document) {
         return function (scope, element) {
 
             var modalWindow = element.parent();
@@ -59,8 +60,8 @@ angular.module('lx.modal.directives', [])
                 $document.unbind('mouseup', mouseup);
             }
         };
-    }])
-    .directive('bbMsgbox', ['$rootScope', 'lxModal', function ($rootScope, lxModal) {
+    })
+    .directive('bbcMsgbox', function ($rootScope, bbcModal) {
         return {
             restrict: 'E,A',
             scope: {
@@ -75,9 +76,9 @@ angular.module('lx.modal.directives', [])
                 scope.$watch('msgShow', function (value) {
                     //if visible use factory to show msgbox
                     if (value) {
-                        lxModal.msgBox(scope.msgHeadline, scope.msgMessage, scope.msgType, scope.msgCbs, scope.msgClass);
+                        bbcModal.msgBox(scope.msgHeadline, scope.msgMessage, scope.msgType, scope.msgCbs, scope.msgClass);
                     }
                 });
             }
         };
-    }]);
+    });
