@@ -30,6 +30,12 @@ describe('lxInteger', function () {
         expect(form.val.$valid).toBe(true);
     });
 
+    it('should pass with negative integer', function() {
+        form.val.$setViewValue(-1);
+        expect(scope.model.val).toEqual(-1);
+        expect(form.val.$valid).toBe(true);
+    });
+
     it('should not pass with float', function() {
         form.val.$setViewValue(4.25);
         expect(scope.model.val).toBeUndefined();
