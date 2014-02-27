@@ -70,7 +70,9 @@
         "karma-coverage": "*",
         "karma-junit-reporter": "*",
         "karma-mocha-reporter": "*",
-        "load-grunt-tasks": "0.2.1"
+        "load-grunt-tasks": "0.2.1",
+        "express": "3.4.8",
+        "ejs": "*"
     },
     "dependencies": {
     }
