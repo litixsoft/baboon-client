@@ -10,22 +10,23 @@ angular.module('bbc.checkbox', ['bbc.checkbox.directives'])
         });
 
         $scope.$watch('disabled', function (val) {
-            if (val) {
+            /*if (val) {
                 $scope.isDisabled = true;
             } else {
                 $scope.isDisabled = false;
-            }
+            }*/
+            $scope.isDisabled = val;
         });
 
         $scope.changeState = function () {
             if (!$scope.isDisabled) {
                 $scope.isChecked = !$scope.isChecked;
-
-                if ($scope.isChecked) {
+                $scope.ngModel = $scope.isChecked;
+                /*if ($scope.isChecked) {
                     $scope.ngModel = true;
                 } else {
                     $scope.ngModel = false;
-                }
+                }*/
             }
         };
     });

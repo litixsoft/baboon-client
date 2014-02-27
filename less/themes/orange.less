@@ -105,11 +105,11 @@ div[hljs] pre code{
 ng-form.inline-edit > .form-group{
   margin-bottom:0;
 }
-ng-form.inline-edit > .form-group .lxvalidation{
+ng-form.inline-edit > .form-group .bbcvalidation{
   position:relative;
   padding:0;
 }
-ng-form.inline-edit .form-group .lxvalidation label.label-danger {
+ng-form.inline-edit .form-group .bbcvalidation label.label-danger {
   right:5px;
   position:absolute;
 }
@@ -129,10 +129,10 @@ ng-form.inline-edit .form-group .lxvalidation label.label-danger {
   border-radius:  0 0 9px 9px;
 }
 
-.form-group .lxvalidation{
+.form-group .bbcvalidation{
   position:relative;
 }
-.form-group.has-error .lxvalidation label{
+.form-group.has-error .bbcvalidation label{
   position:absolute;
   right:20px;
   top:7px;
@@ -142,16 +142,16 @@ ng-form.inline-edit .form-group .lxvalidation label.label-danger {
   cursor:pointer;
   padding:2px 4px;
 }
-.form-group.has-error .lxvalidation .ui-resetwrap + label.label-danger{
+.form-group.has-error .bbcvalidation .ui-resetwrap + label.label-danger{
   right:45px;
 }
-ng-form.inline-edit .form-group.has-error .lxvalidation label.label-danger{
+ng-form.inline-edit .form-group.has-error .bbcvalidation label.label-danger{
   right:5px;
 }
-ng-form.inline-edit .form-group.has-error .lxvalidation .ui-resetwrap + label.label-danger{
+ng-form.inline-edit .form-group.has-error .bbcvalidation .ui-resetwrap + label.label-danger{
   right:30px;
 }
-.form-group.has-error .lxvalidation label.label-danger span[popover]{
+.form-group.has-error .bbcvalidation label.label-danger span[popover]{
   display:block;
   position:absolute;
   top:0;
@@ -164,10 +164,10 @@ ng-form.inline-edit .form-group.has-error .lxvalidation .ui-resetwrap + label.la
 .form-group.has-error input{
   background-color:rgb(255, 238, 238);
 }
-.form-group.has-error .lxvalidation label.label-danger .popover{
+.form-group.has-error .bbcvalidation label.label-danger .popover{
   color:#555;
 }
-.form-group.has-error .lxvalidation label.label-danger .popover .popover-content{
+.form-group.has-error .bbcvalidation label.label-danger .popover .popover-content{
   white-space: nowrap;
 }
 .ui-resetwrap{
@@ -221,36 +221,36 @@ h1{
   color:#999999;
   font-size:14px;
 }
-.btn-toolbar.lx-pager{
+.btn-toolbar.bbc-pager{
   display:inline;
 }
-.btn-toolbar.lx-pager,
-.btn-toolbar.lx-pager .btn-group{
+.btn-toolbar.bbc-pager,
+.btn-toolbar.bbc-pager .btn-group{
   margin:0;
 }
-.btn-toolbar.lx-pager .btn-group input,
-.btn-toolbar.lx-pager .btn-group select,
-.btn-toolbar.lx-pager .btn-group .btn{
+.btn-toolbar.bbc-pager .btn-group input,
+.btn-toolbar.bbc-pager .btn-group select,
+.btn-toolbar.bbc-pager .btn-group .btn{
   border-radius:0;
 }
-.btn-toolbar.lx-pager .count-control{
+.btn-toolbar.bbc-pager .count-control{
   width: 60px;
 }
-.btn-toolbar.lx-pager .btn.btn-default.count-number[disabled=disabled]{
+.btn-toolbar.bbc-pager .btn.btn-default.count-number[disabled=disabled]{
   background:#dddddd;
   border:0;
   border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
 
 }
-.btn-toolbar.lx-pager .btn-group:last-child .btn:last-child{
+.btn-toolbar.bbc-pager .btn-group:last-child .btn:last-child{
   border-radius: 0 4px 4px 0;
 }
-.btn-toolbar.lx-pager .btn-group:first-child select:first-child,
-.btn-toolbar.lx-pager .btn-group:first-child .btn:first-child{
+.btn-toolbar.bbc-pager .btn-group:first-child select:first-child,
+.btn-toolbar.bbc-pager .btn-group:first-child .btn:first-child{
   border-radius: 4px 0 0 4px;
 }
-.btn-toolbar.lx-pager select.form-control{
+.btn-toolbar.bbc-pager select.form-control{
   padding:6px;
 }
 .dark-header{
@@ -546,7 +546,7 @@ ul.nav.nav-pills > li + li {
             }
           }
 
-          .form-group.has-error .lxvalidation .ui-resetwrap + label.label-danger{
+          .form-group.has-error .bbcvalidation .ui-resetwrap + label.label-danger{
             right:30px;
           }
 
@@ -662,7 +662,7 @@ ul.nav.nav-pills > li + li {
   }
 }
 /*-------------------------------------------*/
-/*-----------lxTreeNav Styles----------------*/
+/*-----------bbcTreeNav Styles----------------*/
 /*-------------------------------------------*/
 .navCol{
   ul.navlist{
@@ -741,10 +741,10 @@ ul.nav.nav-pills > li + li {
         cursor:pointer;
       }
 
-      .opensub.lxclose{
+      .opensub.bbcclose{
         background:#3c4148 url('../img/rightarrow.png') no-repeat center center;
       }
-      .opensub.lxopen{
+      .opensub.bbcopen{
         background:#3c4148 url('../img/downarrow.png') no-repeat center center;
       }
 
@@ -807,7 +807,7 @@ ul.nav.nav-pills > li + li {
     transform: scaleY(0);
     -webkit-transform-origin: top;
   }
-  .display.lxclose {
+  .display.bbcclose {
     //  -webkit-transition: all 0.3s ease-in-out;
     opacity: 0;
     height:0;
@@ -817,7 +817,7 @@ ul.nav.nav-pills > li + li {
     -ms-transform: scaleY(0);
     transform: scaleY(0);
   }
-  .display.lxopen {
+  .display.bbcopen {
     //  -webkit-transition: all 0.3s ease-in-out;
     opacity: 1;
     height:auto;
@@ -925,10 +925,10 @@ ul.nav.nav-pills > li + li {
   //    background-color:white;
   //    border-color:white;
   //  }
-  //   .opensub.lxclose{
+  //   .opensub.bbcclose{
   //    background:#fff url('../img/rightarrow.png') no-repeat center center;
   //  }
-  //   .opensub.lxopen{
+  //   .opensub.bbcopen{
   //    background:#fff url('../img/downarrow.png') no-repeat center center;
   //  }
   //  /*-------- show n hide + animation -----------*/
@@ -946,7 +946,7 @@ ul.nav.nav-pills > li + li {
   //    transform: scaleY(0);
   //    -webkit-transform-origin: top;
   //  }
-  //   .display.lxclose {
+  //   .display.bbcclose {
   //    /*-webkit-transition: all 0.3s ease-in-out;*/
   //    opacity: 0;
   //    height:0;
@@ -956,7 +956,7 @@ ul.nav.nav-pills > li + li {
   //    -ms-transform: scaleY(0);
   //    transform: scaleY(0);
   //  }
-  //   .display.lxopen {
+  //   .display.bbcopen {
   //    /*-webkit-transition: all 0.3s ease-in-out;*/
   //    opacity: 1;
   //    height:auto;
@@ -993,7 +993,7 @@ ul.nav.nav-pills > li + li {
 
 
 /*-----------modal popup directive index.html-baboon-core-----*/
-.modal.lx-modal-msg:not(.standard){
+.modal.bbc-modal-msg:not(.standard){
   display:block;
 
   .modal-header{
@@ -1053,7 +1053,7 @@ ul.nav.nav-pills > li + li {
     text-shadow:0 1px 1px rgba(0,0,0,0.5);
   }
 }
-.modal.fade:not(.lx-modal-msg){
+.modal.fade:not(.bbc-modal-msg){
   .modal-dialog{
     width:auto;
     max-width:1200px;
@@ -1156,8 +1156,8 @@ markdown img:hover{
   stroke-dasharray: "3, 3" ;
 }
 
-/* ---------------  lxAlert -black message box ------------------- */
-.lx-alert .alert{
+/* ---------------  bbcAlert -black message box ------------------- */
+.bbc-alert .alert{
   border-radius:8px;
   position:fixed;
   top:80px;
@@ -1173,7 +1173,7 @@ markdown img:hover{
   text-align: center;
 }
 
-.lx-alert.animate-show .alert {
+.bbc-alert.animate-show .alert {
   -webkit-transition:all linear 0.25s;
   transition:all linear 0.25s;
   opacity:1;
@@ -1181,16 +1181,16 @@ markdown img:hover{
   /*width:400px;*/
 }
 
-.lx-alert.animate-show.ng-hide-add,
-.lx-alert.animate-show.ng-hide-remove {
+.bbc-alert.animate-show.ng-hide-add,
+.bbc-alert.animate-show.ng-hide-remove {
   display:block!important;
 }
 
-.lx-alert.animate-show.ng-hide {
+.bbc-alert.animate-show.ng-hide {
   display:block !important;
 }
 
-.lx-alert.animate-show.ng-hide  .alert{
+.bbc-alert.animate-show.ng-hide  .alert{
   -webkit-transition:all linear 0.25s;
   transition:all linear 0.25s;
   opacity:0;
@@ -1199,7 +1199,7 @@ markdown img:hover{
   right:-340px;
 }
 
-/* --------------- lxDatepicker -------------- */
+/* --------------- bbcDatepicker -------------- */
 .has-error .input-group-btn .btn{
   //  color: #FFF;
   //  background-color: #D9534F;
@@ -1215,18 +1215,18 @@ markdown img:hover{
   border-left-color: #ac2925;
 }
 
-.form-group.has-error .lxvalidation div[lx-datepicker] + label.label-danger{
+.form-group.has-error .bbcvalidation div[bbc-datepicker] + label.label-danger{
   right:auto;
   left:110px;
 }
 
-.lx-datepicker{
+.bbc-datepicker{
   //  background:#eee;
   .gradientFromTop('fcfcfc','eeeeee');
   border-radius:7px;box-shadow:0 1px 17px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.5);text-align: center;padding:0;width:500px;
   position:absolute;top:40px;left:0;z-index:9999;
 
-  .lx-datepicker-body{
+  .bbc-datepicker-body{
     padding:20px 0 10px 0;
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -1234,7 +1234,7 @@ markdown img:hover{
     -ms-user-select: none;
     user-select: none;
 
-    .lx-datepicker-year{
+    .bbc-datepicker-year{
       border-right:1px solid rgba(255,255,255,0.5);
       //  border-left:1px solid rgba(255,255,255,0.5);
       height:228px;padding:50px 0;position:relative;
@@ -1243,24 +1243,24 @@ markdown img:hover{
       ul{
         list-style-type: none;padding:0;margin:auto 0;
       }
-      .lx-datepicker-year-btn{
+      .bbc-datepicker-year-btn{
         position:absolute;font-size:24px;left:50%;margin-left:-12px;width:24px;height:24px;
       }
-      .lx-datepicker-year-btn:hover{
+      .bbc-datepicker-year-btn:hover{
         cursor:pointer;color:#888;
       }
-      .lx-datepicker-year-btn.year-up{
+      .bbc-datepicker-year-btn.year-up{
         top:0;
       }
-      .lx-datepicker-year-btn.year-down{
+      .bbc-datepicker-year-btn.year-down{
         bottom:3px;
       }
-      .lx-datepicker-year-container{
+      .bbc-datepicker-year-container{
         display:block;height:100%;width:120%;overflow-x:hidden;overflow-y:scroll;/*font-weight:bolder;*/font-size: 17px;
       }
     }
 
-    .lx-datepicker-month{
+    .bbc-datepicker-month{
       border-right:1px solid rgba(255,255,255,0.5);border-left:1px solid rgba(0,0,0,0.1);
       //  border-left:1px solid rgba(255,255,255,0.5);border-right:1px solid rgba(0,0,0,0.1);
       padding:0 5px;
@@ -1271,7 +1271,7 @@ markdown img:hover{
 
     }
 
-    .lx-datepicker-day{
+    .bbc-datepicker-day{
       border-left:1px solid rgba(0,0,0,0.1);
       //  border-right:1px solid rgba(0,0,0,0.1);
       table{
@@ -1305,8 +1305,8 @@ markdown img:hover{
       }
     }
 
-    .lx-datepicker-year ul li:hover,
-    .lx-datepicker-month ul li:hover{
+    .bbc-datepicker-year ul li:hover,
+    .bbc-datepicker-month ul li:hover{
       font-weight:bold;cursor:pointer;
     }
 
@@ -1315,56 +1315,56 @@ markdown img:hover{
     }
   }
 
-  .lx-datepicker-footer{
+  .bbc-datepicker-footer{
     margin-top:10px;background:rgba(0,0,0,0.05);border-radius: 0 0 7px 7px;
 
-    .lx-datepicker-btn{
+    .bbc-datepicker-btn{
       margin:5px 17px 5px 0;
     }
   }
 }
 
-/*-------lx-Radio-----lx-Checkbox--------*/
-@lxRed: #E65B44;
-@lxRedDisabled: #e7a398;
+/*-------bbc-Radio-----bbc-Checkbox--------*/
+@bbcRed: #E65B44;
+@bbcRedDisabled: #e7a398;
 
-.lx-checkbox{
+.bbc-checkbox{
   border: 1px solid #ccc;border-radius: 4px;width:20px;height:20px; display:inline-block;float:left;margin-left:-20px;padding:0 2px;
 }
-.lx-checkbox.disabled{
+.bbc-checkbox.disabled{
   border: 1px solid #e0e0e0;background:#f2f2f2;cursor: default;
 }
-.lx-checkbox.lx-checked{
-  border: 1px solid @lxRed;
-  background:@lxRed;
+.bbc-checkbox.bbc-checked{
+  border: 1px solid @bbcRed;
+  background:@bbcRed;
 }
-.lx-checkbox.lx-checked.disabled{
-  border: 1px solid @lxRedDisabled;
-  background: @lxRedDisabled;
+.bbc-checkbox.bbc-checked.disabled{
+  border: 1px solid @bbcRedDisabled;
+  background: @bbcRedDisabled;
   color:#eee;
 }
 
-.lx-radio{
+.bbc-radio{
   border: 1px solid #ccc;border-radius: 14px;width:20px;height:20px; display:inline-block;float:left;margin-left:-20px;padding:0 2px;
 }
-.lx-radio.lx-checked{
-  border: 1px solid @lxRed;
-  background:@lxRed;
+.bbc-radio.bbc-checked{
+  border: 1px solid @bbcRed;
+  background:@bbcRed;
 }
-.lx-radio .radio-point{
+.bbc-radio .radio-point{
   width:14px;height:14px;border-radius:15px;border:3px solid white;display:inline-block;margin-top:2px;color:white;
 }
 
-.lx-radio.disabled{
+.bbc-radio.disabled{
   border: 1px solid #e0e0e0;background:#f2f2f2;cursor: default;
 }
-.lx-radio.disabled.lx-checked{
-  border: 1px solid @lxRedDisabled;
-  background: @lxRedDisabled;
+.bbc-radio.disabled.bbc-checked{
+  border: 1px solid @bbcRedDisabled;
+  background: @bbcRedDisabled;
 }
-.lx-radio.disabled .radio-point{
+.bbc-radio.disabled .radio-point{
   border-color:transparent;
 }
-.lx-radio.disabled.lx-checked  .radio-point{
+.bbc-radio.disabled.bbc-checked  .radio-point{
   border-color:#eee;
 }

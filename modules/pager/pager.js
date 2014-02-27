@@ -5,7 +5,7 @@ angular.module('bbc.pager', [])
         return {
             restrict: 'E',
             template: '<div class="row">' +
-                '<div class="btn-toolbar lx-pager">' +
+                '<div class="btn-toolbar bbc-pager">' +
                 '<div class="btn-group">' +
                 '<button class="btn btn-primary" ng-click="firstPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-step-backward"></span></button>' +
                 '<button class="btn btn-primary" ng-click="previousPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-backward"></span></button>' +

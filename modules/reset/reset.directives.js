@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bbc.reset.directives', [])
-    .value('bbcResetConfig',null)
+    .value('bbcResetConfig', null)
     .directive('bbcReset', function (bbcResetConfig) {
         var resetValue = null;
         if (bbcResetConfig !== undefined){
