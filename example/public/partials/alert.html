@@ -1,6 +1,7 @@
-<alert class="ng-cloak" type="bbcAlert.type" close="bbcAlert.close()">{{bbcAlert.msg}}</alert>
 <h1>Alert Test</h1>
-<h3>{{view}}</h3>
-<button class='btn btn-default' ng-click="showAlert()">Show Alert Info</button>
+<div>
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    <button class='btn btn-default' ng-click="addAlert()">Add Alert</button>
+</div>
 
 
