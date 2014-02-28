@@ -142,18 +142,7 @@ module.exports = function (grunt) {
                 },
                 colors: false
             }
-        },
-        bgShell: {
-            bower: {
-                cmd: 'bower install',
-                fail: true
-            },
-            npm: {
-                cmd: 'npm install',
-                fail: true
-            }
         }
-
     });
 
     grunt.registerTask('lint', [
@@ -188,14 +177,6 @@ module.exports = function (grunt) {
         'karma:ci',
         'karma:coverage',
         'karma:cobertura'
-    ]);
-
-    // Delete node_modules, bower_components folder and run npm install and bower install
-    grunt.registerTask('update', [
-        'clean:bower',
-        'clean:node_modules',
-        'bgShell:npm',
-        'bgShell:bower'
     ]);
 
     // Default task.
