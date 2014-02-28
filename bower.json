@@ -37,10 +37,11 @@
     "homepage": "https://github.com/litixsoft/baboon-client",
     "ignore": [
         "**/.*",
-        "node_modules",
-        "test",
+        ".reports",
         "bower_components",
         "example",
+        "node_modules",
+        "test",
         "server.js"
     ],
     "dependencies": {
