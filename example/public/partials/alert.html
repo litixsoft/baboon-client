@@ -1,7 +1,12 @@
 <h1>Alert Test</h1>
-<div class="bbc-alert animate-show" ng-show="bbcAlert.visible">
+<!--<div class="bbc-alert animate-show" ng-show="bbcAlert.visible">
     <alert class="ng-cloak" type="bbcAlert.type" close="bbcAlert.close()">{{bbcAlert.msg}}</alert>
-</div>
+</div>-->
+
+<!--<bbc-alert-ui visible="bbcAlert.visible" type="bbcAlert.type" message="bbcAlert.msg" on-close="bbcAlert.close()"></bbc-alert-ui>-->
+
+<bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
+
 <button class='btn btn-default' ng-click="showAlert()">Show Info-Alert</button>
 
 

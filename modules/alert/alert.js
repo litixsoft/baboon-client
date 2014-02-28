@@ -2,7 +2,7 @@
 
 angular.module('bbc.alert', [])
     // Service for angular-ui alert handling
-    .factory('bbcAlert', function ($log, $timeout) {
+    .factory('bbcAlertSrv', function ($log, $timeout) {
         var pub = {};
 
         // timeout for show alert box.
@@ -36,7 +36,7 @@ angular.module('bbc.alert', [])
             if (pub.logLevel === 'warning') {
                 level = 2;
             }
-            if (pub.logLevel === 'error') {
+            if (pub.logLevel === 'danger') {
                 level = 1;
             }
 
@@ -49,7 +49,7 @@ angular.module('bbc.alert', [])
             if (type === 'warning' && level >= 2) {
                 $log.warn(type + ': ' + msg);
             }
-            if (type === 'error' && level >= 1) {
+            if (type === 'danger' && level >= 1) {
                 $log.error(type + ': ' + msg);
             }
         };
@@ -95,9 +95,24 @@ angular.module('bbc.alert', [])
         };
 
         // show error alert message
-        pub.error = function (message) {
-            show('error', message);
+        pub.danger = function (message) {
+            show('danger', message);
         };
 
         return pub;
+    })
+    .directive('bbcAlert', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<div class="bbc-alert animate-show" ng-show="service.visible">' +
+                '<alert class="ng-cloak" type="service.type" close="service.close()">{{ service.msg }}</alert>' +
+                '</div>',
+            scope: {
+                service: '='
+            }
+        };
     });
+
+
+
