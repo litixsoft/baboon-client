@@ -21,11 +21,23 @@
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<div ng-include="'partials/navigation.html'"></div>
-<div id="singlepageFrame" class="ng-cloak">
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Baboon Client - example application</a>
+        </div>
+    </div>
 </div>
+<div class="container">
+    <div class="row ng-cloak">
+        <div class="col-md-3" ng-include="'partials/navigation.html'"></div>
+        <div id="singlepageFrame" class="col-md-8">
+                <!-- Add your site or application content here -->
+                <div class="container" ng-view=""></div>
+        </div>
+    </div>
+</div>
+
 <!--[if lt IE 9]>
 <script src="es5-shim/es5-shim.js"></script>
 <script src="json3/lib/json3.min.js"></script>

@@ -44,6 +44,8 @@ angular.module('example', [
             }
         ];
 
+
+
         $scope.isActive = function (route) {
             return route === $location.path();
         };
