@@ -43,6 +43,7 @@
         "modules/**/*.html",
         "node_modules",
         "test",
+        ".*",
         "Gruntfile.js",
         "package.json",
         "server.js",
