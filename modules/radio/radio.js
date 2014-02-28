@@ -1,37 +1,39 @@
 'use strict';
 
-angular.module('bbc.radio', ['bbc.radio.directives'])
-    .controller('BbcRadioCtrl', function ($scope) {
-        $scope.isChecked = false;
-        $scope.hasValue = '';
-        $scope.isDisabled = false;
-
-        $scope.$watch('hasValue', function () {
-            $scope.hasValue = $scope.value;
-        });
-
-        $scope.$watch('disabled', function (val) {
-            if (val) {
-                $scope.isDisabled = true;
-            } else {
-                $scope.isDisabled = false;
-            }
-        });
-
-        $scope.$watch('ngModel', function () {
-            if ($scope.ngModel === $scope.hasValue) {
-                $scope.isChecked = true;
-            } else {
-                $scope.isChecked = false;
-            }
-        });
-
-        $scope.changeState = function () {
-            if (!$scope.isDisabled) {
-                $scope.isChecked = !$scope.isChecked;
-                if ($scope.isChecked) {
-                    $scope.ngModel = $scope.hasValue;
+angular.module('bbc.radio', [])
+    .directive('bbcRadio', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                label: '@',
+                ngModel: '=',
+                ngModelText: '@ngModel',
+                value: '@',
+                name: '@',
+                disabled: '@'
+            },
+            controller: function ($scope) {
+                $scope.checked = function () {
+                    return $scope.value === $scope.model;
+                };
+            },
+            template: '<div class="bbc-radio">' +
+                '<div class="radio-button">' +
+                '<input type="radio" ng-model="ngModel" value="{{value}}" name="{{name}}" id="{{ngModelText}}{{value}}" />' +
+                '<label for="{{ngModelText}}{{value}}"><span class="radio-checked"></span></label>' +
+                '</div>' +
+                '<div class="title"><label for="{{value}}">{{label}}</label></div>' +
+                '</div>',
+            link: function (scope, element, attrs) {
+                //console.log(attrs['disabled']);
+                if (attrs.disabled) {
+                    element.children('div').children('input').attr('disabled', 'disabled');
                 }
+                else {
+                    element.children('div').children('input').removeAttr('disabled');
+                }
+
             }
         };
     });
