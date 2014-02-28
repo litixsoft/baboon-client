@@ -2,7 +2,8 @@
 
 angular.module('example', [
         'ngRoute',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'bbc.alert'
     ])
     .config(function ($routeProvider, $locationProvider) {
 
@@ -23,19 +24,12 @@ angular.module('example', [
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
     })
-    .controller('AlertCtrl', function ($scope) {
+    .controller('AlertCtrl', function ($scope, bbcAlert) {
 
-        $scope.alerts = [
-            { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-            { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
-        ];
+        $scope.bbcAlert = bbcAlert;
 
-        $scope.addAlert = function() {
-            $scope.alerts.push({msg: 'Another alert!'});
-        };
-
-        $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
+        $scope.showAlert = function() {
+            $scope.bbcAlert.info('Info message from controller');
         };
     })
     .controller('NavigationCtrl', function ($scope, $location) {
