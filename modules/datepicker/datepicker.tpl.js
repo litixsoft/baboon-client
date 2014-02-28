@@ -20,7 +20,6 @@ angular.module("datepicker/datepicker.html", []).run(["$templateCache", function
     "                    <ul>\n" +
     "                        <li ng-repeat=\"year in yearNames\" ng-click=\"yearClick(year)\" ng-class=\"{active: selectedDay.getFullYear()===year }\">{{year}}</li>\n" +
     "                    </ul>\n" +
-    "                    <!--2015<br>2014<br><span class=\"active\">2013</span><br>2012<br>2011<br>2010<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>Toll<br>-->\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"bbc-datepicker-month col-md-3 col-xs-3\">\n" +

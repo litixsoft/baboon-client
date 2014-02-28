@@ -53,7 +53,7 @@ module.exports = function (grunt) {
         open: {
             coverage: {
                 path: function () {
-                    return path.join(__dirname, getCoverageReport('.reports/coverage/client/'));
+                    return path.join(__dirname, getCoverageReport('.reports/coverage/'));
                 }
             }
         },
@@ -170,18 +170,25 @@ module.exports = function (grunt) {
         'karma:unit'
     ]);
 
-    grunt.registerTask('debug', [
+    grunt.registerTask('cover', [
         'build',
-        'karma:debug'
+        'clean:coverage',
+        'lint',
+        'karma:coverage',
+        'open:coverage'
     ]);
 
-
-    grunt.registerTask('demo', ['clean:tmp', 'html2js', 'jshint:test', 'karma:chrome']);
-    grunt.registerTask('cover', ['clean:tmp', 'html2js', 'clean:coverage', 'jshint:test', 'karma:coverage', 'open:coverage']);
-    grunt.registerTask('ci', ['clean', 'html2js', 'jshint:jslint', 'jshint:checkstyle', 'karma:ci', 'karma:coverage', 'karma:cobertura']);
-
-    // Default task.
-    grunt.registerTask('default', ['test']);
+    grunt.registerTask('ci', [
+        'clean:coverage',
+        'clean:test',
+        'clean:jshint',
+        'html2js',
+        'jshint:test',
+        'jshint:checkstyle',
+        'karma:ci',
+        'karma:coverage',
+        'karma:cobertura'
+    ]);
 
     // Delete node_modules, bower_components folder and run npm install and bower install
     grunt.registerTask('update', [
@@ -190,4 +197,7 @@ module.exports = function (grunt) {
         'bgShell:npm',
         'bgShell:bower'
     ]);
+
+    // Default task.
+    grunt.registerTask('default', ['test']);
 };
