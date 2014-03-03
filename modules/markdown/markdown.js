@@ -10,7 +10,6 @@ angular.module('bbc.markdown', [])
                 scope.$watch(attrs.ngModel, function (value) {
                     var htmlText = converter.makeHtml(value || '');
                     element.html(htmlText);
-
                 });
             }
         };

@@ -152,7 +152,113 @@ describe('bbc form service', function () {
 
         describe('populateValidation()', function () {
             it('should add the validation errors', function () {
+                var form = { errors: { id: 'required' } };
+                var errors = [
+                    { property: 'date', message: 'format' },
+                    { property: 'name', message: 'length' }
+                ];
 
+                expect(form.errors.id).toBeDefined();
+                service.populateValidation(form, errors);
+                expect(form.errors.id).toBeUndefined();
+                expect(form.errors.date).toBeDefined();
+                expect(form.errors.name).toBeDefined();
+            });
+
+            it('should not add the validation errors', function () {
+                var form = { errors: { id: 'required' } };
+
+                expect(form.errors.id).toBeDefined();
+                service.populateValidation(form, null);
+                expect(form.errors.id).toBeDefined();
+            });
+        });
+
+        describe('hasLoadedModelFromCache()', function () {
+            it('should has model in cache', function () {
+                var data = { id: 1, name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                var inCache = service.hasLoadedModelFromCache('1');
+                expect(inCache).toBeTruthy();
+            });
+
+            it('should has not model in cache', function () {
+                var data = { id: 1, name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                var inCache = service.hasLoadedModelFromCache('2');
+                expect(inCache).toBeFalsy();
+            });
+
+            it('should has model in cache', function () {
+                var data = { id: 1, name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                var inCache = service.hasLoadedModelFromCache();
+                expect(inCache).toBeTruthy();
+            });
+
+            it('should has model in cache', function () {
+                var data = { id: 'test', name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                var inCache = service.hasLoadedModelFromCache();
+                expect(inCache).toBeTruthy();
+            });
+
+            it('should return true without master in cache', function () {
+                var data = { id: 1, name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                inject(function ($injector) {
+                    var cache = $injector.get('bbcCache');
+                    delete cache['1_Master'];
+                });
+                var inCache = service.hasLoadedModelFromCache('1');
+                expect(inCache).toBeTruthy();
+            });
+        });
+    });
+
+    describe('bbcForm partially initialized', function () {
+        beforeEach(function () {
+            inject(function ($injector) {
+                service = $injector.get('bbcForm')('test');
+            });
+        });
+
+        describe('reset()', function () {
+            it('should reset the model to initial state without refreshing the cachce', function () {
+                var data = { id: 1, name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                service.model.age = 66;
+                service.reset();
+
+                expect(service.model).toEqual({id: 1, name: 'wayne', age: 99});
+
+                inject(function ($injector) {
+                    var cache = $injector.get('bbcCache');
+                    expect(cache[1]).not.toEqual({id: 1, name: 'wayne', age: 99});
+                });
+            });
+        });
+
+        describe('reset()', function () {
+            it('should reset the model to initial state without refreshing the cachce', function () {
+                var data = { id: 1, name: 'wayne', age: 99 };
+
+                service.setModel(data);
+                service.model.age = 66;
+                service.reset();
+
+                expect(service.model).toEqual({id: 1, name: 'wayne', age: 99});
+
+                inject(function ($injector) {
+                    var cache = $injector.get('bbcCache');
+                    expect(cache['undefined']).not.toEqual({id: 1, name: 'wayne', age: 99});
+                });
             });
         });
     });

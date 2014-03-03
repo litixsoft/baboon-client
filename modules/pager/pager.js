@@ -72,7 +72,7 @@ angular.module('bbc.pager', [])
                         }
 
                         scope.pageSize = pageSize;
-                    } else if (typeof scope.pageSize !== 'number') {
+                    } else { // if (typeof scope.pageSize !== 'number') {
                         scope.pageSize = defaultPageSize;
                     }
                 });

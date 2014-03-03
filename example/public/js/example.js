@@ -5,7 +5,8 @@ angular.module('example', [
         'ui.bootstrap',
         'bbc.alert',
         'bbc.checkbox',
-        'bbc.radio'
+        'bbc.radio',
+        'bbc.markdown'
     ])
     .config(function ($routeProvider, $locationProvider) {
 
@@ -14,6 +15,7 @@ angular.module('example', [
             .when('/alert', { templateUrl: 'partials/alert.html', controller: 'AlertCtrl' })
             .when('/checkbox', { templateUrl: 'partials/checkbox.html', controller: 'CheckboxCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
+            .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
             .otherwise({ redirectTo: '/' });
         $locationProvider.html5Mode(true);
@@ -36,6 +38,14 @@ angular.module('example', [
     .controller('RadioCtrl', function ($scope) {
         $scope.modelV = false;
         $scope.modelValue = false;
+
+        $scope.isDisabled = false;
+        $scope.clickMe = function() {
+            $scope.isDisabled = !$scope.isDisabled;
+        };
+    })
+    .controller('MarkdownCtrl', function ($scope) {
+        $scope.markdown = '###Hallo'
     })
     .controller('NavigationCtrl', function ($scope, $location) {
         $scope.menu = [
@@ -43,7 +53,8 @@ angular.module('example', [
             { 'title': 'Alert', 'link': '/alert' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
             { 'title': 'RadioButton', 'link': '/radio' },
-            { 'title': 'Datepicker', 'link': '/datepicker' }
+            { 'title': 'Datepicker', 'link': '/datepicker' },
+            { 'title': 'Markdown', 'link': '/markdown' }
         ];
 
         $scope.isActive = function (route) {

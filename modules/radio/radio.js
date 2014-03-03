@@ -13,27 +13,25 @@ angular.module('bbc.radio', [])
                 name: '@',
                 disabled: '@'
             },
-            controller: function ($scope) {
-                $scope.checked = function () {
-                    return $scope.value === $scope.model;
-                };
-            },
             template: '<div class="bbc-radio">' +
                 '<div class="radio-button">' +
-                '<input type="radio" ng-model="ngModel" value="{{value}}" name="{{name}}" id="{{ngModelText}}{{value}}" />' +
-                '<label for="{{ngModelText}}{{value}}"><span class="radio-checked"></span></label>' +
+                    '<input type="radio" ng-model="ngModel" value="{{value}}" name="{{name}}" id="{{ngModelText}}{{value}}" />' +
+                    '<label for="{{ngModelText}}{{value}}"><span class="radio-checked"></span></label>' +
                 '</div>' +
-                '<div class="title"><label for="{{value}}">{{label}}</label></div>' +
+                    '<div class="title"><label for="{{value}}">{{label}}</label></div>' +
                 '</div>',
-            link: function (scope, element, attrs) {
-                //console.log(attrs['disabled']);
-                if (attrs.disabled) {
-                    element.children('div').children('input').attr('disabled', 'disabled');
-                }
-                else {
-                    element.children('div').children('input').removeAttr('disabled');
-                }
-
+            link: function (scope, element) {
+                scope.$watch('disabled', function (newVal) {
+                    var firstChild = angular.element(element.children('div')[0]);
+                    if(newVal === 'disabled' || newVal === '' || newVal) {
+                        firstChild.find('input').attr('disabled', 'disabled').css('cursor', 'not-allowed');
+                        firstChild.css('background-color', '#ccc');
+                    }
+                    else {
+                        firstChild.children('input').removeAttr('disabled').css('cursor', 'default');
+                        firstChild.css('background-color', '#fff');
+                    }
+                });
             }
         };
     });
