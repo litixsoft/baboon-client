@@ -28,7 +28,6 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-
         src: {
             jshint: {
                 files: [
@@ -142,7 +141,25 @@ module.exports = function (grunt) {
                 },
                 colors: false
             }
+        },
+        changelog: {
+            options: {
+            }
+        },
+        bump: {
+            options: {
+                updateConfigs: ['pkg'],
+                commitFiles: ['-a'],
+                commitMessage: 'chore: release v%VERSION%',
+                push: false
+            }
         }
+    });
+
+    grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
+        grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');
+        require('fs').chmodSync('.git/hooks/commit-msg', '0755');
+        grunt.log.ok('Registered git hook: commit-msg');
     });
 
     grunt.registerTask('lint', [
@@ -154,6 +171,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
+        'git:commitHook',
         'build',
         'lint',
         'karma:unit'
@@ -178,6 +196,15 @@ module.exports = function (grunt) {
         'karma:coverage',
         'karma:cobertura'
     ]);
+
+    grunt.registerTask('release', 'Bump version, update changelog and tag version', function (version) {
+        grunt.task.run([
+            'bump:' + (version || 'patch') + ':bump-only',
+            'build',
+            'changelog',
+            'bump-commit'
+        ]);
+    });
 
     // Default task.
     grunt.registerTask('default', ['test']);

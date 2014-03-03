@@ -1,8 +1,6 @@
-# baboon client [![Build Status](https://travis-ci.org/litixsoft/baboon-client.png?branch=master)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.png)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.png)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
+# baboon client [![Build Status](https://travis-ci.org/litixsoft/baboon-client.png?branch=v0.4)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.png)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.png)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
 
 > A client library for baboon webtoolkit.
-
-_(Coming soon)_
 
 ## Install
 install global dependencies:
@@ -21,22 +19,23 @@ Github: master, current development status, release candidate:
 
 	$ bower install https://github.com/litixsoft/baboon-client.git#master
 
-Github: develop, very early stage of development, unstable:
+Github: v0.4, very early stage of development, unstable:
 
-	$ bower install https://github.com/litixsoft/baboon-client.git#develop
+	$ bower install https://github.com/litixsoft/baboon-client.git#v0.4
 
 
 ## Contributing and test
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](http://gruntjs.com/).
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please create descriptive commit messages.
+We use a git hook to validate the commit messages against these [rules](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w).
+Lint and test your code using [grunt](http://gruntjs.com/).
 
-install global dependencies:
+Install global dependencies:
 
     $ npm install -g grunt-cli karma bower
 
 On linux use administrative rights to install global modules:
 
     $ sudo npm install -g grunt-cli karma bower
-
 
 Clone the baboon-client repository and install the dev dependencies and test suite deps.
 Test baboon-client with grunt.
@@ -50,53 +49,12 @@ Test baboon-client with grunt.
 Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
-## Release History
-### v0.3.0
-* add function transport.on() to listen to socket events
-* add lxDatepicker directive
-* add lx-radio and lx-checkbox directives to have radio buttons and checkboxes that looks the same in every browser and OS
-* highlight the active link in the menu
-* make menu responsive
-* fix error in lx.pager that button 'next Page' and 'last Page' are enabled when current page is greater than number of pages
-* navigation now uses names instead of numbers to find children
-
-### v0.2.9
-* update angular to v1.2.2
-* update angular-translate to v1.1.1
-* add transport.rest() to make rest only calls over the transport layer
-* update navigation and session to use transport.rest()
-* add .jshintrc
-
-### v0.2.8
-* update api/v1
-* remove auth
-
-### v0.2.7
-* remove passport auth
-
-### v0.2.6
-* integrate charts
-* update design
-* update auth
-* bugfixes
-* refactoring
-
-### v0.2.5
-* sync with baboon actual version
-
-### v0.0.2
-* include and rename module
-* tests
-
-### v0.0.1
-* initial structure
-
 ## Author
 [Litixsoft GmbH](http://www.litixsoft.de)
 
 ## License
 
-Copyright (C) 2013 Litixsoft GmbH info@litixsoft.de Licensed under the MIT license.
+Copyright (C) 2013-2014 Litixsoft GmbH info@litixsoft.de Licensed under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
