@@ -24,7 +24,7 @@ angular.module('bbc.inline.edit', [])
              * @param {object} model The current data.
              * @param {object} form The angularjs formcontroller.
              */
-            pub.reset = function (model, form) {
+            pub.reset = function (form) {
                 if (form) {
                     // reset form errors
                     form.errors = {};
@@ -34,7 +34,6 @@ angular.module('bbc.inline.edit', [])
                 }
 
                 // reset model
-                angular.copy(master, model);
                 pub.model = angular.copy(master);
             };
 
