@@ -8,7 +8,8 @@ angular.module('example', [
         'bbc.radio',
         'bbc.markdown',
         'bbc.sort',
-        'bbc.inline.edit'
+        'bbc.inline.edit',
+        'bbc.reset'
     ])
     .config(function ($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
@@ -21,6 +22,7 @@ angular.module('example', [
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
             .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
+            .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
             .otherwise({ redirectTo: '/' });
     })
     .controller('ExampleCtrl', function ($scope) {
@@ -98,6 +100,9 @@ angular.module('example', [
             }
         }
     })
+
+    .controller('ResetCtrl', function () {
+    })
     .controller('NavigationCtrl', function ($scope, $location) {
         $scope.menu = [
             { 'title': 'Home', 'link': '/' },
@@ -107,7 +112,8 @@ angular.module('example', [
             { 'title': 'Datepicker', 'link': '/datepicker' },
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Sort', 'link': '/sort' },
-            { 'title': 'Inline Edit', 'link': '/edit' }
+            { 'title': 'Inline Edit', 'link': '/edit' },
+            { 'title': 'UI Reset', 'link': '/reset' }
         ];
 
         $scope.isActive = function (route) {

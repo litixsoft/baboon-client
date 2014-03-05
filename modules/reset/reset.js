@@ -1,5 +1,42 @@
 'use strict';
 
-angular.module('bbc.reset', ['bbc.reset.directives']);
+angular.module('bbc.reset', [])
+    .directive('bbcReset', function ($compile, $timeout) {
+        return {
+            require: 'ngModel',
+            restrict: 'A',
+            scope: {},
+            link: function (scope, elem, attrs, ctrl) {
+                // limit to input element of specific types
+                //var inputTypes = /text|search|tel|url|email|password/i;
+                var inputTypes = ['text', 'search', 'tel', 'url', 'email', 'password'];
+                if (elem[0].nodeName !== 'INPUT') {
+                    throw new Error('resetField is limited to input elements');
+                }
+                //if (!inputTypes.test(attrs.type)) {
+                if(inputTypes.indexOf(attrs.type) === -1) {
+                    throw new Error('Invalid input type for resetField: ' + attrs.type);
+                }
 
+                var span = $compile('<span ng-show="enabled" ng-click="reset()" class="glyphicon glyphicon-remove"></span>')(scope);
+                elem.wrap('<div class="right-inner-addon">').after(span);
 
+                scope.reset = function() {
+                    ctrl.$setViewValue(null);
+                    ctrl.$render();
+                    $timeout(function() {
+                        elem[0].focus();
+                    }, 0, false);
+                };
+
+                elem.bind('input', function() {
+                    // NgModelController.$isEmpty
+                    scope.enabled = !ctrl.$isEmpty(elem.val());
+                })
+                .bind('focus', function() {
+                    scope.enabled = !ctrl.$isEmpty(elem.val());
+                    scope.$apply();
+                });
+            }
+        };
+    });
