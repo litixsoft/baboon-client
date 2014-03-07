@@ -33,6 +33,7 @@
         "d3": false,
         "chroma": false,
         "modalMock": false,
-        "callObjectMock": false
+        "callObjectMock": false,
+        "emptyFunctionMock": false
     }
 }

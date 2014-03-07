@@ -147,7 +147,7 @@ describe('bbcModal', function () {
         }));
 
         it('should be set to  ActionOk if callObj is of type funtion', inject(function ($controller) {
-            modalOptions.callObj = callObjectMock.cbOk;
+            modalOptions.callObj = emptyFunctionMock;
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: modalInstance, modalOptions: modalOptions});
             expect(typeof scope.modalOptions.actionOk).toBe('function');
         }));

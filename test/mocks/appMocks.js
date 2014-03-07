@@ -22,3 +22,5 @@ var callObjectMock = {
     cbYes: function () { },
     cbNo: function () { }
 };
+
+var emptyFunctionMock = function() {};
