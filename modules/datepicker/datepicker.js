@@ -20,7 +20,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
             link: function (scope, element, attrs, ctrls) {
                 scope.visible = false;                     // is datepicker popup visible
                 scope.divider = '';                        // the character used to divide the date numbers 12.2.2013
-                scope.placeholder = scope.bbcDatepicker;   // placeholder text for the input
+                scope.placeholder = attrs.placeholder;     // placeholder text for the input
                 scope.selectedDay = new Date();            // the selected date, initialized with todays date
                 scope.selectedDayShort = '';               // selected date formated as 12.3.2004
                 scope.today = {
@@ -295,35 +295,39 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  *
                  */
                 scope.getInput = function () {
+
                     var valid = {
                         required: true,
                         date: true
                     };
 
+                    if(attrs.required){
+                        valid.required = false;
+                    }
+
+
                     ctrls.$dirty = true;
 
-                    if (validateDate(scope.selectedDayShort)) {
-                        var parts = scope.selectedDayShort.split(getDivider(scope.selectedDayShort));
-                        scope.selectedDay.setDate(parts[0]);
-                        if (parts[1] >= 0 && parts[1] <= 12) {
-                            scope.selectedDay.setMonth(parts[1] - 1);
+                    if (scope.selectedDayShort.length < 1) {
+                        if (attrs.required) {
+                            valid.required = false;
+                            valid.date = true;
+                        } else {
+                            valid.required = true;
+                            valid.date = true;
                         }
-                        scope.selectedDay.setFullYear(parts[2]);
-                        scope.ngModel = new Date('' + scope.selectedDay); // set the model with the new date from the input
-
-                        valid.date = true;      // date is valid no need to show error
-                        valid.required = true;  // required is valid no need to show error
-                    }
-                    else {
-
-                        if (scope.selectedDayShort.length < 1) {
-                            if (attrs.required) {
-                                valid.required = false;
-                                valid.date = true;
-                            } else {
-                                valid.required = true;
-                                valid.date = false;
+                    } else {
+                        if (validateDate(scope.selectedDayShort)) {
+                            var parts = scope.selectedDayShort.split(getDivider(scope.selectedDayShort));
+                            scope.selectedDay.setDate(parts[0]);
+                            if (parts[1] >= 0 && parts[1] <= 12) {
+                                scope.selectedDay.setMonth(parts[1] - 1);
                             }
+                            scope.selectedDay.setFullYear(parts[2]);
+                            scope.ngModel = new Date('' + scope.selectedDay); // set the model with the new date from the input
+
+                            valid.date = true;      // date is valid no need to show error
+                            valid.required = true;  // required is valid no need to show error
                         } else {
                             valid.required = true;
                             valid.date = false;
