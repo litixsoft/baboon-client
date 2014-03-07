@@ -11,6 +11,7 @@ module.exports = function (config) {
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'bower_components/showdown/src/showdown.js',
+            'test/mocks/modalMocks.js',
             'modules/**/*.js'
         ],
 
