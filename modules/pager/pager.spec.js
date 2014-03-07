@@ -12,9 +12,7 @@ describe('bbcPager', function () {
         scope = $rootScope.$new();
         scope.count = 10;
         scope.pageSizes = [1, 5, 10];
-        scope.getData = function (pagingOptions) {
-            console.log(pagingOptions);
-        };
+        scope.getData = emptyFunctionMock;
 
         spyOn(scope, 'getData');
 
@@ -100,6 +98,30 @@ describe('bbcPager', function () {
 
         elementScope.pageSize = 0;
         expect(elementScope.numberOfPages()).toBe(5);
+    });
+
+    it('should should not match any if-else path in $observe for pageSizes', function () {
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" ></bbc-pager>');
+        compile(element)(scope);
+        var elementScope = element.isolateScope();
+        elementScope.pageSizeOptions = {};
+        scope.$digest();
+    });
+
+    it('should should not match the if path in $observe for pageSize with pageSize === "number"', function () {
+        element = angular.element('<bbc-pager count="count" page-size="5" current-page="currentPage" ></bbc-pager>');
+        compile(element)(scope);
+        scope.$digest();
+        var elementScope = element.isolateScope();
+        expect(elementScope.pageSize).toBe(5);
+    });
+
+    it('should not trigger anything in scope.$watch(pageSize)', function () {
+        element = angular.element('<bbc-pager count="count" page-size="5" current-page="currentPage" ></bbc-pager>');
+        compile(element)(scope);
+        scope.currentPage = 0;
+        scope.pageSize = 5;
+        scope.$digest();
     });
 
     it('should have a function getOptions() which returns the paging options', function () {

@@ -61,8 +61,6 @@ angular.module('bbc.pager', [])
                     var pageSize = scope.$eval(value);
 
                     if (typeof pageSize === 'number') {
-                        scope.pageSizeOptions = scope.pageSizeOptions;
-
                         if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
                             // add pageSize to pageSizeOptions
                             scope.pageSizeOptions.push(pageSize);
@@ -90,7 +88,7 @@ angular.module('bbc.pager', [])
                  * @returns {number}
                  */
                 scope.skip = function () {
-                    return (scope.currentPage - 1) * (scope.pageSize || defaultPageSize);
+                    return (scope.currentPage - 1) * scope.pageSize;
                 };
 
                 /**
@@ -103,7 +101,7 @@ angular.module('bbc.pager', [])
                         scope.pageSize = 1;
                     }
 
-                    return Math.ceil(scope.count / (scope.pageSize || defaultPageSize));
+                    return Math.ceil(scope.count / scope.pageSize);
                 };
 
                 /**
@@ -113,7 +111,7 @@ angular.module('bbc.pager', [])
                  */
                 scope.getOptions = function () {
                     return {
-                        limit: scope.pageSize || defaultPageSize,
+                        limit: scope.pageSize,
                         skip: scope.skip()
                     };
                 };
@@ -123,7 +121,7 @@ angular.module('bbc.pager', [])
                  */
                 scope.nextPage = function () {
                     var currentPage = scope.currentPage,
-                        count = currentPage * scope.pageSize || defaultPageSize;
+                        count = currentPage * scope.pageSize;
 
                     if (count < scope.count) {
                         scope.currentPage = ++currentPage;
