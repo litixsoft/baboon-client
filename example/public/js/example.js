@@ -109,41 +109,74 @@ angular.module('example', [
         $scope.message = '';
 
         $scope.popupYesNo = function(){
-            bbcModal.msgBox('modalExamplePopup', false,'Ja bzw. Nein drücken!', 'Wenn Sie "ja" drücken wollen tun sie dies bitte, ansonsten einfach "nein" drücken.', 'Warning', {
-                cbYes: function () {
-                    $scope.message = 'Du hast tatsächlich ja gedrückt.';
-                },
-                cbNo: function () {
-                    $scope.message = 'Du willst es also wirklich nicht.';
+            var options = {
+                id: 'modalExamplePopup',
+                backdrop: false,
+                headline: 'Ja bzw. Nein drücken!',
+                message: 'Wenn Sie "ja" drücken wollen tun sie dies bitte, ansonsten einfach "nein" drücken.',
+                type: 'Warning',
+                callObj: {
+                    cbYes: function () {
+                        $scope.message = 'Du hast tatsächlich ja gedrückt.';
+                    },
+                    cbNo: function () {
+                        $scope.message = 'Du willst es also wirklich nicht.';
+                    }
                 }
-            });
+            };
+            bbcModal.msgBox(options);
         };
 
         $scope.popupOkClose = function(){
-            bbcModal.msgBox('modalExamplePopup', false,'Ok bzw. Close drücken!', 'Wenn Sie "Ok" drücken wollen tun sie dies bitte, ansonsten einfach "Close" drücken.', 'Warning', {
-                cbOk: function () {
-                    $scope.message = 'Wow, du findest es also auch ok.';
-                },
-                cbClose: function () {
-                    $scope.message = 'Dann schließe ich es halt..';
+            var options = {
+                id: 'modalExamplePopup',
+                backdrop: false,
+                headline: 'Ok bzw. Close drücken!',
+                message: 'Wenn Sie "Ok" drücken wollen tun sie dies bitte, ansonsten einfach "Close" drücken.',
+                type: 'Warning',
+                callObj: {
+                    cbOk: function () {
+                        $scope.message = 'Wow, du findest es also auch ok.';
+                    },
+                    cbClose: function () {
+                        $scope.message = 'Dann schließe ich es halt..';
+                    }
                 }
-            });
+            };
+            bbcModal.msgBox(options);
         };
 
         $scope.popupModal = function(){
-            bbcModal.msgBox('modalExamplePopup', true,'Modales Popup', 'So ich bin einfach mal ein Modales Popup, cool oder?', 'Warning', {
-                cbOk: function () {
-                    $scope.message = 'Ich schließe das Popup mal für dich.';
+            var options = {
+                id: 'modalExamplePopup',
+                backdrop: true,
+                headline: 'Modales Popup',
+                message: 'So ich bin einfach mal ein Modales Popup, cool oder?',
+                type: 'Warning',
+                callObj: {
+                    cbOk: function () {
+                        $scope.message = 'Ich schließe das Popup mal für dich.';
+                    }
                 }
-            });
+            };
+            bbcModal.msgBox(options);
         };
 
         $scope.popupModalUpdate = function(){
-            bbcModal.msgBox('modalExamplePopup', true,'Modales Popup', 'So ich bin einfach mal ein Modales Popup, cool oder?', 'Warning', {
-                cbOk: function () {
-                    $scope.message = 'Ich schließe das Popup mal für dich.';
+
+            var options = {
+                id: 'modalExamplePopup',
+                backdrop: true,
+                headline: 'Modales Popup',
+                message: 'So ich bin einfach mal ein Modales Popup, cool oder?',
+                type: 'Warning',
+                callObj: {
+                    cbOk: function () {
+                        $scope.message = 'Ich schließe das Popup mal für dich.';
+                    }
                 }
-            });
+            };
+            bbcModal.msgBox(options);
 
             setTimeout(function(){
                 bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
