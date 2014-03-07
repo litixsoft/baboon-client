@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('bbc.modal', ['bbc.modal.directives', 'modal/tpls/msgBox.html'])
-    .controller('bbcModalCtrl', function ($rootScope, $scope, $modalInstance, modalOptions) {
+angular.module('bbc.modal', ['modal/msgBox.html'])
+    .controller('BbcModalCtrl', function ($rootScope, $scope, $modalInstance, modalOptions) {
 
         $scope.modalOptions = modalOptions;
 
@@ -13,14 +13,13 @@ angular.module('bbc.modal', ['bbc.modal.directives', 'modal/tpls/msgBox.html'])
 
         if (typeof($scope.modalOptions.callObj) === 'function') {
             $scope.modalOptions.actionOk = $scope.modalOptions.callObj;
-        } else if (typeof($scope.modalOptions.callObj) === 'object') {
+        }
+        else if (typeof($scope.modalOptions.callObj) === 'object') {
             $scope.modalOptions.actionOk = $scope.modalOptions.callObj.cbOk;
             $scope.modalOptions.actionClose = $scope.modalOptions.callObj.cbClose;
             $scope.modalOptions.actionYes = $scope.modalOptions.callObj.cbYes;
             $scope.modalOptions.actionNo = $scope.modalOptions.callObj.cbNo;
-        } /*else {
-            $scope.modalOptions.actionClose = true;
-        }*/
+        }
 
         $scope.reset = function () {
             if ($modalInstance) {
@@ -77,21 +76,21 @@ angular.module('bbc.modal', ['bbc.modal.directives', 'modal/tpls/msgBox.html'])
             $rootScope.$emit(id, message);
         };
 
-        pub.msgBox = function (id, backdrop, headline, message, type, callObj, cssClass) {
-
+        //pub.msgBox = function (id, backdrop, headline, message, type, callObj, cssClass) {
+        pub.msgBox = function (options) {
             var self = this;
 
             var modalOptions = {
-                msgId: id,
-                headline: headline,
-                message: message,
-                type: type,
-                callObj: callObj,
-                cssClass: cssClass
+                msgId: options.id,
+                headline: options.headline,
+                message: options.message,
+                type: options.type,
+                callObj: options.callObj,
+                cssClass: options.cssClass
             };
 
             self.modalInstance = $modal.open({
-                backdrop: backdrop, //static, true, false
+                backdrop: options.backdrop,
                 modalFade: true,
                 controller: 'BbcModalCtrl',
                 windowClass: 'bbc-modal-msg',
@@ -99,7 +98,7 @@ angular.module('bbc.modal', ['bbc.modal.directives', 'modal/tpls/msgBox.html'])
                     modalOptions: function () { return modalOptions; }
                 },
                 keyboard: false,
-                templateUrl: 'modal/tpls/msgBox.html'
+                templateUrl: 'modal/msgBox.html'
             });
 
         };
@@ -109,5 +108,4 @@ angular.module('bbc.modal', ['bbc.modal.directives', 'modal/tpls/msgBox.html'])
         };
 
         return pub;
-
     });

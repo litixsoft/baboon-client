@@ -9,7 +9,9 @@ angular.module('example', [
         'bbc.markdown',
         'bbc.sort',
         'bbc.inline.edit',
-        'bbc.reset'
+        'bbc.reset',
+        'bbc.modal',
+        'bbc.datepicker'
     ])
     .config(function ($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
@@ -23,6 +25,7 @@ angular.module('example', [
             .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
+            .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
             .otherwise({ redirectTo: '/' });
     })
     .controller('ExampleCtrl', function ($scope) {
@@ -100,8 +103,52 @@ angular.module('example', [
             }
         }
     })
-
     .controller('ResetCtrl', function () {
+    })
+    .controller('ModalCtrl', function ($scope, bbcModal) {
+        $scope.message = '';
+
+        $scope.popupYesNo = function(){
+            bbcModal.msgBox('modalExamplePopup', false,'Ja bzw. Nein drücken!', 'Wenn Sie "ja" drücken wollen tun sie dies bitte, ansonsten einfach "nein" drücken.', 'Warning', {
+                cbYes: function () {
+                    $scope.message = 'Du hast tatsächlich ja gedrückt.';
+                },
+                cbNo: function () {
+                    $scope.message = 'Du willst es also wirklich nicht.';
+                }
+            });
+        };
+
+        $scope.popupOkClose = function(){
+            bbcModal.msgBox('modalExamplePopup', false,'Ok bzw. Close drücken!', 'Wenn Sie "Ok" drücken wollen tun sie dies bitte, ansonsten einfach "Close" drücken.', 'Warning', {
+                cbOk: function () {
+                    $scope.message = 'Wow, du findest es also auch ok.';
+                },
+                cbClose: function () {
+                    $scope.message = 'Dann schließe ich es halt..';
+                }
+            });
+        };
+
+        $scope.popupModal = function(){
+            bbcModal.msgBox('modalExamplePopup', true,'Modales Popup', 'So ich bin einfach mal ein Modales Popup, cool oder?', 'Warning', {
+                cbOk: function () {
+                    $scope.message = 'Ich schließe das Popup mal für dich.';
+                }
+            });
+        };
+
+        $scope.popupModalUpdate = function(){
+            bbcModal.msgBox('modalExamplePopup', true,'Modales Popup', 'So ich bin einfach mal ein Modales Popup, cool oder?', 'Warning', {
+                cbOk: function () {
+                    $scope.message = 'Ich schließe das Popup mal für dich.';
+                }
+            });
+
+            setTimeout(function(){
+                bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
+            },3000);
+        };
     })
     .controller('NavigationCtrl', function ($scope, $location) {
         $scope.menu = [
@@ -113,7 +160,8 @@ angular.module('example', [
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Sort', 'link': '/sort' },
             { 'title': 'Inline Edit', 'link': '/edit' },
-            { 'title': 'UI Reset', 'link': '/reset' }
+            { 'title': 'UI Reset', 'link': '/reset' },
+            { 'title': 'Modal', 'link': '/modal' }
         ];
 
         $scope.isActive = function (route) {
