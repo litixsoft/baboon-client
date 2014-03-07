@@ -1,13 +1,11 @@
 'use strict';
 
 angular.module('bbc.transport', ['bbc.rest', 'bbc.socket'])
-    .factory('bbcTransport', function ($rootScope, REST, SocketIO, USE_SOCKET) {
+    .factory('bbcTransport', function ($rootScope, bbcRestSrv, SocketIO, USE_SOCKET) {
 
             // set socket transport to false
             $rootScope.socketEnabled = false;
 
-            // rest default instance
-            var rest = new REST();
             var socket;
 
             // socket.IO default instance
