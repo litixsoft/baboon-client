@@ -31,6 +31,9 @@
         "Showdown": false,
         "io": false,
         "d3": false,
-        "chroma": false
+        "chroma": false,
+        "modalMock": false,
+        "callObjectMock": false,
+        "emptyFunctionMock": false
     }
 }

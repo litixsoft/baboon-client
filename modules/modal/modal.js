@@ -76,7 +76,6 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             $rootScope.$emit(id, message);
         };
 
-        //pub.msgBox = function (id, backdrop, headline, message, type, callObj, cssClass) {
         pub.msgBox = function (options) {
             var self = this;
 
@@ -86,7 +85,8 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
                 message: options.message,
                 type: options.type,
                 callObj: options.callObj,
-                cssClass: options.cssClass
+                cssClass: options.cssClass,
+                buttonTextValues: options.buttonTextValues
             };
 
             self.modalInstance = $modal.open({
@@ -100,7 +100,6 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
                 keyboard: false,
                 templateUrl: 'modal/msgBox.html'
             });
-
         };
 
         pub.reset = function () {

@@ -39,10 +39,8 @@ describe('bbcSort', function () {
         elementScope.sort();
     });
 
-
-
     it('should be return without error', function () {
-        scope.sort = function() {};
+        scope.sort = emptyFunctionMock;
 
         spyOn(scope, 'sort');
 
