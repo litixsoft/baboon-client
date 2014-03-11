@@ -7,7 +7,7 @@ describe('bbc.cache', function () {
         module('bbc.cache');
 
         inject(function ($injector) {
-            service = $injector.get('bbcCache');
+            service = $injector.get('bbcCacheSrv');
         });
     });
 
@@ -30,7 +30,7 @@ describe('bbc.cache', function () {
         expect(service.obj).toEqual({name: 'wayne', age: 10});
 
         inject(function ($injector) {
-            var serviceRef = $injector.get('bbcCache');
+            var serviceRef = $injector.get('bbcCacheSrv');
 
             expect(serviceRef.test).toBe(1);
             expect(serviceRef.obj).toEqual({name: 'wayne', age: 10});

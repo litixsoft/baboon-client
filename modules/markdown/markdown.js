@@ -12,13 +12,9 @@ angular.module('bbc.markdown', [])
      * @example
      <example module="ngView">
          <file name="index.html">
-            <div ng-controller="MarkdownCtrl" class="container">
-                <div class="row">
-                    <div class="span9">
-                        <textarea ng-model="markdown" ></textarea>
-                        <div bbc-markdown ng-model="markdown"></div>
-                    </div>
-                </div>
+            <div ng-controller="MarkdownCtrl">
+                <textarea ng-model="markdown" ></textarea>
+                <div bbc-markdown ng-model="markdown"></div>
             </div>
          </file>
          <file name="scripts.js">

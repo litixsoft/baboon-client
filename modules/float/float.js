@@ -1,6 +1,31 @@
 'use strict';
 
 angular.module('bbc.float', [])
+    /**
+     * @ngdoc directive
+     * @name bbc.float.directive:bbcFloat
+     * @restrict A
+     *
+     * @description
+     * Convert and round any number to a float by given decimal places.
+     *
+     * @param {int=} bbcFloat number of decimal places (default is 2).
+     *
+     * @example
+     <example module="ngView">
+     <file name="index.html">
+         <div ng-controller="FloatCtrl">
+            <input type="text" bbc-float="2" ng-model="model" />
+            <pre>{{ model }}</pre>
+         </div>
+     </file>
+     <file name="scripts.js">
+        angular.module('ngView', ['bbc.float']).controller('FloatCtrl', function ($scope) {
+                $scope.model = 1.235;
+        });
+     </file>
+     </example>
+     */
     .directive('bbcFloat', function () {
         var FLOAT_REGEXP = /^\-?\d+((\.|,)?(\d+)?)?$/;
 

@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('bbc.cache', [])
-    // Super simple client cache
-    .factory('bbcCache', function () {
+    /**
+     * @ngdoc object
+     * @name bbc.cache.bbcCache
+     *
+     * @description
+     * Simple client cache.
+     *
+     */
+    .factory('bbcCacheSrv', function () {
         return {};
     });

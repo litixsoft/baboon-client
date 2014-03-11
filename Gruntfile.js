@@ -46,7 +46,8 @@ module.exports = function (grunt) {
             test: '.reports/test',
             jshint: '.reports/jshint',
             bower: ['<%= src.bowerrc.directory %>'],
-            node_modules: ['node_modules']
+            node_modules: ['node_modules'],
+            docs: ['build/docs']
         },
 
         open: {
@@ -153,8 +154,39 @@ module.exports = function (grunt) {
                 commitMessage: 'chore: release v%VERSION%',
                 push: false
             }
+        },
+        ngdocs: {
+            options: {
+                dest: 'build/docs',
+                html5Mode: false,
+                scripts: [
+                    /*'angular.js',*/
+                    'http://code.angularjs.org/1.2.14/angular.js',
+                    'http://code.angularjs.org/1.2.14/angular-route.min.js',
+                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',
+                    'https://raw.github.com/coreyti/showdown/master/src/showdown.js',
+                    'https://raw.github.com/litixsoft/baboon-client/v0.4/modules/markdown/markdown.js',
+                    'https://raw.github.com/litixsoft/baboon-client/v0.4/modules/alert/alert.js',
+                    'https://raw.github.com/litixsoft/baboon-client/v0.4/modules/float/float.js'
+                ],
+                styles: [
+                    'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
+                ]
+            },
+            api: {
+                src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js'],
+                title: 'API Reference'
+            }
+        },
+        connect: {
+            options: {
+                keepalive: true
+            },
+            server: {}
         }
     });
+
+    grunt.registerTask('doc', ['clean:docs', 'ngdocs', 'connect']);
 
     grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
         grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');

@@ -2,7 +2,7 @@
 
 angular.module('bbc.form', [])
     // form service with cache
-    .factory('bbcForm', function (bbcCache) {
+    .factory('bbcForm', function (bbcCacheSrv) {
         return function (modelName, key) {
             var pub = {},
                 master = {};
@@ -28,11 +28,11 @@ angular.module('bbc.form', [])
                 pub.model = angular.copy(master);
 
                 if (key) {
-                    // reset model in bbcCache
+                    // reset model in bbcCacheSrv
                     if (pub.model[key]) {
-                        bbcCache[pub.model[key]] = pub.model;
+                        bbcCacheSrv[pub.model[key]] = pub.model;
                     } else {
-                        bbcCache[modelName] = pub.model;
+                        bbcCacheSrv[modelName] = pub.model;
                     }
                 }
             };
@@ -47,29 +47,29 @@ angular.module('bbc.form', [])
             };
 
             /**
-             * Tries to load the model from bbcCache.
+             * Tries to load the model from bbcCacheSrv.
              *
              * @param {string=} key The key of the model.
              * @returns {boolean}
              */
             pub.hasLoadedModelFromCache = function (key) {
-                if (key && bbcCache[key]) {
-                    // load from bbcCache
-                    pub.model = bbcCache[key];
+                if (key && bbcCacheSrv[key]) {
+                    // load from bbcCacheSrv
+                    pub.model = bbcCacheSrv[key];
 
-                    if (bbcCache[key + '_Master']) {
-                        // load master from bbcCache
-                        master = bbcCache[key + '_Master'];
+                    if (bbcCacheSrv[key + '_Master']) {
+                        // load master from bbcCacheSrv
+                        master = bbcCacheSrv[key + '_Master'];
                     }
 
                     return true;
                 } else if (!key) {
-                    if (bbcCache[modelName]) {
-                        // load from bbcCache
-                        pub.model = bbcCache[modelName];
+                    if (bbcCacheSrv[modelName]) {
+                        // load from bbcCacheSrv
+                        pub.model = bbcCacheSrv[modelName];
                     } else {
-                        // set bbcCache
-                        bbcCache[modelName] = pub.model;
+                        // set bbcCacheSrv
+                        bbcCacheSrv[modelName] = pub.model;
                     }
 
                     return true;
@@ -82,12 +82,12 @@ angular.module('bbc.form', [])
              * Sets the model.
              *
              * @param {object} model The model.
-             * @param {boolean} resetCache Specifies if the bbcCache should be resettet.
+             * @param {boolean} resetCache Specifies if the bbcCacheSrv should be reset.
              */
             pub.setModel = function (model, resetCache) {
                 if (!pub.model[key] && resetCache) {
-                    // no key -> create, delete model from bbcCache
-                    delete bbcCache[modelName];
+                    // no key -> create, delete model from bbcCacheSrv
+                    delete bbcCacheSrv[modelName];
                 }
 
                 // set model
@@ -95,13 +95,13 @@ angular.module('bbc.form', [])
                 master = angular.copy(model);
 
                 if (resetCache) {
-                    // reset bbcCache
-                    delete bbcCache[model[key]];
-                    delete bbcCache[model[key] + '_Master'];
+                    // reset bbcCacheSrv
+                    delete bbcCacheSrv[model[key]];
+                    delete bbcCacheSrv[model[key] + '_Master'];
                 } else {
-                    // set bbcCache
-                    bbcCache[model[key]] = pub.model;
-                    bbcCache[model[key] + '_Master'] = master;
+                    // set bbcCacheSrv
+                    bbcCacheSrv[model[key]] = pub.model;
+                    bbcCacheSrv[model[key] + '_Master'] = master;
                 }
             };
 

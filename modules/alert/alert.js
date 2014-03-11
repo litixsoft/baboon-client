@@ -1,7 +1,16 @@
 'use strict';
 
 angular.module('bbc.alert', [])
-    // Service for angular-ui alert handling
+    /**
+     * @ngdoc object
+     * @name bbc.alert.bbcAlertSrv
+     * @requires $log
+     * @requires $timeout
+     *
+     * @description
+     * Service for angular-ui alert handling.
+     *
+     */
     .factory('bbcAlertSrv', function ($log, $timeout) {
         var pub = {};
 
@@ -101,6 +110,32 @@ angular.module('bbc.alert', [])
 
         return pub;
     })
+    /**
+     * @ngdoc directive
+     * @name bbc.alert.directive:bbcAlert
+     * @restrict E
+     *
+     * @description
+     * Markup for alert.
+     *
+     * @example
+     <example module="ngView">
+         <file name="index.html">
+             <div ng-controller="AlertCtrl">
+                <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
+                <button class='btn btn-default' ng-click="showAlert()">Show Info-Alert</button>
+             </div>
+         </file>
+         <file name="scripts.js">
+             angular.module('ngView', ['bbc.alert']).controller('AlertCtrl', function ($scope, bbcAlertSrv) {
+                $scope.bbcAlert = bbcAlertSrv;
+                $scope.showAlert = function() {
+                    $scope.bbcAlert.info('Info message from controller');
+                };
+             });
+         </file>
+     </example>
+     */
     .directive('bbcAlert', function () {
         return {
             restrict: 'E',
