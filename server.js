@@ -11,7 +11,10 @@ var path = require('path');
 var lessMiddleware = require('less-middleware');
 
 
+
 var app = express();
+var server = require('http').createServer(app)
+var io = require('socket.io').listen(server);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -34,10 +37,39 @@ app.use(app.router);
 app.use(express.errorHandler());
 
 
+app.post('/api/echo', function(req, res) {
+
+    console.log('## REST: received from the client:');
+    console.log(req.body);
+
+    if(req.body.error) {
+
+        var error = {
+            name: 'EchoTestError',
+            resource: 'api/echo',
+            statusCode: 401,
+            message: 'Fake echo test error'
+        };
+
+        res.json(error.statusCode, error);
+    }
+    else {
+        res.json(200, req.body);
+    }
+
+});
+
 app.get('/*', routes.index);
 
+io.sockets.on('connection', function (socket) {
+    socket.emit('news', 'push this news from server when client connection is successfully');
+    socket.on('echo', function (data, callback) {
+        console.log('## Socket: received from the client:');
+        console.log(data);
+        callback(null, data);
+    });
+});
 
-
-http.createServer(app).listen(app.get('port'), function () {
+server.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });

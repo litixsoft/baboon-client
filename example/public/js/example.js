@@ -11,9 +11,10 @@ angular.module('example', [
         'bbc.inline.edit',
         'bbc.reset',
         'bbc.modal',
-        'bbc.datepicker'
+        'bbc.datepicker',
+        'bbc.transport'
     ])
-    .config(function ($routeProvider, $locationProvider) {
+    .config(function ($routeProvider, $locationProvider, transportProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
@@ -26,7 +27,9 @@ angular.module('example', [
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
+            .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .otherwise({ redirectTo: '/' });
+        transportProvider.set({useSocket:false, connectTimeout:2000});
     })
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
@@ -194,8 +197,55 @@ angular.module('example', [
             { 'title': 'Sort', 'link': '/sort' },
             { 'title': 'Inline Edit', 'link': '/edit' },
             { 'title': 'UI Reset', 'link': '/reset' },
-            { 'title': 'Modal', 'link': '/modal' }
+            { 'title': 'Modal', 'link': '/modal' },
+            { 'title': 'Transport', 'link': '/transport' }
         ];
+
+        $scope.isActive = function (route) {
+            return route === $location.path();
+        };
+    })
+    .controller('RestCtrl', function ($scope, $location) {
+
+        $scope.isActive = function (route) {
+            return route === $location.path();
+        };
+    })
+    .controller('TransportCtrl', function ($scope, $location, transport) {
+
+        $scope.messages = [];
+
+        transport.forward('connect', $scope);
+
+        $scope.$on('socket:connect', function() {
+            $scope.messages.push({message: 'CONNECT:  connection successfully'});
+        });
+
+//        $scope.$on('$routeChangeStart', function() {
+//            socket.disconnect();
+//        });
+//
+        transport.on('news', function (data) {
+            $scope.messages.push({message: 'NEWS: ' + data});
+        });
+
+
+        $scope.clear = function() {
+            $scope.messages = [];
+        };
+
+        $scope.send = function() {
+            $scope.messages.push({class:'sent', message: 'SENT: ' + $scope.message});
+            transport.emit('api/echo', {message: $scope.message, error:true}, function(error, result) {
+
+                if(!error && result) {
+                    $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
+                }
+                else {
+                    $scope.messages.push({class: 'error', message: error.data});
+                }
+            });
+        };
 
         $scope.isActive = function (route) {
             return route === $location.path();

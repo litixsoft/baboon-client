@@ -1,0 +1,29 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div class="page-header">
+            <h1>Transport</h1>
+            <h2>Socket: {{socketEnabled}}</h2>
+        </div>
+        <p>Baboon used socket.io for the websocket communication.</p>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Log</div>
+            <div class="panel-body">
+
+                <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
+                    <li ng-repeat="item in messages">
+                        <span class="{{item.class}}">{{ item.message }}</span>
+                    </li>
+                </ul>
+                <button class="btn btn-danger" ng-click="clear()">Clear log</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <input ng-model="message" type="text" class="form-control" id="message" placeholder="Enter message for server">
+        </div>
+        <div class=".btn-block">
+            <button class="btn btn-default" ng-click="send()">Send message</button>
+        </div>
+    </div>
+</div>
