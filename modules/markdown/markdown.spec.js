@@ -8,7 +8,7 @@ describe('bbcMarkdown', function () {
     beforeEach(inject(function ($compile, $rootScope) {
         compile = $compile;
         scope = $rootScope.$new();
-        element = angular.element('<bbc-markdown ng-model="markdown"></bbc-markdown>');
+        element = angular.element('<div bbc-markdown ng-model="markdown"></div>');
 
         scope.markdown = '##Hallo';
         $compile(element)(scope);
