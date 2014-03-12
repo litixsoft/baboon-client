@@ -37,6 +37,16 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
         };
 
+        /**
+         * Get instance of transport
+         *
+         * @param $rootScope
+         * @param $http
+         * @param Socket
+         * @param $window
+         * @param $log
+         * @returns {{forward: forward, on: on, addListener: addListener, removeListener: removeListener, emit: emit}}
+         */
         this.$get = function ($rootScope, $http, Socket, $window, $log) {
 
             var socket;
@@ -165,15 +175,39 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 }
             };
 
+            /**
+             * Register events on socket
+             *
+             * @param event
+             * @param callback
+             * @returns {*}
+             */
             var on = function(event, callback) {
                 if (config.useSocket && $rootScope.socketEnabled) {
                     return socket.on(event, callback);
                 }
             };
 
+            /**
+             *
+             * Register events on socket
+             * The same as on.
+             *
+             * @param event
+             * @param callback
+             * @returns {*}
+             */
+            var addListener = function(event, callback) {
+                if (config.useSocket && $rootScope.socketEnabled) {
+                    return socket.addListener(event, callback);
+                }
+            };
+
             return {
                 forward: forward,
                 on: on,
+                addListener: addListener,
+                removeListener: socket.removeListener,
                 emit: emit
             };
         };
