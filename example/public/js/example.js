@@ -29,7 +29,8 @@ angular.module('example', [
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .otherwise({ redirectTo: '/' });
-        transportProvider.set({useSocket:false, connectTimeout:2000});
+        transportProvider.set();
+//        transportProvider.set({useSocket:false, connectTimeout:2000});
     })
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
@@ -211,7 +212,7 @@ angular.module('example', [
             return route === $location.path();
         };
     })
-    .controller('TransportCtrl', function ($scope, $location, transport) {
+    .controller('TransportCtrl', function ($rootScope, $scope, $location, transport) {
 
         $scope.messages = [];
 
@@ -220,6 +221,10 @@ angular.module('example', [
         $scope.$on('socket:connect', function() {
             $scope.messages.push({message: 'CONNECT:  connection successfully'});
         });
+
+        $scope.setSocketState = function(){
+            $rootScope.socketEnabled = !$rootScope.socketEnabled;
+        };
 
 //        $scope.$on('$routeChangeStart', function() {
 //            socket.disconnect();

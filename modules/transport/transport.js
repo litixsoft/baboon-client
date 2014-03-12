@@ -143,12 +143,14 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 $rootScope.isLoading = true;
 
                 if (config.useSocket && $rootScope.socketEnabled) {
+                    console.log('socket');
                     socket.emit(event, data, function(error, result){
                         $rootScope.isLoading = false;
                         callback(error, result);
                     });
                 }
                 else {
+                    console.log('rest');
                     $http.post(event, data)
                         .success(function (result) {
                             $rootScope.isLoading = false;
@@ -170,7 +172,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @returns {*|void}
              */
             var forward = function(event, scope) {
-                if (config.useSocket && $rootScope.socketEnabled) {
+                if (config.useSocket) {
                     return socket.forward(event, scope);
                 }
             };
@@ -183,7 +185,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @returns {*}
              */
             var on = function(event, callback) {
-                if (config.useSocket && $rootScope.socketEnabled) {
+                if (config.useSocket) {
                     return socket.on(event, callback);
                 }
             };
@@ -198,8 +200,23 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @returns {*}
              */
             var addListener = function(event, callback) {
-                if (config.useSocket && $rootScope.socketEnabled) {
+                if (config.useSocket) {
                     return socket.addListener(event, callback);
+                }
+            };
+
+            /**
+             *
+             * Register events on socket
+             * The same as on.
+             *
+             * @param event
+             * @param callback
+             * @returns {*}
+             */
+            var removeListener = function(event, callback) {
+                if (config.useSocket) {
+                    return socket.removeListener(event, callback);
                 }
             };
 
@@ -207,7 +224,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 forward: forward,
                 on: on,
                 addListener: addListener,
-                removeListener: socket.removeListener,
+                removeListener: removeListener,
                 emit: emit
             };
         };

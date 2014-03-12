@@ -3,8 +3,10 @@
         <div class="page-header">
             <h1>Transport</h1>
             <h2>Socket: {{socketEnabled}}</h2>
+            <button class="btn btn-default" ng-model="socketEnabled" ng-click="setSocketState()" ng-disabled="socketEnabled">enable</button>
+            <button class="btn btn-default" ng-model="socketEnabled" ng-click="setSocketState()" ng-disabled="!socketEnabled">disable</button>
         </div>
-        <p>Baboon used socket.io for the websocket communication.</p>
+        <p>Baboon uses socket.io for the websocket communication.</p>
 
         <div class="panel panel-info">
             <div class="panel-heading">Log</div>
