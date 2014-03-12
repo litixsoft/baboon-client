@@ -2,9 +2,14 @@
     <div class="p-wrapper">
         <div class="page-header">
             <h1>Transport</h1>
-            <span>Socket: {{socketEnabled}}</span>
-            <button class="btn btn-default" ng-model="socketEnabled" ng-click="setSocketState()" ng-disabled="socketEnabled">enable</button>
-            <button class="btn btn-default" ng-model="socketEnabled" ng-click="setSocketState()" ng-disabled="!socketEnabled">disable</button>
+            <div>
+                <span>Socket: {{socketEnabled}}</span>
+                <button class="btn btn-default" ng-model="socketEnabled" ng-click="setSocketState()" ng-disabled="socketEnabled">enable</button>
+                <button class="btn btn-default" ng-model="socketEnabled" ng-click="setSocketState()" ng-disabled="!socketEnabled">disable</button>
+            </div>
+            <div>
+                Raise error:<bbc-checkbox ng-model="raiseError" title="Dast etx"></bbc-checkbox>
+            </div>
         </div>
         <p>Baboon uses socket.io for the websocket communication.</p>
 
@@ -23,7 +28,6 @@
         <div class="form-group">
             <label for="message">Message</label>
             <input ng-model="message" type="text" class="form-control" id="message" placeholder="Enter message for server">
-            <bbc-checkbox ng-model="raiseError" title="Dast etx"></bbc-checkbox>Raise error
         </div>
         <div class=".btn-block">
             <button class="btn btn-default" ng-click="send()">Send message</button>

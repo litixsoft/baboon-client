@@ -243,7 +243,6 @@ angular.module('example', [
             $scope.messages.push({class:'sent', message: 'SENT: ' + $scope.message});
 
             transport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
-
                 if(error){
                     $scope.messages.push({class: 'error', message: error.data});
                 } else if(result){

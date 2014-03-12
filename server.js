@@ -73,6 +73,8 @@ io.sockets.on('connection', function (socket) {
             };
 
             callback(error);
+        } else{
+            callback(null, data);
         }
     });
 
