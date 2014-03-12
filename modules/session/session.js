@@ -2,13 +2,13 @@
 
 angular.module('bbc.session', [])
     // Service for session handling
-    .factory('bbcSession', function ($rootScope, $log, bbcTransport) {
+    .factory('bbcSession', function ($rootScope, $log, transport) {
         var pub = {};
 
         // save key value in session
         pub.setData = function (key, value, callback) {
             if (arguments.length === 3) {
-                bbcTransport.rest('session/setData', {key: key, value: value}, callback);
+                transport.emit('api/session/setData', {key: key, value: value}, callback);
             }
             else {
                 $log.error('parameter error, required key, value and callback');
@@ -27,7 +27,7 @@ angular.module('bbc.session', [])
                 data = {key: key};
             }
 
-            bbcTransport.rest('session/deleteData', data, callback);
+            transport.emit('api/session/deleteData', data, callback);
         };
 
         // get key value from session
@@ -41,17 +41,17 @@ angular.module('bbc.session', [])
                 data = {key: key};
             }
 
-            bbcTransport.rest('session/getData', data, callback);
+            transport.emit('api/session/getData', data, callback);
         };
 
         // check session and set activity time
         pub.getLastActivity = function (callback) {
-            bbcTransport.rest('session/getLastActivity', {}, callback);
+            transport.emit('api/session/getLastActivity', {}, callback);
         };
 
         // check session and set activity time
         pub.setActivity = function (callback) {
-            bbcTransport.rest('session/setActivity', {}, callback);
+            transport.emit('api/session/setActivity', {}, callback);
         };
 
         return pub;
