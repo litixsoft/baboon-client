@@ -164,10 +164,12 @@ module.exports = function (grunt) {
                     'http://code.angularjs.org/1.2.14/angular.js',
                     'http://code.angularjs.org/1.2.14/angular-route.min.js',
                     'http://code.angularjs.org/1.2.14/angular-animate.min.js',
-                    'https://raw.github.com/coreyti/showdown/master/src/showdown.js',
-                    'https://raw.github.com/litixsoft/baboon-client/v0.4/modules/markdown/markdown.js',
-                    'https://raw.github.com/litixsoft/baboon-client/v0.4/modules/alert/alert.js',
-                    'https://raw.github.com/litixsoft/baboon-client/v0.4/modules/float/float.js'
+                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/alert/alert.js',
+                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/cache/cache.js',
+                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/checkbox/checkbox.js',
+                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/float/float.js',
+                    'https://rawgithub.com/coreyti/showdown/master/src/showdown.js',
+                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/markdown/markdown.js'
                 ],
                 styles: [
                     'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
