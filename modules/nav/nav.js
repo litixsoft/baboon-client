@@ -1,60 +1,79 @@
 'use strict';
 
-angular.module('bbc.nav', ['bbc.nav.directives'])
-    .controller('BbcTreeViewCtrl', function ($scope, $element, $attrs, transport, $log) {
-            $scope.currentLink = '';
+angular.module('bbc.nav', [])
+    .provider('navigation', function () {
 
-            function callback (data) {
-                var treeData = [];
+        var currentApp;
 
-                if ($attrs.nrAttr === undefined) {
-                    angular.forEach(data, function (value) {
-                        treeData.push({'title': value.title, 'route': value.route, 'target': value.target});
-                    });
-                    $scope.treeData = treeData;
-                } else {
-                    angular.forEach(data, function (value) {
-                        if(value.title === $attrs.nrAttr){
-                            $scope.treeData = value.children;
-                        }
-                    });
-                }
-            }
+        /**
+         * Set navigation with current app and root title
+         *
+         * @param current
+         * @param root {string} title for route /
+         */
+        this.setCurrentApp = function (current) {
+            currentApp = current;
+        };
 
-            // get nav data over rest transport
-            transport.rest('nav/getNavData', {}, function(error, result) {
-                if (error) {
-                    $log.error(error);
-                }
-                else {
-                    callback(result);
-                }
-            });
+        this.$get = function (transport) {
+            var pub = {};
 
-            $scope.ngClickable = typeof($attrs.methodAttr) !== 'undefined';
-
-            $scope.type = $attrs.typeAttr;
-
-            $scope.toggleShow = function (data) {
-                if (data.hide === 'bbcclose' || data.hide === undefined) {
-                    data.hide = 'bbcopen';
-                } else {
-                    data.hide = 'bbcclose';
-                }
+            /**
+             * Get the current app
+             *
+             * @returns {*}
+             */
+            pub.getCurrentApp = function () {
+                return currentApp;
             };
 
-            $scope.toggleNav = function (data) {
-                if (data.hide === '' || data.hide === undefined) {
-                    data.hide = 'open';
-                } else {
-                    data.hide = '';
-                }
+            /**
+             * Get navigation tree
+             *
+             * @param callback
+             */
+            pub.getTree = function (callback) {
+                transport.emit('/api/navigation/getTree',{current: currentApp}, callback);
             };
 
-            $scope.openLink = function (value) {
-                if(value){
-                    $scope.currentLink = value;
-                }
+            /**
+             * Get navigation flat list
+             *
+             * @param callback
+             */
+            pub.getList = function (callback) {
+                transport.emit('/api/navigation/getList',{current: currentApp}, callback);
             };
-        }
-    );
+
+            /**
+             * Get toplevel of navigation
+             *
+             * @param callback
+             */
+            pub.getTopList = function (callback) {
+                transport.emit('/api/navigation/getTopList',{current: currentApp}, callback);
+            };
+
+            /**
+             * Get all sub links from a top as tree
+             *
+             * @param top
+             * @param callback
+             */
+            pub.getSubTree = function (top, callback) {
+                transport.emit('/api/navigation/getSubTree',{current: currentApp, top: top}, callback);
+            };
+
+            /**
+             * Get all sub links from a top as flat list
+             *
+             * @param top
+             * @param callback
+             */
+            pub.getSubList = function (top, callback) {
+                transport.emit('/api/navigation/getSubList',{current: currentApp, top: top}, callback);
+            };
+
+            return pub;
+        };
+    });
