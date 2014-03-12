@@ -56,13 +56,26 @@ app.post('/api/echo', function(req, res) {
     else {
         res.json(200, req.body);
     }
-
 });
 
 app.get('/*', routes.index);
 
 io.sockets.on('connection', function (socket) {
     socket.emit('news', 'push this news from server when client connection is successfully');
+
+    socket.on('api/echo', function (data, callback) {
+        if(data.error) {
+            var error = {
+                name: 'EchoTestError',
+                resource: 'api/echo',
+                statusCode: 401,
+                message: 'Fake echo test error'
+            };
+
+            callback(error);
+        }
+    });
+
     socket.on('echo', function (data, callback) {
         console.log('## Socket: received from the client:');
         console.log(data);

@@ -215,6 +215,7 @@ angular.module('example', [
     .controller('TransportCtrl', function ($rootScope, $scope, $location, transport) {
 
         $scope.messages = [];
+        $scope.raiseError = false;
 
         transport.forward('connect', $scope);
 
@@ -234,20 +235,19 @@ angular.module('example', [
             $scope.messages.push({message: 'NEWS: ' + data});
         });
 
-
         $scope.clear = function() {
             $scope.messages = [];
         };
 
         $scope.send = function() {
             $scope.messages.push({class:'sent', message: 'SENT: ' + $scope.message});
-            transport.emit('api/echo', {message: $scope.message, error:true}, function(error, result) {
 
-                if(!error && result) {
-                    $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
-                }
-                else {
+            transport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
+
+                if(error){
                     $scope.messages.push({class: 'error', message: error.data});
+                } else if(result){
+                    $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
                 }
             });
         };

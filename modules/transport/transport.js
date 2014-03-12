@@ -51,12 +51,12 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             var socket;
 
-            // default settings when options empty
+            // default settings when options is empty
             config.protocol = config.protocol || $window.location.protocol;
             config.hostname = config.hostname || $window.location.hostname;
             config.port = config.port || parseInt($window.location.port);
 
-            // fix protocol when forget :
+            // fix protocol when forgotten :
             if(config.protocol === 'http' || config.protocol === 'https' ||
                 config.protocol === 'ws' || config.protocol === 'wss') {
                 config.protocol = config.protocol + ':';
@@ -143,14 +143,17 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 $rootScope.isLoading = true;
 
                 if (config.useSocket && $rootScope.socketEnabled) {
-                    console.log('socket');
                     socket.emit(event, data, function(error, result){
                         $rootScope.isLoading = false;
-                        callback(error, result);
+
+                        var err = null;
+                        if (error){
+                            err = {data: error};
+                        }
+                        callback(err, result);
                     });
                 }
                 else {
-                    console.log('rest');
                     $http.post(event, data)
                         .success(function (result) {
                             $rootScope.isLoading = false;
@@ -192,7 +195,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             /**
              *
-             * Register events on socket
+             * Add listener on socket
              * The same as on.
              *
              * @param event
@@ -207,7 +210,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             /**
              *
-             * Register events on socket
+             * Remove listener on socket
              * The same as on.
              *
              * @param event
