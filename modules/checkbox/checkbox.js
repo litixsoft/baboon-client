@@ -13,11 +13,6 @@ angular.module('bbc.checkbox', [])
      * @example
      <example module="ngView">
         <file name="index.html">
-            <style type="text/css">
-                 .bbc-checkbox { border: 1px solid black; background: white; border-radius: 4px; width: 20px; height: 20px; display:inline-block; margin:0; padding:0 2px; }
-                 .bbc-checkbox span { height: 14px;margin:0;padding:0; }
-                 .bbc-checkbox.disabled { border: 1px solid rgb(84, 84, 84); background: lightgray; color: rgb(84, 84, 84); cursor: not-allowed; }
-            </style>
             <div ng-controller="CheckboxCtrl">
                  <bbc-checkbox ng-model="model1" disabled="disabled"></bbc-checkbox> I'm disabled!
                  <br />

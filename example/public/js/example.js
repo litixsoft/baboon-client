@@ -12,7 +12,9 @@ angular.module('example', [
         'bbc.reset',
         'bbc.modal',
         'bbc.datepicker',
-        'bbc.transport'
+        'bbc.transport',
+        'bbc.integer',
+        'bbc.float'
     ])
     .config(function ($routeProvider, $locationProvider, transportProvider) {
         $locationProvider.html5Mode(true);
@@ -20,13 +22,15 @@ angular.module('example', [
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
             .when('/alert', { templateUrl: 'partials/alert.html', controller: 'AlertCtrl' })
             .when('/checkbox', { templateUrl: 'partials/checkbox.html', controller: 'CheckboxCtrl' })
-            .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
-            .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
-            .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
-            .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
+            .when('/float', { templateUrl: 'partials/float.html', controller: 'FloatCtrl' })
+            .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
+            .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
+            .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
+            .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
+            .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .otherwise({ redirectTo: '/' });
         transportProvider.set();
@@ -44,13 +48,26 @@ angular.module('example', [
     .controller('DatepickerCtrl', function () {
     })
     .controller('CheckboxCtrl', function ($scope) {
-        $scope.modelV = false;
-        $scope.modelValue = false;
+        $scope.model1 = false;
+        $scope.model2 = true;
+    })
+    .controller('FloatCtrl', function ($scope) {
+        $scope.val = '1.23';
+        $scope.initialType = (typeof $scope.val);
+
+        $scope.$watch('val', function() {
+            $scope.currentType = (typeof $scope.val);
+        });
+    })
+    .controller('IntegerCtrl', function ($scope) {
+        $scope.val = '1';
+        $scope.initialType = (typeof $scope.val);
+
+        $scope.$watch('val', function() {
+            $scope.currentType = (typeof $scope.val);
+        });
     })
     .controller('RadioCtrl', function ($scope) {
-        $scope.modelV = false;
-        $scope.modelValue = false;
-
         $scope.isDisabled = false;
         $scope.clickMe = function() {
             $scope.isDisabled = !$scope.isDisabled;
@@ -192,14 +209,16 @@ angular.module('example', [
             { 'title': 'Home', 'link': '/' },
             { 'title': 'Alert', 'link': '/alert' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
-            { 'title': 'RadioButton', 'link': '/radio' },
             { 'title': 'Datepicker', 'link': '/datepicker' },
-            { 'title': 'Markdown', 'link': '/markdown' },
-            { 'title': 'Sort', 'link': '/sort' },
+            { 'title': 'Float', 'link': '/float' },
             { 'title': 'Inline Edit', 'link': '/edit' },
-            { 'title': 'UI Reset', 'link': '/reset' },
+            { 'title': 'Integer', 'link': '/integer' },
+            { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
-            { 'title': 'Transport', 'link': '/transport' }
+            { 'title': 'RadioButton', 'link': '/radio' },
+            { 'title': 'Sort', 'link': '/sort' },
+            { 'title': 'Transport', 'link': '/transport' },
+            { 'title': 'UI Reset', 'link': '/reset' },
         ];
 
         $scope.isActive = function (route) {

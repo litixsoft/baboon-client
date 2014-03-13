@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('bbc.form', [])
-    // form service with cache
+    /**
+     * @ngdoc object
+     * @name bbc.form.bbcForm
+     *
+     * @description
+     * Form service which allow caching, reset the object and populates validation errors.
+     *
+     */
     .factory('bbcForm', function (bbcCacheSrv) {
         return function (modelName, key) {
             var pub = {},

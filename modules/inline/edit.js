@@ -1,6 +1,14 @@
 'use strict';
 
 angular.module('bbc.inline.edit', [])
+    /**
+     * @ngdoc object
+     * @name bbc.inline.edit.bbcInlineEdit
+     *
+     * @description
+     * Service for editing which allow reset the object and populates validation errors.
+     *
+     */
     .factory('bbcInlineEdit', function () {
         return function () {
             var pub = {},

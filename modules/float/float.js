@@ -5,6 +5,7 @@ angular.module('bbc.float', [])
      * @ngdoc directive
      * @name bbc.float.directive:bbcFloat
      * @restrict A
+     * @element input
      *
      * @description
      * Convert and round any number to a float by given decimal places.

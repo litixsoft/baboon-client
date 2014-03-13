@@ -1,13 +1,17 @@
 <div class="beige-noise">
     <div class="p-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <textarea name="markdown-input" ng-model="markdown" rows="4" class="form-control"></textarea>
-            </div>
+        <div class="page-header">
+            <h1>Markdown</h1>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div bbc-markdown ng-model="markdown"></div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Example</div>
+            <div class="panel-body">
+                <div class="form-group">
+                        <textarea name="markdown-input" ng-model="markdown" rows="4" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                        <pre bbc-markdown ng-model="markdown"></pre>
+                </div>
             </div>
         </div>
     </div>
