@@ -18,19 +18,28 @@ angular.module('bbc.inline.edit', [])
             pub.model = {};
 
             /**
+             * @ngdoc method
+             * @name bbc.inline.edit.bbcInlineEdit#isUnchanged
+             * @methodOf bbc.inline.edit.bbcInlineEdit
+             *
+             * @description
              * Checks if the model has changes.
              *
-             * @returns {boolean}
+             * @returns {boolean} true if model is unchanged, otherwise false.
              */
             pub.isUnchanged = function () {
                 return angular.equals(pub.model, master);
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.inline.edit.bbcInlineEdit#reset
+             * @methodOf bbc.inline.edit.bbcInlineEdit
+             *
+             * @description
              * Resets the model to the master.
              *
-             * @param {object} model The current data.
-             * @param {object} form The angularjs formcontroller.
+             * @param {object} form The angularjs form controller.
              */
             pub.reset = function (form) {
                 if (form) {
@@ -46,6 +55,11 @@ angular.module('bbc.inline.edit', [])
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.inline.edit.bbcInlineEdit#setModel
+             * @methodOf bbc.inline.edit.bbcInlineEdit
+             *
+             * @description
              * Sets the model.
              *
              * @param {object} model The model.
@@ -56,6 +70,11 @@ angular.module('bbc.inline.edit', [])
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.inline.edit.bbcInlineEdit#populateValidation
+             * @methodOf bbc.inline.edit.bbcInlineEdit
+             *
+             * @description
              * Add server validation to form.
              *
              * @param {object} form The angularjs form controller.

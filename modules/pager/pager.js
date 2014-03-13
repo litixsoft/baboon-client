@@ -1,7 +1,16 @@
 'use strict';
 
 angular.module('bbc.pager', [])
-    .directive('bbcPager', function () {
+    /**
+     * @ngdoc directive
+     * @name bbc.pager.directive:bbcPager
+     * @restrict E
+     *
+     * @description
+     * Creates an pager for custom or server side paging.
+     *
+     */
+     .directive('bbcPager', function () {
         return {
             restrict: 'E',
             template: '<div class="row">' +

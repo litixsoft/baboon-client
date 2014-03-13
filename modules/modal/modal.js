@@ -59,23 +59,45 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             $scope.reset();
         };
     })
+    /**
+     * @ngdoc service
+     * @name bbc.modal.bbcModal
+     *
+     * @description
+     * Service displaying a modal popup window.
+     *
+     */
     .service('bbcModal', function ($rootScope, $modal) {
-        /**
-         * Opens the modal window.
-         *
-         * @param {string} headline The headline to show.
-         * @param {string} message The message to show.
-         * @param {string=} type The message type.
-         * @param {function=} callback The callback action when click the ok button in the modal window OR {object=} object with multible callbacks
-         * @param {string=} cssClass an optinal css class to manipulate the msgbox style
-         */
+
 
         var pub = {};
 
+        /**
+         * @ngdoc method
+         * @name bbc.modal.bbcModal#updateMsg
+         * @methodOf bbc.modal.bbcModal
+         *
+         * @description
+         * Updates a message on an open modal window.
+         *
+         * @param {string} id The id of the modal window.
+         * @param {string} message The message which should update.
+         */
         pub.updateMsg = function (id, message) {
             $rootScope.$emit(id, message);
         };
 
+        /**
+         * @ngdoc method
+         * @name bbc.modal.bbcModal#msgBox
+         * @methodOf bbc.modal.bbcModal
+         *
+         * @description
+         * Opens the modal window.
+         *
+         * @param {object} options An object with headline , message , message type, callback action when click the ok button in the modal window object with multiple callbacks,
+         *                         an optional css class to manipulate the msgbox style and the button text values.
+         */
         pub.msgBox = function (options) {
             var self = this;
 
@@ -102,6 +124,15 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             });
         };
 
+        /**
+         * @ngdoc method
+         * @name bbc.modal.bbcModal#reset
+         * @methodOf bbc.modal.bbcModal
+         *
+         * @description
+         * Closes the modal window.
+         *
+         */
         pub.reset = function () {
             this.modalInstance.dismiss('cancel');
         };

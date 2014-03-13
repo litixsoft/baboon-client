@@ -1,6 +1,16 @@
 'use strict';
 
 angular.module('bbc.sort', [])
+    /**
+     * @ngdoc directive
+     * @name bbc.sort.directive:bbcSort
+     * @restrict A
+     * @element input
+     *
+     * @description
+     * Directive for custom sorting or server side sorting.
+     *
+     */
     .directive('bbcSort', function () {
         return {
             restrict: 'E',

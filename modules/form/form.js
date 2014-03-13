@@ -18,9 +18,14 @@ angular.module('bbc.form', [])
             pub.model = {};
 
             /**
+             * @ngdoc method
+             * @name bbc.form.bbcForm#reset
+             * @methodOf bbc.form.bbcForm
+             *
+             * @description
              * Resets the model to the master.
              *
-             * @param {object} form The angularjs formcontroller.
+             * @param {object} form The angularjs form controller.
              */
             pub.reset = function (form) {
                 if (form) {
@@ -45,19 +50,29 @@ angular.module('bbc.form', [])
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.form.bbcForm#isUnchanged
+             * @methodOf bbc.form.bbcForm
+             *
+             * @description
              * Checks if the model has changes.
              *
-             * @returns {boolean}
+             * @returns {boolean} true if model is unchanged, otherwise false.
              */
             pub.isUnchanged = function () {
                 return angular.equals(pub.model, master);
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.form.bbcForm#hasLoadedModelFromCache
+             * @methodOf bbc.form.bbcForm
+             *
+             * @description
              * Tries to load the model from bbcCacheSrv.
              *
              * @param {string=} key The key of the model.
-             * @returns {boolean}
+             * @returns {boolean} true if model has loaded from cache, otherwise false.
              */
             pub.hasLoadedModelFromCache = function (key) {
                 if (key && bbcCacheSrv[key]) {
@@ -86,6 +101,11 @@ angular.module('bbc.form', [])
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.form.bbcForm#setModel
+             * @methodOf bbc.form.bbcForm
+             *
+             * @description
              * Sets the model.
              *
              * @param {object} model The model.
@@ -113,6 +133,11 @@ angular.module('bbc.form', [])
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.form.bbcForm#populateValidation
+             * @methodOf bbc.form.bbcForm
+             *
+             * @description
              * Add server validation to form.
              *
              * @param {object} form The angularjs form controller.
