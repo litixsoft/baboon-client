@@ -3,7 +3,7 @@
 angular.module('bbc.cache', [])
     /**
      * @ngdoc object
-     * @name bbc.cache.bbcCache
+     * @name bbc.cache.bbcCacheSrv
      *
      * @description
      * Simple client cache.

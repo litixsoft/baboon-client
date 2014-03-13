@@ -17,12 +17,12 @@ angular.module('bbc.float', [])
      <file name="index.html">
          <div ng-controller="FloatCtrl">
             <input type="text" bbc-float="2" ng-model="model" />
-            <pre>{{ model }}</pre>
+            <div>{{ model }}</div>
          </div>
      </file>
      <file name="scripts.js">
         angular.module('ngView', ['bbc.float']).controller('FloatCtrl', function ($scope) {
-                $scope.model = 1.235;
+            $scope.model = 1.235;
         });
      </file>
      </example>

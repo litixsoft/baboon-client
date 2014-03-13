@@ -4,6 +4,7 @@ angular.module('bbc.form', [])
     /**
      * @ngdoc object
      * @name bbc.form.bbcForm
+     * @requires bbc.cache.bbcCacheSrv
      *
      * @description
      * Form service which allow caching, reset the object and populates validation errors.

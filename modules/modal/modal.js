@@ -62,14 +62,14 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
     /**
      * @ngdoc service
      * @name bbc.modal.bbcModal
+     * @requires $rootScope
+     * @requires $modal
      *
      * @description
      * Service displaying a modal popup window.
      *
      */
     .service('bbcModal', function ($rootScope, $modal) {
-
-
         var pub = {};
 
         /**

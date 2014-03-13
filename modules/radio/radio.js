@@ -4,7 +4,7 @@ angular.module('bbc.radio', [])
     /**
      * @ngdoc directive
      * @name bbc.radio.directive:bbcRadio
-     * @restrict EA
+     * @restrict E
      *
      * @description
      * Creates a radiobutton with same look and feel on all browser.

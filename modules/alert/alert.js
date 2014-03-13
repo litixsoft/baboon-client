@@ -83,27 +83,71 @@ angular.module('bbc.alert', [])
             }
         };
 
-        // close alert message
+        /**
+         * @ngdoc method
+         * @name bbc.alert.bbcAlertSrv#close
+         * @methodOf bbc.alert.bbcAlertSrv
+         *
+         * @description
+         * Closes the alert message.
+         *
+         */
         pub.close = function () {
             close();
         };
 
-        // show info alert message
+        /**
+         * @ngdoc method
+         * @name bbc.alert.bbcAlertSrv#info
+         * @methodOf bbc.alert.bbcAlertSrv
+         *
+         * @description
+         * Shows an info alert message.
+         *
+         * @param {string} message The message to be displayed.
+         */
         pub.info = function (message) {
             show('info', message);
         };
 
-        // show success alert message
+        /**
+         * @ngdoc method
+         * @name bbc.alert.bbcAlertSrv#success
+         * @methodOf bbc.alert.bbcAlertSrv
+         *
+         * @description
+         * Shows a success alert message.
+         *
+         * @param {string} message The message to be displayed.
+         */
         pub.success = function (message) {
             show('success', message);
         };
 
-        // show warning alert message
+        /**
+         * @ngdoc method
+         * @name bbc.alert.bbcAlertSrv#warning
+         * @methodOf bbc.alert.bbcAlertSrv
+         *
+         * @description
+         * Shows a warning alert message.
+         *
+         * @param {string} message The message to be displayed.
+         */
         pub.warning = function (message) {
             show('warning', message);
         };
 
-        // show error alert message
+        /**
+         * @ngdoc method
+         * @name bbc.alert.bbcAlertSrv#danger
+         * @methodOf bbc.alert.bbcAlertSrv
+         *
+         * @description
+         * Shows a danger alert message.
+         *
+         * @param {string} message The message to be displayed.
+         */
         pub.danger = function (message) {
             show('danger', message);
         };
@@ -120,20 +164,20 @@ angular.module('bbc.alert', [])
      *
      * @example
      <example module="ngView">
-         <file name="index.html">
-             <div ng-controller="AlertCtrl">
-                <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
-                <button class='btn btn-default' ng-click="showAlert()">Show Info-Alert</button>
-             </div>
-         </file>
-         <file name="scripts.js">
-             angular.module('ngView', ['bbc.alert']).controller('AlertCtrl', function ($scope, bbcAlertSrv) {
-                $scope.bbcAlert = bbcAlertSrv;
-                $scope.showAlert = function() {
-                    $scope.bbcAlert.info('Info message from controller');
-                };
-             });
-         </file>
+     <file name="index.html">
+         <div ng-controller="AlertCtrl">
+             <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
+             <button class='btn btn-default' ng-click="showAlert()">Show Info-Alert</button>
+         </div>
+     </file>
+     <file name="scripts.js">
+        angular.module('ngView', ['bbc.alert']).controller('AlertCtrl', function ($scope, bbcAlertSrv) {
+            $scope.bbcAlert = bbcAlertSrv;
+            $scope.showAlert = function() {
+                $scope.bbcAlert.info('Info message from controller');
+            };
+         });
+     </file>
      </example>
      */
     .directive('bbcAlert', function () {

@@ -4,7 +4,7 @@ angular.module('bbc.sort', [])
     /**
      * @ngdoc directive
      * @name bbc.sort.directive:bbcSort
-     * @restrict A
+     * @restrict E
      * @element input
      *
      * @description

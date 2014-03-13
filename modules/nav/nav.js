@@ -1,6 +1,14 @@
 'use strict';
 
 angular.module('bbc.nav', [])
+    /**
+     * @ngdoc object
+     * @name bbc.nav.navigation
+     *
+     * @description
+     * Service for navigation handling and ui.
+     *
+     */
     .provider('navigation', function () {
 
         var currentApp;
