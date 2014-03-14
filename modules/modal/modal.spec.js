@@ -10,8 +10,8 @@ describe('bbcModal', function () {
 
         beforeEach(inject(function ($injector, $modal, $rootScope) {
             rootScope = $rootScope;
-            spyOn($modal, 'open').andReturn(fakeModal);
             service = $injector.get('bbcModal');
+            spyOn($modal, 'open').and.returnValue(fakeModal);
         }));
 
         it('should be initialized correctly ', function () {
@@ -166,7 +166,7 @@ describe('bbcModal', function () {
         }));
 
         it('should be trigger rootScope on event', function () {
-            spyOn(rootScope, '$on').andCallThrough();
+            spyOn(rootScope, '$on').and.callThrough();
             rootScope.$emit('modalExamplePopup', 'unit test');
             expect(rootScope.$on).toHaveBeenCalled();
             expect(scope.modalOptions.message).toBe('unit test');

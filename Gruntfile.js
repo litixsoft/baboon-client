@@ -159,24 +159,22 @@ module.exports = function (grunt) {
             options: {
                 dest: 'build/docs',
                 html5Mode: false,
+                title: 'Baboon Client',
+                //image: 'http://www.litixsoft.de/img/baboon-affe.png',
                 scripts: [
-                    /*'angular.js',*/
-                    'http://code.angularjs.org/1.2.14/angular.js',
+                    'angular.js',
+                    /*'http://code.angularjs.org/1.2.14/angular.js',
                     'http://code.angularjs.org/1.2.14/angular-route.min.js',
-                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',
-                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/alert/alert.js',
-                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/cache/cache.js',
-                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/checkbox/checkbox.js',
-                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/float/float.js',
-                    'https://rawgithub.com/coreyti/showdown/master/src/showdown.js',
-                    'https://rawgithub.com/litixsoft/baboon-client/v0.4/modules/markdown/markdown.js'
+                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',*/
+                    'docs/js/sample-not-for-production.js'
                 ],
                 styles: [
-                    'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
+                    /*'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',*/
+                    'docs/css/sample.css'
                 ]
             },
             api: {
-                src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js'],
+                src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js', 'docs/content/api/*.ngdoc'],
                 title: 'API Reference'
             }
         },
@@ -185,10 +183,35 @@ module.exports = function (grunt) {
                 keepalive: true
             },
             server: {}
+        },
+        uglify: {
+            options: {
+                beautify: false,
+                mangle: false
+            },
+            doc: {
+                files: { 'docs/js/sample-not-for-production.js': [
+                    'modules/**/*.js',
+                    'bower_components/showdown/src/showdown.js',
+                    '!modules/**/*.spec.js',
+                    '!modules/**/*.tpl.js'
+                ]}
+            }
+        },
+        less: {
+            doc: {
+                options: {
+                    combine: true,
+                    cleancss: true
+                },
+                files: {
+                    'docs/css/sample.css': 'modules/**/*.less'
+                }
+            }
         }
     });
 
-    grunt.registerTask('doc', ['clean:docs', 'ngdocs', 'connect']);
+    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'connect']);
 
     grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
         grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');

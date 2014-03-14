@@ -221,7 +221,7 @@ describe('bbcPager', function () {
             elementScope.$digest();
 
             expect(spy).toHaveBeenCalled();
-            expect(spy.calls.length).toEqual(1);
+            expect(spy.calls.count()).toEqual(1);
         });
 
         it('should do nothing the data when the pageSize changes with same value', function () {
@@ -247,7 +247,7 @@ describe('bbcPager', function () {
             expect(elementScope.numberOfPages()).toBe(2);
             expect(elementScope.currentPage).toBe(2);
             expect(spy).toHaveBeenCalled();
-            expect(spy.calls.length).toEqual(2);
+            expect(spy.calls.count()).toEqual(2);
         });
 
         it('should not refresh the data when the count changes but the current page is smaller than the number of pages', function () {
@@ -257,7 +257,7 @@ describe('bbcPager', function () {
             elementScope.count = 7;
 
             expect(spy).not.toHaveBeenCalled();
-            expect(spy.calls.length).toEqual(0);
+            expect(spy.calls.count()).toEqual(0);
         });
 
         it('should refresh the data when the current page is changed', function () {
@@ -272,7 +272,7 @@ describe('bbcPager', function () {
             elementScope.$digest();
 
             expect(spy).toHaveBeenCalled();
-            expect(spy.calls.length).toEqual(1);
+            expect(spy.calls.count()).toEqual(1);
         });
     });
 });
