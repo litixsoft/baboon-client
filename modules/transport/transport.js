@@ -93,8 +93,14 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 });
 
                 // socket error event
-                socket.on('error', function () {
-                    $log.warn('socket: error');
+                socket.on('error', function (error) {
+                    $log.error('socket: ', error);
+
+                    if(error === 'handshake unauthorized') {
+                        $log.warn('the transmitted session no longer exists, trigger $sessionInactive event.');
+                        $rootScope.$emit('$sessionInactive');
+                    }
+
                     $rootScope.socketEnabled = false;
                 });
             };

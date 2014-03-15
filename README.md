@@ -46,6 +46,14 @@ Test baboon-client with grunt.
     $ bower install
     $ grunt test
 
+Alternate you can use the update script
+
+    $ git clone https://github.com/litixsoft/baboon-client.git
+    $ cd baboon-client
+    $ ./update.sh // in windows use update.bat
+    $ grunt test
+
+
 Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
