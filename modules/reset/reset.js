@@ -4,6 +4,9 @@ angular.module('bbc.reset', [])
     /**
      * @ngdoc directive
      * @name bbc.reset.directive:bbcReset
+     * @requires $compile
+     * @requires $timeout
+     *
      * @restrict A
      * @element input
      *

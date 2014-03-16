@@ -12,13 +12,18 @@ angular.module('bbc.radio', [])
      *
      * @example
      <example module="ngView">
-         <file name="index1.html">
+         <file name="index.html">
             <div ng-controller="RadioCtrl">
-                 <bbc-radio ng-model="myModel" name="myGroup" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
-                 <bbc-radio ng-model="myModel" name="myGroup" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
-                 <bbc-radio ng-model="myModel" name="myGroup" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
-                 <button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
-                 <pre>Value: {{ myModel }}</pre>
+                 <bbc-radio ng-model="myModel" name="myGroup" label="1" value="1"
+                            ng-disabled="isDisabled"></bbc-radio>
+                 <bbc-radio ng-model="myModel" name="myGroup" label="2" value="2"
+                            ng-disabled="isDisabled"></bbc-radio>
+                 <bbc-radio ng-model="myModel" name="myGroup" label="3" value="3"
+                            ng-disabled="isDisabled"></bbc-radio>
+                 <button class="btn btn-default" ng-click="clickMe()">
+                    {{ isDisabled ? 'Enable' : 'Disable' }}
+                 </button>
+                 <div>Value: {{ myModel }}</div>
             </div>
         </file>
          <file name="scripts.js">
