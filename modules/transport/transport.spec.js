@@ -22,17 +22,17 @@ describe('bbcTransport', function () {
             $transportProvider = transportProvider;
         }));
 
-        beforeEach(inject(function($rootScope, $http, Socket, $window, $log, $controller){
-            $rootScope = {};
-            $http = {};
-            Socket = {};
-            $window = {};
-            $log = {};
-
-            console.log($controller);
-
-            $transportProvider('.$get', {$rootScope:$rootScope, $http:$http, Socket:Socket, $window:$window, $log:$log});
-        }));
+//        beforeEach(inject(function($rootScope, $http, Socket, $window, $log, $controller){
+//            $rootScope = {};
+//            $http = {};
+//            Socket = {};
+//            $window = {};
+//            $log = {};
+//
+//            console.log($controller);
+//
+//            $transportProvider('.$get', {$rootScope:$rootScope, $http:$http, Socket:Socket, $window:$window, $log:$log});
+//        }));
 
         it('should set the config', function () {
             inject(function (transport) {
