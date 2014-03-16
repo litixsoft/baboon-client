@@ -61,7 +61,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
     })
     /**
      * @ngdoc service
-     * @name bbc.modal.bbcModal
+     * @name bbc.modal.$bbcModal
      * @requires $rootScope
      * @requires $modal
      *
@@ -69,13 +69,13 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
      * Service displaying a modal popup window.
      *
      */
-    .service('bbcModal', function ($rootScope, $modal) {
+    .service('$bbcModal', function ($rootScope, $modal) {
         var pub = {};
 
         /**
          * @ngdoc method
-         * @name bbc.modal.bbcModal#updateMsg
-         * @methodOf bbc.modal.bbcModal
+         * @name bbc.modal.$bbcModal#updateMsg
+         * @methodOf bbc.modal.$bbcModal
          *
          * @description
          * Updates a message on an open modal window.
@@ -89,8 +89,8 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
 
         /**
          * @ngdoc method
-         * @name bbc.modal.bbcModal#msgBox
-         * @methodOf bbc.modal.bbcModal
+         * @name bbc.modal.$bbcModal#msgBox
+         * @methodOf bbc.modal.$bbcModal
          *
          * @description
          * Opens the modal window.
@@ -126,8 +126,8 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
 
         /**
          * @ngdoc method
-         * @name bbc.modal.bbcModal#reset
-         * @methodOf bbc.modal.bbcModal
+         * @name bbc.modal.$bbcModal#reset
+         * @methodOf bbc.modal.$bbcModal
          *
          * @description
          * Closes the modal window.

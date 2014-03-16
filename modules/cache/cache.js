@@ -3,7 +3,7 @@
 angular.module('bbc.cache', [])
     /**
      * @ngdoc object
-     * @name bbc.cache.bbcCacheSrv
+     * @name bbc.cache.$bbcCache
      *
      * @description
      * Simple client cache.
@@ -26,19 +26,19 @@ angular.module('bbc.cache', [])
             </div>
         </file>
         <file name="scripts.js">
-            angular.module('ngView', ['bbc.cache']).controller('CacheCtrl', function ($scope, bbcCacheSrv) {
-                $scope.bbcCache = bbcCacheSrv;
+            angular.module('ngView', ['bbc.cache']).controller('CacheCtrl', function ($scope, $bbcCache) {
+                $scope.bbcCache = $bbcCache;
                 $scope.addToCache = function(user) {
-                    bbcCacheSrv['_user'] = user;
+                    $bbcCache['_user'] = user;
                 };
 
                 $scope.clearCache = function() {
-                    delete bbcCacheSrv['_user'];
+                    delete $bbcCache['_user'];
                 };
             });
         </file>
      </example>
      */
-    .factory('bbcCacheSrv', function () {
+    .factory('$bbcCache', function () {
         return {};
     });

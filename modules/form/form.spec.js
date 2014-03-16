@@ -8,10 +8,10 @@ describe('bbc form service', function () {
         module('bbc.form');
     });
 
-    describe('bbcForm', function () {
+    describe('$bbcForm', function () {
         beforeEach(function () {
             inject(function ($injector) {
-                service = $injector.get('bbcForm')('test', 'id');
+                service = $injector.get('$bbcForm')('test', 'id');
             });
         });
 
@@ -43,7 +43,7 @@ describe('bbc form service', function () {
                 expect(service.model).toEqual(data);
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
 
                     expect(cache[1]).toEqual(data);
                     expect(cache['1_Master']).toEqual(data);
@@ -59,7 +59,7 @@ describe('bbc form service', function () {
                 expect(service.model).toEqual(data);
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
 
                     expect(cache[1]).toBeUndefined();
                     expect(cache['1_Master']).toBeUndefined();
@@ -70,7 +70,7 @@ describe('bbc form service', function () {
                 var data = {name: 'wayne', age: 99};
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
 
                     cache.test = 123;
                     service.setModel(data, true);
@@ -96,7 +96,7 @@ describe('bbc form service', function () {
                 expect(service.model).toEqual({id: 1, name: 'wayne', age: 99});
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
 
                     expect(cache[1]).toEqual({id: 1, name: 'wayne', age: 99});
                 });
@@ -138,7 +138,7 @@ describe('bbc form service', function () {
                 expect(service.model).toEqual({name: 'wayne', age: 99});
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
 
                     expect(cache.test).toEqual({name: 'wayne', age: 99});
                 });
@@ -207,7 +207,7 @@ describe('bbc form service', function () {
 
                 service.setModel(data);
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
                     delete cache['1_Master'];
                 });
                 var inCache = service.hasLoadedModelFromCache('1');
@@ -216,10 +216,10 @@ describe('bbc form service', function () {
         });
     });
 
-    describe('bbcForm partially initialized', function () {
+    describe('$bbcForm partially initialized', function () {
         beforeEach(function () {
             inject(function ($injector) {
-                service = $injector.get('bbcForm')('test');
+                service = $injector.get('$bbcForm')('test');
             });
         });
 
@@ -234,7 +234,7 @@ describe('bbc form service', function () {
                 expect(service.model).toEqual({id: 1, name: 'wayne', age: 99});
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
                     expect(cache[1]).not.toEqual({id: 1, name: 'wayne', age: 99});
                 });
             });
@@ -251,7 +251,7 @@ describe('bbc form service', function () {
                 expect(service.model).toEqual({id: 1, name: 'wayne', age: 99});
 
                 inject(function ($injector) {
-                    var cache = $injector.get('bbcCacheSrv');
+                    var cache = $injector.get('$bbcCache');
                     expect(cache['undefined']).not.toEqual({id: 1, name: 'wayne', age: 99});
                 });
             });

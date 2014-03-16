@@ -39,8 +39,8 @@ angular.module('example', [
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
     })
-    .controller('AlertCtrl', function ($scope, bbcAlertSrv) {
-        $scope.bbcAlert = bbcAlertSrv;
+    .controller('AlertCtrl', function ($scope, $bbcAlert) {
+        $scope.bbcAlert = $bbcAlert;
         $scope.showAlert = function() {
             $scope.bbcAlert.danger('Info message from controller');
         };
@@ -104,8 +104,8 @@ angular.module('example', [
 
         $scope.sort($scope.sortOpts);
     })
-    .controller('InlineEditCtrl', function ($scope, bbcInlineEdit) {
-        $scope.inlineEdit = bbcInlineEdit();
+    .controller('InlineEditCtrl', function ($scope, $bbcInlineEdit) {
+        $scope.inlineEdit = $bbcInlineEdit();
 
         $scope.items = [
             { _id : 1, name: 'John Doe', city: 'New York', country: 'USA' },
@@ -126,7 +126,7 @@ angular.module('example', [
     })
     .controller('ResetCtrl', function () {
     })
-    .controller('ModalCtrl', function ($scope, bbcModal) {
+    .controller('ModalCtrl', function ($scope, $bbcModal) {
         $scope.message = '';
 
         $scope.popupYesNo = function(){
@@ -145,7 +145,7 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
         };
 
         $scope.popupOkClose = function(){
@@ -164,7 +164,7 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
         };
 
         $scope.popupModal = function(){
@@ -180,7 +180,7 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
         };
 
         $scope.popupModalUpdate = function(){
@@ -197,10 +197,10 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
 
             setTimeout(function(){
-                bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
+                $bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
             },3000);
         };
     })

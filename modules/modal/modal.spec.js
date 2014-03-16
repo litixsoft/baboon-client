@@ -1,7 +1,7 @@
 'use strict';
 
-describe('bbcModal', function () {
-    describe('bbcModal service', function () {
+describe('$bbcModal', function () {
+    describe('$bbcModal service', function () {
         var rootScope, service;
         var fakeModal = modalMock;
 
@@ -10,7 +10,7 @@ describe('bbcModal', function () {
 
         beforeEach(inject(function ($injector, $modal, $rootScope) {
             rootScope = $rootScope;
-            service = $injector.get('bbcModal');
+            service = $injector.get('$bbcModal');
             spyOn($modal, 'open').and.returnValue(fakeModal);
         }));
 
@@ -173,7 +173,7 @@ describe('bbcModal', function () {
         });
 
         it('should be call resolve from modal.open config', inject(function ($injector) {
-            var service = $injector.get('bbcModal');
+            var service = $injector.get('$bbcModal');
             service.msgBox({});
         }));
     });

@@ -3,7 +3,7 @@
 angular.module('bbc.alert', [])
     /**
      * @ngdoc object
-     * @name bbc.alert.bbcAlertSrv
+     * @name bbc.alert.$bbcAlert
      * @requires $log
      * @requires $timeout
      *
@@ -11,7 +11,7 @@ angular.module('bbc.alert', [])
      * Service for angular-ui alert handling.
      *
      */
-    .factory('bbcAlertSrv', function ($log, $timeout) {
+    .factory('$bbcAlert', function ($log, $timeout) {
         var pub = {};
 
         // timeout for show alert box.
@@ -85,8 +85,8 @@ angular.module('bbc.alert', [])
 
         /**
          * @ngdoc method
-         * @name bbc.alert.bbcAlertSrv#close
-         * @methodOf bbc.alert.bbcAlertSrv
+         * @name bbc.alert.$bbcAlert#close
+         * @methodOf bbc.alert.$bbcAlert
          *
          * @description
          * Closes the alert message.
@@ -98,8 +98,8 @@ angular.module('bbc.alert', [])
 
         /**
          * @ngdoc method
-         * @name bbc.alert.bbcAlertSrv#info
-         * @methodOf bbc.alert.bbcAlertSrv
+         * @name bbc.alert.$bbcAlert#info
+         * @methodOf bbc.alert.$bbcAlert
          *
          * @description
          * Shows an info alert message.
@@ -112,8 +112,8 @@ angular.module('bbc.alert', [])
 
         /**
          * @ngdoc method
-         * @name bbc.alert.bbcAlertSrv#success
-         * @methodOf bbc.alert.bbcAlertSrv
+         * @name bbc.alert.$bbcAlert#success
+         * @methodOf bbc.alert.$bbcAlert
          *
          * @description
          * Shows a success alert message.
@@ -126,8 +126,8 @@ angular.module('bbc.alert', [])
 
         /**
          * @ngdoc method
-         * @name bbc.alert.bbcAlertSrv#warning
-         * @methodOf bbc.alert.bbcAlertSrv
+         * @name bbc.alert.$bbcAlert#warning
+         * @methodOf bbc.alert.$bbcAlert
          *
          * @description
          * Shows a warning alert message.
@@ -140,8 +140,8 @@ angular.module('bbc.alert', [])
 
         /**
          * @ngdoc method
-         * @name bbc.alert.bbcAlertSrv#danger
-         * @methodOf bbc.alert.bbcAlertSrv
+         * @name bbc.alert.$bbcAlert#danger
+         * @methodOf bbc.alert.$bbcAlert
          *
          * @description
          * Shows a danger alert message.
@@ -171,8 +171,8 @@ angular.module('bbc.alert', [])
          </div>
      </file>
      <file name="scripts.js">
-        angular.module('ngView', ['bbc.alert']).controller('AlertCtrl', function ($scope, bbcAlertSrv) {
-            $scope.bbcAlert = bbcAlertSrv;
+        angular.module('ngView', ['bbc.alert']).controller('AlertCtrl', function ($scope, $bbcAlert) {
+            $scope.bbcAlert = $bbcAlert;
             $scope.showAlert = function() {
                 $scope.bbcAlert.info('Info message from controller');
             };

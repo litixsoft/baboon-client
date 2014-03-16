@@ -3,13 +3,13 @@
 angular.module('bbc.inline.edit', [])
     /**
      * @ngdoc object
-     * @name bbc.inline.edit.bbcInlineEdit
+     * @name bbc.inline.edit.$bbcInlineEdit
      *
      * @description
      * Service for editing which allow reset the object and populates validation errors.
      *
      */
-    .factory('bbcInlineEdit', function () {
+    .factory('$bbcInlineEdit', function () {
         return function () {
             var pub = {},
                 master = {};
@@ -19,8 +19,8 @@ angular.module('bbc.inline.edit', [])
 
             /**
              * @ngdoc method
-             * @name bbc.inline.edit.bbcInlineEdit#isUnchanged
-             * @methodOf bbc.inline.edit.bbcInlineEdit
+             * @name bbc.inline.edit.$bbcInlineEdit#isUnchanged
+             * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
              * Checks if the model has changes.
@@ -33,8 +33,8 @@ angular.module('bbc.inline.edit', [])
 
             /**
              * @ngdoc method
-             * @name bbc.inline.edit.bbcInlineEdit#reset
-             * @methodOf bbc.inline.edit.bbcInlineEdit
+             * @name bbc.inline.edit.$bbcInlineEdit#reset
+             * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
              * Resets the model to the master.
@@ -56,8 +56,8 @@ angular.module('bbc.inline.edit', [])
 
             /**
              * @ngdoc method
-             * @name bbc.inline.edit.bbcInlineEdit#setModel
-             * @methodOf bbc.inline.edit.bbcInlineEdit
+             * @name bbc.inline.edit.$bbcInlineEdit#setModel
+             * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
              * Sets the model.
@@ -71,8 +71,8 @@ angular.module('bbc.inline.edit', [])
 
             /**
              * @ngdoc method
-             * @name bbc.inline.edit.bbcInlineEdit#populateValidation
-             * @methodOf bbc.inline.edit.bbcInlineEdit
+             * @name bbc.inline.edit.$bbcInlineEdit#populateValidation
+             * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
              * Add server validation to form.

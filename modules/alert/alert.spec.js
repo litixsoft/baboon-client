@@ -7,11 +7,11 @@ describe('bbc.alert', function () {
         module('bbc.alert');
 
         inject(function ($injector) {
-            service = $injector.get('bbcAlertSrv');
+            service = $injector.get('$bbcAlert');
         });
     });
 
-    describe('AlertSrv', function() {
+    describe('$bbcAlert', function() {
         it('should be initialized correctly ', function () {
             expect(typeof service).toBe('object');
             expect(typeof service.close).toBe('function');
