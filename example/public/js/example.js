@@ -237,9 +237,15 @@ angular.module('example', [
         $scope.raiseError = false;
 
         transport.forward('connect', $scope);
+        transport.forward('disconnect', $scope);
 
         $scope.$on('socket:connect', function() {
             $scope.messages.push({message: 'CONNECT:  connection successfully'});
+        });
+
+        $scope.$on('socket:disconnect', function() {
+            $scope.messages.push({message: 'CONNECT: connection lost'});
+            $rootScope.socketEnabled = false;
         });
 
         $scope.setSocketState = function(){

@@ -8,7 +8,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
             });
         };
     })
-    .provider('$bbcTransport', function () {
+    .provider('transport', function () {
 
         var config = {};
 
