@@ -10,16 +10,16 @@ describe('bbcTransport', function () {
         connectTimeout:555
     };
 
-    describe('Provider: transport', function () {
+    describe('Provider: $bbcTransport', function () {
 
-        var $transportProvider, $transport;
+        var transportProvider, transport;
 
         // get transport
         beforeEach(module('bbc.transport'));
 
         // get transport provider
-        beforeEach(module(function (transportProvider) {
-            $transportProvider = transportProvider;
+        beforeEach(module(function ($bbcTransportProvider) {
+            transportProvider = $bbcTransportProvider;
         }));
 
 //        beforeEach(inject(function($rootScope, $http, Socket, $window, $log, $controller){
@@ -35,10 +35,10 @@ describe('bbcTransport', function () {
 //        }));
 
         it('should set the config', function () {
-            inject(function (transport) {
-                $transportProvider.set(config);
+            inject(function ($bbcTransport) {
+                transportProvider.set(config);
 
-                $transport = transport;
+                transport = $bbcTransport;
             });
 
         });
