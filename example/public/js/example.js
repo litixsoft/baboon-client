@@ -16,7 +16,7 @@ angular.module('example', [
         'bbc.integer',
         'bbc.float'
     ])
-    .config(function ($routeProvider, $locationProvider, transportProvider) {
+    .config(function ($routeProvider, $locationProvider, $bbcTransportProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
@@ -33,7 +33,7 @@ angular.module('example', [
             .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .otherwise({ redirectTo: '/' });
-        transportProvider.set();
+        $bbcTransportProvider.set();
 //        transportProvider.set({useSocket:false, connectTimeout:2000});
     })
     .controller('ExampleCtrl', function ($scope) {
@@ -231,13 +231,13 @@ angular.module('example', [
             return route === $location.path();
         };
     })
-    .controller('TransportCtrl', function ($rootScope, $scope, $location, transport) {
+    .controller('TransportCtrl', function ($rootScope, $scope, $location, $bbcTransport) {
 
         $scope.messages = [];
         $scope.raiseError = false;
 
-        transport.forward('connect', $scope);
-        transport.forward('disconnect', $scope);
+        $bbcTransport.forward('connect', $scope);
+        $bbcTransport.forward('disconnect', $scope);
 
         $scope.$on('socket:connect', function() {
             $scope.messages.push({message: 'CONNECT:  connection successfully'});
@@ -256,7 +256,7 @@ angular.module('example', [
 //            socket.disconnect();
 //        });
 //
-        transport.on('news', function (data) {
+        $bbcTransport.on('news', function (data) {
             $scope.messages.push({message: 'NEWS: ' + data});
         });
 
@@ -267,7 +267,7 @@ angular.module('example', [
         $scope.send = function() {
             $scope.messages.push({class:'sent', message: 'SENT: ' + $scope.message});
 
-            transport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
+            $bbcTransport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
                 if(error){
                     $scope.messages.push({class: 'error', message: error.data});
                 } else if(result){
