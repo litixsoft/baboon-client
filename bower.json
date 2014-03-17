@@ -37,7 +37,10 @@
   "homepage": "https://github.com/litixsoft/baboon-client",
   "ignore": [
     ".reports",
+    ".tmp",
+    ".dist",
     "bower_components",
+    "docs",
     "example",
     "modules/**/*.spec.js",
     "modules/**/*.html",
@@ -47,7 +50,8 @@
     "Gruntfile.js",
     "package.json",
     "server.js",
-    "update.*"
+    "update.*",
+    "validate-commit-msg.js"
   ],
   "dependencies": {
     "angular": "1.2.14",
