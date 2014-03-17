@@ -109,7 +109,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
             if(config.useSocket) {
 
                 // create socket instance
-                socket = new Socket(config.host, config.timeout);
+                socket = new Socket(config.host, config.connectTimeout);
 
                 // register events
                 registerSocketEvents(socket);
