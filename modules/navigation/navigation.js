@@ -1,23 +1,28 @@
 'use strict';
 
 angular.module('bbc.navigation', [])
-/**
- * @ngdoc object
- * @name bbc.navigation.$bbcNavigation
- *
- * @description
- * Service for navigation handling and ui.
- *
- */
+    /**
+     * @ngdoc object
+     * @name bbc.navigation.$bbcNavigation
+     *
+     * @description
+     * Service for navigation handling and ui.
+     *
+     */
     .provider('$bbcNavigation', function () {
 
         var app;
         var route;
 
         /**
+         * @ngdoc method
+         * @name bbc.navigation.$bbcNavigation#set
+         * @methodOf bbc.navigation.$bbcNavigation
+         *
+         * @description
          * Set navigation with app and route of app
          *
-         * @param {Object} options - The options of navigation
+         * @param {object} options The options of navigation
          */
         this.set = function (options) {
             app = options.app;
@@ -28,63 +33,98 @@ angular.module('bbc.navigation', [])
             var pub = {};
 
             /**
-             * Get the current app
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getApp
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @returns {*}
+             * @description
+             * Gets the current app.
+             *
+             * @returns {object} The current app.
              */
             pub.getApp = function () {
                 return app;
             };
 
             /**
-             * Get the current app route
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getRoute
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @returns {*}
+             * @description
+             * Gets the current app route.
+             *
+             * @returns {object} The current app route.
              */
             pub.getRoute = function () {
                 return route;
             };
 
             /**
-             * Get navigation tree
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getTree
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @param callback
+             * @description
+             * Gets the navigation tree.
+             *
+             * @param {Function} callback The callback function.
              */
             pub.getTree = function (callback) {
                 $bbcTransport.emit('/api/navigation/getTree',{current: app}, callback);
             };
 
             /**
-             * Get navigation flat list
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getList
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @param callback
+             * @description
+             * Gets the navigation flat list.
+             *
+             * @param {Function} callback The callback function.
              */
             pub.getList = function (callback) {
                 $bbcTransport.emit('/api/navigation/getList',{current: app}, callback);
             };
 
             /**
-             * Get toplevel of navigation
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getTopList
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @param callback
+             * @description
+             * Gets the toplevel of navigation.
+             *
+             * @param {Function} callback The callback function.
              */
             pub.getTopList = function (callback) {
                 $bbcTransport.emit('/api/navigation/getTopList',{current: app}, callback);
             };
 
             /**
-             * Get all sub links from application as tree
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getSubTree
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @param callback
+             * @description
+             * Gets all sub links from application as tree.
+             *
+             * @param {Function} callback The callback function.
              */
             pub.getSubTree = function (callback) {
                 $bbcTransport.emit('/api/navigation/getSubTree',{current: app, top: route}, callback);
             };
 
             /**
-             * Get all sub links from application as list
+             * @ngdoc method
+             * @name bbc.navigation.$bbcNavigation#getSubList
+             * @methodOf bbc.navigation.$bbcNavigation
              *
-             * @param callback
+             * @description
+             * Get all sub links from application as list.
+             *
+             * @param {Function} callback The callback function.
              */
             pub.getSubList = function (callback) {
                 $bbcTransport.emit('/api/navigation/getSubList',{current: app, top: route}, callback);
