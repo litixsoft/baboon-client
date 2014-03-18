@@ -9,7 +9,7 @@ describe('bbcTransport', function () {
         beforeEach(module('bbc.transport'));
 
         beforeEach(function () {
-            mockSocketFactory = function(){
+            mockSocketFactory = function () {
                 return {};
             };
 
@@ -40,7 +40,7 @@ describe('bbcTransport', function () {
                 service = $injector.get('$bbcSocket');
             });
 
-            expect(function(){
+            expect(function () {
                 service.createSocket();
             }).toThrow(new Error('Param "host" and "connectTimeout" are required'));
         });
@@ -50,7 +50,7 @@ describe('bbcTransport', function () {
                 service = $injector.get('$bbcSocket');
             });
 
-            expect(function(){
+            expect(function () {
                 service.createSocket({}, 100);
             }).toThrow(new Error('Param "host" is required and must be of type string!'));
         });
@@ -60,7 +60,7 @@ describe('bbcTransport', function () {
                 service = $injector.get('$bbcSocket');
             });
 
-            expect(function(){
+            expect(function () {
                 service.createSocket('host', 'host');
             }).toThrow(new Error('Param "connectTimeout" is required and must be of type number and greater than 0!'));
         });
@@ -70,7 +70,7 @@ describe('bbcTransport', function () {
                 service = $injector.get('$bbcSocket');
             });
 
-            expect(function(){
+            expect(function () {
                 service.createSocket('host', -6);
             }).toThrow(new Error('Param "connectTimeout" is required and must be of type number and greater than 0!'));
         });
@@ -78,7 +78,7 @@ describe('bbcTransport', function () {
 
     describe('Provider: $bbcTransport', function () {
 
-        var transportProvider, transport, mockSocket, mockRootScope, mockLog;
+        var transportProvider, transport, mockSocket, mockRootScope, mockLog, mockHttp;
 
         // init module
         beforeEach(module('bbc.transport'));
@@ -105,19 +105,49 @@ describe('bbcTransport', function () {
                             this.listeners[event] = callback;
                         },
                         emit: function (event, data, callback) {
+                            if (event === 'error') {
+                                this.listeners[event]('handshake unauthorized');
+                            }
                             if (this.listeners[event]) {
                                 this.listeners[event](null, data);
                             }
 
-                            if (callback) {
-                                callback(null, data);
+                            if (event === 'callbackErrorTest') {
+                                callback(event);
+                                return;
                             }
+
+                            callback(null, data);
+                        },
+                        forward: function () {
+                            return null;
                         }
                     };
                 }
             };
 
-            mockRootScope = {};
+            mockRootScope = {
+                $emit: function () {}
+            };
+
+            mockHttp = {
+                post: function () {
+                    return this;
+                },
+                success: function (callback) {
+                    callback({});
+                    return this;
+                },
+                error: function (callback) {
+                    callback({
+                        data: {},
+                        status: {},
+                        headers: {},
+                        config: {}
+                    });
+                    return this;
+                }
+            };
 
             mockLog = {
                 message: '',
@@ -138,6 +168,7 @@ describe('bbcTransport', function () {
                 $provide.value('$bbcSocket', mockSocket);
                 $provide.value('$rootScope', mockRootScope);
                 $provide.value('$log', mockLog);
+                $provide.value('$http', mockHttp);
             });
         });
 
@@ -157,14 +188,24 @@ describe('bbcTransport', function () {
         }));
 
         it('should call set() without params', function () {
-//            console.log(transportProvider);
-//            transportProvider.set();
-
             inject(function ($bbcTransport) {
-//                console.log(transportProvider);
                 transportProvider.set();
-
                 transport = $bbcTransport;
+            });
+        });
+
+        it('should log when connecting is called', function (done) {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            mockRootScope.socketEnabled = true;
+            expect(mockLog.message).toEqual('');
+
+            transport.emit('connecting', {}, function () {
+                expect(mockLog.message).toEqual('socket: connecting to ');
+
+                done();
             });
         });
 
@@ -178,6 +219,36 @@ describe('bbcTransport', function () {
 
             transport.emit('connect', {}, function () {
                 expect(mockLog.message).toEqual('socket: connected');
+
+                done();
+            });
+        });
+
+        it('should log when disconnect is called', function (done) {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            mockRootScope.socketEnabled = true;
+            expect(mockLog.message).toEqual('');
+
+            transport.emit('disconnect', {}, function () {
+                expect(mockLog.message).toEqual('socket: disconnected');
+
+                done();
+            });
+        });
+
+        it('should log when error is called', function (done) {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            mockRootScope.socketEnabled = true;
+            expect(mockLog.message).toEqual('');
+
+            transport.emit('error', {}, function () {
+                expect(mockLog.message).toEqual('socket: handshake unauthorizedthe transmitted session no longer exists, trigger $sessionInactive event.socket: null');
 
                 done();
             });
@@ -243,16 +314,144 @@ describe('bbcTransport', function () {
             });
         });
 
-        it('should add and remove the listener', function (done) {
+        it('should process error if callback contains error', function (done) {
             inject(function ($bbcTransport) {
                 transport = $bbcTransport;
             });
 
             mockRootScope.socketEnabled = true;
 
-            transport.addListener('test', null);
-            transport.removeListener('test', function () {
+            transport.emit('callbackErrorTest', {}, function (error) {
+                expect(error).toBeDefined();
+                expect(error.data).toBeDefined();
+                expect(error.data).toEqual('callbackErrorTest');
+
                 done();
+            });
+        });
+
+        it('should throw error if emit is called with empty "event" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            expect(function () {
+                transport.emit('', {});
+            }).toThrow(new Error('Param "event" is required and must be of type string!'));
+        });
+
+        it('should throw error if emit is called with wrong type of "event" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            expect(function () {
+                transport.emit({}, {});
+            }).toThrow(new Error('Param "event" is required and must be of type string!'));
+        });
+
+        it('should throw error if emit is called with wrong type of "callback" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            expect(function () {
+                transport.emit('test', {});
+            }).toThrow(new Error('Param "callback" is required and must be of type function!'));
+        });
+
+        it('should throw error if emit is called with wrong type of "data" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            expect(function () {
+                transport.emit('test', '', {});
+            }).toThrow(new Error('Param "data" parameter must be of type object!'));
+        });
+
+        it('should add and remove the listener', function (done) {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            transport.addListener('test2', {});
+            transport.removeListener('test2', function () {
+                transport.removeListener('test2', function () {
+                    done();
+                });
+            });
+        });
+
+        it('should not add and not remove the listener if "config.useSocket" is false', function () {
+            inject(function ($bbcTransport) {
+                var config = {
+                    protocol: 'http',
+                    hostname: 'localhost2',
+                    port: 4656,
+                    useSocket: false,
+                    connectTimeout: 555
+                };
+
+                transportProvider.set(config);
+                transport = $bbcTransport;
+            });
+
+            transport.addListener('test', null);
+            transport.removeListener('test', null);
+        });
+
+        it('should forward an event', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            transport.forward('test', {});
+        });
+
+        it('should not forward an event if "config.useSocket" is false', function () {
+            inject(function ($bbcTransport) {
+                var config = {
+                    protocol: 'http',
+                    hostname: 'localhost2',
+                    port: 4656,
+                    useSocket: false,
+                    connectTimeout: 555
+                };
+
+                transportProvider.set(config);
+                transport = $bbcTransport;
+            });
+
+            transport.forward('test', {});
+        });
+
+        it('should not register an event if "config.useSocket" is false', function () {
+            inject(function ($bbcTransport) {
+                var config = {
+                    protocol: 'http',
+                    hostname: 'localhost2',
+                    port: 4656,
+                    useSocket: false,
+                    connectTimeout: 555
+                };
+
+                transportProvider.set(config);
+                transport = $bbcTransport;
+            });
+
+            transport.on('test', {});
+        });
+
+        it('should use http if "socketEnabled" is false', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            mockRootScope.socketEnabled = false;
+
+            transport.emit('callbackErrorTest', {}, function () {
+                expect(mockRootScope.isLoading).toBeFalsy();
             });
         });
     });

@@ -159,7 +159,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
                 // socket error event
                 socket.on('error', function (error) {
-                    $log.error('socket: ', error);
+                    $log.error('socket: ' + error, error);
 
                     if(error === 'handshake unauthorized') {
                         $log.warn('the transmitted session no longer exists, trigger $sessionInactive event.');
@@ -205,14 +205,14 @@ angular.module('bbc.transport', ['btford.socket-io'])
                     throw new TypeError('Param "event" is required and must be of type string!');
                 }
 
-                // check callback
-                if (typeof callback !== 'function') {
-                    throw new TypeError('Param "callback" is required and must be of type function!');
-                }
-
                 // check data
                 if (typeof data !== 'object') {
                     throw new TypeError('Param "data" parameter must be of type object!');
+                }
+
+                // check callback
+                if (typeof callback !== 'function') {
+                    throw new TypeError('Param "callback" is required and must be of type function!');
                 }
 
                 $rootScope.isLoading = true;
