@@ -11,34 +11,36 @@ describe('bbcTransport', function () {
 
         // init mocks
         beforeEach(function () {
-            mockSocket = function (host, connectTimeout) {
-                return {
-                    host: host,
-                    connectTimeout: connectTimeout,
-                    listeners: {},
-                    addListener: function (event, callback) {
-                        this.listeners[event] = callback;
-                    },
-                    removeListener: function (event, callback) {
-                        if (this.listeners[event]) {
-                            delete this.listeners[event];
-                        }
+            mockSocket = {
+                createSocket: function (host, connectTimeout) {
+                    return {
+                        host: host,
+                        connectTimeout: connectTimeout,
+                        listeners: {},
+                        addListener: function (event, callback) {
+                            this.listeners[event] = callback;
+                        },
+                        removeListener: function (event, callback) {
+                            if (this.listeners[event]) {
+                                delete this.listeners[event];
+                            }
 
-                        callback(null, null);
-                    },
-                    on: function (event, callback) {
-                        this.listeners[event] = callback;
-                    },
-                    emit: function (event, data, callback) {
-                        if (this.listeners[event]) {
-                            this.listeners[event](null, data);
-                        }
+                            callback(null, null);
+                        },
+                        on: function (event, callback) {
+                            this.listeners[event] = callback;
+                        },
+                        emit: function (event, data, callback) {
+                            if (this.listeners[event]) {
+                                this.listeners[event](null, data);
+                            }
 
-                        if (callback) {
-                            callback(null, data);
+                            if (callback) {
+                                callback(null, data);
+                            }
                         }
-                    }
-                };
+                    };
+                }
             };
 
             mockRootScope = {};
@@ -46,20 +48,20 @@ describe('bbcTransport', function () {
             mockLog = {
                 message: '',
                 lastError: '',
-                info: function(data){
+                info: function (data) {
                     this.message += data;
                 },
-                warn: function(data){
+                warn: function (data) {
                     this.message += data;
                 },
-                error: function(data, error){
+                error: function (data, error) {
                     this.message += data;
                     this.lastError = error;
                 }
             };
 
             module(function ($provide) {
-                $provide.value('Socket', mockSocket);
+                $provide.value('$bbcSocket', mockSocket);
                 $provide.value('$rootScope', mockRootScope);
                 $provide.value('$log', mockLog);
             });
@@ -79,6 +81,18 @@ describe('bbcTransport', function () {
 
             transportProvider.set(config);
         }));
+
+        it('should call set() without params', function () {
+//            console.log(transportProvider);
+//            transportProvider.set();
+
+            inject(function ($bbcTransport) {
+//                console.log(transportProvider);
+                transportProvider.set();
+
+                transport = $bbcTransport;
+            });
+        });
 
         it('should log when connect is called', function (done) {
             inject(function ($bbcTransport) {
@@ -163,7 +177,7 @@ describe('bbcTransport', function () {
             mockRootScope.socketEnabled = true;
 
             transport.addListener('test', null);
-            transport.removeListener('test', function(){
+            transport.removeListener('test', function () {
                 done();
             });
         });

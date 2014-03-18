@@ -1,13 +1,42 @@
 'use strict';
 
 angular.module('bbc.transport', ['btford.socket-io'])
-    .factory('Socket', function (socketFactory) {
-        return function (host, timeout) {
+    /**
+     * @ngdoc object
+     * @name bbc.transport.$bbcSocket
+     * @requires socketFactory
+     *
+     * @description
+     * Service for socket connection.
+     *
+     */
+    .factory('$bbcSocket', function (socketFactory) {
+        var pub = {};
+
+        function Connection(host, connectTimeout) {
+            var connection = io.connect(host, {'connect timeout': connectTimeout});
+
             return socketFactory({
-                ioSocket: io.connect(host, {'connect timeout': timeout})
+                // Creates a new socket connection.
+                ioSocket: connection
             });
+        }
+
+        pub.createSocket = function (host, connectTimeout) {
+            return new Connection(host, connectTimeout);
         };
+
+        return pub;
     })
+
+    /**
+     * @ngdoc object
+     * @name bbc.transport.$bbcTransport
+     *
+     * @description
+     * Service for transport.
+     *
+     */
     .provider('$bbcTransport', function () {
 
         var config = {};
@@ -42,12 +71,12 @@ angular.module('bbc.transport', ['btford.socket-io'])
          *
          * @param $rootScope
          * @param $http
-         * @param Socket
+         * @param $bbcSocket
          * @param $window
          * @param $log
          * @returns {{forward: forward, on: on, addListener: addListener, removeListener: removeListener, emit: emit}}
          */
-        this.$get = function ($rootScope, $http, Socket, $window, $log) {
+        this.$get = function ($rootScope, $http, $bbcSocket, $window, $log) {
 
             var socket;
 
@@ -109,7 +138,8 @@ angular.module('bbc.transport', ['btford.socket-io'])
             if(config.useSocket) {
 
                 // create socket instance
-                socket = new Socket(config.host, config.connectTimeout);
+//                socket = new $bbcSocket(config.host, config.connectTimeout); // jshint ignore:line
+                socket = $bbcSocket.createSocket(config.host, config.connectTimeout); // jshint ignore:line
 
                 // register events
                 registerSocketEvents(socket);
