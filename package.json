@@ -70,7 +70,7 @@
     "grunt-open": "~0.2.3",
     "karma-detect-browsers": "*",
     "karma-coverage": "*",
-    "karma-jasmine": "*",
+    "karma-jasmine": "~0.2.2",
     "karma-junit-reporter": "*",
     "karma-mocha-reporter": "*",
     "less-middleware": "^0.1.15",

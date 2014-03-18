@@ -14,8 +14,8 @@ module.exports = function (config) {
             'bower_components/angular-translate/angular-translate.js',
             'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
             'bower_components/angular-socket-io/socket.js',
-            'test/mocks/appMocks.js',
             'test/mocks/socket-io.js',
+            'test/mocks/appMocks.js',
             'modules/navigation/navigation.js',
             'modules/**/*.js'
         ],
