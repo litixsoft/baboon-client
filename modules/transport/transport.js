@@ -9,6 +9,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
      * @description
      * Service for socket connection.
      *
+     * @param {object} socketFactory The socket io object
      */
     .factory('$bbcSocket', function (socketFactory) {
         var pub = {};
@@ -22,6 +23,17 @@ angular.module('bbc.transport', ['btford.socket-io'])
             });
         }
 
+        /**
+         * @ngdoc method
+         * @name bbc.transport.$bbcSocket#createSocket
+         * @methodOf bbc.transport.$bbcSocket
+         *
+         * @description
+         * Set navigation with app and route of app
+         *
+         * @param {string} host The host connection string
+         * @param {number} connectTimeout The connection timeout
+         */
         pub.createSocket = function (host, connectTimeout) {
             return new Connection(host, connectTimeout);
         };
@@ -42,9 +54,14 @@ angular.module('bbc.transport', ['btford.socket-io'])
         var config = {};
 
         /**
+         * @ngdoc method
+         * @name bbc.transport.$bbcTransport#set
+         * @methodOf bbc.transport.$bbcTransport
+         *
+         * @description
          * Setup the transport configuration
          *
-         * @param {Object} [options]
+         * @param {object} options The options for config
          */
         this.set = function (options) {
 
@@ -67,16 +84,22 @@ angular.module('bbc.transport', ['btford.socket-io'])
         };
 
         /**
+         * @ngdoc method
+         * @name bbc.transport.$bbcTransport#$get
+         * @methodOf bbc.transport.$bbcTransport
+         *
+         * @description
          * Get instance of transport
          *
-         * @param $rootScope
-         * @param $http
-         * @param $bbcSocket
-         * @param $window
-         * @param $log
-         * @returns {{forward: forward, on: on, addListener: addListener, removeListener: removeListener, emit: emit}}
+         * @param {object} $rootScope The root scope
+         * @param {object} $http The http request
+         * @param {object} $bbcSocket The socket
+         * @param {object} $window The window
+         * @param {object} $log The log
+         * @returns {object} The current transport provider
          */
         this.$get = function ($rootScope, $http, $bbcSocket, $window, $log) {
+            var pub = {};
 
             var socket;
 
@@ -136,16 +159,19 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             // check useSocket
             if(config.useSocket) {
-
                 // create socket instance
-//                socket = new $bbcSocket(config.host, config.connectTimeout); // jshint ignore:line
-                socket = $bbcSocket.createSocket(config.host, config.connectTimeout); // jshint ignore:line
+                socket = $bbcSocket.createSocket(config.host, config.connectTimeout);
 
                 // register events
                 registerSocketEvents(socket);
             }
 
             /**
+             * @ngdoc method
+             * @name bbc.transport.$bbcTransport#emit
+             * @methodOf bbc.transport.$bbcTransport
+             *
+             * @description
              * Emit transport fire event to socket or request post to server.
              * Rest route is socket event name.
              *
@@ -153,7 +179,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @param {!(object|function)} data - The data object for server.
              * @param {function=} callback - The callback.
              */
-            var emit = function(event, data, callback) {
+            pub.emit = function(event, data, callback) {
 
                 // when 2 is callback in data, rewrite this
                 if(arguments.length === 2) {
@@ -204,67 +230,79 @@ angular.module('bbc.transport', ['btford.socket-io'])
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.transport.$bbcTransport#forward
+             * @methodOf bbc.transport.$bbcTransport
+             *
+             * @description
              * Forward events to angular
              *
-             * @param event
-             * @param scope
-             * @returns {*|void}
+             * @param {string} event The event to listen to
+             * @param {object} scope The scope to forward the events
+             * @returns {Function} callback - The callback.
              */
-            var forward = function(event, scope) {
+            pub.forward = function(event, scope) {
                 if (config.useSocket) {
                     return socket.forward(event, scope);
                 }
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.transport.$bbcTransport#on
+             * @methodOf bbc.transport.$bbcTransport
+             *
+             * @description
              * Register events on socket
              *
-             * @param event
-             * @param callback
-             * @returns {*}
+             * @param {string} event The event to listen to
+             * @param {function} callback The function to be called after event is raised
+             * @returns {Function} callback - The callback.
              */
-            var on = function(event, callback) {
+            pub.on = function(event, callback) {
                 if (config.useSocket) {
                     return socket.on(event, callback);
                 }
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.transport.$bbcTransport#addListener
+             * @methodOf bbc.transport.$bbcTransport
              *
+             * @description
              * Add listener on socket
              * The same as on.
              *
-             * @param event
-             * @param callback
-             * @returns {*}
+             * @param {string} event The event to listen to
+             * @param {function} callback The function to be called after the event is raised
+             * @returns {Function} callback - The callback.
              */
-            var addListener = function(event, callback) {
+            pub.addListener = function(event, callback) {
                 if (config.useSocket) {
                     return socket.addListener(event, callback);
                 }
             };
 
             /**
+             * @ngdoc method
+             * @name bbc.transport.$bbcTransport#removeListener
+             * @methodOf bbc.transport.$bbcTransport
              *
+             * @description
              * Remove listener on socket
              * The same as on.
              *
-             * @param event
-             * @param callback
-             * @returns {*}
+             * @param {string} event The event to listen to
+             * @param {function} callback The function to be called after event is removed from socket
+             * @returns {Function} callback - The callback.
              */
-            var removeListener = function(event, callback) {
+            pub.removeListener = function(event, callback) {
                 if (config.useSocket) {
                     return socket.removeListener(event, callback);
                 }
             };
 
-            return {
-                forward: forward,
-                on: on,
-                addListener: addListener,
-                removeListener: removeListener,
-                emit: emit
-            };
+            return pub;
         };
     });
