@@ -12,6 +12,7 @@ module.exports = function (config) {
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'bower_components/showdown/src/showdown.js',
             'bower_components/angular-socket-io/socket.js',
+            'test/mocks/socket-io.js',
             'test/mocks/appMocks.js',
             'modules/**/*.js'
         ],

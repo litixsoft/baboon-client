@@ -4,7 +4,6 @@ angular.module('bbc.transport', ['btford.socket-io'])
     /**
      * @ngdoc object
      * @name bbc.transport.$bbcSocket
-     * @requires socketFactory
      *
      * @description
      * Service for socket connection.
@@ -16,6 +15,8 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
         function Connection(host, connectTimeout) {
             var connection = io.connect(host, {'connect timeout': connectTimeout});
+
+            pub.connection = connection;
 
             return socketFactory({
                 // Creates a new socket connection.
@@ -35,6 +36,21 @@ angular.module('bbc.transport', ['btford.socket-io'])
          * @param {number} connectTimeout The connection timeout
          */
         pub.createSocket = function (host, connectTimeout) {
+            // when 2 is callback in data, rewrite this
+            if(arguments.length !== 2) {
+                throw new TypeError('Param "host" and "connectTimeout" are required');
+            }
+
+            // check host
+            if (typeof host !== 'string' || host.length === 0) {
+                throw new TypeError('Param "host" is required and must be of type string!');
+            }
+
+            // check connectTimeout
+            if (typeof connectTimeout !== 'number' || connectTimeout < 0) {
+                throw new TypeError('Param "connectTimeout" is required and must be of type number and greater than 0!');
+            }
+
             return new Connection(host, connectTimeout);
         };
 
@@ -50,7 +66,6 @@ angular.module('bbc.transport', ['btford.socket-io'])
      *
      */
     .provider('$bbcTransport', function () {
-
         var config = {};
 
         /**
@@ -64,7 +79,6 @@ angular.module('bbc.transport', ['btford.socket-io'])
          * @param {object} options The options for config
          */
         this.set = function (options) {
-
             options = options || {};
 
             // default settings
@@ -80,7 +94,6 @@ angular.module('bbc.transport', ['btford.socket-io'])
             }
 
             config.connectTimeout = options.connectTimeout || 5000;
-
         };
 
         /**

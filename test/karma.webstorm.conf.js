@@ -18,6 +18,7 @@ module.exports = function (config) {
             'bower_components/showdown/src/showdown.js',
             'bower_components/angular-socket-io/socket.js',
             'test/mocks/appMocks.js',
+            'test/mocks/socket-io.js',
             'modules/**/*.js'
         ],
 
