@@ -48,4 +48,51 @@ angular.module('bbc.navigation')
                 };
             }
         };
+    })
+    .directive('bbcNavigationTree', function($bbcNavigation, $location, $templateCache) {
+        return {
+            restrict: 'E',
+            replace: true,
+            template:   '<ul class="navlist">'+
+                '<li ng-repeat="data in navList"  ng-include="\'bbc/navigation/tpls/treeview/inner.html\'"></li>'+
+                '</ul>',
+            scope: {
+                orientation: '@'
+            },
+            link: function (scope) {
+
+                $templateCache.put('bbc/navigation/tpls/treeview/inner.html',
+                    '<div class="list-item" ng-class="{active: isActive(data.route)}">'+
+                        '<div class="opensub {{data.hide}}" ng-show="data.children" ng-click="toggleShow(data)"></div>'+
+                        '<div class="nav-icon {{data.icon}}"></div>'+
+                        '<a ng-if="!ngClickable" ng-class="{spacer: data.children.length > 0}" ng-href="{{data.route}}" ng-click="openLink(data[linkAttr])" target="{{data.target}}"><span>{{data.title | translate }}</span></a>'+
+                        '<a ng-if="ngClickable" ng-click="methodAttr({name: data[linkAttr]});"><span translate>{{data[labelAttr]}}</span></a>'+
+                        '</div>'+
+                        '<ul class="display {{data.hide}}" ng-if="data.children.length">'+
+                        '<li ng-repeat="data in data.children" ng-include="\'bbc/navigation/tpls/treeview/inner.html\'"></li>'+
+                        '</ul>');
+
+
+                $bbcNavigation.getTree(function (error, navList) {
+                    if (error || navList.length === 0) {
+                        scope.navList = [];
+                    }
+                    else {
+                        scope.navList = navList;
+                    }
+                });
+
+                scope.toggleShow = function (data) {
+                    if (data.hide === 'lxclose' || data.hide === undefined) {
+                        data.hide = 'lxopen';
+                    } else {
+                        data.hide = 'lxclose';
+                    }
+                };
+
+                scope.isActive = function (route) {
+                    return route === $location.path();
+                };
+            }
+        };
     });
