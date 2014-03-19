@@ -1,0 +1,33 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div class="page-header">
+            <h1>Pager</h1>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Example</div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col style="width:50%;" />
+                        <col style="width:50%;" />
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Index</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.index }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <bbc-pager count="count" current-page="currentPage" page-sizes="[1, 5, 10, 25]" page-size="{{ initialPageSize }}" on-paging="load(pagingOptions)"></bbc-pager>
+            </div>
+        </div>
+    </div>
+</div>

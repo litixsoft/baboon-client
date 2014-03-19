@@ -5,7 +5,6 @@ angular.module('bbc.sort', [])
      * @ngdoc directive
      * @name bbc.sort.directive:bbcSort
      * @restrict E
-     * @element input
      *
      * @description
      * Directive for custom sorting or server side sorting.
@@ -14,7 +13,7 @@ angular.module('bbc.sort', [])
      * <example module="ngView">
            <file name="index.html">
                <div ng-controller="SortController">
-                   <table class="table table-striped">
+                 <table class="table table-striped">
                      <colgroup>
                          <col style="width:40%;" />
                          <col style="width:30%;" />

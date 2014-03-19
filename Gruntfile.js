@@ -163,10 +163,10 @@ module.exports = function (grunt) {
                 title: 'Baboon Client',
                 image: 'docs/img/baboon.png',
                 scripts: [
-                    /*'angular.js',*/
-                    'http://code.angularjs.org/1.2.14/angular.js',
+                    'angular.js',
+                    /*'http://code.angularjs.org/1.2.14/angular.js',
                     'http://code.angularjs.org/1.2.14/angular-route.min.js',
-                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',
+                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',*/
                     '.tmp/docs/js/sample-not-for-production.js'
                 ],
                 styles: [

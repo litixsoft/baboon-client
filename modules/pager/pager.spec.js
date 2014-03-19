@@ -25,7 +25,7 @@ describe('bbcPager', function () {
     it('should be initialized correctly', function () {
         var elementScope = element.isolateScope();
 
-        expect(elementScope.count).toBe(0);
+        expect(elementScope.count).toBe(10);
         expect(elementScope.currentPage).toBe(1);
         expect(scope.getData).not.toHaveBeenCalled();
 
@@ -91,7 +91,7 @@ describe('bbcPager', function () {
 
     it('should have a function numberOfPages() which returns number of pages', function () {
         var elementScope = element.isolateScope();
-        expect(elementScope.numberOfPages()).toBe(0);
+        expect(elementScope.numberOfPages()).toBe(1);
 
         elementScope.count = 5;
         expect(elementScope.numberOfPages()).toBe(1);
@@ -187,7 +187,7 @@ describe('bbcPager', function () {
         var elementScope = element.isolateScope();
 
         expect(elementScope.currentPage).toBe(1);
-        expect(elementScope.numberOfPages()).toBe(0);
+        expect(elementScope.numberOfPages()).toBe(1);
         elementScope.count = 19;
         elementScope.$digest();
 

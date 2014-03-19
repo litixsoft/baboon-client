@@ -14,7 +14,8 @@ angular.module('example', [
         'bbc.datepicker',
         'bbc.transport',
         'bbc.integer',
-        'bbc.float'
+        'bbc.float',
+        'bbc.pager'
     ])
     .config(function ($routeProvider, $locationProvider, $bbcTransportProvider) {
         $locationProvider.html5Mode(true);
@@ -28,6 +29,7 @@ angular.module('example', [
             .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
             .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
+            .when('/pager', { templateUrl: 'partials/pager.html', controller: 'PagerCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
             .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
@@ -70,6 +72,27 @@ angular.module('example', [
         $scope.$watch('val', function() {
             $scope.currentType = (typeof $scope.val);
         });
+    })
+    .controller('PagerCtrl', function ($scope) {
+        $scope.initialPageSize = 10;
+        $scope.pagingOptions = {'skip': 0, 'limit': $scope.initialPageSize};
+
+        $scope.load = function (page) {
+            $scope.pagingOptions = page;
+            getData();
+        };
+
+        function getData() {
+            var items = [];
+            for(var i = 0; i < 100; i++) {
+                items.push({name: 'Item ' + (i + 1), index: i});
+            }
+
+            $scope.items = items.slice($scope.pagingOptions.skip, $scope.pagingOptions.skip + $scope.pagingOptions.limit);
+            $scope.count = 100;
+        }
+
+        getData();
     })
     .controller('RadioCtrl', function ($scope) {
         $scope.isDisabled = false;
@@ -219,6 +242,7 @@ angular.module('example', [
             { 'title': 'Integer', 'link': '/integer' },
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
+            { 'title': 'Pager', 'link': '/pager' },
             { 'title': 'RadioButton', 'link': '/radio' },
             { 'title': 'Sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
