@@ -159,17 +159,17 @@ module.exports = function (grunt) {
             options: {
                 dest: '.dist/docs',
                 html5Mode: false,
+                navTemplate: 'docs/html/nav.html',
                 title: 'Baboon Client',
-                //image: 'http://www.litixsoft.de/img/baboon-affe.png',
+                image: 'docs/img/baboon.png',
                 scripts: [
-                    'angular.js',
-                    /*'http://code.angularjs.org/1.2.14/angular.js',
+                    /*'angular.js',*/
+                    'http://code.angularjs.org/1.2.14/angular.js',
                     'http://code.angularjs.org/1.2.14/angular-route.min.js',
-                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',*/
+                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',
                     '.tmp/docs/js/sample-not-for-production.js'
                 ],
                 styles: [
-                    /*'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',*/
                     '.tmp/docs/css/sample.css'
                 ]
             },
@@ -180,7 +180,10 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                keepalive: true
+                keepalive: true,
+                open: {
+                    target: 'http://localhost:8000/.dist/docs/index.html'
+                }
             },
             server: {}
         },
@@ -191,6 +194,7 @@ module.exports = function (grunt) {
             },
             doc: {
                 files: { '.tmp/docs/js/sample-not-for-production.js': [
+                    'modules/navigation/navigation.js',
                     'modules/**/*.js',
                     'bower_components/showdown/src/showdown.js',
                     '!modules/**/*.spec.js',
