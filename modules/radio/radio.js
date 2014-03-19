@@ -27,7 +27,7 @@ angular.module('bbc.radio', [])
             </div>
         </file>
          <file name="scripts.js">
-            angular.module('ngView', ['bbc.checkbox']).controller('RadioCtrl', function ($scope) {
+            angular.module('ngView', ['bbc.radio']).controller('RadioCtrl', function ($scope) {
                 $scope.isDisabled = false;
                 $scope.clickMe = function() {
                     $scope.isDisabled = !$scope.isDisabled;
