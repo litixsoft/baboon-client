@@ -209,7 +209,7 @@ module.exports = function (grunt) {
                     cleancss: true
                 },
                 files: {
-                    '.tmp/docs/css/sample.css': 'modules/**/*.less'
+                    '.tmp/docs/css/sample.css': 'modules/**/themes/default.less'
                 }
             }
         }
