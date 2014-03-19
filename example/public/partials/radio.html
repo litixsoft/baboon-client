@@ -1,11 +1,21 @@
-<h1>Radio Test</h1>
-<p>
-Der Value ist: {{ myModel }}
-</p>
-
-<bbc-radio ng-model="myModel" name="myGroup" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
-<bbc-radio ng-model="myModel" name="myGroup" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
-<bbc-radio ng-model="myModel" name="myGroup" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
-<bbc-radio ng-model="myModel" name="myGroup" label="4" value="4" ng-disabled="isDisabled"></bbc-radio>
-<bbc-radio ng-model="myModel" name="myGroup" label="5" value="5" ng-disabled="isDisabled"></bbc-radio>
-<button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div class="page-header">
+            <h1>Radiobutton</h1>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Example</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <bbc-radio ng-model="myModel" name="myGroup" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
+                    <bbc-radio ng-model="myModel" name="myGroup" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
+                    <bbc-radio ng-model="myModel" name="myGroup" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
+                    <button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+                </div>
+                <div class="form-group">
+                    <pre>Value: {{ myModel }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
-describe('bbcModal', function () {
-    describe('bbcModal service', function () {
+describe('$bbcModal', function () {
+    describe('$bbcModal service', function () {
         var rootScope, service;
         var fakeModal = modalMock;
 
@@ -10,8 +10,8 @@ describe('bbcModal', function () {
 
         beforeEach(inject(function ($injector, $modal, $rootScope) {
             rootScope = $rootScope;
-            spyOn($modal, 'open').andReturn(fakeModal);
-            service = $injector.get('bbcModal');
+            service = $injector.get('$bbcModal');
+            spyOn($modal, 'open').and.returnValue(fakeModal);
         }));
 
         it('should be initialized correctly ', function () {
@@ -166,14 +166,14 @@ describe('bbcModal', function () {
         }));
 
         it('should be trigger rootScope on event', function () {
-            spyOn(rootScope, '$on').andCallThrough();
+            spyOn(rootScope, '$on').and.callThrough();
             rootScope.$emit('modalExamplePopup', 'unit test');
             expect(rootScope.$on).toHaveBeenCalled();
             expect(scope.modalOptions.message).toBe('unit test');
         });
 
         it('should be call resolve from modal.open config', inject(function ($injector) {
-            var service = $injector.get('bbcModal');
+            var service = $injector.get('$bbcModal');
             service.msgBox({});
         }));
     });

@@ -46,7 +46,8 @@ module.exports = function (grunt) {
             test: '.reports/test',
             jshint: '.reports/jshint',
             bower: ['<%= src.bowerrc.directory %>'],
-            node_modules: ['node_modules']
+            node_modules: ['node_modules'],
+            docs: ['build/docs']
         },
 
         open: {
@@ -153,8 +154,64 @@ module.exports = function (grunt) {
                 commitMessage: 'chore: release v%VERSION%',
                 push: false
             }
+        },
+        ngdocs: {
+            options: {
+                dest: '.dist/docs',
+                html5Mode: false,
+                title: 'Baboon Client',
+                //image: 'http://www.litixsoft.de/img/baboon-affe.png',
+                scripts: [
+                    'angular.js',
+                    /*'http://code.angularjs.org/1.2.14/angular.js',
+                    'http://code.angularjs.org/1.2.14/angular-route.min.js',
+                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',*/
+                    '.tmp/docs/js/sample-not-for-production.js'
+                ],
+                styles: [
+                    /*'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',*/
+                    '.tmp/docs/css/sample.css'
+                ]
+            },
+            api: {
+                src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js', 'docs/content/api/*.ngdoc'],
+                title: 'API Reference'
+            }
+        },
+        connect: {
+            options: {
+                keepalive: true
+            },
+            server: {}
+        },
+        uglify: {
+            options: {
+                beautify: false,
+                mangle: false
+            },
+            doc: {
+                files: { '.tmp/docs/js/sample-not-for-production.js': [
+                    'modules/**/*.js',
+                    'bower_components/showdown/src/showdown.js',
+                    '!modules/**/*.spec.js',
+                    '!modules/**/*.tpl.js'
+                ]}
+            }
+        },
+        less: {
+            doc: {
+                options: {
+                    combine: true,
+                    cleancss: true
+                },
+                files: {
+                    '.tmp/docs/css/sample.css': 'modules/**/*.less'
+                }
+            }
         }
     });
+
+    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'connect']);
 
     grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
         grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');

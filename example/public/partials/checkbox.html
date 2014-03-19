@@ -1,8 +1,18 @@
-<h1>Checkbox Test</h1>
-
-<div>
-<bbc-checkbox disabled="disabled" ng-model="modelV"></bbc-checkbox>
-Ich bin disabled!
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div class="page-header">
+            <h1>Checkbox</h1>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Example</div>
+            <div class="panel-body">
+                <div>
+                    <bbc-checkbox disabled="disabled" ng-model="model1"></bbc-checkbox>
+                    Ich bin disabled!
+                </div>
+                <div bbc-checkbox ng-model="model2" title="I'm a tool tip"></div>
+                Ich wurde {{ model2 ? 'aktiviert' : 'deaktiviert'}}
+            </div>
+        </div>
+    </div>
 </div>
-<bbc-checkbox ng-model="modelValue" title="Dast etx"></bbc-checkbox>
-Ich wurde {{ modelValue ? 'aktiviert' : 'deaktiviert'}}

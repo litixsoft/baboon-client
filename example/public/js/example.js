@@ -11,28 +11,36 @@ angular.module('example', [
         'bbc.inline.edit',
         'bbc.reset',
         'bbc.modal',
-        'bbc.datepicker'
+        'bbc.datepicker',
+        'bbc.transport',
+        'bbc.integer',
+        'bbc.float'
     ])
-    .config(function ($routeProvider, $locationProvider) {
+    .config(function ($routeProvider, $locationProvider, $bbcTransportProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
             .when('/alert', { templateUrl: 'partials/alert.html', controller: 'AlertCtrl' })
             .when('/checkbox', { templateUrl: 'partials/checkbox.html', controller: 'CheckboxCtrl' })
-            .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
-            .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
-            .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
-            .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
+            .when('/float', { templateUrl: 'partials/float.html', controller: 'FloatCtrl' })
+            .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
+            .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
+            .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
+            .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
+            .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
+            .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .otherwise({ redirectTo: '/' });
+        $bbcTransportProvider.set();
+//        transportProvider.set({useSocket:false, connectTimeout:2000});
     })
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
     })
-    .controller('AlertCtrl', function ($scope, bbcAlertSrv) {
-        $scope.bbcAlert = bbcAlertSrv;
+    .controller('AlertCtrl', function ($scope, $bbcAlert) {
+        $scope.bbcAlert = $bbcAlert;
         $scope.showAlert = function() {
             $scope.bbcAlert.danger('Info message from controller');
         };
@@ -44,13 +52,26 @@ angular.module('example', [
 
     })
     .controller('CheckboxCtrl', function ($scope) {
-        $scope.modelV = false;
-        $scope.modelValue = false;
+        $scope.model1 = false;
+        $scope.model2 = true;
+    })
+    .controller('FloatCtrl', function ($scope) {
+        $scope.val = '1.23';
+        $scope.initialType = (typeof $scope.val);
+
+        $scope.$watch('val', function() {
+            $scope.currentType = (typeof $scope.val);
+        });
+    })
+    .controller('IntegerCtrl', function ($scope) {
+        $scope.val = '1';
+        $scope.initialType = (typeof $scope.val);
+
+        $scope.$watch('val', function() {
+            $scope.currentType = (typeof $scope.val);
+        });
     })
     .controller('RadioCtrl', function ($scope) {
-        $scope.modelV = false;
-        $scope.modelValue = false;
-
         $scope.isDisabled = false;
         $scope.clickMe = function() {
             $scope.isDisabled = !$scope.isDisabled;
@@ -87,8 +108,8 @@ angular.module('example', [
 
         $scope.sort($scope.sortOpts);
     })
-    .controller('InlineEditCtrl', function ($scope, bbcInlineEdit) {
-        $scope.inlineEdit = bbcInlineEdit();
+    .controller('InlineEditCtrl', function ($scope, $bbcInlineEdit) {
+        $scope.inlineEdit = $bbcInlineEdit();
 
         $scope.items = [
             { _id : 1, name: 'John Doe', city: 'New York', country: 'USA' },
@@ -109,7 +130,7 @@ angular.module('example', [
     })
     .controller('ResetCtrl', function () {
     })
-    .controller('ModalCtrl', function ($scope, bbcModal) {
+    .controller('ModalCtrl', function ($scope, $bbcModal) {
         $scope.message = '';
 
         $scope.popupYesNo = function(){
@@ -128,7 +149,7 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
         };
 
         $scope.popupOkClose = function(){
@@ -147,7 +168,7 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
         };
 
         $scope.popupModal = function(){
@@ -163,7 +184,7 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
         };
 
         $scope.popupModalUpdate = function(){
@@ -180,10 +201,10 @@ angular.module('example', [
                     }
                 }
             };
-            bbcModal.msgBox(options);
+            $bbcModal.msgBox(options);
 
             setTimeout(function(){
-                bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
+                $bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
             },3000);
         };
     })
@@ -192,14 +213,72 @@ angular.module('example', [
             { 'title': 'Home', 'link': '/' },
             { 'title': 'Alert', 'link': '/alert' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
-            { 'title': 'RadioButton', 'link': '/radio' },
             { 'title': 'Datepicker', 'link': '/datepicker' },
-            { 'title': 'Markdown', 'link': '/markdown' },
-            { 'title': 'Sort', 'link': '/sort' },
+            { 'title': 'Float', 'link': '/float' },
             { 'title': 'Inline Edit', 'link': '/edit' },
+            { 'title': 'Integer', 'link': '/integer' },
+            { 'title': 'Markdown', 'link': '/markdown' },
+            { 'title': 'Modal', 'link': '/modal' },
+            { 'title': 'RadioButton', 'link': '/radio' },
+            { 'title': 'Sort', 'link': '/sort' },
+            { 'title': 'Transport', 'link': '/transport' },
             { 'title': 'UI Reset', 'link': '/reset' },
-            { 'title': 'Modal', 'link': '/modal' }
         ];
+
+        $scope.isActive = function (route) {
+            return route === $location.path();
+        };
+    })
+    .controller('RestCtrl', function ($scope, $location) {
+
+        $scope.isActive = function (route) {
+            return route === $location.path();
+        };
+    })
+    .controller('TransportCtrl', function ($rootScope, $scope, $location, $bbcTransport) {
+
+        $scope.messages = [];
+        $scope.raiseError = false;
+
+        $bbcTransport.forward('connect', $scope);
+        $bbcTransport.forward('disconnect', $scope);
+
+        $scope.$on('socket:connect', function() {
+            $scope.messages.push({message: 'CONNECT:  connection successfully'});
+        });
+
+        $scope.$on('socket:disconnect', function() {
+            $scope.messages.push({message: 'CONNECT: connection lost'});
+            $rootScope.socketEnabled = false;
+        });
+
+        $scope.setSocketState = function(){
+            $rootScope.socketEnabled = !$rootScope.socketEnabled;
+        };
+
+//        $scope.$on('$routeChangeStart', function() {
+//            socket.disconnect();
+//        });
+//
+        $bbcTransport.on('news', function (data) {
+            $scope.messages.push({message: 'NEWS: ' + data});
+        });
+
+        $scope.clear = function() {
+            $scope.messages = [];
+        };
+
+        $scope.send = function() {
+            $scope.messages.push({class:'sent', message: 'SENT: ' + $scope.message});
+
+            $bbcTransport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
+                if(error){
+                    $scope.messages.push({class: 'error', message: error.data});
+                } else if(result){
+                    $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
+                }
+            });
+        };
 
         $scope.isActive = function (route) {
             return route === $location.path();

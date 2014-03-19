@@ -1,31 +1,37 @@
-<h1>Datepicker Test</h1>
-
-
-<form name="form" class="form-horizontal" role="form">
-
-    <div class="form-group">
-        <label for="pick" class="col-sm-3 control-label">Datum</label>
-        <div class="col-sm-9">
-            <input id="pick" name="pick" ng-model="date" bbc-datepicker placeholder="dd.MM.yyyy">
-            <!--<input id="pick" name="pick" ng-model="date" bbc-datepicker="'yyy/MM/dd'" required="">-->
-            <label class="label label-danger" ng-show="form.pick.$dirty && form.pick.$invalid">
-                <div class="glyphicon glyphicon-fire"></div>
-                <span ng-show="form.pick.$error.date">Das Datum hat ein falsches Format.</span>
-                <span ng-show="form.pick.$error.required">Das Datum muss angegeben werden.</span>
-            </label>
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div class="page-header">
+            <h1>Datepicker</h1>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Example</div>
+            <div class="panel-body">
+                <form name="form" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="pick" class="col-sm-3 control-label">Datum</label>
+                        <div class="col-sm-9">
+                            <input id="pick" name="pick" ng-model="date" bbc-datepicker="'yyy/MM/dd'" placeholder="dd.MM.yyyy">
+                            <!--<input id="pick" name="pick" ng-model="date" bbc-datepicker="'yyy/MM/dd'" required="">-->
+                            <label class="label label-danger" ng-show="form.pick.$dirty && form.pick.$invalid">
+                                <div class="glyphicon glyphicon-fire"></div>
+                                <span ng-show="form.pick.$error.date">Das Datum hat ein falsches Format.</span>
+                                <span ng-show="form.pick.$error.required">Das Datum muss angegeben werden.</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pick2" class="col-sm-3 control-label">Datum (required)</label>
+                        <div class="col-sm-9">
+                            <input id="pick2" name="pick2" ng-model="date2" bbc-datepicker="'yyy/MM/dd'" required="" placeholder="placeholder">
+                            <label class="label label-danger" ng-show="form.pick2.$dirty && form.pick2.$invalid">
+                                <div class="glyphicon glyphicon-fire"></div>
+                                <span ng-show="form.pick2.$error.date">Das Datum hat ein falsches Format.</span>
+                                <span ng-show="form.pick2.$error.required">Das Datum muss angegeben werden.</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <label for="pick2" class="col-sm-3 control-label">Datum (required)</label>
-        <div class="col-sm-9">
-            <input id="pick2" name="pick2" ng-model="date2" bbc-datepicker="'MM/dd/yyyy'" required="" placeholder="placeholder">
-            <label class="label label-danger" ng-show="form.pick2.$dirty && form.pick2.$invalid">
-                <div class="glyphicon glyphicon-fire"></div>
-                <span ng-show="form.pick2.$error.date">Das Datum hat ein falsches Format.</span>
-                <span ng-show="form.pick2.$error.required">Das Datum muss angegeben werden.</span>
-            </label>
-        </div>
-    </div>
-
-</form>
+</div>

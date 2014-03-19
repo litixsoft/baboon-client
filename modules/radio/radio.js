@@ -1,6 +1,41 @@
 'use strict';
 
 angular.module('bbc.radio', [])
+    /**
+     * @ngdoc directive
+     * @name bbc.radio.directive:bbcRadio
+     * @restrict E
+     *
+     * @description
+     * Creates a radiobutton with same look and feel on all browser.
+     *
+     *
+     * @example
+     <example module="ngView">
+         <file name="index.html">
+            <div ng-controller="RadioCtrl">
+                 <bbc-radio ng-model="myModel" name="myGroup" label="1" value="1"
+                            ng-disabled="isDisabled"></bbc-radio>
+                 <bbc-radio ng-model="myModel" name="myGroup" label="2" value="2"
+                            ng-disabled="isDisabled"></bbc-radio>
+                 <bbc-radio ng-model="myModel" name="myGroup" label="3" value="3"
+                            ng-disabled="isDisabled"></bbc-radio>
+                 <button class="btn btn-default" ng-click="clickMe()">
+                    {{ isDisabled ? 'Enable' : 'Disable' }}
+                 </button>
+                 <div>Value: {{ myModel }}</div>
+            </div>
+        </file>
+         <file name="scripts.js">
+            angular.module('ngView', ['bbc.checkbox']).controller('RadioCtrl', function ($scope) {
+                $scope.isDisabled = false;
+                $scope.clickMe = function() {
+                    $scope.isDisabled = !$scope.isDisabled;
+                };
+            });
+         </file>
+     </example>
+     */
     .directive('bbcRadio', function () {
         return {
             restrict: 'E',

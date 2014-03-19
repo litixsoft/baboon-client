@@ -9,7 +9,7 @@ describe('bbc inline edit service', function () {
 
     beforeEach(function () {
         inject(function ($injector) {
-            service = $injector.get('bbcInlineEdit')();
+            service = $injector.get('$bbcInlineEdit')();
         });
     });
 

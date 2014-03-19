@@ -1,6 +1,31 @@
 'use strict';
 
 angular.module('bbc.reset', [])
+    /**
+     * @ngdoc directive
+     * @name bbc.reset.directive:bbcReset
+     * @requires $compile
+     * @requires $timeout
+     *
+     * @restrict A
+     * @element input
+     *
+     * @description
+     * Resets the model of an input field.
+     *
+     * @example
+     <example module="ngView">
+     <file name="index.html">
+     <div ng-controller="ResetCtrl">
+     <input type="text" class="form-control" ng-model="test" bbc-reset placeholder="Add any text..." />
+     </div>
+     </file>
+     <file name="scripts.js">
+        angular.module('ngView', ['bbc.reset']).controller('ResetCtrl', function ($scope) {
+        });
+     </file>
+     </example>
+     */
     .directive('bbcReset', function ($compile, $timeout) {
         return {
             require: 'ngModel',
