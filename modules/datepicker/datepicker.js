@@ -218,18 +218,18 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 /**
                  * Fills the day and month with 0 for format xx.xx.xxxx
                  */
-                function updateInput () { // fills the input field and fills date up with 0zeros if day or month are smaller than 10 example: 7 -> 07
-                    var day = scope.selectedDay.getDate();
-                    if (day < 10) {
-                        day = '0' + day;
-                    }
-
-                    var month = scope.selectedDay.getMonth() + 1;
-                    if (month < 10) {
-                        month = '0' + month;
-                    }
-                    scope.selectedDayShort = $filter('date')(scope.selectedDay,scope.dateFormat);//(day + '' + scope.divider + '' + month + '' + scope.divider + '' + scope.selectedDay.getFullYear());
-                }
+//                function updateInput () { // fills the input field and fills date up with 0zeros if day or month are smaller than 10 example: 7 -> 07
+//                    var day = scope.selectedDay.getDate();
+//                    if (day < 10) {
+//                        day = '0' + day;
+//                    }
+//
+//                    var month = scope.selectedDay.getMonth() + 1;
+//                    if (month < 10) {
+//                        month = '0' + month;
+//                    }
+//                    scope.selectedDayShort = $filter('date')(scope.selectedDay,scope.dateFormat);//(day + '' + scope.divider + '' + month + '' + scope.divider + '' + scope.selectedDay.getFullYear());
+//                }
 
                 /**
                  * scrolls the year container in the assigned direction, recursive
