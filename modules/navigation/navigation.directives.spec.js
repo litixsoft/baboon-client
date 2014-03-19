@@ -4,18 +4,17 @@ describe('bbc.navigation', function () {
     var navigationMockTop = [
         { title: 'TEST', route: '/test', app: 'unitTest' }
     ];
-/*    var navigationMockSub = [
+    var navigationMockSub = [
         { title: 'TEST-SUB', route: '/test-sub', app: 'unitTest' }
     ];
     var navigationMockList = [
         { title: 'TEST', route: '/test', app: 'unitTest', level: 0 },
         { title: 'TEST-SUB', route: '/test-sub', app: 'unitTest', level: 1 }
-    ];*/
+    ];
 
     describe('navigationList type="top"', function() {
         beforeEach(module('bbc.transport'));
         beforeEach(module('bbc.navigation'));
-        //beforeEach(module('bbc.navigation.directives'));
         beforeEach(module('pascalprecht.translate'));
 
         var $navigation, $scope, location, element, compile;
@@ -80,10 +79,9 @@ describe('bbc.navigation', function () {
         });
     });
 
-/*    describe('navigationList type="sub"', function() {
+    describe('navigationList type="sub"', function() {
         beforeEach(module('bbc.transport'));
         beforeEach(module('bbc.navigation'));
-        beforeEach(module('bbc.navigation.directives'));
         beforeEach(module('pascalprecht.translate'));
 
         var $navigation, $scope, location, element, compile;
@@ -146,7 +144,6 @@ describe('bbc.navigation', function () {
     describe('navigationList type="list"', function() {
         beforeEach(module('bbc.transport'));
         beforeEach(module('bbc.navigation'));
-        beforeEach(module('bbc.navigation.directives'));
         beforeEach(module('pascalprecht.translate'));
 
         var $navigation, $scope, location, element, compile;
@@ -216,7 +213,6 @@ describe('bbc.navigation', function () {
     describe('navigationList with error', function() {
         beforeEach(module('bbc.transport'));
         beforeEach(module('bbc.navigation'));
-        beforeEach(module('bbc.navigation.directives'));
         beforeEach(module('pascalprecht.translate'));
 
         var $scope, element, compile;
@@ -247,5 +243,5 @@ describe('bbc.navigation', function () {
                 compile(element)($scope);
             }).toThrow(new Error('Type must be top, sub or list.'));
         });
-    });*/
+    });
 });
