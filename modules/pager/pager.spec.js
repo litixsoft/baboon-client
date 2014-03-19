@@ -202,6 +202,22 @@ describe('bbcPager', function () {
         expect(elementScope.currentPage).toBe(1);
     });
 
+    it('should should initialize missing count', function () {
+        element = angular.element('<bbc-pager current-page="currentPage" ></bbc-pager>');
+        compile(element)(scope);
+        var elementScope = element.isolateScope();
+        expect(elementScope.count).toBe(0);
+    });
+
+    it('should set currentPage to default', function () {
+        scope.count = 'ad';
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" ></bbc-pager>');
+        compile(element)(scope);
+        var elementScope = element.isolateScope();
+        elementScope.lastPage();
+        expect(elementScope.currentPage).toBe(1);
+    });
+
     describe('has a function refresh() which', function () {
         it('should call the controller function', function () {
             var elementScope = element.isolateScope();
