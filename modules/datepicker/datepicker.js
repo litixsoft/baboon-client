@@ -5,7 +5,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
         minYear: 1880,
         maxYear: 2100
     })
-    .directive('bbcDatepicker', function ($window, bbcDatepickerConfig) {
+    .directive('bbcDatepicker', function ($window,$filter, bbcDatepickerConfig) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -21,6 +21,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 scope.visible = false;                     // is datepicker popup visible
                 scope.divider = '';                        // the character used to divide the date numbers 12.2.2013
                 scope.placeholder = attrs.placeholder;     // placeholder text for the input
+                scope.dateFormat = scope.bbcDatepicker || 'dd.MM.yyyy';
                 scope.selectedDay = new Date();            // the selected date, initialized with todays date
                 scope.selectedDayShort = '';               // selected date formated as 12.3.2004
                 scope.today = {
@@ -94,6 +95,11 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @returns {string} ./-
                  */
                 function getDivider (dateFormat) {
+
+//                    var regex =  /y/; // /id=[\'\"]{0,1}(\w+)/; //gets the id attribute
+//                    var matches = dateFormat.match(regex);
+//                    console.log(matches);
+
                     var divider = '.';
                     var chars = dateFormat.split('');
                     if (chars.indexOf('.') >= 0) { divider = '.'; }
@@ -110,6 +116,8 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @returns {boolean}
                  */
                 function validateDate (selectedDayShort) {
+                    console.log(scope.selectedDayShort);
+                    console.log($filter('date')(scope.selectedDayShort,scope.dateFormat));
                     var parts = selectedDayShort.split(getDivider(selectedDayShort));
                     if (parts.length === 3) {
 
@@ -220,7 +228,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     if (month < 10) {
                         month = '0' + month;
                     }
-                    scope.selectedDayShort = (day + '' + scope.divider + '' + month + '' + scope.divider + '' + scope.selectedDay.getFullYear());
+                    scope.selectedDayShort = $filter('date')(scope.selectedDay,scope.dateFormat);//(day + '' + scope.divider + '' + month + '' + scope.divider + '' + scope.selectedDay.getFullYear());
                 }
 
                 /**
@@ -285,6 +293,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     scope.selectedDay.setDate(number.nr);              // set the day
                     scope.selectedDay.setHours(5);                     // set hours of time to 5 o clock
                     scope.ngModel = new Date('' + scope.selectedDay);  // set the model with the new selected date
+
+                    console.log(scope.ngModel.toLocaleDateString());
+                    console.log($filter('date')(scope.ngModel, 'yyyy-dd-MM'));
+
                     scope.visible = false;                             // hide the datepicker
                     ctrls.$dirty = false;                              // validation: input not dirty
                     ctrls.$setValidity('date', true);                  // set validation of a wrong date to false
@@ -384,12 +396,12 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                                     });
                                 }
                             });
-                        }, 10);
+                        }, 30);
                     }
                 });
 
                 /* -------- start ------------- */
-                scope.divider = getDivider(scope.bbcDatepicker);
+//                scope.divider = getDivider(scope.bbcDatepicker);
                 scope.yearNames = fillRange();
 
                 scope.$watch('ngModel', function () {
@@ -397,13 +409,18 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
 
                     if (test.toString() !== 'Invalid Date') {
                         scope.selectedDay = test;
-                        scope.selectedDayShort = test.getDate() + '' + scope.divider + '' + (test.getMonth() + 1) + '' + scope.divider + '' + test.getFullYear();
-                        updateInput(); // fill the input with zeros if necessary
+//                        console.log("_----------------");
+//                        console.log($filter('date')(test,'yyyy-MM-dd'));
+//                        scope.selectedDayShort = test.getDate() + '' + scope.divider + '' + (test.getMonth() + 1) + '' + scope.divider + '' + test.getFullYear();
+                        scope.selectedDayShort = $filter('date')(test,scope.dateFormat);
+//                        scope.selectedDayShort = $filter('date')(scope.selectedDay,scope.dateFormat);
+//                        updateInput(); // fill the input with zeros if necessary
                     } else {
                         scope.selectedDay = new Date();
                     }
                     createDays(scope.selectedDay);
                 });
+
 
                 function update () {
                     createDays(scope.selectedDay);
