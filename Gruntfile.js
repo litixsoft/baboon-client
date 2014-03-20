@@ -197,6 +197,7 @@ module.exports = function (grunt) {
                     'modules/navigation/navigation.js',
                     'modules/**/*.js',
                     'bower_components/showdown/src/showdown.js',
+                    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
                     '!modules/**/*.spec.js',
                     'modules/**/*.tpl.js'
                 ]}

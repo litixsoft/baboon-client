@@ -171,7 +171,7 @@ angular.module('bbc.alert', [])
          </div>
      </file>
      <file name="scripts.js">
-        angular.module('ngView', ['bbc.alert']).controller('AlertCtrl', function ($scope, $bbcAlert) {
+        angular.module('ngView', ['ui.bootstrap', 'bbc.alert']).controller('AlertCtrl', function ($scope, $bbcAlert) {
             $scope.bbcAlert = $bbcAlert;
             $scope.showAlert = function() {
                 $scope.bbcAlert.info('Info message from controller');
