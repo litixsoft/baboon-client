@@ -216,7 +216,12 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'connect']);
+    grunt.registerTask('move-doc', function() {
+        grunt.file.copy('./.dist/docs/index.html', 'example/views/doc/index.html');
+        grunt.file.delete('./.dist/docs/index.html');
+    });
+
+    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'move-doc']);
 
     grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
         grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');

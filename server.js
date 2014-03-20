@@ -33,6 +33,7 @@ app.use(lessMiddleware({
 app.use(express.static(path.join(__dirname, 'example', 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'modules')));
+app.use(express.static(path.join(__dirname, '.dist', 'docs')));
 app.use(app.router);
 app.use(express.errorHandler());
 
@@ -58,7 +59,15 @@ app.post('/api/echo', function(req, res) {
     }
 });
 
-app.get('/*', routes.index);
+app.get('/doc', function(req, res) {
+    //res.sendfile(path.join(__dirname, '.dist/docs/index.html'));
+    res.render('doc/index');
+});
+
+app.get('/*', function(req, res) {
+    //res.sendfile(path.join(__dirname, 'example/views/index.html'));
+    res.render('index');
+});
 
 io.sockets.on('connection', function (socket) {
     socket.emit('news', 'push this news from server when client connection is successfully');
