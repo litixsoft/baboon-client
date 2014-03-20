@@ -76,7 +76,7 @@ describe('bbcTransport', function () {
         });
     });
 
-    describe('Provider: $bbcTransport', function () {
+    describe('provider: $bbcTransport', function () {
 
         var transportProvider, transport, mockSocket, mockRootScope, mockLog, mockHttp;
 
