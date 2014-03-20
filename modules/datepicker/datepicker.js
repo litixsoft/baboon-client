@@ -55,6 +55,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 scope.yearNames = [];
                 scope.monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
                 scope.dayNames = ['KW', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+//                scope.dayNames = ['KW', 'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
                 var autoScroll = false; // true if scroll through the years by holding down the keys
                 var mainPick = element[0]; //document.getElementById(scope.inputID); //get input with datepicker by id (cause angular element parent has selectors)
@@ -248,13 +249,16 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                         if (i === 0) {
                             var countFirstLine = 0;
                             var value = 2;
+//                            var value = 1;
                             if (startpoint.firstDay < 2) {
                                 value = -5;
                             }
                             for (var j = (startpoint.daysLastMonth - (startpoint.firstDay - value)); j <= (startpoint.daysLastMonth); j++) {
-
                                 days.push({nr: j, in: false});
                                 countFirstLine++;
+                            }
+                            if(countFirstLine===7){
+                                startpoint.currentKW--;
                             }
                             for (var k = 1; countFirstLine < 7; k++) {
                                 countFirstLine++;
@@ -272,8 +276,16 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                                 days.push({nr: startDaySecondWeek, in: inOut});
                             }
                         }
+                        var tempkw = startpoint.currentKW;
+                        if(startpoint.currentKW===0 && i===0){
+                            tempkw=53;
+                        }
+                        if(startpoint.currentKW>= 48 && i===5){
+                            tempkw=-4;
+                        }
+
                         var temp = {
-                            kw: (startpoint.currentKW + i),
+                            kw: (tempkw + i),
                             days: days
                         };
                         scope.month.push(temp);
@@ -409,7 +421,6 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @param {string} up or down direction
                  */
                 scope.startScroll = function (direction) {
-                    console.log("scroll: "+direction);
                     autoScroll = true;
                     autoScrollFunc(direction);
                 };
@@ -459,9 +470,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 scope.yearNames = fillRange();
 
                 scope.$watch('ngModel', function () {
-                    console.log("model: "+scope.ngModel);
                     var test = new Date(scope.ngModel);
-                    console.log("test: "+test);
 
                     if (test.toString() !== 'Invalid Date') {
                         scope.selectedDay = test;
