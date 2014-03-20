@@ -154,11 +154,9 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                         var part1 = parseInt(parts[0], 10);
                         var part2 = parseInt(parts[1], 10);
                         var part3 = parseInt(parts[2], 10);
-                        var dateFixed = '';
 
                         if(partsFormat[0].indexOf('d')!==-1 && partsFormat[1].indexOf('M')!==-1 && partsFormat[2].indexOf('y')!==-1){
                             var tempDate = new Date(part3,part2-1,part1,8,0,0);
-                            console.log("-----"+tempDate);
                             if(tempDate.getMonth()=== (part2-1) && tempDate.getDate()=== part1){
 //                                return true;
                                 returnValue.result = tempDate;
@@ -169,10 +167,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                             }
                         }
                         if(partsFormat[2].indexOf('d')!==-1 && partsFormat[1].indexOf('M')!==-1 && partsFormat[0].indexOf('y')!==-1){
-                            var tempDate = new Date(part1,part2-1,part3,8,0,0);
-                            if(tempDate.getMonth()=== (part2-1) && tempDate.getDate()=== part3){
+                            var tempDate2 = new Date(part1,part2-1,part3,8,0,0);
+                            if(tempDate2.getMonth()=== (part2-1) && tempDate2.getDate()=== part3){
 //                                return true;
-                                returnValue.result = tempDate;
+                                returnValue.result = tempDate2;
                                 return returnValue;
                             } else {
                                 returnValue.error = 'day';
@@ -180,10 +178,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                             }
                         }
                         if(partsFormat[1].indexOf('d')!==-1 && partsFormat[0].indexOf('M')!==-1 && partsFormat[2].indexOf('y')!==-1){
-                            var tempDate = new Date(part3,part1-1,part2,8,0,0);
-                            if(tempDate.getMonth()=== (part1-1) && tempDate.getDate()=== part2){
+                            var tempDate3 = new Date(part3,part1-1,part2,8,0,0);
+                            if(tempDate3.getMonth()=== (part1-1) && tempDate3.getDate()=== part2){
 //                                return true;
-                                returnValue.result = tempDate;
+                                returnValue.result = tempDate3;
                                 return returnValue;
                             } else {
                                 returnValue.error = 'day';
@@ -385,16 +383,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     } else {
                         var validationObject = validateDate(scope.selectedDayShort);
                         if (!validationObject.error) {
-//                            var parts = scope.selectedDayShort.split(getDivider(scope.selectedDayShort));
-//                            scope.selectedDay.setDate(parts[0]);
-//                            if (parts[1] >= 0 && parts[1] <= 12) {
-//                                scope.selectedDay.setMonth(parts[1] - 1);
-//                            }
-//                            scope.selectedDay.setFullYear(parts[2]);
-                            console.log("result: "+validationObject.result);
-                            console.log("filter:"+$filter('date')(validationObject.result, scope.dateFormat));
                             scope.ngModel = validationObject.result;// new Date('' + scope.selectedDay); // set the model with the new date from the input
-
                             valid.date = true;      // date is valid no need to show error
                             valid.required = true;  // required is valid no need to show error
                             valid.wrongdate = true;
