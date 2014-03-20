@@ -50,7 +50,7 @@
                 </form>
 
                 <div class=".btn-block">
-                    <button class="btn btn-default" ng-click="send()">Send message</button>
+                    <button class="btn btn-default" ng-click="send()" ng-disabled="!message || message.length < 1">Send message</button>
                 </div>
             </div>
         </div>
