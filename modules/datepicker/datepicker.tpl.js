@@ -11,10 +11,10 @@ angular.module("datepicker/datepicker.html", []).run(["$templateCache", function
     "        <div class=\"row bbc-datepicker-body\">\n" +
     "            <div class=\"bbc-datepicker-year col-md-2 col-xs-2\" unselectable=\"on\">\n" +
     "                <div class=\"bbc-datepicker-year-btn year-up\">\n" +
-    "                    <span class=\"glyphicon glyphicon-circle-arrow-up\" ng-mousedown=\"startScroll()\" ng-mouseup=\"stopScroll()\"></span>\n" +
+    "                    <span class=\"glyphicon glyphicon-circle-arrow-up\" ng-mousedown=\"startScroll('up')\" ng-mouseup=\"stopScroll()\"></span>\n" +
     "                </div>\n" +
     "                <div class=\"bbc-datepicker-year-btn year-down\">\n" +
-    "                    <span class=\"glyphicon glyphicon-circle-arrow-down\" ng-mousedown=\"startScroll()\" ng-mouseup=\"stopScroll()\"></span>\n" +
+    "                    <span class=\"glyphicon glyphicon-circle-arrow-down\" ng-mousedown=\"startScroll('down')\" ng-mouseup=\"stopScroll()\"></span>\n" +
     "                </div>\n" +
     "                <div class=\"bbc-datepicker-year-container\">\n" +
     "                    <ul>\n" +

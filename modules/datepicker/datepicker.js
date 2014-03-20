@@ -125,6 +125,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     if (chars.indexOf('.') >= 0) { divider = '.'; }
                     if (chars.indexOf('/') >= 0) { divider = '/'; }
                     if (chars.indexOf('-') >= 0) { divider = '-'; }
+                    if (chars.indexOf(':') >= 0) { divider = ':'; }
 
                     return divider;
                 }
@@ -136,16 +137,63 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @returns {boolean}
                  */
                 function validateDate (selectedDayShort) {
-                    var parts = selectedDayShort.split(getDivider(selectedDayShort));
-                    if (parts.length === 3) {
 
-                        var m = parseInt(parts[1], 10);
-                        var d = parseInt(parts[0], 10);
-                        var y = parseInt(parts[2], 10);
-                        var date = new Date(y, m - 1, d);
+                    var partsDivider = getDivider(selectedDayShort);
+                    var parts = selectedDayShort.split(partsDivider);
 
-                        return (date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d);
+                    var partsFormatDivider = getDivider(scope.dateFormat);
+                    var partsFormat = scope.dateFormat.split(partsFormatDivider);
+
+                    var returnValue = {
+                        error: null,
+                        result: null
+                    };
+
+                    if (parts.length === 3 && partsFormat.length === 3) {//
+                        var part1 = parseInt(parts[0], 10);
+                        var part2 = parseInt(parts[1], 10);
+                        var part3 = parseInt(parts[2], 10);
+                        var dateFixed = '';
+
+                        if(partsFormat[0].indexOf('d')!==-1 && partsFormat[1].indexOf('M')!==-1 && partsFormat[2].indexOf('y')!==-1){
+                            var tempDate = new Date(part3,part2-1,part1,8,0,0);
+                            console.log("-----"+tempDate);
+                            if(tempDate.getMonth()=== (part2-1) && tempDate.getDate()=== part1){
+//                                return true;
+                                returnValue.result = tempDate;
+                                return returnValue;
+                            } else {
+                                returnValue.error = 'day';
+                                return returnValue;
+                            }
+                        }
+                        if(partsFormat[2].indexOf('d')!==-1 && partsFormat[1].indexOf('M')!==-1 && partsFormat[0].indexOf('y')!==-1){
+                            var tempDate = new Date(part1,part2-1,part3,8,0,0);
+                            if(tempDate.getMonth()=== (part2-1) && tempDate.getDate()=== part3){
+//                                return true;
+                                returnValue.result = tempDate;
+                                return returnValue;
+                            } else {
+                                returnValue.error = 'day';
+                                return returnValue;
+                            }
+                        }
+                        if(partsFormat[1].indexOf('d')!==-1 && partsFormat[0].indexOf('M')!==-1 && partsFormat[2].indexOf('y')!==-1){
+                            var tempDate = new Date(part3,part1-1,part2,8,0,0);
+                            if(tempDate.getMonth()=== (part1-1) && tempDate.getDate()=== part2){
+//                                return true;
+                                returnValue.result = tempDate;
+                                return returnValue;
+                            } else {
+                                returnValue.error = 'day';
+                                return returnValue;
+                            }
+                        }
+
                     }
+                    returnValue.error = 'format';
+                    return returnValue;
+
                 }
 
                 /**
@@ -307,14 +355,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 scope.getInput = function () {
 
                     var valid = {
-                        required: true,
-                        date: true
+                        required: attrs.required ? false : true,
+                        date: true,
+                        wrongdate: true
                     };
-
-                    if(attrs.required){
-                        valid.required = false;
-                    }
-
 
                     ctrls.$dirty = true;
 
@@ -327,25 +371,35 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                             valid.date = true;
                         }
                     } else {
-                        if (validateDate(scope.selectedDayShort)) {
-                            var parts = scope.selectedDayShort.split(getDivider(scope.selectedDayShort));
-                            scope.selectedDay.setDate(parts[0]);
-                            if (parts[1] >= 0 && parts[1] <= 12) {
-                                scope.selectedDay.setMonth(parts[1] - 1);
-                            }
-                            scope.selectedDay.setFullYear(parts[2]);
-                            scope.ngModel = new Date('' + scope.selectedDay); // set the model with the new date from the input
+                        var validationObject = validateDate(scope.selectedDayShort);
+                        if (!validationObject.error) {
+//                            var parts = scope.selectedDayShort.split(getDivider(scope.selectedDayShort));
+//                            scope.selectedDay.setDate(parts[0]);
+//                            if (parts[1] >= 0 && parts[1] <= 12) {
+//                                scope.selectedDay.setMonth(parts[1] - 1);
+//                            }
+//                            scope.selectedDay.setFullYear(parts[2]);
+                            console.log("result: "+validationObject.result);
+                            console.log("filter:"+$filter('date')(validationObject.result, scope.dateFormat));
+                            scope.ngModel = validationObject.result;// new Date('' + scope.selectedDay); // set the model with the new date from the input
 
                             valid.date = true;      // date is valid no need to show error
                             valid.required = true;  // required is valid no need to show error
+                            valid.wrongdate = true;
                         } else {
                             valid.required = true;
-                            valid.date = false;
+                            if(validationObject.error==='day'){
+                                valid.wrongdate = false;
+                            } else {
+                                valid.date = false;
+                            }
+
                         }
                     }
 
                     ctrls.$setValidity('date', valid.date); //true or false
                     ctrls.$setValidity('required', valid.required); //true or false
+                    ctrls.$setValidity('wrongdate', valid.wrongdate); //true or false
 
                 };
 
@@ -355,6 +409,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @param {string} up or down direction
                  */
                 scope.startScroll = function (direction) {
+                    console.log("scroll: "+direction);
                     autoScroll = true;
                     autoScrollFunc(direction);
                 };
@@ -404,7 +459,9 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 scope.yearNames = fillRange();
 
                 scope.$watch('ngModel', function () {
+                    console.log("model: "+scope.ngModel);
                     var test = new Date(scope.ngModel);
+                    console.log("test: "+test);
 
                     if (test.toString() !== 'Invalid Date') {
                         scope.selectedDay = test;
