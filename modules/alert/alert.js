@@ -167,14 +167,17 @@ angular.module('bbc.alert', [])
      <file name="index.html">
          <div ng-controller="AlertCtrl">
              <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
-             <button class='btn btn-default' ng-click="showAlert()">Show Info-Alert</button>
+             <button class='btn btn-default' ng-click="showAlert('info')">Info-Alert</button>
+             <button class='btn btn-default' ng-click="showAlert('success')">Success-Alert</button>
+             <button class='btn btn-default' ng-click="showAlert('warning')">Warning-Alert</button>
+             <button class='btn btn-default' ng-click="showAlert('danger')">Danger-Alert</button>
          </div>
      </file>
      <file name="scripts.js">
         angular.module('ngView', ['ui.bootstrap', 'bbc.alert']).controller('AlertCtrl', function ($scope, $bbcAlert) {
             $scope.bbcAlert = $bbcAlert;
-            $scope.showAlert = function() {
-                $scope.bbcAlert.info('Info message from controller');
+            $scope.showAlert = function(type) {
+                $scope.bbcAlert[type]('Info message from controller');
             };
          });
      </file>
