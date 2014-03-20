@@ -24,3 +24,20 @@ var callObjectMock = {
 };
 
 var emptyFunctionMock = function() {};
+
+var io = {
+    connect: function () {
+        return {
+            on: function (ev, fn) {
+                this._listeners[ev] = fn;
+            },
+            emit: function (ev, data) {
+                return (this._listeners[ev] || angular.noop)(data);
+            },
+            _listeners: {},
+            removeListener: function (ev) {
+                delete this._listeners[ev];
+            }
+        };
+    }
+};
