@@ -63,12 +63,9 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 var datepicker = angular.element(dateElement[0]);
 
                 var off = { // datepicker offset in browser window, used to move datepicker if not fully visible in view
-                    top: 40,
+                    top: 5,
                     left: 0
                 };
-
-                element.removeAttr('class');
-                element.removeAttr('type');
 
                 angular.element($window).bind('resize', function () {
                     if (scope.visible) {
@@ -81,18 +78,19 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  *
                  */
                 function checkPosition () {
-                    var rect = dateElement[0].getBoundingClientRect();
+                    var rect = element[0].getBoundingClientRect();
+                    var popup = dateElement[0].getBoundingClientRect();
                     var width = $window.innerWidth;
                     var height = $window.innerHeight;
 
-                    if (rect.bottom > height - 20) {
-                        off.top -= ( rect.bottom - (height - 20));
+                    if ((rect.bottom + popup.height) > height - 20) {
+                        off.top -= ( (rect.bottom + popup.height) - (height - 20));
                     }
 
                     datepicker.css('top', off.top + 'px');
 
-                    if (rect.right > width - 20) {
-                        off.left -= ( rect.right - (width - 20));
+                    if ((rect.left + popup.width) > width - 20) {
+                        off.left -= ( (rect.left + popup.width) - (width - 20));
                     }
 
                     datepicker.css('left', off.left + 'px');
@@ -380,9 +378,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 scope.$watch('visible', function (newValue) {
                     if (newValue) { //if visible
                         off = {
-                            top: 40,
+                            top: 5,
                             left: 0
                         };
+
                         checkPosition();
 
                         var offsetTop = ( scope.yearNames.indexOf(scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
