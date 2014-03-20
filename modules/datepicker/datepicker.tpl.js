@@ -1,6 +1,6 @@
 angular.module("datepicker/datepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("datepicker/datepicker.html",
-    "<div style=\"display:inline\">\n" +
+    "<div class=\"bbc-datepicker-frame\">\n" +
     "    <div class=\"input-group\" style=\"width:160px;\">\n" +
     "        <input type=\"text\" ng-model=\"selectedDayShort\" id=\"{{inputID}}\" ng-readonly=\"ngReadonly\" name=\"{{inputName}}\" ng-blur=\"getInput()\" class=\"form-control\" placeholder=\"{{placeholder}}\">\n" +
     "        <span class=\"input-group-btn\">\n" +
