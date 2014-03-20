@@ -54,6 +54,15 @@ Alternate you can use the update script
     $ grunt test
 
 
+## Generate Documentation
+Clone the baboon-client repository and install the dev dependencies. Generate baboon-client documentation with grunt. This will generate the documentation and starts automatically a webserver which serves the index page.
+
+    $ git clone https://github.com/litixsoft/baboon-client.git
+    $ cd baboon-client
+    $ npm install
+    $ bower install
+    $ grunt doc
+
 Help us with your ideas. Write your code and test it.
 Write tests for your code. All tests must be successful. Make a pull request.
 
