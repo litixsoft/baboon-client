@@ -3,6 +3,7 @@
 angular.module('example', [
         'ngRoute',
         'ui.bootstrap',
+        'pascalprecht.translate',
         'bbc.alert',
         'bbc.checkbox',
         'bbc.radio',
@@ -15,9 +16,10 @@ angular.module('example', [
         'bbc.transport',
         'bbc.integer',
         'bbc.float',
-        'bbc.pager'
+        'bbc.pager',
+        'bbc.navigation'
     ])
-    .config(function ($routeProvider, $locationProvider, $bbcTransportProvider) {
+    .config(function ($routeProvider, $locationProvider, $bbcTransportProvider, $bbcNavigationProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
@@ -29,6 +31,8 @@ angular.module('example', [
             .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
             .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
+            .when('/nav_home', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl' })
+            .when('/nav_admin', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
             .when('/pager', { templateUrl: 'partials/pager.html', controller: 'PagerCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
@@ -36,10 +40,33 @@ angular.module('example', [
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .otherwise({ redirectTo: '/' });
         $bbcTransportProvider.set();
-//        transportProvider.set({useSocket:false, connectTimeout:2000});
+        $bbcNavigationProvider.set({app:'main', route:'home'});
     })
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
+    })
+    .controller('NavigationCtrl', function ($scope, $location) {
+        $scope.menu = [
+            { 'title': 'Home', 'link': '/' },
+            { 'title': 'Alert', 'link': '/alert' },
+            { 'title': 'Checkbox', 'link': '/checkbox' },
+            { 'title': 'Datepicker', 'link': '/datepicker' },
+            { 'title': 'Float', 'link': '/float' },
+            { 'title': 'Inline Edit', 'link': '/edit' },
+            { 'title': 'Integer', 'link': '/integer' },
+            { 'title': 'Markdown', 'link': '/markdown' },
+            { 'title': 'Modal', 'link': '/modal' },
+            { 'title': 'Navigation', 'link': '/nav_home' },
+            { 'title': 'Pager', 'link': '/pager' },
+            { 'title': 'RadioButton', 'link': '/radio' },
+            { 'title': 'Sort', 'link': '/sort' },
+            { 'title': 'Transport', 'link': '/transport' },
+            { 'title': 'UI Reset', 'link': '/reset' }
+        ];
+
+        $scope.isActive = function (route) {
+            return route === $location.path();
+        };
     })
     .controller('AlertCtrl', function ($scope, $bbcAlert) {
         $scope.bbcAlert = $bbcAlert;
@@ -231,27 +258,13 @@ angular.module('example', [
             },3000);
         };
     })
-    .controller('NavigationCtrl', function ($scope, $location) {
-        $scope.menu = [
-            { 'title': 'Home', 'link': '/' },
-            { 'title': 'Alert', 'link': '/alert' },
-            { 'title': 'Checkbox', 'link': '/checkbox' },
-            { 'title': 'Datepicker', 'link': '/datepicker' },
-            { 'title': 'Float', 'link': '/float' },
-            { 'title': 'Inline Edit', 'link': '/edit' },
-            { 'title': 'Integer', 'link': '/integer' },
-            { 'title': 'Markdown', 'link': '/markdown' },
-            { 'title': 'Modal', 'link': '/modal' },
-            { 'title': 'Pager', 'link': '/pager' },
-            { 'title': 'RadioButton', 'link': '/radio' },
-            { 'title': 'Sort', 'link': '/sort' },
-            { 'title': 'Transport', 'link': '/transport' },
-            { 'title': 'UI Reset', 'link': '/reset' },
-        ];
+    .controller('NavHomeCtrl', function ($scope, $rootScope) {
 
-        $scope.isActive = function (route) {
-            return route === $location.path();
-        };
+        $rootScope.socketEnabled = false;
+    })
+    .controller('NavAdminCtrl', function ($scope, $rootScope) {
+
+        $rootScope.socketEnabled = false;
     })
     .controller('RestCtrl', function ($scope, $location) {
 

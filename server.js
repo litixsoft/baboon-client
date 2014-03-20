@@ -6,6 +6,7 @@
 
 var express = require('express');
 var routes = require('./example/routes');
+var navigation = require('./example/routes/navigation.js');
 var http = require('http');
 var path = require('path');
 var lessMiddleware = require('less-middleware');
@@ -57,6 +58,9 @@ app.post('/api/echo', function(req, res) {
         res.json(200, req.body);
     }
 });
+
+app.use('/api/navigation/getTopList', navigation.getTopList);
+app.use('/api/navigation/getSubList', navigation.getSubList);
 
 app.get('/*', routes.index);
 
