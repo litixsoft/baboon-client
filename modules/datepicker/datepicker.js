@@ -5,6 +5,29 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
         minYear: 1880,
         maxYear: 2100
     })
+    /**
+     * @ngdoc directive
+     * @name bbc.datepicker.directive:bbcDatepicker
+     * @restrict A
+     * @element input
+     *
+     * @description
+     * Creates a datepicker.
+     *
+     *
+     * @example
+     <example module="ngView">
+     <file name="index.html">
+         <div ng-controller="DatepickerCtrl">
+             <input name="pick" ng-model="date" bbc-datepicker placeholder="dd.MM.yyyy">
+         </div>
+     </file>
+     <file name="scripts.js">
+        angular.module('ngView', ['bbc.datepicker']).controller('DatepickerCtrl', function ($scope) {
+        });
+     </file>
+     </example>
+     */
     .directive('bbcDatepicker', function ($window,$filter, bbcDatepickerConfig) {
         return {
             restrict: 'A',

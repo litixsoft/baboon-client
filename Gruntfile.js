@@ -198,7 +198,7 @@ module.exports = function (grunt) {
                     'modules/**/*.js',
                     'bower_components/showdown/src/showdown.js',
                     '!modules/**/*.spec.js',
-                    '!modules/**/*.tpl.js'
+                    'modules/**/*.tpl.js'
                 ]}
             }
         },
