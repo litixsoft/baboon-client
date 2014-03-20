@@ -34,7 +34,7 @@ angular.module('bbc.navigation', [])
         /**
          * @ngdoc method
          * @name bbc.navigation.$bbcNavigation#$get
-         * @methodOf bbc.navigation.$bbcTransport
+         * @methodOf bbc.navigation.$bbcNavigation
          *
          * @description
          * Get instance of navigation

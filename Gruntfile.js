@@ -160,7 +160,7 @@ module.exports = function (grunt) {
                 dest: '.dist/docs',
                 html5Mode: false,
                 navTemplate: 'docs/html/nav.html',
-                title: 'Baboon Client',
+                title: 'baboon client',
                 image: 'docs/img/baboon.png',
                 scripts: [
                     'angular.js',
@@ -177,15 +177,6 @@ module.exports = function (grunt) {
                 src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js', 'docs/content/api/*.ngdoc'],
                 title: 'API Reference'
             }
-        },
-        connect: {
-            options: {
-                keepalive: true,
-                open: {
-                    target: 'http://localhost:8000/.dist/docs/index.html'
-                }
-            },
-            server: {}
         },
         uglify: {
             options: {
@@ -216,7 +207,12 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'connect']);
+    grunt.registerTask('move-doc', function() {
+        grunt.file.copy('./.dist/docs/index.html', 'example/views/doc/index.html');
+        grunt.file.delete('./.dist/docs/index.html');
+    });
+
+    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'move-doc']);
 
     grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
         grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');
