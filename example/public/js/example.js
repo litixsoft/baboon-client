@@ -43,8 +43,8 @@ angular.module('example', [
     })
     .controller('AlertCtrl', function ($scope, $bbcAlert) {
         $scope.bbcAlert = $bbcAlert;
-        $scope.showAlert = function() {
-            $scope.bbcAlert.danger('Info message from controller');
+        $scope.showAlert = function(type) {
+            $scope.bbcAlert[type]('Info message from controller');
         };
     })
     .controller('DatepickerCtrl', function ($scope) {
