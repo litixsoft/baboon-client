@@ -1,6 +1,6 @@
 'use strict';
 
-var isHome = true;
+
 
 exports.getTopList = function (req, res) {
     res.send(200, [
@@ -10,19 +10,20 @@ exports.getTopList = function (req, res) {
 };
 
 exports.getSubList = function (req, res) {
-    isHome = !isHome;
 
-    if (isHome) {
+    var a = req.headers.referer;
+
+    if (a.indexOf('nav-home') > -1) {
         res.send(200, [
-            { title: 'Products', route: '/', app: 'unitTest', level: 0 },
-            { title: 'Customers', route: '/', app: 'unitTest', level: 1 },
-            { title: 'Statistics', route: '/', app: 'unitTest', level: 1 }
+            { title: 'Products', route: '/nav-home/nav-products', app: 'unitTest', level: 0 },
+            { title: 'Customers', route: '/nav-home/nav-customers', app: 'unitTest', level: 1 },
+            { title: 'Statistics', route: '/nav-home/nav-statistics', app: 'unitTest', level: 1 }
         ]);
     } else {
         res.send(200, [
-            { title: 'Rights', route: '/', app: 'unitTest', level: 0 },
-            { title: 'Groups', route: '/', app: 'unitTest', level: 0 },
-            { title: 'Users', route: '/', app: 'unitTest', level: 1 }
+            { title: 'Rights', route: '/nav-admin/nav-rights', app: 'unitTest', level: 0 },
+            { title: 'Groups', route: '/nav-admin/nav-groups', app: 'unitTest', level: 0 },
+            { title: 'Users', route: '/nav-admin/nav-users', app: 'unitTest', level: 1 }
         ]);
     }
 };
