@@ -441,7 +441,6 @@ angular.module('example', [
                 }
 
                 $bbcSession.setData($scope.data.key, $scope.data.value, function (error, result) {
-
                     if(error) {
                         $scope.activityMessages.push({class:'error', message: error});
                     }
