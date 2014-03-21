@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('bbc.session', [])
+angular.module('bbc.session', ['bbc.transport'])
     // Service for session handling
-    .factory('bbcSession', function ($rootScope, $log, transport) {
+    .factory('$bbcSession', function ($rootScope, $log, $bbcTransport) {
         var pub = {};
 
         // save key value in session
         pub.setData = function (key, value, callback) {
             if (arguments.length === 3) {
-                transport.emit('api/session/setData', {key: key, value: value}, callback);
+                $bbcTransport.emit('api/session/setData', {key: key, value: value}, callback);
             }
             else {
                 $log.error('parameter error, required key, value and callback');
@@ -27,7 +27,7 @@ angular.module('bbc.session', [])
                 data = {key: key};
             }
 
-            transport.emit('api/session/deleteData', data, callback);
+            $bbcTransport.emit('api/session/deleteData', data, callback);
         };
 
         // get key value from session
@@ -41,17 +41,17 @@ angular.module('bbc.session', [])
                 data = {key: key};
             }
 
-            transport.emit('api/session/getData', data, callback);
+            $bbcTransport.emit('api/session/getData', data, callback);
         };
 
         // check session and set activity time
         pub.getLastActivity = function (callback) {
-            transport.emit('api/session/getLastActivity', {}, callback);
+            $bbcTransport.emit('api/session/getLastActivity', {}, callback);
         };
 
         // check session and set activity time
         pub.setActivity = function (callback) {
-            transport.emit('api/session/setActivity', {}, callback);
+            $bbcTransport.emit('api/session/setActivity', {}, callback);
         };
 
         return pub;

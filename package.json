@@ -77,7 +77,6 @@
     "load-grunt-tasks": "0.4.0",
     "time-grunt": "~0.2.10",
     "grunt-ngdocs": "litixsoft/grunt-ngdocs",
-    "grunt-contrib-connect": "~0.7.1",
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-less": "0.10.0"
   },

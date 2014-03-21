@@ -10,6 +10,7 @@ var navigation = require('./example/routes/navigation.js');
 var http = require('http');
 var path = require('path');
 var lessMiddleware = require('less-middleware');
+var session = require('./example/routes/session')();
 
 
 
@@ -27,6 +28,11 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
+app.use(express.session({
+    secret: 'secret',
+    cookie: {expires: false}
+}));
 app.use(lessMiddleware({
     src: __dirname + '/example/public',
     compress: true
@@ -59,6 +65,12 @@ app.post('/api/echo', function(req, res) {
         res.json(200, req.body);
     }
 });
+
+app.post('/api/session/setActivity', session.setActivity);
+app.post('/api/session/getLastActivity', session.getLastActivity);
+app.post('/api/session/getData', session.getData);
+app.post('/api/session/setData', session.setData);
+app.post('/api/session/deleteData', session.deleteData);
 
 app.use('/api/navigation/getTopList', navigation.getTopList);
 app.use('/api/navigation/getSubList', navigation.getSubList);

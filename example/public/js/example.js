@@ -17,7 +17,8 @@ angular.module('example', [
         'bbc.integer',
         'bbc.float',
         'bbc.pager',
-        'bbc.navigation'
+        'bbc.navigation',
+        'bbc.session'
     ])
     .config(function ($routeProvider, $locationProvider, $bbcTransportProvider, $bbcNavigationProvider) {
         $locationProvider.html5Mode(true);
@@ -31,13 +32,14 @@ angular.module('example', [
             .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
             .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
-            .when('/nav_home', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl' })
-            .when('/nav_admin', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
+            .when('/nav-home', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl' })
+            .when('/nav-admin', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
             .when('/pager', { templateUrl: 'partials/pager.html', controller: 'PagerCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
             .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
+            .when('/session', { templateUrl: 'partials/session.html', controller: 'SessionCtrl' })
             .otherwise({ redirectTo: '/' });
         $bbcTransportProvider.set();
         $bbcNavigationProvider.set({app:'main', route:'home'});
@@ -56,7 +58,7 @@ angular.module('example', [
             { 'title': 'Integer', 'link': '/integer' },
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
-            { 'title': 'Navigation', 'link': '/nav_home' },
+            { 'title': 'Navigation', 'link': '/nav-home' },
             { 'title': 'Pager', 'link': '/pager' },
             { 'title': 'RadioButton', 'link': '/radio' },
             { 'title': 'Sort', 'link': '/sort' },
@@ -293,10 +295,6 @@ angular.module('example', [
             $rootScope.socketEnabled = !$rootScope.socketEnabled;
         };
 
-//        $scope.$on('$routeChangeStart', function() {
-//            socket.disconnect();
-//        });
-//
         $bbcTransport.on('news', function (data) {
             $scope.messages.push({message: 'NEWS: ' + data});
         });
@@ -319,5 +317,170 @@ angular.module('example', [
 
         $scope.isActive = function (route) {
             return route === $location.path();
+        };
+    })
+    .controller('SessionCtrl', function ($scope, $bbcSession, $rootScope) {
+
+        $scope.activityMessages = [];
+
+        $scope.clearActivity = function() {
+            $scope.activityMessages = [];
+        };
+
+        $scope.getLastActivity = function() {
+            $scope.activityMessages.push({class:'sent', message: 'SENT: ' + 'getLastActivity'});
+
+            if ($rootScope.socketEnabled ) {
+                $rootScope.socketEnabled = false;
+            }
+
+            $bbcSession.getLastActivity(function(error, data) {
+
+                console.log(data.activity);
+
+                if(error) {
+                    $scope.activityMessages.push({class:'error', message: error});
+                }
+                else {
+                    var now = new Date(data.activity);
+                    $scope.activityMessages.push({class: 'response', message: 'RESPONSE: ' + 'last activity is ' + now});
+                }
+            });
+        };
+
+        $scope.setActivity = function() {
+
+            var now = new Date();
+            $scope.activityMessages.push({class:'sent', message: 'SENT: ' + 'set activity to ' + now});
+
+            if ($rootScope.socketEnabled ) {
+                $rootScope.socketEnabled = false;
+            }
+
+            $bbcSession.setActivity(function(error) {
+                if(error) {
+                    $scope.activityMessages.push({class:'error', message: error});
+                }
+                else {
+                    $scope.activityMessages.push({class: 'response', message: 'RESPONSE: true'});
+
+                    $scope.apply = function() {
+                        $scope.data.key = '';
+                        $scope.data.value = '';
+                    };
+                }
+            });
+        };
+
+        $scope.dataMessages = [];
+
+        $scope.clearData = function() {
+            $scope.dataMessages = [];
+        };
+
+        $scope.getData = function () {
+
+            if (typeof $scope.data === 'undefined' || typeof $scope.data.key === 'undefined' ||
+                $scope.data.key.length === 0) {
+
+                $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'get all session data'});
+
+                if ($rootScope.socketEnabled ) {
+                    $rootScope.socketEnabled = false;
+                }
+
+                $bbcSession.getData(function (error, result) {
+                    if (error) {
+                        $scope.dataMessages.push({class:'error', message: error});
+                    }
+                    else {
+                        $scope.dataMessages.push({class:'response', message: 'RESPONSE: '});
+                        $scope.dataMessages.push({class:'response', message: result});
+                    }
+                });
+            }
+            else {
+
+                $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'get key: ' + $scope.data.key});
+
+                if ($rootScope.socketEnabled ) {
+                    $rootScope.socketEnabled = false;
+                }
+
+                $bbcSession.getData($scope.data.key, function (error, result) {
+                    if (error) {
+                        $scope.dataMessages.push({class:'error', message: error});
+                    }
+                    else {
+                        $scope.dataMessages.push({class:'response', message: 'RESPONSE: ' });
+                        $scope.dataMessages.push({class:'response', message: result});
+                    }
+                });
+            }
+        };
+
+        $scope.setData = function () {
+            if (typeof $scope.data === 'undefined' || typeof $scope.data.key === 'undefined' ||
+                $scope.data.key.length === 0 || typeof $scope.data.value === 'undefined' ||
+                $scope.data.value.length === 0) {
+
+                $scope.dataMessages.push({class:'error', message: 'ERROR: ' + 'for save in session is key and value required'});
+            }
+            else {
+
+                $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'setData' + 'key:' + $scope.data.key + ' value:' + $scope.data.value});
+
+                if ($rootScope.socketEnabled ) {
+                    $rootScope.socketEnabled = false;
+                }
+
+                $bbcSession.setData($scope.data.key, $scope.data.value, function (error, result) {
+
+                    if(error) {
+                        $scope.activityMessages.push({class:'error', message: error});
+                    }
+                    else {
+                        $scope.dataMessages.push({class:'response', message: 'RESPONSE: ' + result});
+                    }
+                });
+            }
+        };
+
+        $scope.deleteData = function () {
+            if (typeof $scope.data === 'undefined' || typeof $scope.data.key === 'undefined' ||
+                $scope.data.key.length === 0) {
+
+                $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'set no key, delete all objects in session.data'});
+
+                if ($rootScope.socketEnabled ) {
+                    $rootScope.socketEnabled = false;
+                }
+
+                $bbcSession.deleteData(function (error, result) {
+                    if (error) {
+                        $scope.activityMessages.push({class:'error', message: error});
+                    }
+                    else {
+                        $scope.dataMessages.push({class:'response', message: 'RESPONSE: ' + result});
+                    }
+                });
+            }
+            else {
+
+                $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'delete ' + $scope.data.key + ' in session.data'});
+
+                if ($rootScope.socketEnabled ) {
+                    $rootScope.socketEnabled = false;
+                }
+
+                $bbcSession.deleteData($scope.data.key, function (error, result) {
+                    if (error) {
+                        $scope.activityMessages.push({class:'error', message: error});
+                    }
+                    else {
+                        $scope.dataMessages.push({class:'response', message: 'RESPONSE: ' + result});
+                    }
+                });
+            }
         };
     });
