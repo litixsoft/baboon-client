@@ -4,8 +4,8 @@ var isHome = true;
 
 exports.getTopList = function (req, res) {
     res.send(200, [
-        { title: 'Home', route: '/nav_home', app: 'unitTest', level: 0 },
-        { title: 'Admin', route: '/nav_admin', app: 'unitTest', level: 1 }
+        { title: 'Home', route: '/nav-home', app: 'unitTest', level: 0 },
+        { title: 'Admin', route: '/nav-admin', app: 'unitTest', level: 1 }
     ]);
 };
 

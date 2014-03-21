@@ -32,8 +32,8 @@ angular.module('example', [
             .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
             .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
-            .when('/nav_home', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl' })
-            .when('/nav_admin', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
+            .when('/nav-home', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl' })
+            .when('/nav-admin', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
             .when('/pager', { templateUrl: 'partials/pager.html', controller: 'PagerCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
@@ -58,7 +58,7 @@ angular.module('example', [
             { 'title': 'Integer', 'link': '/integer' },
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
-            { 'title': 'Navigation', 'link': '/nav_home' },
+            { 'title': 'Navigation', 'link': '/nav-home' },
             { 'title': 'Pager', 'link': '/pager' },
             { 'title': 'RadioButton', 'link': '/radio' },
             { 'title': 'Sort', 'link': '/sort' },
@@ -258,28 +258,6 @@ angular.module('example', [
             setTimeout(function(){
                 $bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
             },3000);
-        };
-    })
-    .controller('NavigationCtrl', function ($scope, $location) {
-        $scope.menu = [
-            { 'title': 'Home', 'link': '/' },
-            { 'title': 'Alert', 'link': '/alert' },
-            { 'title': 'Checkbox', 'link': '/checkbox' },
-            { 'title': 'Datepicker', 'link': '/datepicker' },
-            { 'title': 'Float', 'link': '/float' },
-            { 'title': 'Inline Edit', 'link': '/edit' },
-            { 'title': 'Integer', 'link': '/integer' },
-            { 'title': 'Markdown', 'link': '/markdown' },
-            { 'title': 'Modal', 'link': '/modal' },
-            { 'title': 'RadioButton', 'link': '/radio' },
-            { 'title': 'Sort', 'link': '/sort' },
-            { 'title': 'Transport', 'link': '/transport' },
-            { 'title': 'UI Reset', 'link': '/reset' },
-            { 'title': 'Session', 'link': '/session' }
-        ];
-
-        $scope.isActive = function (route) {
-            return route === $location.path();
         };
     })
     .controller('NavHomeCtrl', function ($scope, $rootScope) {
