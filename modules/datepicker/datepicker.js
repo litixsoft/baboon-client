@@ -28,7 +28,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
      </file>
      </example>
      */
-    .directive('bbcDatepicker', function ($window,$filter, bbcDatepickerConfig) {
+    .directive('bbcDatepicker', function ($window,$filter,$timeout, bbcDatepickerConfig) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -52,25 +52,26 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     month: scope.selectedDay.getMonth(),
                     year: scope.selectedDay.getFullYear()
                 };
+                scope.requiredAttr = attrs.required;
                 scope.yearNames = [];
                 scope.monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
                 scope.dayNames = ['KW', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
 //                scope.dayNames = ['KW', 'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
-                var autoScroll = false; // true if scroll through the years by holding down the keys
+                scope.autoScroll = false; // true if scroll through the years by holding down the keys
                 var mainPick = element[0]; //document.getElementById(scope.inputID); //get input with datepicker by id (cause angular element parent has selectors)
-                var scrollCont = mainPick.getElementsByClassName('bbc-datepicker-year-container')[0];
+                scope.scrollCont = mainPick.getElementsByClassName('bbc-datepicker-year-container')[0];
                 var dateElement = mainPick.getElementsByClassName('bbc-datepicker');
-                var datepicker = angular.element(dateElement[0]);
+                scope.datepicker = angular.element(dateElement[0]);
 
-                var off = { // datepicker offset in browser window, used to move datepicker if not fully visible in view
+                scope.off = { // datepicker offset in browser window, used to move datepicker if not fully visible in view
                     top: 5,
                     left: 0
                 };
 
                 angular.element($window).bind('resize', function () {
                     if (scope.visible) {
-                        checkPosition();
+                        scope.checkPosition();
                     }
                 });
 
@@ -78,24 +79,24 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * moving datepicker if not fully in view
                  *
                  */
-                function checkPosition () {
+                scope.checkPosition = function () {
                     var rect = element[0].getBoundingClientRect();
                     var popup = dateElement[0].getBoundingClientRect();
                     var width = $window.innerWidth;
                     var height = $window.innerHeight;
 
                     if ((rect.bottom + popup.height) > height - 20) {
-                        off.top -= ( (rect.bottom + popup.height) - (height - 20));
+                        scope.off.top -= ( (rect.bottom + popup.height) - (height - 20));
                     }
 
-                    datepicker.css('top', off.top + 'px');
+                    scope.datepicker.css('top', scope.off.top + 'px');
 
                     if ((rect.left + popup.width) > width - 20) {
-                        off.left -= ( (rect.left + popup.width) - (width - 20));
+                        scope.off.left -= ( (rect.left + popup.width) - (width - 20));
                     }
 
-                    datepicker.css('left', off.left + 'px');
-                }
+                    scope.datepicker.css('left', scope.off.left + 'px');
+                };
 
                 /**
                  * fill Array with a range of numbers start with maxYear ends with minYear
@@ -116,8 +117,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @param {string} format 22.22.2003
                  * @returns {string} ./-
                  */
-                function getDivider (dateFormat) {
-
+                scope.getDivider = function (dateFormat) {
 //                    var regex =  /y/; // /id=[\'\"]{0,1}(\w+)/; //gets the id attribute
 //                    var matches = dateFormat.match(regex);
 
@@ -129,20 +129,19 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     if (chars.indexOf(':') >= 0) { divider = ':'; }
 
                     return divider;
-                }
+                };
 
                 /**
                  * Validates date
                  *
                  * @param {string} format 22.22.2003
-                 * @returns {boolean}
+                 * @returns {object}
                  */
-                function validateDate (selectedDayShort) {
-
-                    var partsDivider = getDivider(selectedDayShort);
+                scope.validateDate = function (selectedDayShort) {
+                    var partsDivider = scope.getDivider(selectedDayShort);
                     var parts = selectedDayShort.split(partsDivider);
 
-                    var partsFormatDivider = getDivider(scope.dateFormat);
+                    var partsFormatDivider = scope.getDivider(scope.dateFormat);
                     var partsFormat = scope.dateFormat.split(partsFormatDivider);
 
                     var returnValue = {
@@ -193,7 +192,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     returnValue.error = 'format';
                     return returnValue;
 
-                }
+                };
 
                 /**
                  * Gets the start values for the days array
@@ -296,19 +295,20 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  *
                  * @param {string} up or down
                  */
-                function autoScrollFunc (direction) {
-                    if (autoScroll) {
-                        setTimeout(function () {
+
+                scope.autoScrollFunc = function (direction) {
+                    if (scope.autoScroll) {
+                        $timeout(function () {
                             if (direction === 'up') {
-                                scrollCont.scrollTop -= 5;
+                                scope.scrollCont.scrollTop -= 5;
                             } else if (direction === 'down') {
-                                scrollCont.scrollTop += 5;
+                                scope.scrollCont.scrollTop += 5;
                             }
 
-                            autoScrollFunc(direction);
+                            scope.autoScrollFunc(direction);
                         }, 20);
                     }
-                }
+                };
 
                 /**
                  * is called when a year is clicked, set the selected date and refresh view
@@ -363,9 +363,8 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  *
                  */
                 scope.getInput = function () {
-
-                    var valid = {
-                        required: attrs.required ? false : true,
+                    scope.valid = {
+                        required: scope.requiredAttr ? false : true,
                         date: true,
                         wrongdate: true
                     };
@@ -373,34 +372,34 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     ctrls.$dirty = true;
 
                     if (scope.selectedDayShort.length < 1) {
-                        if (attrs.required) {
-                            valid.required = false;
-                            valid.date = true;
+                        if (scope.requiredAttr) {
+                            scope.valid.required = false;
+                            scope.valid.date = true;
                         } else {
-                            valid.required = true;
-                            valid.date = true;
+                            scope.valid.required = true;
+                            scope.valid.date = true;
                         }
                     } else {
-                        var validationObject = validateDate(scope.selectedDayShort);
-                        if (!validationObject.error) {
-                            scope.ngModel = validationObject.result;// new Date('' + scope.selectedDay); // set the model with the new date from the input
-                            valid.date = true;      // date is valid no need to show error
-                            valid.required = true;  // required is valid no need to show error
-                            valid.wrongdate = true;
+                        scope.validationObject = scope.validateDate(scope.selectedDayShort);
+                        if (!scope.validationObject.error) {
+                            scope.ngModel = scope.validationObject.result;// new Date('' + scope.selectedDay); // set the model with the new date from the input
+                            scope.valid.date = true;      // date is valid no need to show error
+                            scope.valid.required = true;  // required is valid no need to show error
+                            scope.valid.wrongdate = true;
                         } else {
-                            valid.required = true;
-                            if(validationObject.error==='day'){
-                                valid.wrongdate = false;
+                            scope.valid.required = true;
+                            if(scope.validationObject.error==='day'){
+                                scope.valid.wrongdate = false;
                             } else {
-                                valid.date = false;
+                                scope.valid.date = false;
                             }
 
                         }
                     }
 
-                    ctrls.$setValidity('date', valid.date); //true or false
-                    ctrls.$setValidity('required', valid.required); //true or false
-                    ctrls.$setValidity('wrongdate', valid.wrongdate); //true or false
+                    ctrls.$setValidity('date', scope.valid.date); //true or false
+                    ctrls.$setValidity('required', scope.valid.required); //true or false
+                    ctrls.$setValidity('wrongdate', scope.valid.wrongdate); //true or false
 
                 };
 
@@ -410,15 +409,15 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  * @param {string} up or down direction
                  */
                 scope.startScroll = function (direction) {
-                    autoScroll = true;
-                    autoScrollFunc(direction);
+                    scope.autoScroll = true;
+                    scope.autoScrollFunc(direction);
                 };
 
                 /**
                  * is called onmouseup on one of the scroll buttons, stops scrolling
                  */
                 scope.stopScroll = function () {
-                    autoScroll = false;
+                    scope.autoScroll = false;
                 };
 
                 /**
@@ -432,17 +431,17 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                  */
                 scope.$watch('visible', function (newValue) {
                     if (newValue) { //if visible
-                        off = {
+                        scope.off = {
                             top: 5,
                             left: 0
                         };
 
-                        checkPosition();
+                        scope.checkPosition();
 
                         var offsetTop = ( scope.yearNames.indexOf(scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
 
                         setTimeout(function () {
-                            scrollCont.scrollTop = offsetTop; // auto scroll to selected year
+                            scope.scrollCont.scrollTop = offsetTop; // auto scroll to selected year
                             angular.element($window).bind('keydown', function (ev) {
                                 if (ev.keyCode === 27) { // ESC
                                     scope.$apply(function () {
