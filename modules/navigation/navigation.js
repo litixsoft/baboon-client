@@ -31,17 +31,6 @@ angular.module('bbc.navigation', [])
             route = options.route;
         };
 
-        /**
-         * @ngdoc method
-         * @name bbc.navigation.$bbcNavigation#$get
-         * @methodOf bbc.navigation.$bbcNavigation
-         *
-         * @description
-         * Get instance of navigation
-         *
-         * @param {object} $bbcTransport The transport layer
-         * @returns {object} The current transport provider
-         */
         this.$get = function ($bbcTransport) {
             var pub = {};
 
