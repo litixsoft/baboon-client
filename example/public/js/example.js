@@ -5,6 +5,7 @@ angular.module('example', [
         'ui.bootstrap',
         'pascalprecht.translate',
         'bbc.alert',
+        'bbc.cache',
         'bbc.checkbox',
         'bbc.radio',
         'bbc.markdown',
@@ -25,6 +26,7 @@ angular.module('example', [
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
             .when('/alert', { templateUrl: 'partials/alert.html', controller: 'AlertCtrl' })
+            .when('/cache', { templateUrl: 'partials/cache.html', controller: 'CacheCtrl' })
             .when('/checkbox', { templateUrl: 'partials/checkbox.html', controller: 'CheckboxCtrl' })
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
@@ -57,6 +59,7 @@ angular.module('example', [
         $scope.menu = [
             { 'title': 'Home', 'link': '/' },
             { 'title': 'Alert', 'link': '/alert' },
+            { 'title': '$bbcCache', 'link': '/cache' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
             { 'title': 'Datepicker', 'link': '/datepicker' },
             { 'title': 'Float', 'link': '/float' },
@@ -70,7 +73,7 @@ angular.module('example', [
             { 'title': 'Session', 'link': '/session' },
             { 'title': 'Sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
-            { 'title': 'UI Reset', 'link': '/reset' }
+            { 'title': 'bbcReset', 'link': '/reset' }
         ];
 
         $scope.isActive = function (route) {
@@ -81,6 +84,16 @@ angular.module('example', [
         $scope.bbcAlert = $bbcAlert;
         $scope.showAlert = function(type) {
             $scope.bbcAlert[type]('Info message from controller');
+        };
+    })
+    .controller('CacheCtrl', function ($scope, $bbcCache) {
+        $scope.bbcCache = $bbcCache;
+        $scope.addToCache = function(user) {
+            $bbcCache['_user'] = user;
+        };
+
+        $scope.clearCache = function() {
+            delete $bbcCache['_user'];
         };
     })
     .controller('DatepickerCtrl', function ($scope) {

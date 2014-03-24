@@ -11,9 +11,11 @@ angular.module('bbc.reset', [])
      * @element input
      *
      * @description
-     * Resets the model of an input field.
+     * Adds an icon to reset the model of an input field.
+     * For more details see {@link /reset Reset-Example}
      *
-     * @example
+     */
+    /*     * @example
      <example module="ngView">
      <file name="index.html">
      <div ng-controller="ResetCtrl">
@@ -21,11 +23,10 @@ angular.module('bbc.reset', [])
      </div>
      </file>
      <file name="scripts.js">
-        angular.module('ngView', ['bbc.reset']).controller('ResetCtrl', function ($scope) {
-        });
+     angular.module('ngView', ['bbc.reset']).controller('ResetCtrl', function ($scope) {
+     });
      </file>
-     </example>
-     */
+     </example>*/
     .directive('bbcReset', function ($compile, $timeout) {
         return {
             require: 'ngModel',
