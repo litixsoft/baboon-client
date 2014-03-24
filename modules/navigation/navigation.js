@@ -81,7 +81,7 @@ angular.module('bbc.navigation', [])
              * @description
              * Gets the navigation tree.
              *
-             * @param {Function} callback The callback function.
+             * @param {function(error, data) } callback The callback function.
              */
             pub.getTree = function (callback) {
                 $bbcTransport.emit('/api/navigation/getTree',{current: app}, callback);
@@ -95,7 +95,7 @@ angular.module('bbc.navigation', [])
              * @description
              * Gets the navigation flat list.
              *
-             * @param {Function} callback The callback function.
+             * @param {function(error, data) } callback The callback function.
              */
             pub.getList = function (callback) {
                 $bbcTransport.emit('/api/navigation/getList',{current: app}, callback);
@@ -109,7 +109,7 @@ angular.module('bbc.navigation', [])
              * @description
              * Gets the toplevel of navigation.
              *
-             * @param {Function} callback The callback function.
+             * @param {function(error, data) } callback The callback function.
              */
             pub.getTopList = function (callback) {
                 $bbcTransport.emit('/api/navigation/getTopList',{current: app}, callback);
@@ -123,11 +123,12 @@ angular.module('bbc.navigation', [])
              * @description
              * Gets all sub links from application as tree.
              *
-             * @param {Function} callback The callback function.
+             * @param {function(error, data) } callback The callback function.
              */
             pub.getSubTree = function (callback) {
                 $bbcTransport.emit('/api/navigation/getSubTree',{current: app, top: route}, callback);
             };
+
 
             /**
              * @ngdoc method
@@ -137,7 +138,7 @@ angular.module('bbc.navigation', [])
              * @description
              * Get all sub links from application as list.
              *
-             * @param {Function} callback The callback function.
+             * @param {function(error, data) } callback The callback function.
              */
             pub.getSubList = function (callback) {
                 $bbcTransport.emit('/api/navigation/getSubList',{current: app, top: route}, callback);
