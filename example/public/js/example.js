@@ -33,7 +33,13 @@ angular.module('example', [
             .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
             .when('/nav-home', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl' })
+            .when('/nav-home/nav-products', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl'})
+            .when('/nav-home/nav-customers', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl'})
+            .when('/nav-home/nav-statistics', { templateUrl: 'partials/nav_home.html', controller: 'NavHomeCtrl'})
             .when('/nav-admin', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
+            .when('/nav-admin/nav-rights', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
+            .when('/nav-admin/nav-groups', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
+            .when('/nav-admin/nav-users', { templateUrl: 'partials/nav_admin.html', controller: 'NavAdminCtrl' })
             .when('/pager', { templateUrl: 'partials/pager.html', controller: 'PagerCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
@@ -436,7 +442,6 @@ angular.module('example', [
                 }
 
                 $bbcSession.setData($scope.data.key, $scope.data.value, function (error, result) {
-
                     if(error) {
                         $scope.activityMessages.push({class:'error', message: error});
                     }
