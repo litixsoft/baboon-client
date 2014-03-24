@@ -223,8 +223,9 @@ angular.module('bbc.pager', [])
                  * Update current page when current page is greater than number of pages.
                  */
                 scope.$watch('count', function () {
-                    if (scope.currentPage > scope.numberOfPages() && scope.numberOfPages() > 0) {
-                        scope.currentPage = scope.numberOfPages() || 1;
+                    var pageCount = scope.numberOfPages();
+                    if (scope.currentPage > pageCount && pageCount > 0) {
+                        scope.currentPage = pageCount;
                     }
                 });
 

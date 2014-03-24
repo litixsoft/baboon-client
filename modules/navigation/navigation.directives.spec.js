@@ -244,4 +244,101 @@ describe('bbc.navigation', function () {
             }).toThrow(new Error('Type must be top, sub or list.'));
         });
     });
+
+    describe('bbcNavigationTree', function() {
+        beforeEach(module('bbc.transport'));
+        beforeEach(module('bbc.navigation'));
+        beforeEach(module('pascalprecht.translate'));
+
+        var $navigation, $scope, location, element, compile;
+
+        beforeEach(function (done) {
+            inject(function ($compile, $rootScope, $injector, $location) {
+                compile = $compile;
+                $navigation = $injector.get('$bbcNavigation');
+                location = $location;
+                $navigation.getTree = function(callback) {
+                    callback(null, navigationMockList);
+                };
+
+                $scope = $rootScope.$new();
+                element = angular.element('<bbc-navigation-tree></bbc-navigation-tree>');
+                compile(element)($scope);
+                done();
+            });
+        });
+
+        it('should be correct initialized', function () {
+            var elementScope = element.isolateScope();
+
+            expect(elementScope.navList).toBeDefined();
+            expect(elementScope.navList.length).toBe(2);
+        });
+
+        it('should attach menus to the scope', function () {
+            var elementScope = element.isolateScope();
+
+            expect(elementScope.navList.length).toBeGreaterThan(0);
+
+            expect(elementScope.navList[0].title).toBe('TEST');
+            expect(elementScope.navList[0].route).toBe('/test');
+            expect(elementScope.navList[0].app).toBe('unitTest');
+            expect(elementScope.navList[0].level).toBe(0);
+
+            expect(elementScope.navList[1].title).toBe('TEST-SUB');
+            expect(elementScope.navList[1].route).toBe('/test-sub');
+            expect(elementScope.navList[1].app).toBe('unitTest');
+            expect(elementScope.navList[1].level).toBe(1);
+        });
+
+        it('should active the correct location', function () {
+            var elementScope = element.isolateScope();
+
+            location.path('/test/path');
+            expect(elementScope.isActive('/test/path')).toBe(true);
+            expect(elementScope.isActive('/test/foo')).toBe(false);
+        });
+
+        it('should set hid to bbc-open', function() {
+            var data = {};
+            var elementScope = element.isolateScope();
+            elementScope.toggleShow(data);
+            expect(data.hide).toBe('bbc-open');
+        });
+
+        it('should set hid to bbc-close', function() {
+            var data = {hide: 'bbc-open'};
+            var elementScope = element.isolateScope();
+            elementScope.toggleShow(data);
+            expect(data.hide).toBe('bbc-close');
+        });
+    });
+
+    describe('bbcNavigationTree with error', function() {
+        beforeEach(module('bbc.transport'));
+        beforeEach(module('bbc.navigation'));
+        beforeEach(module('pascalprecht.translate'));
+
+        var $scope, element, compile;
+
+        beforeEach(function (done) {
+            inject(function ($compile, $rootScope, $injector) {
+                compile = $compile;
+                var $navigation = $injector.get('$bbcNavigation');
+                $navigation.getTree = function(callback) {
+                    callback('error');
+                };
+
+                $scope = $rootScope.$new();
+                element = angular.element('<bbc-navigation-tree></bbc-navigation-tree>');
+                compile(element)($scope);
+                done();
+            });
+        });
+
+        it('should be attach a empty menuTopList', function () {
+            var elementScope = element.isolateScope();
+            expect(elementScope.navList.length).toBe(0);
+        });
+    });
 });

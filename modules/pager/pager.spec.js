@@ -124,6 +124,15 @@ describe('bbcPager', function () {
         scope.$digest();
     });
 
+    it('should trigger if path in scope.$watch(pageSize)', function () {
+        element = angular.element('<bbc-pager count="count" page-size="5" current-page="currentPage" ></bbc-pager>');
+        compile(element)(scope);
+        scope.currentPage = 1;
+        scope.pageSize = 1;
+        scope.count = 0;
+        scope.$digest();
+    });
+
     it('should have a function getOptions() which returns the paging options', function () {
         var elementScope = element.isolateScope();
         expect(elementScope.getOptions()).toEqual({limit: 10, skip: 0});

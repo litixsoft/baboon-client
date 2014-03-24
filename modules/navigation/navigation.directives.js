@@ -83,10 +83,10 @@ angular.module('bbc.navigation')
                 });
 
                 scope.toggleShow = function (data) {
-                    if (data.hide === 'lxclose' || data.hide === undefined) {
-                        data.hide = 'lxopen';
+                    if (data.hide === 'bbc-close' || data.hide === undefined) {
+                        data.hide = 'bbc-open';
                     } else {
-                        data.hide = 'lxclose';
+                        data.hide = 'bbc-close';
                     }
                 };
 
