@@ -4,44 +4,34 @@
             <h1>bbc.session</h1>
         </div>
 
-        <p>
-            Sessions werden in Baboon vom Server mit den Parametern aus der config.js erzeugt und verwaltet.
-            Das Modul bbc.session beinhaltet einen Service, welcher mit der Serversession interagieren kann.
-            Dies kann genutzt werden um den Server Aktivität zu melden und Daten vom Client aus in der Session zu
-            speichern.
-        </p>
+        <p>{{ 'SESSION_INTRO' | translate }}</p>
 
-        <h3>Methoden des Sessionservices</h3>
+        <h3>{{ 'SESSION_LIST_HEADER' | translate }}</h3>
         <ul>
-            <li>setActivity: Aktivität der Session melden</li>
-            <li>getLastActivity: Letzte Aktivität abfragen</li>
-            <li>setData: Daten in der Session speichern</li>
-            <li>getData: Daten aus der Session laden</li>
-            <li>deleteData: Daten aus der Session löschen</li>
+            <li>setActivity: {{ 'SESSION_LIST_1' | translate }}</li>
+            <li>getLastActivity: {{ 'SESSION_LIST_2' | translate }}</li>
+            <li>setData: {{ 'SESSION_LIST_3' | translate }}</li>
+            <li>getData: {{ 'SESSION_LIST_4' | translate }}</li>
+            <li>deleteData: {{ 'SESSION_LIST_5' | translate }}</li>
         </ul>
 
-        <h3>setActivity: Meldet neue Aktivität an den Server</h3>
+        <h3>setActivity: {{ 'SESSION_SETACTIVITY_HEADER' | translate }}</h3>
 
         <p>
-            Eine Singlepage Anwendung wird einmal an den Client ausgeliefert und erzeugt keinen neuen Request.
-            Das ist für die Session ein Problem, da zwangsläufig die Inaktivitätszeit überschritten wird. Um das zu
-            vermeiden, meldet der Client, wie im Beispiel, bei jeder Änderung der Route eine Aktivität an den Server.
-            Der Server prüft die Session und meldet einen Fehler,
-            wenn die Inaktivitätszeit oder die Maximale Laufzeit der Session überschritten wurde.
+            {{ 'SESSION_SETACTIVITY_TEXT' | translate }}
         </p>
 
         <div hljs include="'snippet/session/setActivity.js'" class="r"></div>
 
-        <h3>getLastActivity: Letzte Aktivität der Session abfragen</h3>
+        <h3>getLastActivity: {{ 'SESSION_GETLASTACTIVITY_HEADER' | translate }}</h3>
 
         <p>
-            Die letzte Aktivität der Session abfragen. Dabei wird die Session nicht erneut überprüft und keine
-            neue Aktivität gesetzt. Es wird ein in ISO formatierter Datumsstring zurück geliefert.
+            {{ 'SESSION_GETLASTACTIVITY_TEXT' | translate }}
         </p>
 
         <div hljs include="'snippet/session/getLastActivity.js'"></div>
 
-        <h3>Beispiel:</h3>
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
 
         <tabset>
             <tab heading="demo.js">
@@ -73,51 +63,40 @@
             </div>
         </div>
 
-        <h3>setData: Daten im Session-Container speichern</h3>
+        <h3>setData: {{ 'SESSION_SETDATA_HEADER' | translate }}</h3>
         <p>
-            Sie können über den Session-Service vom Client aus Daten in der Serversession speichern.
-            Baboon verwendet zum speichern in der Session den Container data. Alle Daten vom Client werden innerhalb des
-            Containers session.data abgelegt und können auch nur aus diesem gelesen und gelöscht werden.
-            Speichern außerhalb des Containers ist nicht möglich.
-        </p>
-        <p>
-            Ist der Key in der Session bereits vergeben, wird der Wert mit dem neuen Wert überschrieben.
-            Beachten Sie daher den Aufbau Ihrer Namen für Keys und verwenden Sie wenn möglich einen Namespace.
+            {{ 'SESSION_SETDATA_TEXT' | translate }}
         </p>
 
         <div hljs include="'snippet/session/setData.js'"></div>
 
-        <h3>getData: Daten aus dem Session-Container lesen</h3>
+        <h3>getData: {{ 'SESSION_GETDATA_HEADER' | translate }}</h3>
         <p>
-            Sie können über den Session-Service vom Client aus Daten aus der Serversession auslesen.
-            Verwenden Sie dazu den Key unter welchem Sie die Daten gespeichert haben.
-            Sie können Daten, die außerhalb des Containers liegen, nicht abfragen.
+            {{ 'SESSION_GETDATA_TEXT' | translate }}
         </p>
 
         <div hljs include="'snippet/session/getData.js'"></div>
 
         <p>
-            Wenn Sie keinen Key angeben, wird Ihnen das gesamte Session Container Objekt zurück geliefert.
+            {{ 'SESSION_GETDATA_TEXT2' | translate }}
         </p>
 
         <div hljs include="'snippet/session/getData2.js'"></div>
 
-        <h3>deleteData: Daten aus dem Session-Container löschen</h3>
+        <h3>deleteData: {{ 'SESSION_DELETEDATA_HEADER' | translate }}</h3>
         <p>
-            Sie können über den Session-Service vom Client aus Daten aus der Serversession löschen.
-            Verwenden Sie dazu den Key unter welchem Sie die Daten gespeichert haben.
-            Sie können Daten, die außerhalb des Containers liegen, nicht löschen.
+            {{ 'SESSION_DELETEDATA_TEXT' | translate }}
         </p>
 
         <div hljs include="'snippet/session/deleteData.js'"></div>
 
         <p>
-            Wenn Sie keinen Key angeben, wird das gesamte Session Container Objekt gelöscht.
+            {{ 'SESSION_DELETEDATA_TEXT2' | translate }}
         </p>
 
         <div hljs include="'snippet/session/deleteData2.js'"></div>
 
-        <h3>Beispiel</h3>
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
 
         <tabset>
             <tab heading="demo.js">
