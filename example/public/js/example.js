@@ -4,6 +4,7 @@ angular.module('example', [
         'ngRoute',
         'ui.bootstrap',
         'pascalprecht.translate',
+        'hljs',
         'bbc.alert',
         'bbc.cache',
         'bbc.checkbox',
@@ -83,10 +84,10 @@ angular.module('example', [
             { 'title': 'Navigation', 'link': '/nav-home' },
             { 'title': 'Pager', 'link': '/pager' },
             { 'title': 'RadioButton', 'link': '/radio' },
-            { 'title': 'Session', 'link': '/session' },
             { 'title': 'Sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
-            { 'title': 'bbcReset', 'link': '/reset' }
+            { 'title': 'bbcReset', 'link': '/reset' },
+            { 'title': 'bbc.session', 'link': '/session' }
         ];
 
         $scope.isActive = function (route) {
