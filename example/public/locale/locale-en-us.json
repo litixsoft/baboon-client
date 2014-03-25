@@ -27,7 +27,7 @@
     "SESSION_LIST_4": "Load data from the session",
     "SESSION_LIST_5": "Delete data from the session",
     "SESSION_SETACTIVITY_HEADER": "Reports new activity to the server",
-    "SESSION_SETACTIVITY_TEXT": "A single page application is once delivered to the client, and does not generate a new request. This is a problem for the session, as inevitably the inactivity time is exceeded. To avoid this, the client will report as in the example at each change of the route an activity to the server. The server checks the session and reports an error, if the elapsed time or the maximum duration of the session has been exceeded.",
+    "SESSION_SETACTIVITY_TEXT": "Report activity on the server. The server checks the session on inactivity and maximum service life. If one of these times are exceeded, the server sends the client in the callback an error. If the session ok, the server uses the current server time and stores it as the last activity.",
     "SESSION_GETLASTACTIVITY_HEADER": "Check Latest activity session",
     "SESSION_GETLASTACTIVITY_TEXT": "The last activity of the session to query. The session will not be checked again and set no new activity. It is returned a formatted in ISO date string.",
     "SESSION_SETDATA_HEADER": "Store data in the Session Container",

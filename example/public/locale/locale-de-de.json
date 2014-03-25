@@ -27,7 +27,7 @@
     "SESSION_LIST_4": "Daten aus der Session laden",
     "SESSION_LIST_5": "Daten aus der Session löschen",
     "SESSION_SETACTIVITY_HEADER": "Meldet neue Aktivität an den Server",
-    "SESSION_SETACTIVITY_TEXT": "Eine Singlepage Anwendung wird einmal an den Client ausgeliefert und erzeugt keinen neuen Request. Das ist für die Session ein Problem, da zwangsläufig die Inaktivitätszeit überschritten wird. Um das zu vermeiden, meldet der Client, wie im Beispiel, bei jeder Änderung der Route eine Aktivität an den Server. Der Server prüft die Session und meldet einen Fehler, wenn die Inaktivitätszeit oder die Maximale Laufzeit der Session überschritten wurde.",
+    "SESSION_SETACTIVITY_TEXT": "Aktivität an den Server melden. Der Server prüft die Session auf Inaktivität und Maximale Lebensdauer. Ist eine dieser Zeiten überschritten, sendet der Server dem Client im Callback einen Fehler. Ist die Session ok, verwendet der Server die aktuelle Serverzeit und speichert diese als letzte Aktivität.",
     "SESSION_GETLASTACTIVITY_HEADER": "Letzte Aktivität der Session abfragen",
     "SESSION_GETLASTACTIVITY_TEXT": "Die letzte Aktivität der Session abfragen. Dabei wird die Session nicht erneut überprüft und keine neue Aktivität gesetzt. Es wird ein in ISO formatierter Datumsstring zurück geliefert.",
     "SESSION_SETDATA_HEADER": "Daten im Session-Container speichern",
