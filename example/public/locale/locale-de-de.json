@@ -1,5 +1,10 @@
 {
     "EXAMPLE": "Beispiel",
     "INPUT_PLACEHOLDER": "Text eingeben...",
-    "RESETTEXT": "Die bbc-reset Directive fügt dem Eingabefeld eine Bild hinzu, um das Model und die Anzeige zurückzusetzen. Die Directive kann nur auf die folgenden input Typen angewendet werden:"
+    "API_LINK_DESCRIPTION": "Für weitere Details besuchen Sie bitte unsere",
+    "API_LINK_TEXT": "API Referenz",
+    "RESET_TEXT": "Die bbc-reset Directive fügt dem Eingabefeld eine Bild hinzu, um das Model und die Anzeige zurückzusetzen. Die Directive kann nur auf die folgenden input Typen angewendet werden:",
+    "SORT_TEXT": "Die bbc-sort Directive fügt einer Tabelle eine Spalte für eine benutzerdefinierte oder serverseitige Sortierung hinzu.",
+    "SORT_CITY": "Stadt",
+    "SORT_COUNTRY": "Land"
 }
