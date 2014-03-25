@@ -29,6 +29,10 @@
                     <li class="active"><a href="/" target="_self"><i class="glyphicon glyphicon-tag"></i> Guide</a></li>
                 </ul>
             </div>
+            <div class="btn-group pull-right">
+                <a ng-click="switchLocale('de-de')" style="cursor: pointer;"><img src="/img/flag-germany48.png" alt="german" /></a>
+                <a ng-click="switchLocale('en-us')" style="cursor: pointer;"><img src="/img/flag-usa48.png" alt="english" /></a>
+            </div>
         </div>
     </div>
 </header>
@@ -55,6 +59,7 @@
 <script src="angular-route/angular-route.js"></script>
 <script src="angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="angular-translate/angular-translate.js"></script>
+<script src="angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <script src="showdown/src/showdown.js"></script>
 <script src="alert/alert.js"></script>
 <script src="cache/cache.js"></script>

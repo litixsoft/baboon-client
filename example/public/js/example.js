@@ -21,7 +21,7 @@ angular.module('example', [
         'bbc.navigation',
         'bbc.session'
     ])
-    .config(function ($routeProvider, $locationProvider, $bbcTransportProvider, $bbcNavigationProvider) {
+    .config(function ($routeProvider, $locationProvider, $bbcTransportProvider, $bbcNavigationProvider, $translateProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
@@ -49,8 +49,21 @@ angular.module('example', [
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
             .when('/session', { templateUrl: 'partials/session.html', controller: 'SessionCtrl' })
             .otherwise({ redirectTo: '/' });
+
         $bbcTransportProvider.set();
         $bbcNavigationProvider.set({app:'main', route:'home'});
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/locale/locale-',
+            suffix: '.json'
+        });
+        $translateProvider.preferredLanguage('en-us');
+        $translateProvider.fallbackLanguage('en-us');
+    })
+    .run(function ($rootScope, $translate) {
+        $rootScope.switchLocale = function(locale) {
+            $translate.use(locale);
+        };
     })
     .controller('ExampleCtrl', function ($scope) {
         $scope.view = 'partials/example.html';
