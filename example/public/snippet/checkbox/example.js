@@ -1,0 +1,1 @@
+angular.module('NgAppDemo', ['bbc.checkbox']).controller('NgAppDemoCtrl', function ($scope) {});

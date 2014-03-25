@@ -42,5 +42,10 @@
     "CHECKBOX_INTRO": "With the checkbox directive baboon provides a checkbox that looks in all supported browsers equal and has the same behavior.",
     "DISABLED": "The box is disabled!",
     "ACTIVATED": "I am enabled!",
-    "DEACTIVATED": "I am disabled!"
+    "DEACTIVATED": "I am disabled!",
+    "DATEPICKER_INTRO": "The datepicker directive is a calendar component. Through them, you can enter valid date values in an input box on easy way. The values can be inline as well as on the calender popup be entered.",
+    "DATE": "Date",
+    "DATEPICKER_WRONG_FORMAT": "Date has the wrong format.",
+    "DATEPICKER_REQUIRED":  "The date must be specified.",
+    "DATEPICKER_WRONG_DATE": "This date does not exist."
 }

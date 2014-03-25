@@ -42,5 +42,10 @@
     "CHECKBOX_INTRO": "Mit der Checkbox-Directive liefert Baboon eine Checkbox die in allen unterstützten Browsern gleich aussieht und das gleiche Verhalten aufweist.",
     "DISABLED": "Ich bin disabled!",
     "ACTIVATED": "Ich bin aktiviert!",
-    "DEACTIVATED": "Ich bin deaktiviert!"
+    "DEACTIVATED": "Ich bin deaktiviert!",
+    "DATEPICKER_INTRO": "Die Datepicker-Directive ist eine Kalenderkomponente. Durch sie lassen sich in ein Inputfeld auf einfache weise valide Datumswerte eintragen. Die Werte können sowohl inline als auch über das Kalenderpopup eingetragen werden.",
+    "DATE": "Datum",
+    "DATEPICKER_WRONG_FORMAT": "Das Datum hat ein falsches Format.",
+    "DATEPICKER_REQUIRED": "Das Datum muss angegeben werden.",
+    "DATEPICKER_WRONG_DATE": "Dieses Datum existiert nicht."
 }

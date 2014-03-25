@@ -1,0 +1,1 @@
+angular.module('NgAppDemo', ['bbc.cache']).controller('NgAppDemoCtrl', function ($scope) {});

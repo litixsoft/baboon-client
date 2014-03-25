@@ -1,0 +1,1 @@
+angular.module('NgAppDemo', ['bbc.datepicker']).controller('NgAppDemoCtrl', function ($scope) {});
