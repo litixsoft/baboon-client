@@ -44,22 +44,21 @@ angular.module('session', ['bbc.session'])
                 $scope.data.key.length === 0 || typeof $scope.data.value === 'undefined' ||
                 $scope.data.value.length === 0) {
 
-                $scope.dataMessages.push({class: 'error', message: 'ERROR: ' + 'for save in session is key and value required'});
+                $scope.dataMessages.push('ERROR: ' +
+                    'for save in session is key and value required');
             }
             else {
 
-                $scope.dataMessages.push({class: 'sent', message: 'SENT: ' + 'setData' + 'key:' + $scope.data.key + ' value:' + $scope.data.value});
-
-                if ($rootScope.socketEnabled) {
-                    $rootScope.socketEnabled = false;
-                }
+                $scope.dataMessages.push('SENT: ' + 'setData' + 'key:' + $scope.data.key +
+                    ' value:' + $scope.data.value);
 
                 $bbcSession.setData($scope.data.key, $scope.data.value, function (error, result) {
                     if (error) {
-                        $scope.activityMessages.push({class: 'error', message: error});
+                        $scope.activityMessages.push(error);
                     }
                     else {
-                        $scope.dataMessages.push({class: 'response', message: 'RESPONSE: ' + result});
+                        $scope.dataMessages.push('RESPONSE: ');
+                        $scope.dataMessages.push(result);
                     }
                 });
             }
@@ -69,35 +68,31 @@ angular.module('session', ['bbc.session'])
             if (typeof $scope.data === 'undefined' || typeof $scope.data.key === 'undefined' ||
                 $scope.data.key.length === 0) {
 
-                $scope.dataMessages.push({class: 'sent', message: 'SENT: ' + 'set no key, delete all objects in session.data'});
-
-                if ($rootScope.socketEnabled) {
-                    $rootScope.socketEnabled = false;
-                }
+                $scope.dataMessages.push('SENT: ' +
+                    'set no key, delete all objects in session.data');
 
                 $bbcSession.deleteData(function (error, result) {
                     if (error) {
-                        $scope.activityMessages.push({class: 'error', message: error});
+                        $scope.activityMessages.push(error);
                     }
                     else {
-                        $scope.dataMessages.push({class: 'response', message: 'RESPONSE: ' + result});
+                        $scope.dataMessages.push('RESPONSE: ');
+                        $scope.dataMessages.push(result);
                     }
                 });
             }
             else {
 
-                $scope.dataMessages.push({class: 'sent', message: 'SENT: ' + 'delete ' + $scope.data.key + ' in session.data'});
-
-                if ($rootScope.socketEnabled) {
-                    $rootScope.socketEnabled = false;
-                }
+                $scope.dataMessages.push('SENT: ' + 'delete ' +
+                    $scope.data.key + ' in session.data');
 
                 $bbcSession.deleteData($scope.data.key, function (error, result) {
                     if (error) {
-                        $scope.activityMessages.push({class: 'error', message: error});
+                        $scope.activityMessages.push(error);
                     }
                     else {
-                        $scope.dataMessages.push({class: 'response', message: 'RESPONSE: ' + result});
+                        $scope.dataMessages.push('RESPONSE: ');
+                        $scope.dataMessages.push(result);
                     }
                 });
             }
