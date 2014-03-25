@@ -82,7 +82,7 @@ angular.module('example', [
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
             { 'title': 'Navigation', 'link': '/nav-home' },
-            { 'title': 'Pager', 'link': '/pager' },
+            { 'title': 'bbc.pager', 'link': '/pager' },
             { 'title': 'bbc.radio', 'link': '/radio' },
             { 'title': 'bbc.sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
