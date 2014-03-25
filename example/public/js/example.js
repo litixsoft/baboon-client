@@ -79,7 +79,7 @@ angular.module('example', [
             { 'title': 'Float', 'link': '/float' },
             { 'title': 'Inline Edit', 'link': '/edit' },
             { 'title': 'Integer', 'link': '/integer' },
-            { 'title': 'Markdown', 'link': '/markdown' },
+            { 'title': 'bbc.markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
             { 'title': 'Navigation', 'link': '/nav-home' },
             { 'title': 'bbc.pager', 'link': '/pager' },

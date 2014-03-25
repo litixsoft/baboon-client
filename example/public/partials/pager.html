@@ -10,31 +10,33 @@
 
         <tabset>
             <tab heading="index.html">
-<div hljs>
-<table class="table table-striped">
-    <colgroup>
-        <col style="width:50%;" />
-        <col style="width:50%;" />
-    </colgroup>
-    <thead>
-    <tr>
-        <th><bbc-sort sort-opts="sortOpts" field-name="name" on-sorting="sort(sortingOptions)">Name</bbc-sort></th>
-        <th>Index</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="item in items">
-        <td>{{ item.name }}</td>
-        <td>{{ item.index }}</td>
-    </tr>
-    </tbody>
-</table>
-<bbc-pager count="count" current-page="currentPage" page-sizes="[1, 5, 10, 25]" page-size="10" on-paging="load(pagingOptions)"></bbc-pager>
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <table class="table table-striped">
+        <colgroup>
+            <col style="width:50%;" />
+            <col style="width:50%;" />
+        </colgroup>
+        <thead>
+        <tr>
+            <th><bbc-sort sort-opts="sortOpts" field-name="name" on-sorting="sort(sortingOptions)">Name</bbc-sort></th>
+            <th>Index</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.index }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <bbc-pager count="count" current-page="currentPage" page-sizes="[1, 5, 10, 25]" page-size="10" on-paging="load(pagingOptions)"></bbc-pager>
 </div>
+                </div>
             </tab>
             <tab heading="scripts.js">
 <div hljs>
-function PagerController($scope) {
+angular.module('ngAppDemo', ['bbc.pager']).controller('NgAppDemoCtrl', function ($scope) {
     $scope.initialPageSize = 10;
     $scope.pagingOptions = {'skip': 0, 'limit': $scope.initialPageSize};
     $scope.load = function (page) {
@@ -54,7 +56,7 @@ function PagerController($scope) {
     }
 
     getData();
-};
+});;
 </div>
             </tab>
         </tabset>

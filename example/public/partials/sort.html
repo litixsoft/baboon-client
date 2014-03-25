@@ -10,6 +10,7 @@
         <tabset>
             <tab heading="index.html">
 <div hljs>
+<div ng-controller="NgAppDemoCtrl">
     <table class="table table-striped">
         <colgroup>
             <col style="width:40%;" />
@@ -32,10 +33,11 @@
         </tbody>
     </table>
 </div>
+</div>
             </tab>
             <tab heading="scripts.js">
 <div hljs>
-function SortController($scope) {
+angular.module('ngAppDemo', ['bbc.sort']).controller('NgAppDemoCtrl', function ($scope) {
     $scope.sortOpts = {'name': -1};
 
     $scope.items = [
@@ -62,7 +64,7 @@ function SortController($scope) {
     };
 
     $scope.sort($scope.sortOpts);
-};
+});
 </div>
             </tab>
         </tabset>

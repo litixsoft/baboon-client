@@ -10,20 +10,22 @@
         <tabset>
             <tab heading="index.html">
                 <div hljs>
-<bbc-radio ng-model="model" name="group" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
-<bbc-radio ng-model="model" name="group" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
-<bbc-radio ng-model="model" name="group" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
-<button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+<div ng-controller="NgAppDemoCtrl">
+    <bbc-radio ng-model="model" name="group" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
+    <bbc-radio ng-model="model" name="group" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
+    <bbc-radio ng-model="model" name="group" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
+    <button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+</div>
                 </div>
             </tab>
             <tab heading="scripts.js">
                 <div hljs>
-function RadioController($scope) {
+angular.module('ngAppDemo', ['bbc.radio']).controller('NgAppDemoCtrl', function ($scope) {
     $scope.isDisabled = false;
     $scope.clickMe = function() {
         $scope.isDisabled = !$scope.isDisabled;
     };
-}
+});
                 </div>
             </tab>
         </tabset>
