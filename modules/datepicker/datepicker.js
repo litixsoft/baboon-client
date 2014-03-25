@@ -12,21 +12,14 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
      * @element input
      *
      * @description
-     * Creates a datepicker.
+     * Creates a datepicker. A datepicker is an interactiv calendar to choose a date in an input field.
+     * For more information look at the [guide](/datepicker).
      *
+     * @param {string=} [bbc-datepicker='dd.MM.yyyy'] Format string for date presentation.
+     * @param {string} ng-model The binding to a value in scope.
+     * @param {string=} placeholder The placeholder text in the input box.
+     * @param {=} required A date value is required.
      *
-     * @example
-     <example module="ngView">
-     <file name="index.html">
-         <div ng-controller="DatepickerCtrl">
-             <input name="pick" ng-model="date" bbc-datepicker placeholder="dd.MM.yyyy">
-         </div>
-     </file>
-     <file name="scripts.js">
-        angular.module('ngView', ['bbc.datepicker']).controller('DatepickerCtrl', function ($scope) {
-        });
-     </file>
-     </example>
      */
     .directive('bbcDatepicker', function ($window,$filter,$timeout, bbcDatepickerConfig) {
         return {
