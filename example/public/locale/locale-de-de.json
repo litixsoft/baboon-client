@@ -6,5 +6,6 @@
     "RESET_TEXT": "Die bbc-reset Directive fügt dem Eingabefeld eine Bild hinzu, um das Model und die Anzeige zurückzusetzen. Die Directive kann nur auf die folgenden input Typen angewendet werden:",
     "SORT_TEXT": "Die bbc-sort Directive fügt einer Tabelle eine Spalte für eine benutzerdefinierte oder serverseitige Sortierung hinzu.",
     "SORT_CITY": "Stadt",
-    "SORT_COUNTRY": "Land"
+    "SORT_COUNTRY": "Land",
+    "RADIO_TEXT": "Die bbc-radio Directive erzeugt ein RadioButton, der ein einheitliches Ausehen in allen Browsern besitzt."
 }
