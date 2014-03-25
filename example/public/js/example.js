@@ -86,7 +86,7 @@ angular.module('example', [
             { 'title': 'RadioButton', 'link': '/radio' },
             { 'title': 'Sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
-            { 'title': 'bbcReset', 'link': '/reset' },
+            { 'title': 'bbc.reset', 'link': '/reset' },
             { 'title': 'bbc.session', 'link': '/session' }
         ];
 
