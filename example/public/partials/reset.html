@@ -1,7 +1,7 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>bbcReset</h1>
+            <h1>bbc.reset</h1>
         </div>
         <p>
             {{ 'RESETTEXT' | translate }}
@@ -14,25 +14,23 @@
                 <li>password</li>
             </ul>
         </p>
-        <div class="panel panel-info">
-            <div class="panel-heading">{{ 'EXAMPLE' | translate }}</div>
+        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs  source="'<input type=&#34;text&#34; ng-model=&#34;test&#34; bbc-reset placeholder=&#34;...&#34; />'">
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
             <div class="panel-body">
                 <div class="form-group row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <input type="text" class="form-control" ng-model="test" bbc-reset placeholder="{{ 'INPUT_PLACEHOLDER' | translate }}" />
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" ng-model="test2" bbc-reset placeholder="{{ 'INPUT_PLACEHOLDER' | translate }}" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-5">
-                        <input type="text" class="form-control" ng-model="test3" bbc-reset placeholder="{{ 'INPUT_PLACEHOLDER' | translate }}" />
-                    </div>
-                </div>
+                <pre>Model: {{ test }}</pre>
             </div>
         </div>
     </div>
-</di
+</div>
