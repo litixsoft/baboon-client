@@ -75,14 +75,6 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     }
                 });
 
-//
-//                angular.element($window).on('keydown', function (ev, data) {
-////                    console.log('dfgdfg');
-////                    console.log(ev);
-//                    console.log(data);
-////                    console.log(ev.which);
-//                });
-
                 /**
                  * moving datepicker if not fully in view
                  *
@@ -449,16 +441,17 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
 
                         var offsetTop = ( scope.yearNames.indexOf(scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
 
-//                        setTimeout(function () {
-                        scope.scrollCont.scrollTop = offsetTop; // auto scroll to selected year
-                        angular.element($window).on('keydown', function (ev, data) {
-                            if (data.keyCode === 27) { // ESC
-                                scope.$apply(function () {
-                                    scope.visible = false;
-                                });
-                            }
-                        });
-//                        }, 30);
+                        $timeout(function () {
+                            scope.scrollCont.scrollTop = offsetTop; // auto scroll to selected year
+                            angular.element($window).on('keydown', function (ev, data) {
+                                // ev.keyCode when in browser, data.keyCode when in test
+                                if ((ev && ev.keyCode === 27) || (data && data.keyCode === 27)) { // ESC
+                                    scope.$apply(function () {
+                                        scope.visible = false;
+                                    });
+                                }
+                            });
+                        }, 30);
                     }
                 });
 

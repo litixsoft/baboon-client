@@ -306,9 +306,33 @@ describe('bbcDatepicker', function () {
 
     it('scope.$watch(ngModel) should set selectedDay with ngModel', function () {
         var elementScope = element.isolateScope();
+        elementScope.ngModel = new Date(2004,3,23);
+        scope.$digest();
+        expect(elementScope.selectedDay.toISOString()).toEqual(new Date(2004,3,23).toISOString());
+    });
+
+
+    it('scope.$watch(ngModel) should set selectedDay with ngModel', function () {
+        var elementScope = element.isolateScope();
         elementScope.ngModel = new Date(2004,11,31);
         scope.$digest();
         expect(elementScope.selectedDay.toISOString()).toEqual(new Date(2004,11,31).toISOString());
+    });
+
+    it('scope.$watch(ngModel) should set selectedDay with ngModel, test for "if(countFirstLine === 7)"  ', function () {
+        var elementScope = element.isolateScope();
+
+        elementScope.ngModel = new Date(2004,2,15);
+        scope.$digest();
+        expect(elementScope.selectedDay.toISOString()).toEqual(new Date(2004,2,15).toISOString());
+    });
+
+    it('scope.$watch(ngModel) should set selectedDay with ngModel, test for "if(startpoint.currentKW===0 && i===0)"  ', function () {
+        var elementScope = element.isolateScope();
+
+        elementScope.ngModel = new Date(2017,0,15);
+        scope.$digest();
+        expect(elementScope.selectedDay.toISOString()).toEqual(new Date(2017,0,15).toISOString());
     });
 
     it('scope.$watch(visible) should set visible to false when key 27 (ESC) is clicked', inject(function ($window, $timeout) {
@@ -320,13 +344,22 @@ describe('bbcDatepicker', function () {
 
         $timeout.flush();
 
-
-
-
         angular.element($window).triggerHandler('keydown',[{keyCode:27}]);
 
-//        $timeout.flush();
         expect(elementScope.visible).toBeFalsy();
+    }));
 
+    it('scope.$watch(visible) should do nothing to visible when other than key 27 (ESC) is clicked', inject(function ($window, $timeout) {
+        var elementScope = element.isolateScope();
+        elementScope.visible = true;
+        scope.$digest();
+
+        expect(elementScope.visible).toBeTruthy();
+
+        $timeout.flush();
+
+        angular.element($window).triggerHandler('keydown',[{keyCode:45}]);
+
+        expect(elementScope.visible).toBeTruthy();
     }));
 });

@@ -36,7 +36,7 @@
                     <tr ng-repeat="week in month">
                         <td>{{week.kw}}</td>
                         <td ng-repeat="day in week.days">
-                            <button class="btn btn-default btn-sm btn-block" ng-click="dayClick(day)" ng-class="{other: !day.in, 'btn-primary' : (day.in && selectedDay.getDate()===day.nr), today: (today.day===day.nr && today.month===selectedDay.getMonth() && today.year===selectedDay.getFullYear())}">{{day.nr}}</button>
+                            <button class="btn btn-default btn-sm btn-block" ng-click="dayClick(day)" ng-class="{other: !day.in, 'btn-primary' : (day.in && selectedDay.getDate()===day.nr), today: (day.in && today.day===day.nr && today.month===selectedDay.getMonth() && today.year===selectedDay.getFullYear())}">{{day.nr}}</button>
                         </td>
                     </tr>
                     </tbody>

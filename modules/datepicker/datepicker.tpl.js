@@ -38,7 +38,7 @@ angular.module("datepicker/datepicker.html", []).run(["$templateCache", function
     "                    <tr ng-repeat=\"week in month\">\n" +
     "                        <td>{{week.kw}}</td>\n" +
     "                        <td ng-repeat=\"day in week.days\">\n" +
-    "                            <button class=\"btn btn-default btn-sm btn-block\" ng-click=\"dayClick(day)\" ng-class=\"{other: !day.in, 'btn-primary' : (day.in && selectedDay.getDate()===day.nr), today: (today.day===day.nr && today.month===selectedDay.getMonth() && today.year===selectedDay.getFullYear())}\">{{day.nr}}</button>\n" +
+    "                            <button class=\"btn btn-default btn-sm btn-block\" ng-click=\"dayClick(day)\" ng-class=\"{other: !day.in, 'btn-primary' : (day.in && selectedDay.getDate()===day.nr), today: (day.in && today.day===day.nr && today.month===selectedDay.getMonth() && today.year===selectedDay.getFullYear())}\">{{day.nr}}</button>\n" +
     "                        </td>\n" +
     "                    </tr>\n" +
     "                    </tbody>\n" +
