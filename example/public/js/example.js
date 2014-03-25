@@ -72,8 +72,8 @@ angular.module('example', [
     .controller('NavigationCtrl', function ($scope, $location) {
         $scope.menu = [
             { 'title': 'Home', 'link': '/' },
-            { 'title': 'Alert', 'link': '/alert' },
-            { 'title': '$bbcCache', 'link': '/cache' },
+            { 'title': 'bbc.alert', 'link': '/alert' },
+            { 'title': 'bbc.cache', 'link': '/cache' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
             { 'title': 'Datepicker', 'link': '/datepicker' },
             { 'title': 'Float', 'link': '/float' },
@@ -82,8 +82,8 @@ angular.module('example', [
             { 'title': 'Markdown', 'link': '/markdown' },
             { 'title': 'Modal', 'link': '/modal' },
             { 'title': 'Navigation', 'link': '/nav-home' },
-            { 'title': 'Pager', 'link': '/pager' },
-            { 'title': 'RadioButton', 'link': '/radio' },
+            { 'title': 'bbc.pager', 'link': '/pager' },
+            { 'title': 'bbc.radio', 'link': '/radio' },
             { 'title': 'bbc.sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
             { 'title': 'bbc.reset', 'link': '/reset' },

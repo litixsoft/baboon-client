@@ -1,16 +1,46 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Alert</h1>
+            <h1>bbc.alert</h1>
         </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">{{ 'EXAMPLE' | translate }}</div>
-            <div class="panel-body">
-                <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
-                <button class='btn btn-default' ng-click="showAlert('info')">Info-Alert</button>
-                <button class='btn btn-default' ng-click="showAlert('success')">Success-Alert</button>
-                <button class='btn btn-default' ng-click="showAlert('warning')">Warning-Alert</button>
-                <button class='btn btn-default' ng-click="showAlert('danger')">Danger-Alert</button>
+        <p>{{ 'ALERT_INTRO' | translate }}</p>
+        <br>
+        <h3>{{ 'ALERT_METHODS' | translate}}</h3>
+        <ul>
+            <li>{{ 'ALERT_INFO' | translate }}</li>
+            <li>{{ 'ALERT_SUCCESS' | translate }}</li>
+            <li>{{ 'ALERT_WARN' | translate }}</li>
+            <li>{{ 'ALERT_DANGER' | translate }}</li>
+            <li>{{ 'ALERT_CLOSE' | translate }}</li>
+        </ul>
+
+        <p>{{ 'ALERT_MESSAGE' | translate }}</p>
+
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.alert.directive:bbcAlert" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+
+        <hr/>
+
+        <h3>{{ 'EXAMPLE' | translate }}</h3>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/alert/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/alert/example.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+
+                <div class="panel-body">
+                    <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
+                    <button class='btn btn-default' ng-click="showAlert('info')">Info-Alert</button>
+                    <button class='btn btn-default' ng-click="showAlert('success')">Success-Alert</button>
+                    <button class='btn btn-default' ng-click="showAlert('warning')">Warning-Alert</button>
+                    <button class='btn btn-default' ng-click="showAlert('danger')">Danger-Alert</button>
+                </div>
             </div>
         </div>
     </div>

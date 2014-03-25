@@ -5,58 +5,16 @@ angular.module('bbc.pager', [])
      * @ngdoc directive
      * @name bbc.pager.directive:bbcPager
      * @restrict E
+     * @param {number} count The count of all items.
+     * @param {number=} [currentPage] The current page to display.
+     * @param {number} pageSize The current page size.
+     * @param {Array} pageSizes An array of all page sizes which the user can select.
+     * @param {function(pagingOptions) } onPaging The callback which is called on paging.
      *
      * @description
      * Creates an pager for custom or server side paging.
+     * For more details see our {@link /pager Guide}.
      *
-     * @example
-     * <example module="ngView">
-        <file name="index.html">
-            <div ng-controller="PagerController">
-                <table class="table table-striped">
-                    <colgroup>
-                        <col style="width:50%;" />
-                        <col style="width:50%;" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th><bbc-sort sort-opts="sortOpts" field-name="name" on-sorting="sort(sortingOptions)">Name</bbc-sort></th>
-                            <th>Index</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in items">
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.index }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <bbc-pager count="count" current-page="currentPage" page-sizes="[1, 5, 10, 25]" page-size="{{ initialPageSize }}" on-paging="load(pagingOptions)"></bbc-pager>
-            </div>
-        </file>
-        <file name="scripts.js">
-            angular.module('ngView', ['bbc.pager']).controller('PagerController', function ($scope) {
-                $scope.initialPageSize = 10;
-                $scope.pagingOptions = {'skip': 0, 'limit': $scope.initialPageSize};
-                $scope.load = function (page) {
-                    $scope.pagingOptions = page;
-                    getData();
-                };
-
-                function getData() {
-                    var items = [];
-                    for(var i = 0; i < 100; i++) {
-                        items.push({name: 'Item ' + (i + 1), index: i});
-                    }
-
-                    $scope.items = items.slice($scope.pagingOptions.skip, $scope.pagingOptions.skip + $scope.pagingOptions.limit);
-                    $scope.count = 100;
-                }
-
-                getData();
-            });
-        </file>
-     </example>
      */
      .directive('bbcPager', function () {
         return {
