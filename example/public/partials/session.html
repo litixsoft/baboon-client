@@ -1,12 +1,45 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Session</h1>
+            <h1>bbc.session</h1>
         </div>
-        <p>Baboon can communicate with server session.</p>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">Example Activity Set/Get</div>
+        <p>{{ 'SESSION_INTRO' | translate }}</p>
+
+        <h3>{{ 'SESSION_LIST_HEADER' | translate }}</h3>
+        <ul>
+            <li>setActivity: {{ 'SESSION_LIST_1' | translate }}</li>
+            <li>getLastActivity: {{ 'SESSION_LIST_2' | translate }}</li>
+            <li>setData: {{ 'SESSION_LIST_3' | translate }}</li>
+            <li>getData: {{ 'SESSION_LIST_4' | translate }}</li>
+            <li>deleteData: {{ 'SESSION_LIST_5' | translate }}</li>
+        </ul>
+
+        <h3>setActivity: {{ 'SESSION_SETACTIVITY_HEADER' | translate }}</h3>
+
+        <p>
+            {{ 'SESSION_SETACTIVITY_TEXT' | translate }}
+        </p>
+
+        <h3>getLastActivity: {{ 'SESSION_GETLASTACTIVITY_HEADER' | translate }}</h3>
+
+        <p>
+            {{ 'SESSION_GETLASTACTIVITY_TEXT' | translate }}
+        </p>
+
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
+
+        <tabset>
+            <tab heading="demo.js">
+                <div hljs include="'snippet/session/activityDemo.js'"></div>
+            </tab>
+            <tab heading="demo.html">
+                <div hljs include="'snippet/session/activityDemo.html'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
             <div class="panel-body">
 
                 <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
@@ -26,8 +59,42 @@
             </div>
         </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">Example Session Set/Get/Delete</div>
+        <h3>setData: {{ 'SESSION_SETDATA_HEADER' | translate }}</h3>
+        <p>
+            {{ 'SESSION_SETDATA_TEXT' | translate }}
+        </p>
+
+        <h3>getData: {{ 'SESSION_GETDATA_HEADER' | translate }}</h3>
+        <p>
+            {{ 'SESSION_GETDATA_TEXT' | translate }}
+        </p>
+
+        <p>
+            {{ 'SESSION_GETDATA_TEXT2' | translate }}
+        </p>
+
+        <h3>deleteData: {{ 'SESSION_DELETEDATA_HEADER' | translate }}</h3>
+        <p>
+            {{ 'SESSION_DELETEDATA_TEXT' | translate }}
+        </p>
+
+        <p>
+            {{ 'SESSION_DELETEDATA_TEXT2' | translate }}
+        </p>
+
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
+
+        <tabset>
+            <tab heading="demo.js">
+                <div hljs include="'snippet/session/getSetDemo.js'"></div>
+            </tab>
+            <tab heading="demo.html">
+                <div hljs include="'snippet/session/getSetDemo.html'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
             <div class="panel-body">
 
                 <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">

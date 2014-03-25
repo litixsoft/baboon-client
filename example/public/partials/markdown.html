@@ -1,16 +1,37 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Markdown</h1>
+            <h1>bbc.markdown</h1>
         </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">Example</div>
+        <p>{{ 'MARKDOWN_TEXT' | translate }}</p>
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.markdown.directive:bbcMarkdown" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <hr />
+        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <textarea name="markdown-input" ng-model="markdown" rows="4" class="form-control"></textarea>
+    <pre bbc-markdown ng-model="markdown"></pre>
+</div>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.markdown']).controller('NgAppDemoCtrl', function ($scope) {
+    $scope.markdown = '### H3 Header';
+});
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
             <div class="panel-body">
                 <div class="form-group">
-                        <textarea name="markdown-input" ng-model="markdown" rows="4" class="form-control"></textarea>
+                    <textarea name="markdown-input" ng-model="markdown" rows="4" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                        <pre bbc-markdown ng-model="markdown"></pre>
+                    <pre bbc-markdown ng-model="markdown"></pre>
                 </div>
             </div>
         </div>
