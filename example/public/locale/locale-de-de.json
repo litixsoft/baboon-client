@@ -1,3 +1,5 @@
 {
-    "EXAMPLE": "Beispiel"
+    "EXAMPLE": "Beispiel",
+    "INPUT_PLACEHOLDER": "Text eingeben...",
+    "RESETTEXT": "Die bbc-reset Directive fügt dem Eingabefeld eine Bild hinzu, um das Model und die Anzeige zurückzusetzen. Die Directive kann nur auf die folgenden input Typen angewendet werden:"
 }

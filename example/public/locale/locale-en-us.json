@@ -1,3 +1,5 @@
 {
-    "EXAMPLE": "Example"
+    "EXAMPLE": "Example",
+    "INPUT_PLACEHOLDER": "Add any text...",
+    "RESETTEXT": "The bbc-reset directive adds an icon to reset the model of an input field and also empties the view value of the input field. The directive can only be applied to the following input types:"
 }

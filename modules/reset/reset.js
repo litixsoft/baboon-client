@@ -6,6 +6,7 @@ angular.module('bbc.reset', [])
      * @name bbc.reset.directive:bbcReset
      * @requires $compile
      * @requires $timeout
+     * @throws {TypeError} The method could throw a **TypeError** if you use not a input filed or pass the type param of the wrong type.
      *
      * @restrict A
      * @element input
@@ -15,18 +16,6 @@ angular.module('bbc.reset', [])
      * For more details see {@link /reset Reset-Example}
      *
      */
-    /*     * @example
-     <example module="ngView">
-     <file name="index.html">
-     <div ng-controller="ResetCtrl">
-     <input type="text" class="form-control" ng-model="test" bbc-reset placeholder="Add any text..." />
-     </div>
-     </file>
-     <file name="scripts.js">
-     angular.module('ngView', ['bbc.reset']).controller('ResetCtrl', function ($scope) {
-     });
-     </file>
-     </example>*/
     .directive('bbcReset', function ($compile, $timeout) {
         return {
             require: 'ngModel',
@@ -37,11 +26,11 @@ angular.module('bbc.reset', [])
                 //var inputTypes = /text|search|tel|url|email|password/i;
                 var inputTypes = ['text', 'search', 'tel', 'url', 'email', 'password'];
                 if (elem[0].nodeName !== 'INPUT') {
-                    throw new Error('resetField is limited to input elements');
+                    throw new TypeError('resetField is limited to input elements');
                 }
                 //if (!inputTypes.test(attrs.type)) {
                 if(inputTypes.indexOf(attrs.type) === -1) {
-                    throw new Error('Invalid input type for resetField: ' + attrs.type);
+                    throw new TypeError('Invalid input type for resetField: ' + attrs.type);
                 }
 
                 var span = $compile('<span ng-show="enabled" ng-click="reset()" class="glyphicon glyphicon-remove"></span>')(scope);
