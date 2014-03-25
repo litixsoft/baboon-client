@@ -8,6 +8,7 @@
     "ALERT_SUCCESS": "success: Delivers a message for the successful completion of a process.",
     "ALERT_WARN": "warning: Delivers a striking warning.",
     "ALERT_DANGER": "danger: Provides a alarm message for heavier errors.",
+    "ALERT_CLOSE": "close: Hides the message box again.",
     "ALERT_MESSAGE": "The message parameter contains the message to be displayed.",
     "API_LINK_DESCRIPTION": "For more Details please check out our",
     "API_LINK_TEXT": "api reference",
@@ -16,5 +17,6 @@
     "SORT_CITY": "City",
     "SORT_COUNTRY": "Country",
     "RADIO_TEXT": "The bbc-radio directive creates a radio button with the same look and feel on all browsers.",
+    "CACHE_INTRO": "With the cache factory offers baboon is a simple variant to store objects in the memory.",
     "PAGER_TEXT": "The bbc pager directive adds a pager for custom or server-side paging."
 }

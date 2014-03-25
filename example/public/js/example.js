@@ -73,7 +73,7 @@ angular.module('example', [
         $scope.menu = [
             { 'title': 'Home', 'link': '/' },
             { 'title': 'bbc.alert', 'link': '/alert' },
-            { 'title': '$bbcCache', 'link': '/cache' },
+            { 'title': 'bbc.cache', 'link': '/cache' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
             { 'title': 'Datepicker', 'link': '/datepicker' },
             { 'title': 'Float', 'link': '/float' },

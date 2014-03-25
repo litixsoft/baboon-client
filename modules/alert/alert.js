@@ -9,6 +9,7 @@ angular.module('bbc.alert', [])
      *
      * @description
      * Service for angular-ui alert handling which shows different alert boxes in an application.
+     * For more information look at the [guide](/alert).
      *
      */
     .factory('$bbcAlert', function ($log, $timeout) {

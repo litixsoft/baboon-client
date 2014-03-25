@@ -3,11 +3,12 @@
     "INPUT_PLACEHOLDER": "Text eingeben...",
     "DEMO": "Demo",
     "ALERT_INTRO": "Baboon liefert einen Service mit einer Directive zum Anzeigen von Informationen für den User mit. Dafür wird eine Box temporär in der UI eingeblendet. Über die Methoden und Parameter des Services lassen sich Inhalt und Aussehen der Alarmbox steuern.",
-    "ALERT_HEADER_METHODS": "Methoden",
+    "ALERT_METHODS": "Methoden",
     "ALERT_INFO": "info: Liefert einfachen Hinweis zur Information des Benutzers.",
     "ALERT_SUCCESS": "success: Liefert eine Meldung für den erfolgreichen Abschluß eines Bearbeitungsvorgangs.",
     "ALERT_WARN": "warning: Liefert eine auffällige Warnmeldung.",
     "ALERT_DANGER": "danger: Liefert eine Alarmmeldung bei schwereren Fehlern.",
+    "ALERT_CLOSE": "close: Blendet die Messagebox wieder aus.",
     "ALERT_MESSAGE": "Der Parameter Message enthält die anzuzeigende Nachricht.",
     "API_LINK_DESCRIPTION": "Für weitere Details besuchen Sie bitte unsere",
     "API_LINK_TEXT": "API Referenz",
@@ -16,5 +17,6 @@
     "SORT_CITY": "Stadt",
     "SORT_COUNTRY": "Land",
     "RADIO_TEXT": "Die bbc-radio Directive erzeugt ein RadioButton, der ein einheitliches Ausehen in allen Browsern besitzt.",
+    "CACHE_INTRO": "Baboon bietet mit der Cache-Factory eine einfache Variante um Objecte im Speicher abzulegen.",
     "PAGER_TEXT": "Die bbc-pager Directive erzeugt einen Pager für benutzerdefiniertes oder serverseitiges Paging."
 }
