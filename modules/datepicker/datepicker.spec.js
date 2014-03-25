@@ -1,7 +1,7 @@
 'use strict';
 
 describe('bbcDatepicker', function () {
-    var element, compile, scope;// mockWindow, resizeFxn;
+    var element, compile, scope;
 
     beforeEach(module('bbc.datepicker'));
 
@@ -9,16 +9,6 @@ describe('bbcDatepicker', function () {
         compile = $compile;
         // init scope
         scope = $rootScope.$new();
-//        scope.date2 = null;
-//
-//        spyOn(angular, 'element').andCallFake(function () {
-//            mockWindow = jasmine.createSpy('windowElement');
-//            mockWindow.bind = jasmine.createSpy('bind').andCallFake(function (evt, fxn) {
-//                resizeFxn = fxn;
-//            });
-//            mockWindow.unbind = jasmine.createSpy('unbind');
-//            return mockWindow;
-//        });
 
         element = angular.element('<input id="pick2" name="pick2" ng-model="date2" bbc-datepicker="\'MM/dd/yyyy\'" required="" placeholder="MM/dd/yyyy">');
         compile(element)(scope);
@@ -38,13 +28,45 @@ describe('bbcDatepicker', function () {
         expect(elementScope.dateFormat).toBe('dd.MM.yyyy');
     });
 
-    it('on window resize and visible datepicker checkposition should be called', inject(function () {
-
+    it('on visible set to true checkposition should be called', function () {
         var elementScope = element.isolateScope();
         spyOn(elementScope, 'checkPosition');
         elementScope.visible = true;
         scope.$digest();
         expect(elementScope.visible).toBeTruthy();
+        expect(elementScope.checkPosition).toHaveBeenCalled();
+    });
+
+    it('on window resize checkposition should be called with element is visible', inject(function ($window) {
+        var elementScope = element.isolateScope();
+        elementScope.visible = true;
+        scope.$digest();
+
+        spyOn(elementScope, 'checkPosition');
+        angular.element($window).triggerHandler('resize');
+        expect(elementScope.checkPosition).toHaveBeenCalled();
+    }));
+
+    it('on window resize checkposition should be called with element is not visible', inject(function ($window) {
+        var elementScope = element.isolateScope();
+        elementScope.visible = false;
+        scope.$digest();
+
+        spyOn(elementScope, 'checkPosition');
+        angular.element($window).triggerHandler('resize');
+        expect(elementScope.checkPosition).not.toHaveBeenCalled();
+    }));
+
+    it('on window resize checkposition should be called and scope.off should be set', inject(function ($window) {
+        var elementScope = element.isolateScope();
+        elementScope.visible = true;
+        scope.$digest();
+
+//        $window.innerHeight = 0;
+
+        spyOn(elementScope, 'checkPosition');
+
+        angular.element($window).triggerHandler('resize');
         expect(elementScope.checkPosition).toHaveBeenCalled();
     }));
 
@@ -95,24 +117,11 @@ describe('bbcDatepicker', function () {
         //special 29th February, exists not in 2005
         expect(elementScope.validateDate('2/29/2005').result).toBe(null);
         expect(elementScope.validateDate('2/29/2005').error).toBe('day');
-    });
 
-    it('checkPosition() should set css values', function () {
-        var elementScope = element.isolateScope();
-
-//        elementScope.off ={
-//            top: 50,
-//            left:50
-//        };
-//        expect(elementScope.off.top).toBe(50);
-//        var test = elementScope.datepicker.css.top;
-//        spyOn(elementScope, 'checkPosition');
-//        var spy = elementScope.checkPosition;
-        elementScope.checkPosition();
-
-//        expect(elementScope.off.top).toBeLessThan(50);
-//        expect(spy).toHaveBeenCalled();
-//        expect(mockWindow.bind).toHaveBeenCalledWith("resize", jasmine.any(Function));
+        elementScope.dateFormat = 'MM/MM/yyyy';
+        // no day given
+        expect(elementScope.validateDate('1/1/2004').result).toBe(null);
+        expect(elementScope.validateDate('1/1/2004').error).toBe('format');
     });
 
     it('startScroll() schould start scrolling in direction, autoscroll should be true', function () {
@@ -129,36 +138,47 @@ describe('bbcDatepicker', function () {
         expect(elementScope.autoScrollFunc).toHaveBeenCalled();
     });
 
-    it('autoScrollFunc() should be changing scrollTop', inject(function ($timeout) {
-
-        var elementScope = element.isolateScope();
-        spyOn(elementScope, 'autoScrollFunc');
-        var spy = elementScope.autoScrollFunc;
-
-        elementScope.autoScroll = true;
-        expect(elementScope.autoScroll).toBeTruthy(0);
-
-        elementScope.autoScrollFunc('up');
-        expect(spy).toHaveBeenCalled();
-        expect(elementScope.autoScroll).toBeTruthy(0);
-//        scope.$digest();
-//        expect(elementScope.direction).toBe('up');
-        $timeout.flush();
-        //scrollTop lässt sich scheinbar nicht testen da es vom HTML abhängig ist
-        expect(elementScope.scrollCont.scrollTop).toBe(0);//
-
-        elementScope.autoScrollFunc('down');
-        expect(spy).toHaveBeenCalled();
-        expect(elementScope.scrollCont.scrollTop).toBe(0);
-
-    }));
-
     it('stopScroll() stops scrolling, autoscroll should be false', function () {
         var elementScope = element.isolateScope();
 
         elementScope.stopScroll();
         expect(elementScope.autoScroll).toBeFalsy();
     });
+
+    it('autoScrollFunc() should be changing "scrollCont.scrollTop" when "autoScroll" is true', inject(function ($timeout) {
+        var elementScope = element.isolateScope();
+        var top = elementScope.scrollCont.scrollTop;
+
+        elementScope.autoScroll = true;
+
+        // up
+        elementScope.autoScrollFunc('up');
+        $timeout.flush();
+
+        // down
+        elementScope.autoScrollFunc('down');
+        $timeout.flush();
+
+        expect(elementScope.scrollCont.scrollTop).toBe(top);
+
+        // unknown direction
+        elementScope.autoScrollFunc('foo');
+        $timeout.flush();
+
+        expect(elementScope.scrollCont.scrollTop).toBe(top);
+    }));
+
+    it('autoScrollFunc() should not change "scrollCont.scrollTop" when "autoScroll" is false', inject(function ($timeout) {
+        var elementScope = element.isolateScope();
+        var top = elementScope.scrollCont.scrollTop;
+
+        elementScope.autoScroll = false;
+        elementScope.autoScrollFunc('up');
+
+        $timeout.flush();
+
+        expect(elementScope.scrollCont.scrollTop).toBe(top);
+    }));
 
     it('yearClick() year be set for selectedDay and view updated ', function () {
         var elementScope = element.isolateScope();
@@ -281,10 +301,32 @@ describe('bbcDatepicker', function () {
         var elementScope = element.isolateScope();
         elementScope.ngModel = new Date(2004,3,23);
         scope.$digest();
-        expect(elementScope.selectedDay).toEqual(new Date(2004,3,23));
-
-//        elementScope.ngModel = new Date(-1); //null cause everything you pass in new Date() will lead to an damn wrong Date
-//        scope.$digest();
-//        expect(elementScope.selectedDay).toEqual(new Date());
+        expect(elementScope.selectedDay.toISOString()).toEqual(new Date(2004,3,23).toISOString());
     });
+
+    it('scope.$watch(ngModel) should set selectedDay with ngModel', function () {
+        var elementScope = element.isolateScope();
+        elementScope.ngModel = new Date(2004,11,31);
+        scope.$digest();
+        expect(elementScope.selectedDay.toISOString()).toEqual(new Date(2004,11,31).toISOString());
+    });
+
+    it('scope.$watch(visible) should set visible to false when key 27 (ESC) is clicked', inject(function ($window, $timeout) {
+        var elementScope = element.isolateScope();
+        elementScope.visible = true;
+        scope.$digest();
+
+        expect(elementScope.visible).toBeTruthy();
+
+        $timeout.flush();
+
+
+
+
+        angular.element($window).triggerHandler('keydown',[{keyCode:27}]);
+
+//        $timeout.flush();
+        expect(elementScope.visible).toBeFalsy();
+
+    }));
 });

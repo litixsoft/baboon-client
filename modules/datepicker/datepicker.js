@@ -75,6 +75,14 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     }
                 });
 
+//
+//                angular.element($window).on('keydown', function (ev, data) {
+////                    console.log('dfgdfg');
+////                    console.log(ev);
+//                    console.log(data);
+////                    console.log(ev.which);
+//                });
+
                 /**
                  * moving datepicker if not fully in view
                  *
@@ -154,10 +162,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                         var part2 = parseInt(parts[1], 10);
                         var part3 = parseInt(parts[2], 10);
 
+                        // d M y
                         if(partsFormat[0].indexOf('d')!==-1 && partsFormat[1].indexOf('M')!==-1 && partsFormat[2].indexOf('y')!==-1){
                             var tempDate = new Date(part3,part2-1,part1,8,0,0);
                             if(tempDate.getMonth()=== (part2-1) && tempDate.getDate()=== part1){
-//                                return true;
                                 returnValue.result = tempDate;
                                 return returnValue;
                             } else {
@@ -165,10 +173,11 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                                 return returnValue;
                             }
                         }
+
+                        // y M d
                         if(partsFormat[2].indexOf('d')!==-1 && partsFormat[1].indexOf('M')!==-1 && partsFormat[0].indexOf('y')!==-1){
                             var tempDate2 = new Date(part1,part2-1,part3,8,0,0);
                             if(tempDate2.getMonth()=== (part2-1) && tempDate2.getDate()=== part3){
-//                                return true;
                                 returnValue.result = tempDate2;
                                 return returnValue;
                             } else {
@@ -176,10 +185,11 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                                 return returnValue;
                             }
                         }
+
+                        // M d y
                         if(partsFormat[1].indexOf('d')!==-1 && partsFormat[0].indexOf('M')!==-1 && partsFormat[2].indexOf('y')!==-1){
                             var tempDate3 = new Date(part3,part1-1,part2,8,0,0);
                             if(tempDate3.getMonth()=== (part1-1) && tempDate3.getDate()=== part2){
-//                                return true;
                                 returnValue.result = tempDate3;
                                 return returnValue;
                             } else {
@@ -187,11 +197,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                                 return returnValue;
                             }
                         }
-
                     }
+
                     returnValue.error = 'format';
                     return returnValue;
-
                 };
 
                 /**
@@ -440,16 +449,16 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
 
                         var offsetTop = ( scope.yearNames.indexOf(scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
 
-                        setTimeout(function () {
-                            scope.scrollCont.scrollTop = offsetTop; // auto scroll to selected year
-                            angular.element($window).bind('keydown', function (ev) {
-                                if (ev.keyCode === 27) { // ESC
-                                    scope.$apply(function () {
-                                        scope.visible = false;
-                                    });
-                                }
-                            });
-                        }, 30);
+//                        setTimeout(function () {
+                        scope.scrollCont.scrollTop = offsetTop; // auto scroll to selected year
+                        angular.element($window).on('keydown', function (ev, data) {
+                            if (data.keyCode === 27) { // ESC
+                                scope.$apply(function () {
+                                    scope.visible = false;
+                                });
+                            }
+                        });
+//                        }, 30);
                     }
                 });
 
