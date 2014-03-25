@@ -83,7 +83,7 @@ angular.module('example', [
             { 'title': 'Modal', 'link': '/modal' },
             { 'title': 'Navigation', 'link': '/nav-home' },
             { 'title': 'Pager', 'link': '/pager' },
-            { 'title': 'RadioButton', 'link': '/radio' },
+            { 'title': 'bbc.radio', 'link': '/radio' },
             { 'title': 'bbc.sort', 'link': '/sort' },
             { 'title': 'Transport', 'link': '/transport' },
             { 'title': 'bbc.reset', 'link': '/reset' },

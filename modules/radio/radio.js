@@ -5,36 +5,16 @@ angular.module('bbc.radio', [])
      * @ngdoc directive
      * @name bbc.radio.directive:bbcRadio
      * @restrict E
+     * @param {string} label The label text.
+     * @param {string} ngModel Assignable angular expression to data-bind to bind.
+     * @param {string} value The value for the radio button.
+     * @param {string} name The name for the radio button.
+     * @param {string} disabled A value that indicates the radio button is disabled.
      *
      * @description
-     * Creates a radiobutton with same look and feel on all browser.
+     * Creates a radio button with same look and feel on all browser.
+     * For more details see our {@link /radio Guide}.
      *
-     *
-     * @example
-     <example module="ngView">
-         <file name="index.html">
-            <div ng-controller="RadioCtrl">
-                 <bbc-radio ng-model="myModel" name="myGroup" label="1" value="1"
-                            ng-disabled="isDisabled"></bbc-radio>
-                 <bbc-radio ng-model="myModel" name="myGroup" label="2" value="2"
-                            ng-disabled="isDisabled"></bbc-radio>
-                 <bbc-radio ng-model="myModel" name="myGroup" label="3" value="3"
-                            ng-disabled="isDisabled"></bbc-radio>
-                 <button class="btn btn-default" ng-click="clickMe()">
-                    {{ isDisabled ? 'Enable' : 'Disable' }}
-                 </button>
-                 <div>Value: {{ myModel }}</div>
-            </div>
-        </file>
-         <file name="scripts.js">
-            angular.module('ngView', ['bbc.radio']).controller('RadioCtrl', function ($scope) {
-                $scope.isDisabled = false;
-                $scope.clickMe = function() {
-                    $scope.isDisabled = !$scope.isDisabled;
-                };
-            });
-         </file>
-     </example>
      */
     .directive('bbcRadio', function () {
         return {
