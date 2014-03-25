@@ -37,5 +37,6 @@
     "SESSION_GETDATA_TEXT2": "If you do not enter a key, you the entire session container object is returned.",
     "SESSION_DELETEDATA_HEADER": "Delete data from the Session Container",
     "SESSION_DELETEDATA_TEXT": "The session service can delete from the client data from the server session. Use the key under which you have saved the data. You can import data that are outside of the container, do not delete.",
-    "SESSION_DELETEDATA_TEXT2": "If you do not enter a key, the entire session container object is deleted."
+    "SESSION_DELETEDATA_TEXT2": "If you do not enter a key, the entire session container object is deleted.",
+    "MARKDOWN_TEXT": "Converts markdown to HTML."
 }

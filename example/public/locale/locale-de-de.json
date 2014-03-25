@@ -37,5 +37,6 @@
     "SESSION_GETDATA_TEXT2": "Wenn Sie keinen Key angeben, wird Ihnen das gesamte Session Container Objekt zurück geliefert.",
     "SESSION_DELETEDATA_HEADER": "Daten aus dem Session-Container löschen",
     "SESSION_DELETEDATA_TEXT": "Sie können über den Session-Service vom Client aus Daten aus der Serversession löschen. Verwenden Sie dazu den Key unter welchem Sie die Daten gespeichert haben. Sie können Daten, die außerhalb des Containers liegen, nicht löschen.",
-    "SESSION_DELETEDATA_TEXT2": "Wenn Sie keinen Key angeben, wird das gesamte Session Container Objekt gelöscht."
+    "SESSION_DELETEDATA_TEXT2": "Wenn Sie keinen Key angeben, wird das gesamte Session Container Objekt gelöscht.",
+    "MARKDOWN_TEXT": "Konvertiert markdown zu HTML."
 }

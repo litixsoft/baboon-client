@@ -8,21 +8,8 @@ angular.module('bbc.markdown', [])
      *
      * @description
      * Converts markdown to HTML.
+     * For more details see our {@link /markdown Guide}.
      *
-     * @example
-     <example module="ngView">
-         <file name="index.html">
-            <div ng-controller="MarkdownCtrl">
-                <textarea ng-model="markdown" ></textarea>
-                <div bbc-markdown ng-model="markdown"></div>
-            </div>
-         </file>
-         <file name="scripts.js">
-             angular.module('ngView', ['bbc.markdown']).controller('MarkdownCtrl', function ($scope) {
-                $scope.markdown = '### H3 Header';
-             });
-         </file>
-     </example>
      */
     .directive('bbcMarkdown', function () {
         var converter = new Showdown.converter();
