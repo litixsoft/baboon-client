@@ -8,7 +8,7 @@ angular.module('bbc.alert', [])
      * @requires $timeout
      *
      * @description
-     * Service for angular-ui alert handling.
+     * Service for angular-ui alert handling which shows different alert boxes in an application.
      *
      */
     .factory('$bbcAlert', function ($log, $timeout) {
@@ -102,7 +102,7 @@ angular.module('bbc.alert', [])
          * @methodOf bbc.alert.$bbcAlert
          *
          * @description
-         * Shows an info alert message.
+         * Shows an info alert message. It shows messages without a warn level.
          *
          * @param {string} message The message to be displayed.
          */
@@ -116,7 +116,7 @@ angular.module('bbc.alert', [])
          * @methodOf bbc.alert.$bbcAlert
          *
          * @description
-         * Shows a success alert message.
+         * Shows a success alert message. It shows a confirmation message.
          *
          * @param {string} message The message to be displayed.
          */
@@ -130,7 +130,7 @@ angular.module('bbc.alert', [])
          * @methodOf bbc.alert.$bbcAlert
          *
          * @description
-         * Shows a warning alert message.
+         * Shows a warning alert message.It shows a message with a middle warn level.
          *
          * @param {string} message The message to be displayed.
          */
@@ -144,7 +144,7 @@ angular.module('bbc.alert', [])
          * @methodOf bbc.alert.$bbcAlert
          *
          * @description
-         * Shows a danger alert message.
+         * Shows a danger alert message. It shows a message with a middle warn level.
          *
          * @param {string} message The message to be displayed.
          */
@@ -160,28 +160,9 @@ angular.module('bbc.alert', [])
      * @restrict E
      *
      * @description
-     * Markup for alert.
+     * Markup for alert. It is the place holder which contains the DOM-content to show alert messages.
+     * For more information look at the [guide](/alert).
      *
-     * @example
-     <example module="ngView">
-     <file name="index.html">
-         <div ng-controller="AlertCtrl">
-             <bbc-alert service="bbcAlert" on-show="showAlert()"></bbc-alert>
-             <button class='btn btn-default' ng-click="showAlert('info')">Info-Alert</button>
-             <button class='btn btn-default' ng-click="showAlert('success')">Success-Alert</button>
-             <button class='btn btn-default' ng-click="showAlert('warning')">Warning-Alert</button>
-             <button class='btn btn-default' ng-click="showAlert('danger')">Danger-Alert</button>
-         </div>
-     </file>
-     <file name="scripts.js">
-        angular.module('ngView', ['ui.bootstrap', 'bbc.alert']).controller('AlertCtrl', function ($scope, $bbcAlert) {
-            $scope.bbcAlert = $bbcAlert;
-            $scope.showAlert = function(type) {
-                $scope.bbcAlert[type]('Info message from controller');
-            };
-         });
-     </file>
-     </example>
      */
     .directive('bbcAlert', function () {
         return {

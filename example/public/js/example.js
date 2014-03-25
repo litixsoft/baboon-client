@@ -72,7 +72,7 @@ angular.module('example', [
     .controller('NavigationCtrl', function ($scope, $location) {
         $scope.menu = [
             { 'title': 'Home', 'link': '/' },
-            { 'title': 'Alert', 'link': '/alert' },
+            { 'title': 'bbc.alert', 'link': '/alert' },
             { 'title': '$bbcCache', 'link': '/cache' },
             { 'title': 'Checkbox', 'link': '/checkbox' },
             { 'title': 'Datepicker', 'link': '/datepicker' },
