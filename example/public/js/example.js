@@ -80,7 +80,7 @@ angular.module('example', [
             { 'title': 'Inline Edit', 'link': '/edit' },
             { 'title': 'Integer', 'link': '/integer' },
             { 'title': 'bbc.markdown', 'link': '/markdown' },
-            { 'title': 'Modal', 'link': '/modal' },
+            { 'title': 'bbc.modal', 'link': '/modal' },
             { 'title': 'Navigation', 'link': '/nav-home' },
             { 'title': 'bbc.pager', 'link': '/pager' },
             { 'title': 'bbc.radio', 'link': '/radio' },
@@ -216,82 +216,94 @@ angular.module('example', [
     })
     .controller('ResetCtrl', function () {
     })
-    .controller('ModalCtrl', function ($scope, $bbcModal) {
-        $scope.message = '';
+    .controller('ModalCtrl', function ($scope, $bbcModal, $translate, $rootScope) {
+        $translate.use('en-en');
 
-        $scope.popupYesNo = function(){
-            var options = {
-                id: 'modalExamplePopup',
-                backdrop: false,
-                headline: 'Ja bzw. Nein drücken!',
-                message: 'Wenn Sie "ja" drücken wollen tun sie dies bitte, ansonsten einfach "nein" drücken.',
-                type: 'Warning',
-                callObj: {
-                    cbYes: function () {
-                        $scope.message = 'Du hast tatsächlich ja gedrückt.';
-                    },
-                    cbNo: function () {
-                        $scope.message = 'Du willst es also wirklich nicht.';
-                    }
+        var message = '';
+        var updatedMessage = '';
+        $rootScope.$on('$translateChangeSuccess', function () {
+            $translate('MODAL_HEADLINE').then(function (headline) {
+                options.headline = headline;
+            });
+            $translate('MODAL_MESSAGE_BODY').then(function (message) {
+                options.message = message;
+            });
+            $translate('MODAL_YES_TEXT').then(function (text) {
+                buttonTextValues.yes = text;
+            });
+            $translate('MODAL_NO_TEXT').then(function (text) {
+                buttonTextValues.no = text;
+            });
+            $translate('MODAL_CLOSE_TEXT').then(function (text) {
+                buttonTextValues.close = text;
+            });
+            $translate('MODAL_CLICKED_TEXT').then(function (text) {
+                message = text;
+            });
+            $translate('MODAL_UPDATED_MESSAGE').then(function (text) {
+                updatedMessage = text;
+            });
+        });
+
+        $scope.message = '';
+        var buttonTextValues = { ok: 'Ok' };
+        var options = { id: 'uniqueId', backdrop: false, buttonTextValues: buttonTextValues }
+
+        $scope.popupYesNo = function() {
+            options.callObj = {
+                cbYes: function () {
+                    $scope.message = buttonTextValues.yes + ' ' + message;
+                },
+                cbNo: function () {
+                    $scope.message = buttonTextValues.no + ' ' + message;
                 }
             };
-            $bbcModal.msgBox(options);
+            $bbcModal.open(options);
         };
 
         $scope.popupOkClose = function(){
-            var options = {
-                id: 'modalExamplePopup',
-                backdrop: false,
-                headline: 'Ok bzw. Close drücken!',
-                message: 'Wenn Sie "Ok" drücken wollen tun sie dies bitte, ansonsten einfach "Close" drücken.',
-                type: 'Warning',
-                callObj: {
-                    cbOk: function () {
-                        $scope.message = 'Wow, du findest es also auch ok.';
-                    },
-                    cbClose: function () {
-                        $scope.message = 'Dann schließe ich es halt..';
-                    }
+            options.callObj = {
+                cbOk: function () {
+                    $scope.message = buttonTextValues.ok + ' ' + message;
+                },
+                cbClose: function () {
+                    $scope.message = buttonTextValues.close + ' ' + message;
                 }
             };
-            $bbcModal.msgBox(options);
+            $bbcModal.open(options);
         };
 
         $scope.popupModal = function(){
-            var options = {
-                id: 'modalExamplePopup',
-                backdrop: true,
-                headline: 'Modales Popup',
-                message: 'So ich bin einfach mal ein Modales Popup, cool oder?',
-                type: 'Warning',
-                callObj: {
-                    cbOk: function () {
-                        $scope.message = 'Ich schließe das Popup mal für dich.';
-                    }
+            options.backdrop = true;
+            options.callObj = {
+                cbOk: function () {
+                    $scope.message = buttonTextValues.ok + ' ' + message;
                 }
             };
-            $bbcModal.msgBox(options);
+            $bbcModal.open(options);
         };
 
-        $scope.popupModalUpdate = function(){
+        $scope.popupWithCancel = function(){
+            options.backdrop = true;
+            $bbcModal.open(options);
 
-            var options = {
-                id: 'modalExamplePopup',
-                backdrop: true,
-                headline: 'Modales Popup',
-                message: 'So ich bin einfach mal ein Modales Popup, cool oder?',
-                type: 'Warning',
-                callObj: {
-                    cbOk: function () {
-                        $scope.message = 'Ich schließe das Popup mal für dich.';
-                    }
+            setTimeout(function() {
+                $bbcModal.cancel();
+            }, 1000);
+        };
+
+        $scope.popupModalUpdate = function() {
+            options.backdrop = true;
+            options.callObj = {
+                cbOk: function () {
+                    $scope.message = buttonTextValues.ok + ' ' + message;
                 }
             };
-            $bbcModal.msgBox(options);
+            $bbcModal.open(options);
 
             setTimeout(function(){
-                $bbcModal.updateMsg('modalExamplePopup','Diese zweite, neue Meldung wird dir von Litixsoft präsentiert!');
-            },3000);
+                $bbcModal.update('uniqueId', updatedMessage);
+            }, 2000);
         };
     })
     .controller('NavHomeCtrl', function ($scope, $rootScope) {

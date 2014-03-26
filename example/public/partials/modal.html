@@ -1,102 +1,168 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Messageboxen und Popups</h1>
+            <h1>bbc.modal</h1>
         </div>
-        <p>Baboons beinhaltet einen integrierten Popup- und Messagebox-Service, $bbcModal. Dieser baut auf die Modal-Directiven von Angular-UI-Bootstrap auf.</p>
-        <br>
-        <h4>Wie bekomme ich $bbcModal zum laufen?</h4>
-        <p>Um $bbcModal nutzen zu können müssen sie zu aller erst den $bbcModal Service in ihrem Controller injekten.</p>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Variable</th>
-                <th>Type</th>
-                <th>Discription</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>id</td>
-                <td>[string]</td>
-                <td>ein eindeutiger Bezeichner wie zum Beispiel "DeleteInvoice"</td>
-            </tr>
-            <tr>
-                <td>backdrop</td>
-                <td>[bool]</td>
-                <td>wenn <code>true</code> gesetzt wird die komplette Seite abgedunkelt und man bekommt ein modales Popup, bei <code>false</code> erhält man ein nicht modales Popup ohne Abdunklung</td>
-            </tr>
-            <tr>
-                <td>headline</td>
-                <td>[string]</td>
-                <td>eine kurze Überschrift</td>
-            </tr>
-            <tr>
-                <td>message</td>
-                <td>[string]</td>
-                <td>die eigentliche Nachricht für das Popup-Fenster</td>
-            </tr>
-            <tr>
-                <td>type</td>
-                <td>[string]</td>
-                <td>gibt an ob es sich um eine Warnung oder einen Fehler handelt und steuert damit das Aussehen des Popups, Werte: <code>Warning</code> oder <code>Error</code> </td>
-            </tr>
-            <tr>
-                <td>callObj</td>
-                <td>[object]</td>
-                <td>wenn benötigt wird hier ein Object aus Callbacks übergeben. Die Benamung der Callbacks steuert die Anzeige der Buttons im Popup. Das Weglassen von callObj führt dazu, dass keine Buttons angezeigt werden. Sollte das Popup modal sein und keine Buttons haben, könnte es nicht mehr geschlosssen werden.<br>
-                    Es stehen 4 Callbacks zur Verfügung <code>cbYes</code>, <code>cbNo</code>, <code>cbOk</code> und <code>cbClose</code>
-                </td>
-            </tr>
-            <tr>
-                <td>cssClass</td>
-                <td>[string]</td>
-                <td>hier kann eine Css-Klasse übergeben werden, die das Aussehen des Popups verändert</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div class="panel panel-info">
-            <div class="panel-heading">Example Popup</div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <button class="btn btn-info" ng-click="popupYesNo()">Ja/Nein Popup öffnen</button>
-                        <button class="btn btn-info" ng-click="popupOkClose()">Ok/Close Popup öffnen</button>
-                        <button class="btn btn-info" ng-click="popupModal()">Modal Popup öffnen</button>
-                    </div>
+        <p>{{ 'MODAL_TEXT' | translate }}<a href="http://angular-ui.github.io/bootstrap">UI Bootstrap</a>.</p>
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.modal.$bbcModal" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <h3>{{ MODAL_LIST_HEADER | translate }}</h3>
+        <ul>
+            <li>open: {{ 'MODAL_LIST_OPEN' | translate }}</li>
+            <li>cancel: {{ 'MODAL_LIST_CANCEL' | translate }}</li>
+            <li>update: {{ 'MODAL_LIST_UPDATE' | translate }}</li>
+        </ul>
+        <h3>open: {{ 'MODAL_LIST_OPEN' | translate }}</h3>
+        <p>{{ 'MODAL_OPEN_TEXT' | translate }}</p>
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <button class="btn btn-default" ng-click="popupYesNo()">Yes/No Window</button>
+    <button class="btn btn-default" ng-click="popupOkClose()">Ok/Close Window</button>
+    <button class="btn btn-default" ng-click="popupModal()">Modal Window</button>
+</div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <div style="border: 2px dotted #808080; min-height: 100px; padding: 0.5em; margin-bottom: 1em">
-                            {{ message }}
-                        </div>
-                    </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function ($scope) {
+    $scope.message = '';
+    var buttonTextValues = { yes: 'Yes', no: 'No', close: 'Close', ok: 'Ok' };
+    var options = { id: 'uniqueId', headline: 'Title bar', message: 'The message text.',
+                    backdrop: false, buttonTextValues: buttonTextValues }
+
+    $scope.popupYesNo = function(){
+        options.callObj = {
+            cbYes: function () {
+                $scope.message = 'Yes has been clicked.';
+            },
+            cbNo: function () {
+                $scope.message = 'No has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+
+    $scope.popupOkClose = function(){
+        options.callObj = {
+            cbOk: function () {
+                $scope.message = 'Ok has been clicked.';
+            },
+            cbClose: function () {
+                $scope.message = 'Close has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+
+    $scope.popupModal = function(){
+        options.backdrop = true;
+            options.callObj = {
+            cbOk: function () {
+                $scope.message = 'Ok has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <button class="btn btn-default" ng-click="popupYesNo()">{{ 'MODAL_YES_NO_TEXT' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupOkClose()">{{ 'MODAL_OK_CLOSE_TEXT' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupModal()">{{ 'MODAL_OK_TEXT' | translate }}</button>
+                </div>
+                <div class="col-md-12">
+                    <pre style="text-align: left;">{{ message }}</pre>
                 </div>
             </div>
         </div>
 
-
-        <br><br>
-        <h4>Kann ich die Nachricht des Popups nachträglich ändern?</h4>
-        <p>Ja dies ist ohne Probleme möglich. Manchmal ist es notwendig eine Nachricht nachträglich zu ändern, zum Beispiel bei einem Popup welches den User über mehrere Verbindungsversuche informiert und die Versuche zählt.</p>
-
-        <div class="panel panel-info">
-            <div class="panel-heading">Example - Update Popup</div>
-            <div class="panel-body">
-                <p>3 Sekunden nach dem Öffnen des Popups wird <code>$bbcModal.updateMsg()</code> aufgerufen und die Nachricht dynamisch geändert.</p>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <button class="btn btn-info" ng-click="popupModalUpdate()">Ok/Close Popup öffnen</button>
-                    </div>
+        <h3>cancel: {{ 'MODAL_LIST_CANCEL' | translate }}</h3>
+        <p>{{ 'MODAL_CANCEL_TEXT' | translate }}</p>
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <button class="btn btn-default" ng-click="popupWithCancel()">Modal Window</button>
+</div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <div style="border: 2px dotted #808080; min-height: 100px; padding: 0.5em; margin-bottom: 1em">
-                            {{ message }}
-                        </div>
-                    </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function ($scope) {
+    $scope.popupWithCancel = function(){
+        $bbcModal.open({
+            id: 'uniqueId',
+            headline: 'Title bar',
+            message: 'The message text.',
+            backdrop: true });
+
+        setTimeout(function() {
+            $bbcModal.cancel();
+        }, 1000);
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <p>{{ 'MODAL_CANCEL_DEMO_TEXT' | translate }}</p>
+                    <button class="btn btn-default" ng-click="popupWithCancel()">{{ 'MODAL_OK_TEXT' | translate }}</button>
+                </div>
+            </div>
+        </div>
+
+        <h3>update: {{ 'MODAL_LIST_UPDATE' | translate }}</h3>
+        <p>{{ 'MODAL_UPDATE_TEXT' | translate }}</p>
+        <h3>{{ 'EXAMPLE' | translate }}:</h3>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <button class="btn btn-default" ng-click="popupModalUpdate()">Modal Window</button>
+</div>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function ($scope) {
+    var options = { id: 'uniqueId', headline: 'Title bar', message: 'The message text.',
+                    backdrop: false, buttonTextValues: { ok: 'Ok' } }
+
+    $scope.popupModalUpdate = function() {
+        options.backdrop = true;
+        options.callObj = {
+            cbOk: function () {
+                $scope.message = 'Popup has been closed.';
+            }
+        };
+        $bbcModal.open(options);
+
+        setTimeout(function(){
+            $bbcModal.update('uniqueId', 'The updated message is now available.');
+        }, 2000);
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <p>{{ 'MODAL_UPDATE_DEMO_TEXT' | translate }}</p>
+                    <button class="btn btn-default" ng-click="popupModalUpdate()">{{ 'MODAL_OK_TEXT' | translate }}</button>
                 </div>
             </div>
         </div>

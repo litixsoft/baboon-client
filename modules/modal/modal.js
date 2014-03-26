@@ -5,9 +5,9 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
 
         $scope.modalOptions = modalOptions;
 
-        $rootScope.$on($scope.modalOptions.msgId, function (ev, mass) {
+        $rootScope.$on($scope.modalOptions.msgId, function (ev, msg) {
             $scope.$apply(function () {
-                $scope.modalOptions.message = mass;
+                $scope.modalOptions.message = msg;
             });
         });
 
@@ -21,7 +21,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             $scope.modalOptions.actionNo = $scope.modalOptions.callObj.cbNo;
         }
 
-        $scope.reset = function () {
+        $scope.cancel = function () {
             if ($modalInstance) {
                 $modalInstance.dismiss('cancel');
             }
@@ -32,7 +32,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionYes === 'function') {
                 $scope.modalOptions.actionYes.call();
             }
-            $scope.reset();
+            $scope.cancel ();
         };
 
         /** Executes the NO action and closes the modal window */
@@ -40,7 +40,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionNo === 'function') {
                 $scope.modalOptions.actionNo.call();
             }
-            $scope.reset();
+            $scope.cancel ();
         };
 
         /** Executes the OK action and closes the modal window */
@@ -48,7 +48,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionOk === 'function') {
                 $scope.modalOptions.actionOk.call();
             }
-            $scope.reset();
+            $scope.cancel ();
         };
 
         /** Executes the CLOSE action and closes the modal window */
@@ -56,7 +56,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionOk === 'function') {
                 $scope.modalOptions.actionClose.call();
             }
-            $scope.reset();
+            $scope.cancel ();
         };
     })
     /**
@@ -67,6 +67,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
      *
      * @description
      * Service displaying a modal popup window.
+     * For more details see our {@link /modal Guide}.
      *
      */
     .service('$bbcModal', function ($rootScope, $modal) {
@@ -74,7 +75,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
 
         /**
          * @ngdoc method
-         * @name bbc.modal.$bbcModal#updateMsg
+         * @name bbc.modal.$bbcModal#update
          * @methodOf bbc.modal.$bbcModal
          *
          * @description
@@ -83,31 +84,34 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
          * @param {string} id The id of the modal window.
          * @param {string} message The message which should update.
          */
-        pub.updateMsg = function (id, message) {
+        pub.update = function (id, message) {
             $rootScope.$emit(id, message);
         };
 
         /**
          * @ngdoc method
-         * @name bbc.modal.$bbcModal#msgBox
+         * @name bbc.modal.$bbcModal#open
          * @methodOf bbc.modal.$bbcModal
+         * @param {object} options An object for configuration.
+         * @param {string} options.id An unique identifier.
+         * @param {string} options.headline The headline of the modal window.
+         * @param {string} options.message The message of the modal window.
+         * @param {object|function} options.callObj A function with a callback for the ok button or an object with different callbacks for different buttons, which are called on button click.
+         *                                          The callbacks determine which buttons are displayed. Possible values for the object: cbOk, cbClose, cbYes and cbNo.
+         * @param {object} options.buttonTextValues An object with display values for the buttons.
          *
          * @description
          * Opens the modal window.
          *
-         * @param {object} options An object with headline , message , message type, callback action when click the ok button in the modal window object with multiple callbacks,
-         *                         an optional css class to manipulate the msgbox style and the button text values.
          */
-        pub.msgBox = function (options) {
+        pub.open = function (options) {
             var self = this;
 
             var modalOptions = {
                 msgId: options.id,
                 headline: options.headline,
                 message: options.message,
-                type: options.type,
                 callObj: options.callObj,
-                cssClass: options.cssClass,
                 buttonTextValues: options.buttonTextValues
             };
 
@@ -126,14 +130,14 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
 
         /**
          * @ngdoc method
-         * @name bbc.modal.$bbcModal#reset
+         * @name bbc.modal.$bbcModal#cancel
          * @methodOf bbc.modal.$bbcModal
          *
          * @description
          * Closes the modal window.
          *
          */
-        pub.reset = function () {
+        pub.cancel = function () {
             this.modalInstance.dismiss('cancel');
         };
 

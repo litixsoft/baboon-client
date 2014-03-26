@@ -16,21 +16,21 @@ describe('$bbcModal', function () {
 
         it('should be initialized correctly ', function () {
             expect(typeof service).toBe('object');
-            expect(typeof service.updateMsg).toBe('function');
-            expect(typeof service.msgBox).toBe('function');
-            expect(typeof service.reset).toBe('function');
+            expect(typeof service.update).toBe('function');
+            expect(typeof service.open).toBe('function');
+            expect(typeof service.cancel).toBe('function');
         });
 
-        it('should be call updateMsg', function () {
+        it('should be call update', function () {
             spyOn(rootScope, '$emit');
-            service.updateMsg('test', 'testMsg');
+            service.update('test', 'testMsg');
             expect(rootScope.$emit).toHaveBeenCalledWith('test', 'testMsg');
         });
 
-        it('should be call reset', function () {
+        it('should be call cancel', function () {
             spyOn(fakeModal, 'dismiss');
-            service.msgBox({message: 'Test'});
-            service.reset();
+            service.open({message: 'Test'});
+            service.cancel();
             expect(fakeModal.dismiss).toHaveBeenCalledWith('cancel');
         });
     });
@@ -71,79 +71,79 @@ describe('$bbcModal', function () {
             expect(typeof scope.modalOptions.no).toBe('function');
             expect(typeof scope.modalOptions.ok).toBe('function');
             expect(typeof scope.modalOptions.close).toBe('function');
-            expect(typeof scope.reset).toBe('function');
+            expect(typeof scope.cancel).toBe('function');
         });
 
-        it('should be reset called if yes is clicked', function () {
-            spyOn(scope, 'reset');
+        it('should be cancel called if yes is clicked', function () {
+            spyOn(scope, 'cancel');
             spyOn(scope.modalOptions, 'actionYes');
             scope.modalOptions.yes();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
             expect(scope.modalOptions.actionYes).toHaveBeenCalled();
         });
 
-        it('should be reset called if yes is clicked and no actionYes function is specified', inject(function ($controller) {
+        it('should be cancel called if yes is clicked and no actionYes function is specified', inject(function ($controller) {
             modalOptions = {};
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: modalInstance, modalOptions: modalOptions});
-            spyOn(scope, 'reset');
+            spyOn(scope, 'cancel');
             scope.modalOptions.yes();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
         }));
 
-        it('should be reset called if no is clicked', function () {
-            spyOn(scope, 'reset');
+        it('should be cancel called if no is clicked', function () {
+            spyOn(scope, 'cancel');
             spyOn(scope.modalOptions, 'actionNo');
             scope.modalOptions.no();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
             expect(scope.modalOptions.actionNo).toHaveBeenCalled();
         });
 
-        it('should be reset called no yes is clicked and no actionNo function is specified', inject(function ($controller) {
+        it('should be cancel called no yes is clicked and no actionNo function is specified', inject(function ($controller) {
             modalOptions = {};
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: modalInstance, modalOptions: modalOptions});
-            spyOn(scope, 'reset');
+            spyOn(scope, 'cancel');
             scope.modalOptions.no();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
         }));
 
-        it('should be reset called if ok is clicked', function () {
-            spyOn(scope, 'reset');
+        it('should be cancel called if ok is clicked', function () {
+            spyOn(scope, 'cancel');
             spyOn(scope.modalOptions, 'actionOk');
             scope.modalOptions.ok();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
             expect(scope.modalOptions.actionOk).toHaveBeenCalled();
         });
 
-        it('should be reset called no yes is clicked and no actionOk function is specified', inject(function ($controller) {
+        it('should be cancel called no yes is clicked and no actionOk function is specified', inject(function ($controller) {
             modalOptions = {};
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: modalInstance, modalOptions: modalOptions});
-            spyOn(scope, 'reset');
+            spyOn(scope, 'cancel');
             scope.modalOptions.ok();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
         }));
 
-        it('should be reset called if close is clicked', function () {
-            spyOn(scope, 'reset');
+        it('should be cancel called if close is clicked', function () {
+            spyOn(scope, 'cancel');
             spyOn(scope.modalOptions, 'actionClose');
             scope.modalOptions.close();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
             expect(scope.modalOptions.actionClose).toHaveBeenCalled();
         });
 
-        it('should be reset called no yes is clicked and no actionClose function is specified', inject(function ($controller) {
+        it('should be cancel called no yes is clicked and no actionClose function is specified', inject(function ($controller) {
             modalOptions = {};
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: modalInstance, modalOptions: modalOptions});
-            spyOn(scope, 'reset');
+            spyOn(scope, 'cancel');
             scope.modalOptions.close();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
         }));
 
-        it('should be reset called no yes is clicked and no actionClose function is specified', inject(function ($controller) {
+        it('should be cancel called no yes is clicked and no actionClose function is specified', inject(function ($controller) {
             modalOptions = {};
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: modalInstance, modalOptions: modalOptions});
-            spyOn(scope, 'reset');
+            spyOn(scope, 'cancel');
             scope.modalOptions.close();
-            expect(scope.reset).toHaveBeenCalled();
+            expect(scope.cancel).toHaveBeenCalled();
         }));
 
         it('should be set to  ActionOk if callObj is of type funtion', inject(function ($controller) {
@@ -152,16 +152,16 @@ describe('$bbcModal', function () {
             expect(typeof scope.modalOptions.actionOk).toBe('function');
         }));
 
-        it('should be call reset', function () {
+        it('should be call cancel', function () {
             spyOn(modalInstance, 'dismiss');
-            scope.reset();
+            scope.cancel();
             expect(modalInstance.dismiss).toHaveBeenCalledWith('cancel');
         });
 
-        it('should be call reset but not dismiss on modelInstance', inject(function ($controller) {
+        it('should be call cancel but not dismiss on modelInstance', inject(function ($controller) {
             ctrl = $controller('BbcModalCtrl', {$scope: scope, $modalInstance: null, modalOptions: modalOptions});
             spyOn(modalInstance, 'dismiss');
-            scope.reset();
+            scope.cancel();
             expect(modalInstance.dismiss).not.toHaveBeenCalled();
         }));
 
@@ -174,7 +174,7 @@ describe('$bbcModal', function () {
 
         it('should be call resolve from modal.open config', inject(function ($injector) {
             var service = $injector.get('$bbcModal');
-            service.msgBox({});
+            service.open({});
         }));
     });
 });
