@@ -14,6 +14,7 @@ angular.module('bbc.navigation')
      * For more information look at the [guide](/nav-home).
      *
      * @param {array} navList The binding to the navigation links in scope.
+     * @param {string} type The type of display order of the navigation links. Can be top, sub, list.
      *
      */
     .directive('bbcNavigation', function($bbcNavigation, $location) {

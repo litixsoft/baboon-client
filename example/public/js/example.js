@@ -221,7 +221,6 @@ angular.module('example', [
         var updatedMessage = '';
 
         $rootScope.$on('$translateChangeSuccess', function () {
-            console.log('$translateChangeSuccess');
             $translate('MODAL_HEADLINE').then(function (headline) {
                 options.headline = headline;
             });
@@ -382,8 +381,6 @@ angular.module('example', [
             }
 
             $bbcSession.getLastActivity(function(error, data) {
-
-                console.log(data.activity);
 
                 if(error) {
                     $scope.activityMessages.push({class:'error', message: error});

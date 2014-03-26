@@ -8,9 +8,9 @@ exports.getTopList = function (req, res) {
 };
 
 exports.getSubList = function (req, res) {
-    var a = req.headers.referer;
+    var referer = req.headers.referer;
 
-    if (a.indexOf('nav-home') > -1) {
+    if (referer.indexOf('nav-home') > -1) {
         res.send(200, [
             { title: 'Products', route: '/nav-home/nav-products', app: 'unitTest', level: 0 },
             { title: 'Customers', route: '/nav-home/nav-customers', app: 'unitTest', level: 1 },

@@ -72,5 +72,22 @@
     "MODAL_NO_TEXT": "No",
     "MODAL_CLOSE_TEXT": "Close",
     "MODAL_CLICKED_TEXT": "has been clicked",
-    "MODAL_UPDATED_MESSAGE": "The updated message is now available."
+    "MODAL_UPDATED_MESSAGE": "The updated message is now available.",
+    "TRANSPORT_INTRO": "Baboon verwendet für den Transport eine einheitliche Schnittstelle die sowohl HTTP/HTTPS als auch Sockets bedient, wobei die Socketverbindungen als default verwendet werden. Beim deaktivieren der Sockets werden die Anfragen automatisch auf HTTP/HTTPS umgeschaltet.",
+    "TRANSPORT_LIST_HEADER": "Methods of the transport service",
+    "TRANSPORT_LIST_1": "Fires an event to socket or post request to the server",
+    "TRANSPORT_LIST_2": "Forwards an event to a scope",
+    "TRANSPORT_LIST_3": "Register an event on the socket",
+    "TRANSPORT_LIST_4": "Adds a listener on the socket",
+    "TRANSPORT_LIST_5": "Removes a listener from the socket",
+    "NAVIGATION_DIRECTIVE_INTRO": "Die Navigationsdirektive in Baboon dient zur Darstellung der Navigation. Dabei kann die Ausrichtung horizontal oder vertical erfolgen.",
+    "NAVIGATION_SERVICE_INTRO": "Der Navigationsservice in Baboon liefert die Navigationselemente der Haupt- oder einer Unternavigation als Liste oder Baum zurück. Durch Parameter können die Navigationselemente gefiltert werden.",
+    "NAVIGATION_LIST_HEADER": "Methoden des Navigationsservices",
+    "NAVIGATION_LIST_1": "Gets the current app",
+    "NAVIGATION_LIST_2": "Gets the current app route",
+    "NAVIGATION_LIST_3": "Gets the navigation tree",
+    "NAVIGATION_LIST_4": "Gets the navigation as a flat list",
+    "NAVIGATION_LIST_5": "Gets the toplevel of navigation",
+    "NAVIGATION_LIST_6": "Gets all sub links from application as tree",
+    "NAVIGATION_LIST_7": "Get all sub links from application as list"
 }

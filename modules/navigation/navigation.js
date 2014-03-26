@@ -10,7 +10,6 @@ angular.module('bbc.navigation', [])
      *
      */
     .provider('$bbcNavigation', function () {
-
         var app;
         var route;
 
@@ -82,7 +81,7 @@ angular.module('bbc.navigation', [])
              * @methodOf bbc.navigation.$bbcNavigation
              *
              * @description
-             * Gets the navigation flat list.
+             * Gets the navigation as a flat list.
              *
              * @param {function(error, data) } callback The callback function.
              */
@@ -117,7 +116,6 @@ angular.module('bbc.navigation', [])
             pub.getSubTree = function (callback) {
                 $bbcTransport.emit('/api/navigation/getSubTree',{current: app, top: route}, callback);
             };
-
 
             /**
              * @ngdoc method

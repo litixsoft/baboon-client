@@ -251,7 +251,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @methodOf bbc.transport.$bbcTransport
              *
              * @description
-             * Register events on socket
+             * Register an event on the socket
              *
              * @param {string} event The event to listen to
              * @param {function(error, data) } callback The function to be called after event is raised
@@ -268,7 +268,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @methodOf bbc.transport.$bbcTransport
              *
              * @description
-             * Add listener on socket
+             * Adds a listener on the socket
              * The same as on.
              *
              * @param {string} event The event to listen to
@@ -286,7 +286,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @methodOf bbc.transport.$bbcTransport
              *
              * @description
-             * Remove listener on socket
+             * Removes a listener from the socket
              * The same as on.
              *
              * @param {string} event The event to listen to

@@ -1,18 +1,53 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Navigation</h1>
+            <h1>bbc.navigation</h1>
         </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">Example top horizontal</div>
+
+        <p>{{ 'NAVIGATION_DIRECTIVE_INTRO' | translate }}</p>
+
+        <p>{{ 'NAVIGATION_SERVICE_INTRO' | translate }}</p>
+
+        <h3>{{ 'NAVIGATION_LIST_HEADER' | translate }}</h3>
+        <ul>
+            <li>getApp: {{ 'NAVIGATION_LIST_1' | translate }}</li>
+            <li>getRoute: {{ 'NAVIGATION_LIST_2' | translate }}</li>
+            <li>getTree: {{ 'NAVIGATION_LIST_3' | translate }}</li>
+            <li>getList: {{ 'NAVIGATION_LIST_4' | translate }}</li>
+            <li>getTopList: {{ 'NAVIGATION_LIST_5' | translate }}</li>
+            <li>getSubTree: {{ 'NAVIGATION_LIST_6' | translate }}</li>
+            <li>getSubList: {{ 'NAVIGATION_LIST_7' | translate }}</li>
+        </ul>
+
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.navigation.directive:bbcNavigation" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <hr />
+        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
+        <tabset>
+            <tab heading="home.html">
+                <div hljs include="'snippet/navigation/example_home.html'"></div>
+            </tab>
+            <tab heading="admin.html">
+                <div hljs include="'snippet/navigation/example_admin.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/navigation/example.js'"></div>
+            </tab>
+            <tab heading="server_navigation.js">
+                <div hljs include="'snippet/navigation/server_navigation.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+
             <div class="panel-body">
-                <bbc-navigation  type="top"></bbc-navigation>
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">Example sub list vertical</div>
-            <div class="panel-body">
-                <bbc-navigation  type="sub"></bbc-navigation>
+                <label>Type: top</label>
+                <bbc-navigation type="top"></bbc-navigation>
+
+                <hr/>
+
+                <label>Type: sub</label>
+                <bbc-navigation type="sub"></bbc-navigation>
             </div>
         </div>
     </div>

@@ -3,17 +3,16 @@
         <div class="page-header">
             <h1>bbc.transport</h1>
         </div>
-        <p>
-            Baboon verwendet für den Transport eine einheitliche Schnittstelle die sowohl HTTP/HTTPS als auch Sockets bedient, wobei die Socketverbindungen als default verwendet werden. Beim deaktivieren der Sockets wird dann auf HTTP/HTTPS umgeschaltet.
-        </p>
 
-        <h3>Methoden des Transportservices</h3>
+        <p>{{ 'TRANSPORT_INTRO' | translate }}</p>
+
+        <h3>{{ 'TRANSPORT_LIST_HEADER' | translate }}</h3>
         <ul>
-            <li>emit: Löst eine Anfrage über Socket oder HTTP/HTTPS an den Server aus</li>
-            <li>forward: Leitet Socket-Events zum Scope weiter</li>
-            <li>on: Wartet auf ein Socket-Event vom Server</li>
-            <li>addListener: Fügt einen Listener zum Socket hinzu</li>
-            <li>removeListener: Löscht einen Listener vom Socket</li>
+            <li>emit: {{ 'TRANSPORT_LIST_1' | translate }}</li>
+            <li>forward: {{ 'TRANSPORT_LIST_2' | translate }}</li>
+            <li>on: {{ 'TRANSPORT_LIST_3' | translate }}</li>
+            <li>addListener: {{ 'TRANSPORT_LIST_4' | translate }}</li>
+            <li>removeListener: {{ 'TRANSPORT_LIST_5' | translate }}</li>
         </ul>
 
 
