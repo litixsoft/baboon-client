@@ -1,6 +1,21 @@
 'use strict';
 
 angular.module('bbc.navigation')
+    /**
+     * @ngdoc directive
+     * @name bbc.navigation.directive:bbcNavigation
+     * @requires $bbcNavigation
+     * @requires $location
+     * @restrict E
+     * @throws {TypeError} The method could throw a **TypeError** if the type param is of wrong type.
+     *
+     * @description
+     * Creates a navigation with same look and feel on all browsers.
+     * For more information look at the [guide](/nav-home).
+     *
+     * @param {array} navList The binding to the navigation links in scope.
+     *
+     */
     .directive('bbcNavigation', function($bbcNavigation, $location) {
         return {
             restrict: 'E',
@@ -16,7 +31,7 @@ angular.module('bbc.navigation')
             },
             link: function (scope, element, attrs) {
                 if(attrs.type !== 'top' && attrs.type !== 'sub' && attrs.type !== 'list') {
-                    throw new Error('Type must be top, sub or list.');
+                    throw new TypeError('Type must be top, sub or list.');
                 }
 
                 var defaults = {
@@ -49,6 +64,21 @@ angular.module('bbc.navigation')
             }
         };
     })
+    /**
+     * @ngdoc directive
+     * @name bbc.navigation.directive:bbcNavigationTree
+     * @requires $bbcNavigation
+     * @requires $location
+     * @requires $templateCache
+     * @restrict E
+     *
+     * @description
+     * Creates a navigation tree with same look and feel on all browsers.
+     * For more information look at the [guide](/nav-home).
+     *
+     * @param {array} navList The binding to the navigation links in scope.
+     *
+     */
     .directive('bbcNavigationTree', function($bbcNavigation, $location, $templateCache) {
         return {
             restrict: 'E',

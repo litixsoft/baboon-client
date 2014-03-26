@@ -234,7 +234,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @methodOf bbc.transport.$bbcTransport
              *
              * @description
-             * Forward events to angular
+             * Forwards an event to a scope
              *
              * @param {string} event The event to listen to
              * @param {object} scope The scope to forward the events to

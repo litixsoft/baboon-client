@@ -81,11 +81,11 @@ angular.module('example', [
             { 'title': 'Integer', 'link': '/integer' },
             { 'title': 'bbc.markdown', 'link': '/markdown' },
             { 'title': 'bbc.modal', 'link': '/modal' },
-            { 'title': 'Navigation', 'link': '/nav-home' },
+            { 'title': 'bbc.navigation', 'link': '/nav-home' },
             { 'title': 'bbc.pager', 'link': '/pager' },
             { 'title': 'bbc.radio', 'link': '/radio' },
             { 'title': 'bbc.sort', 'link': '/sort' },
-            { 'title': 'Transport', 'link': '/transport' },
+            { 'title': 'bbc.transport', 'link': '/transport' },
             { 'title': 'bbc.reset', 'link': '/reset' },
             { 'title': 'bbc.session', 'link': '/session' }
         ];

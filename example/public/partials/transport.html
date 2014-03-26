@@ -1,25 +1,38 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Transport</h1>
+            <h1>bbc.transport</h1>
         </div>
-        <p>Baboon uses socket.io for the websocket communication.</p>
+        <p>
+            Baboon verwendet für den Transport eine einheitliche Schnittstelle die sowohl HTTP/HTTPS als auch Sockets bedient, wobei die Socketverbindungen als default verwendet werden. Beim deaktivieren der Sockets wird dann auf HTTP/HTTPS umgeschaltet.
+        </p>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">Log</div>
-            <div class="panel-body">
+        <h3>Methoden des Transportservices</h3>
+        <ul>
+            <li>emit: Löst eine Anfrage über Socket oder HTTP/HTTPS an den Server aus</li>
+            <li>forward: Leitet Socket-Events zum Scope weiter</li>
+            <li>on: Wartet auf ein Socket-Event vom Server</li>
+            <li>addListener: Fügt einen Listener zum Socket hinzu</li>
+            <li>removeListener: Löscht einen Listener vom Socket</li>
+        </ul>
 
-                <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
-                    <li ng-repeat="item in messages">
-                        <span class="{{item.class}}">{{ item.message }}</span>
-                    </li>
-                </ul>
-                <button class="btn btn-danger" ng-click="clear()">Clear log</button>
-            </div>
-        </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">Form</div>
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.transport.$bbcTransport" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <hr />
+        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/transport/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/transport/example.js'"></div>
+            </tab>
+        </tabset>
+
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
             <div class="panel-body">
                 <form name="form" class="form-horizontal" role="form">
                     <div class="form-group">
@@ -52,6 +65,15 @@
                 <div class=".btn-block">
                     <button class="btn btn-default" ng-click="send()" ng-disabled="!message || message.length < 1">Send message</button>
                 </div>
+
+                <hr />
+
+                <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
+                    <li ng-repeat="item in messages">
+                        <span class="{{item.class}}">{{ item.message }}</span>
+                    </li>
+                </ul>
+                <button class="btn btn-danger" ng-click="clear()">Clear log</button>
             </div>
         </div>
     </div>
