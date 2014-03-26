@@ -158,9 +158,9 @@ angular.module('example', [
         getData();
     })
     .controller('RadioCtrl', function ($scope) {
-        $scope.isDisabled = false;
+        $scope.disabled = false;
         $scope.clickMe = function() {
-            $scope.isDisabled = !$scope.isDisabled;
+            $scope.disabled = !$scope.disabled;
         };
     })
     .controller('MarkdownCtrl', function ($scope) {
@@ -217,11 +217,11 @@ angular.module('example', [
     .controller('ResetCtrl', function () {
     })
     .controller('ModalCtrl', function ($scope, $bbcModal, $translate, $rootScope) {
-        $translate.use('en-en');
-
         var message = '';
         var updatedMessage = '';
+
         $rootScope.$on('$translateChangeSuccess', function () {
+            console.log('$translateChangeSuccess');
             $translate('MODAL_HEADLINE').then(function (headline) {
                 options.headline = headline;
             });
@@ -245,6 +245,7 @@ angular.module('example', [
             });
         });
 
+        $translate.use('en-us');
         $scope.message = '';
         var buttonTextValues = { ok: 'Ok' };
         var options = { id: 'uniqueId', backdrop: false, buttonTextValues: buttonTextValues }

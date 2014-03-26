@@ -11,19 +11,19 @@
             <tab heading="index.html">
                 <div hljs>
 <div ng-controller="NgAppDemoCtrl">
-    <bbc-radio ng-model="model" name="group" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
-    <bbc-radio ng-model="model" name="group" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
-    <bbc-radio ng-model="model" name="group" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
-    <button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+    <bbc-radio ng-model="model" name="group" label="1" value="1" ng-disabled="disabled"></bbc-radio>
+    <bbc-radio ng-model="model" name="group" label="2" value="2" ng-disabled="disabled"></bbc-radio>
+    <bbc-radio ng-model="model" name="group" label="3" value="3" ng-disabled="disabled"></bbc-radio>
+    <button class="btn btn-default" ng-click="clickMe()">{{ disabled ? 'Enable' : 'Disable' }}</button>
 </div>
                 </div>
             </tab>
             <tab heading="scripts.js">
                 <div hljs>
 angular.module('ngAppDemo', ['bbc.radio']).controller('NgAppDemoCtrl', function ($scope) {
-    $scope.isDisabled = false;
+    $scope.disabled = false;
     $scope.clickMe = function() {
-        $scope.isDisabled = !$scope.isDisabled;
+        $scope.disabled = !$scope.disabled;
     };
 });
                 </div>
@@ -33,10 +33,10 @@ angular.module('ngAppDemo', ['bbc.radio']).controller('NgAppDemoCtrl', function 
             <div class="panel-heading">Demo</div>
             <div class="panel-body">
                 <div class="form-group">
-                    <bbc-radio ng-model="model" name="group" label="1" value="1" ng-disabled="isDisabled"></bbc-radio>
-                    <bbc-radio ng-model="model" name="group" label="2" value="2" ng-disabled="isDisabled"></bbc-radio>
-                    <bbc-radio ng-model="model" name="group" label="3" value="3" ng-disabled="isDisabled"></bbc-radio>
-                    <button class="btn btn-default" ng-click="clickMe()">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+                    <bbc-radio ng-model="model" name="group" label="1" value="1" ng-disabled="disabled"></bbc-radio>
+                    <bbc-radio ng-model="model" name="group" label="2" value="2" ng-disabled="disabled"></bbc-radio>
+                    <bbc-radio ng-model="model" name="group" label="3" value="3" ng-disabled="disabled"></bbc-radio>
+                    <button class="btn btn-default" ng-click="clickMe()">{{ disabled ? 'Enable' : 'Disable' }}</button>
                 </div>
                 <div class="form-group">
                     <pre>Value: {{ model }}</pre>

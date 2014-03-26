@@ -11,7 +11,6 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             });
         });
 
-        console.log($scope.modalOptions.callObj);
         if (typeof($scope.modalOptions.callObj) === 'function') {
             $scope.modalOptions.actionOk = $scope.modalOptions.callObj;
         }
