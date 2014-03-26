@@ -47,5 +47,10 @@
     "DATE": "Date",
     "DATEPICKER_WRONG_FORMAT": "Date has the wrong format.",
     "DATEPICKER_REQUIRED":  "The date must be specified.",
-    "DATEPICKER_WRONG_DATE": "This date does not exist."
+    "DATEPICKER_WRONG_DATE": "This date does not exist.",
+    "FLOAT_INTRO": "Baboon provides a directive which converts the input string into a number and rounds the number. Can not be converted to a number undefined is returned. A decimal comma is replaced by a decimal point.",
+    "FLOAT_CHANGE_NUMBER": "Please change the number.",
+    "FLOAT_PARSED_VALUE": "The parsed value:",
+    "FLOAT_INITIAL_TYPE": "The initial type is:",
+    "FLOAT_CURRENT_TYPE": "The current type is:"
 }

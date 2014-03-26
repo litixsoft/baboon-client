@@ -1,16 +1,36 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Float</h1>
+            <h1>bbc.float</h1>
         </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">{{ 'EXAMPLE' | translate }}</div>
+
+        <p>{{ 'FLOAT_INTRO' | translate }}</p>
+        <br>
+
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.float.directive:bbcFloat" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <hr/>
+
+        <h3>{{ 'EXAMPLE' | translate }}</h3>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/float/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/float/example.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
             <div class="panel-body">
-                <p>Please change the number</p>
+                <p>{{ 'FLOAT_CHANGE_NUMBER' | translate }}</p>
                 <input type="text" bbc-float="2" ng-model="val" class="form-control" />
-                <pre>The parsed value: {{ val }}</pre>
-                <pre>The initial type is: {{ initialType }}</pre>
-                <pre>The current type is: {{ currentType }}</pre>
+                <p>
+                    <pre>{{ 'FLOAT_PARSED_VALUE' | translate }} {{ val }}</pre>
+                    <pre>{{ 'FLOAT_INITIAL_TYPE' | translate }} {{ initialType }}</pre>
+                    <pre>{{ 'FLOAT_CURRENT_TYPE' | translate }} {{ currentType }}</pre>
+                </p>
             </div>
         </div>
     </div>

@@ -76,7 +76,7 @@ angular.module('example', [
             { 'title': 'bbc.cache', 'link': '/cache' },
             { 'title': 'bbc.checkbox', 'link': '/checkbox' },
             { 'title': 'bbc.datepicker', 'link': '/datepicker' },
-            { 'title': 'Float', 'link': '/float' },
+            { 'title': 'bbc.float', 'link': '/float' },
             { 'title': 'Inline Edit', 'link': '/edit' },
             { 'title': 'Integer', 'link': '/integer' },
             { 'title': 'bbc.markdown', 'link': '/markdown' },
