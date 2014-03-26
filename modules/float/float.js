@@ -11,7 +11,7 @@ angular.module('bbc.float', [])
      * Convert and round any number to a float by given decimal places. It replaces a decimal comma with an decimal point. An non-float-input returns undefined.
      * For more information look at the [guide](/float).
      *
-     * @param {int=} [bbc-float=2] Number of decimal places.
+     * @param {number=} [bbc-float=2] Number of decimal places.
      *
      */
     .directive('bbcFloat', function () {
