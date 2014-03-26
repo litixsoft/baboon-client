@@ -34,14 +34,14 @@
             <div class="panel-body">
                 <form name="form" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="pick" class="col-sm-3 control-label">{{ 'DATE' | translate }}</label>
+                        <label for="pick" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
                             <input id="pick" name="pick" ng-model="date" bbc-datepicker placeholder="dd.MM.yyyy">
                             <label class="label label-danger" ng-show="form.pick.$dirty && form.pick.$invalid">
                                 <div class="glyphicon glyphicon-fire"></div>
-                                <span ng-show="form.pick.$error.date">{{ 'DATEPICKER_WRONG_FORMAT' | translate}}</span>
-                                <span ng-show="form.pick.$error.required">{{ 'DATEPICKER_REQUIRED' | translate}}</span>
-                                <span ng-show="form.pick.$error.wrongdate">{{ 'DATEPICKER_WRONG_DATE' | translate}}</span>
+                                <span ng-show="form.pick.$error.date">This date has the wrong format.</span>
+                                <span ng-show="form.pick.$error.required">The date must be specified.</span>
+                                <span ng-show="form.pick.$error.wrongdate">This date does not exist.</span>
                             </label>
                         </div>
                     </div>
@@ -51,14 +51,14 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label for="pick2" class="col-sm-3 control-label">{{ 'DATE' | translate }} (required)<br>MM/dd/yyyy</label>
+                        <label for="pick2" class="col-sm-3 control-label">Date (required)<br>MM/dd/yyyy</label>
                         <div class="col-sm-9">
                             <input id="pick2" name="pick2" ng-model="date2" bbc-datepicker="'MM/dd/yyyy'" required="" placeholder="MM/dd/yyyy">
                             <label class="label label-danger" ng-show="form.pick2.$dirty && form.pick2.$invalid">
                                 <div class="glyphicon glyphicon-fire"></div>
-                                <span ng-show="form.pick.$error.date">{{ 'DATEPICKER_WRONG_FORMAT' | translate}}</span>
-                                <span ng-show="form.pick.$error.required">{{ 'DATEPICKER_REQUIRED' | translate}}</span>
-                                <span ng-show="form.pick.$error.wrongdate">{{ 'DATEPICKER_WRONG_DATE' | translate}}</span>
+                                <span ng-show="form.pick.$error.date">This date has the wrong format.</span>
+                                <span ng-show="form.pick.$error.required">The date must be specified.</span>
+                                <span ng-show="form.pick.$error.wrongdate">This date does not exist.</span>
                             </label>
                         </div>
                     </div>
@@ -68,14 +68,14 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label for="pick3" class="col-sm-3 control-label">{{ 'DATE' | translate }} (required)<br>yyyy-MM-dd</label>
+                        <label for="pick3" class="col-sm-3 control-label">Date (required)<br>yyyy-MM-dd</label>
                         <div class="col-sm-9">
                             <input id="pick3" name="pick3" ng-model="date3" bbc-datepicker="'yyyy-MM-dd'" required="" placeholder="yyyy-MM-dd">
                             <label class="label label-danger" ng-show="form.pick3.$dirty && form.pick3.$invalid">
                                 <div class="glyphicon glyphicon-fire"></div>
-                                <span ng-show="form.pick.$error.date">{{ 'DATEPICKER_WRONG_FORMAT' | translate}}</span>
-                                <span ng-show="form.pick.$error.required">{{ 'DATEPICKER_REQUIRED' | translate}}</span>
-                                <span ng-show="form.pick.$error.wrongdate">{{ 'DATEPICKER_WRONG_DATE' | translate}}</span>
+                                <span ng-show="form.pick.$error.date">This date has the wrong format.</span>
+                                <span ng-show="form.pick.$error.required">The date must be specified.</span>
+                                <span ng-show="form.pick.$error.wrongdate">This date does not exist.</span>
                             </label>
                         </div>
                     </div>

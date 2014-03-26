@@ -3,9 +3,9 @@
     <div class="panel-body">
         <div>
             <bbc-checkbox disabled="disabled" ng-model="model1"></bbc-checkbox>
-            {{ 'DISABLED' | translate }}
+            The box is disabled!
         </div>
         <div bbc-checkbox ng-model="model2" title="I'm a tool tip"></div>
-        {{ model2 ? ('ACTIVATED' | translate) :  ('DEACTIVATED' | translate) }}
+        {{ model2 ? 'I am enabled!' :  'I am disabled!' }}
     </div>
 </div>

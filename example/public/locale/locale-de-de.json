@@ -3,7 +3,6 @@
     "INPUT_PLACEHOLDER": "Text eingeben...",
     "DEMO": "Demo",
     "ALERT_INTRO": "Baboon liefert einen Service mit einer Directive zum Anzeigen von Informationen für den User mit. Dafür wird eine Box temporär in der UI eingeblendet. Über die Methoden und Parameter des Services lassen sich Inhalt und Aussehen der Alarmbox steuern.",
-    "ALERT_METHODS": "Methoden",
     "ALERT_INFO": "info: Liefert einfachen Hinweis zur Information des Benutzers.",
     "ALERT_SUCCESS": "success: Liefert eine Meldung für den erfolgreichen Abschluß eines Bearbeitungsvorgangs.",
     "ALERT_WARN": "warning: Liefert eine auffällige Warnmeldung.",
@@ -51,14 +50,7 @@
     "DATEPICKER_FEATURE_4": "Er hat in allen unterstützten Browsern das selbe Verhalten.",
     "DATEPICKER_FEATURE_5": "Das Popup ist nativ zu bedienen durch den Verzicht auf verschachtelte Menus.",
     "DATE": "Datum",
-    "DATEPICKER_WRONG_FORMAT": "Das Datum hat ein falsches Format.",
-    "DATEPICKER_REQUIRED": "Das Datum muss angegeben werden.",
-    "DATEPICKER_WRONG_DATE": "Dieses Datum existiert nicht.",
     "FLOAT_INTRO": "Baboon liefert eine Directive welche den eingegebenen String in eine Number konvertiert und rundet. Kann der eingegebene String nicht in eine Number konvertiert werden wird Undefined zurückgeliefert. Ein Dezimalkomma wird durch einen Dezimalpunkt ersetzt.",
-    "FLOAT_CHANGE_NUMBER": "Bitte ändern Sie die Zahl.",
-    "FLOAT_PARSED_VALUE": "Geparster Wert:",
-    "FLOAT_INITIAL_TYPE": "Initialer Datentyp:",
-    "FLOAT_CURRENT_TYPE": "Aktueller Datentyp:",
     "INLINE_INTRO": "Baboon bietet den Service $bbcInlineEdit, welcher es ermöglicht Objekte nach Änderungen zurückzusetzen. Die Objekte können mit Validierungsfehlern erweitert werden.",
     "INLINE_DESCRIPTION": "Der Service hält die Daten im model. Beim Anlegen des models werden die model-Daten im master gespeichert. Das ermöglicht es das model wieder auf seine Ausgangsdaten zurückzusetzen und Änderungen am model nachzuvollziehen.",
     "INLINE_METHOD_ISUNCHANGED": "isChanged: Prüft ob am model Änderungen stattgefunden haben.",
@@ -102,5 +94,6 @@
     "NAVIGATION_LIST_5": "Liefert die Toplevels der Navigation",
     "NAVIGATION_LIST_6": "Liefert alle Unterlinks als Baum einer Toplevel",
     "NAVIGATION_LIST_7": "Liefert alle Unterlinks als Liste einer Toplevel",
-    "INTEGER_INTRO": "Die integer-Directive wandelt die Eingabe in einen Ganzzahlwert um. Ist die Eingabe kein gültiger ganzzahliger Wert wird null oder undefined zurückgegeben."
+    "INTEGER_INTRO": "Die integer-Directive wandelt die Eingabe in einen Ganzzahlwert um. Ist die Eingabe kein gültiger ganzzahliger Wert wird null oder undefined zurückgegeben.",
+    "METHODS": "Methoden"
 }

@@ -24,12 +24,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{ 'DEMO' | translate }}</div>
             <div class="panel-body">
-                <p>{{ 'FLOAT_CHANGE_NUMBER' | translate }}</p>
+                <p>Please change the number.</p>
                 <input type="text" bbc-float="2" ng-model="val" class="form-control" />
                 <p>
-                    <pre>{{ 'FLOAT_PARSED_VALUE' | translate }} {{ val }}</pre>
-                    <pre>{{ 'FLOAT_INITIAL_TYPE' | translate }} {{ initialType }}</pre>
-                    <pre>{{ 'FLOAT_CURRENT_TYPE' | translate }} {{ currentType }}</pre>
+                    <pre>The parsed value: {{ val }}</pre>
+                    <pre>The initial type is: {{ initialType }}</pre>
+                    <pre>The current type is: {{ currentType }}</pre>
                 </p>
             </div>
         </div>
