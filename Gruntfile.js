@@ -161,48 +161,11 @@ module.exports = function (grunt) {
                 html5Mode: false,
                 navTemplate: 'docs/html/nav.html',
                 title: 'baboon client',
-                image: 'docs/img/baboon.png',
-                scripts: [
-                    'angular.js',
-                    /*'http://code.angularjs.org/1.2.14/angular.js',
-                    'http://code.angularjs.org/1.2.14/angular-route.min.js',
-                    'http://code.angularjs.org/1.2.14/angular-animate.min.js',*/
-                    '.tmp/docs/js/sample-not-for-production.js'
-                ],
-                styles: [
-                    '.tmp/docs/css/sample.css'
-                ]
+                image: 'docs/img/baboon.png'
             },
             api: {
                 src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js', 'docs/content/api/*.ngdoc'],
                 title: 'API Reference'
-            }
-        },
-        uglify: {
-            options: {
-                beautify: false,
-                mangle: false
-            },
-            doc: {
-                files: { '.tmp/docs/js/sample-not-for-production.js': [
-                    'modules/navigation/navigation.js',
-                    'modules/**/*.js',
-                    'bower_components/showdown/src/showdown.js',
-                    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-                    '!modules/**/*.spec.js',
-                    'modules/**/*.tpl.js'
-                ]}
-            }
-        },
-        less: {
-            doc: {
-                options: {
-                    combine: true,
-                    cleancss: true
-                },
-                files: {
-                    '.tmp/docs/css/sample.css': 'modules/**/themes/default.less'
-                }
             }
         }
     });
@@ -212,7 +175,7 @@ module.exports = function (grunt) {
         grunt.file.delete('./.dist/docs/index.html');
     });
 
-    grunt.registerTask('doc', ['uglify:doc', 'less:doc', 'clean:docs', 'ngdocs', 'move-doc']);
+    grunt.registerTask('doc', ['clean:docs', 'ngdocs', 'move-doc']);
 
     grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
         grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');
