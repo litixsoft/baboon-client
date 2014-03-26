@@ -6,8 +6,8 @@ angular.module('bbc.inline.edit', [])
      * @name bbc.inline.edit.$bbcInlineEdit
      *
      * @description
-     * Service for editing which allow reset the object and populates validation errors.
-     *
+     * Service for editing which allow reset the object and populates validation errors. It uses the model to hold actual form data and the master to hold the original data.
+     * For more information look at the [guide](/edit).
      */
     .factory('$bbcInlineEdit', function () {
         return function () {
@@ -23,7 +23,7 @@ angular.module('bbc.inline.edit', [])
              * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
-             * Checks if the model has changes.
+             * Checks if the model has changes. It compares the model (actual data in UI) with the master (original data).
              *
              * @returns {boolean} true if model is unchanged, otherwise false.
              */
@@ -37,7 +37,7 @@ angular.module('bbc.inline.edit', [])
              * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
-             * Resets the model to the master.
+             * Resets the model to the master. It set the model to its initial data.
              *
              * @param {object} form The angularjs form controller.
              */
@@ -60,7 +60,7 @@ angular.module('bbc.inline.edit', [])
              * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
-             * Sets the model.
+             * Sets the model and a copy of this as master.
              *
              * @param {object} model The model.
              */
@@ -75,7 +75,7 @@ angular.module('bbc.inline.edit', [])
              * @methodOf bbc.inline.edit.$bbcInlineEdit
              *
              * @description
-             * Add server validation to form.
+             * Add server validation to form and erase old form errors.
              *
              * @param {object} form The angularjs form controller.
              * @param {array} errors The validation errors.

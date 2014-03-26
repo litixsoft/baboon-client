@@ -44,6 +44,12 @@
     "ACTIVATED": "Ich bin aktiviert!",
     "DEACTIVATED": "Ich bin deaktiviert!",
     "DATEPICKER_INTRO": "Die Datepicker-Directive ist eine Kalenderkomponente. Durch sie lassen sich in ein Inputfeld auf einfache weise valide Datumswerte eintragen. Die Werte können sowohl inline als auch über das Kalenderpopup eingetragen werden.",
+    "DATEPICKER_FEATURES": "Der Datepicker bietet viele Vorteile.",
+    "DATEPICKER_FEATURE_1": "Er lässt nur valide Datumswerte zu.",
+    "DATEPICKER_FEATURE_2": "Das Eingabeformat ist frei wählbar.",
+    "DATEPICKER_FEATURE_3": "Er sieht in allen unterstützten Browsern gleich aus.",
+    "DATEPICKER_FEATURE_4": "Er hat in allen unterstützten Browsern das selbe Verhalten.",
+    "DATEPICKER_FEATURE_5": "Das Popup ist nativ zu bedienen durch den Verzicht auf verschachtelte Menus.",
     "DATE": "Datum",
     "DATEPICKER_WRONG_FORMAT": "Das Datum hat ein falsches Format.",
     "DATEPICKER_REQUIRED": "Das Datum muss angegeben werden.",
@@ -53,6 +59,12 @@
     "FLOAT_PARSED_VALUE": "Geparster Wert:",
     "FLOAT_INITIAL_TYPE": "Initialer Datentyp:",
     "FLOAT_CURRENT_TYPE": "Aktueller Datentyp:",
+    "INLINE_INTRO": "Baboon bietet den Service $bbcInlineEdit, welcher es ermöglicht Objekte nach Änderungen zurückzusetzen. Die Objekte können mit Validierungsfehlern erweitert werden.",
+    "INLINE_DESCRIPTION": "Der Service hält die Daten im model. Beim Anlegen des models werden die model-Daten im master gespeichert. Das ermöglicht es das model wieder auf seine Ausgangsdaten zurückzusetzen und Änderungen am model nachzuvollziehen.",
+    "INLINE_METHOD_ISUNCHANGED": "isChanged: Prüft ob am model Änderungen stattgefunden haben.",
+    "INLINE_METHOD_POPVALIDATION": "populateValidation: Ergänzt das form um Servervalidierungsfehler.",
+    "INLINE_METHOD_RESET": "reset: Setzt das model auf seinen Initialwert zurück.",
+    "INLINE_METHOD_SETMODEL": "setModel: Erstellt ein neues model und setzt den master.",
     "MODAL_TEXT": "Das Modul bbc.modal beinhaltet einen Service, welcher Popup- und Messageboxen anzeigen kann. Dieser Service basiert auf der Modal-Directive von ",
     "MODAL_LIST_HEADER": "Methoden des Modalservice",
     "MODAL_LIST_OPEN": "Öffnet ein modales Fenster",
@@ -89,5 +101,6 @@
     "NAVIGATION_LIST_4": "Liefert die aktuelle Navigation als Liste",
     "NAVIGATION_LIST_5": "Liefert die Toplevels der Navigation",
     "NAVIGATION_LIST_6": "Liefert alle Unterlinks als Baum einer Toplevel",
-    "NAVIGATION_LIST_7": "Liefert alle Unterlinks als Liste einer Toplevel"
+    "NAVIGATION_LIST_7": "Liefert alle Unterlinks als Liste einer Toplevel",
+    "INTEGER_INTRO": "Die integer-Directive wandelt die Eingabe in einen Ganzzahlwert um. Ist die Eingabe kein gültiger ganzzahliger Wert wird null oder undefined zurückgegeben."
 }

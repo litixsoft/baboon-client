@@ -2,10 +2,37 @@
 <div class="beige-noise">
     <div class="p-wrapper">
         <div class="page-header">
-            <h1>Inline-Edit</h1>
+            <h1>bbc.inline.edit</h1>
         </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">{{ 'EXAMPLE' | translate }}</div>
+        <p>{{ 'INLINE_INTRO' | translate }}</p>
+        <p>{{ 'INLINE_DESCRIPTION' | translate }}</p>
+        <br>
+
+        <h3>{{ 'METHODS' | translate}}</h3>
+        <ul>
+            <li>{{ 'INLINE_METHOD_ISUNCHANGED' | translate }}</li>
+            <li>{{ 'INLINE_METHOD_POPVALIDATION' | translate }}</li>
+            <li>{{ 'INLINE_METHOD_RESET' | translate }}</li>
+            <li>{{ 'INLINE_METHOD_SETMODEL' | translate }}</li>
+        </ul>
+
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.inline.edit.$bbcInlineEdit" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <hr/>
+
+        <h3>{{ 'EXAMPLE' | translate }}</h3>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/inline/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/inline/example.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+
             <div class="panel-body">
                 <table class="table table-striped">
                     <colgroup>

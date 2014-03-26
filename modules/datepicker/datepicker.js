@@ -18,7 +18,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
      * @param {string=} [bbc-datepicker='dd.MM.yyyy'] Format string for date presentation.
      * @param {string} ng-model The binding to a value in scope.
      * @param {string=} placeholder The placeholder text in the input box.
-     * @param {=} required A date value is required.
+     * @param {object=} required Is the parameter set a date value is required.
      *
      */
     .directive('bbcDatepicker', function ($window,$filter,$timeout, bbcDatepickerConfig) {
