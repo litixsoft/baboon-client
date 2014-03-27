@@ -12,6 +12,7 @@ angular.module('bbc.checkbox', [])
      * For more information look at the [guide](/checkbox).
      *
      * @param {string} ng-model The binding to a value in scope.
+     * @param {object=} disabled Set the checkbox element as disabled.
      *
      */
     .directive('bbcCheckbox', function () {

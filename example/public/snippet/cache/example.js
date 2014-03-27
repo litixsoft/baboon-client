@@ -7,4 +7,4 @@ angular.module('NgAppDemo', ['bbc.cache']).controller('NgAppDemoCtrl', function 
     $scope.clearCache = function() {
         delete $bbcCache['_user'];
     };
-})
+});

@@ -146,7 +146,7 @@ angular.module('bbc.alert', [])
          * @methodOf bbc.alert.$bbcAlert
          *
          * @description
-         * Shows a danger alert message. It shows a message with a middle warn level.
+         * Shows a danger alert message. It shows a message with a high warn level.
          *
          * @param {string} message The message to be displayed.
          */
