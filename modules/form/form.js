@@ -6,9 +6,13 @@ angular.module('bbc.form', [])
      * @name bbc.form.$bbcForm
      * @requires bbc.cache.$bbcCache
      *
+     * @param {string} modelName The name for the model.
+     * @param {string=} key The name for a model property, which value is used as cache id.
+     *
      * @description
      * Form service which allow caching, reset the object and populates validation errors.
      *
+     * For more information look at the [guide](/form).
      */
     .factory('$bbcForm', function ($bbcCache) {
         return function (modelName, key) {

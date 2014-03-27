@@ -18,6 +18,7 @@ angular.module('example', [
         'bbc.transport',
         'bbc.integer',
         'bbc.float',
+        'bbc.form',
         'bbc.pager',
         'bbc.navigation',
         'bbc.session'
@@ -32,6 +33,7 @@ angular.module('example', [
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
             .when('/edit', { templateUrl: 'partials/inlineEdit.html', controller: 'InlineEditCtrl' })
             .when('/float', { templateUrl: 'partials/float.html', controller: 'FloatCtrl' })
+            .when('/form', { templateUrl: 'partials/form.html', controller: 'FormCtrl' })
             .when('/integer', { templateUrl: 'partials/integer.html', controller: 'IntegerCtrl' })
             .when('/markdown', { templateUrl: 'partials/markdown.html', controller: 'MarkdownCtrl' })
             .when('/modal', { templateUrl: 'partials/modal.html', controller: 'ModalCtrl' })
@@ -77,6 +79,7 @@ angular.module('example', [
             { 'title': 'bbc.checkbox', 'link': '/checkbox' },
             { 'title': 'bbc.datepicker', 'link': '/datepicker' },
             { 'title': 'bbc.float', 'link': '/float' },
+            { 'title': 'bbc.form', 'link': '/form' },
             { 'title': 'bbc.inline.edit', 'link': '/edit' },
             { 'title': 'bbc.integer', 'link': '/integer' },
             { 'title': 'bbc.markdown', 'link': '/markdown' },
@@ -127,6 +130,17 @@ angular.module('example', [
         $scope.$watch('val', function() {
             $scope.currentType = (typeof $scope.val);
         });
+    })
+    .controller('FormCtrl', function ($scope, $bbcForm) {
+        $scope.$bbcForm = $bbcForm('formEdit', '_id');
+        var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
+        $scope.$bbcForm.setModel(person);
+
+        $scope.save = function() {
+            if($scope.$bbcForm.model.lastname !== 'Doe') {
+                $scope.$bbcForm.populateValidation($scope.form, [{ property: 'lastname', message: 'Lastname must be Doe.' }]);
+            }
+        };
     })
     .controller('IntegerCtrl', function ($scope) {
         $scope.val = '1';

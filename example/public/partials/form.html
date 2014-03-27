@@ -1,0 +1,183 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div class="page-header">
+            <h1>bbc.form</h1>
+        </div>
+        <p>{{ 'FORM_TEXT' | translate }}</p>
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.form.$bbcForm" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+
+        <h3>{{ 'FORM_LIST_HEADER' | translate }}</h3>
+        <ul>
+            <li>setModel: {{ 'FORM_LIST_SET' | translate }}</li>
+            <li>hasLoadedModelFromCache: {{ 'FORM_LIST_HASLOADED' | translate }}</li>
+            <li>isUnchanged: {{ 'FORM_LIST_UNCHANGED' | translate }}</li>
+            <li>populateValidation: {{ 'FORM_LIST_POPULATE' | translate }}</li>
+            <li>reset: {{ 'FORM_LIST_RESET' | translate }}</li>
+        </ul>
+
+        <h3>{{ 'FORM_INIT_HEADER' | translate }}</h3>
+        <p>{{ 'FORM_INIT_TEXT' | translate }}</p>
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+    $scope.$bbcForm = $bbcForm('formEdit', '_id');
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <h3>setModel: {{ 'FORM_LIST_SET' | translate }}</h3>
+        <p>{{ 'FORM_SET_TEXT' | translate }}</p>
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+    $scope.$bbcForm = $bbcForm('formEdit', '_id');
+    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
+    $scope.$bbcForm.setModel(person); // add
+    $scope.$bbcForm.setModel(person, true); // remove
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <h3>hasLoadedModelFromCache: {{ 'FORM_LIST_HASLOADED' | translate }}</h3>
+        <p>{{ 'FORM_HASLOADED_TEXT' | translate }}</p>
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+$scope.$bbcForm = $bbcForm('formEdit', '_id');
+var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
+$scope.$bbcForm.setModel(person); // add
+
+if (!$scope.$bbcForm.hasLoadedModelFromCache(1)) {
+    // load person...
+    $scope.lxForm.setModel(person);
+}
+                </div>
+            </tab>
+        </tabset>
+
+        <h3>isUnchanged: {{ 'FORM_LIST_UNCHANGED' | translate }}</h3>
+        <p>{{ 'FORM_UNCHANGED_TEXT' | translate }}</p>
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+    $scope.$bbcForm = $bbcForm('formEdit', '_id');
+    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
+    $scope.$bbcForm.setModel(person);
+    var isDirty = !$scope.$bbcForm.isUnchanged();
+    console.log(isDirty); // false
+    person.firstname = 'Jane';
+    isDirty = !$scope.$bbcForm.isUnchanged();
+    console.log(isDirty); // true
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <h3>isUnchanged: {{ 'FORM_LIST_POPULATE' | translate }}</h3>
+        <p>{{ 'FORM_POPULATE_TEXT' | translate }}</p>
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+    $scope.$bbcForm = $bbcForm('formEdit', '_id');
+    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
+    $scope.$bbcForm.setModel(person);
+
+    $scope.save = function() {
+        if($scope.person.lastname !== 'Doe') {
+            $scope.$bbcForm.populateValidation($scope.form,
+                    [{ property: 'lastname', message: 'Lastname must be Doe.' }]);
+        }
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <h3>reset: {{ 'FORM_LIST_RESET' | translate }}</h3>
+        <p>{{ 'FORM_RESET_TEXT' | translate }}</p>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<form name="form" class="form-horizontal" novalidate>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Firstname</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" name="firstname" ng-model="$bbcForm.model.firstname" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : ((form.lastname.$dirty &amp;&amp; form.lastname.$invalid) || form.errors.lastname)}">
+        <label class="col-lg-2 control-label">Lastname*</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" name="lastname" ng-model="$bbcForm.model.lastname" required>
+            <label ng-show="((form.lastname.$dirty && form.lastname.$invalid) || form.errors.lastname)" class="label label-danger">
+                <div class="glyphicon glyphicon-fire"></div>
+                <span ng-show="form.lastname.$error.required">Lastname is required</span>
+                <span ng-show="form.errors.lastname">{{form.errors.lastname}}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            {{form.$invalid || $bbcForm.isUnchanged()}}
+            <button ng-click="save()" class="btn btn-primary" ng-disabled="form.$invalid || $bbcForm.isUnchanged()">Speichern</button>
+            <button ng-click="$bbcForm.reset(form)" class="btn btn-primary">Reset</button>
+        </div>
+    </div>
+</form>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+    $scope.$bbcForm = $bbcForm('formEdit', '_id');
+    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
+    $scope.$bbcForm.setModel(person);
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <hr />
+        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <form name="form" class="form-horizontal" novalidate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="firstname">{{ 'FORM_FIRSTNAME' | translate }}</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="firstname" name="firstname" ng-model="$bbcForm.model.firstname" placeholder="{{ 'FORM_FIRSTNAME' | translate }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : ((form.lastname.$dirty && form.lastname.$invalid) || form.errors.lastname)}">
+                            <label class="col-lg-2 control-label" for="lastname">{{ 'FORM_LASTNAME' | translate }}*</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="lastname" name="lastname" ng-model="$bbcForm.model.lastname" placeholder="{{ 'FORM_LASTNAME' | translate }}" required>
+                                <label ng-show="((form.lastname.$dirty && form.lastname.$invalid) || form.errors.lastname)" class="label label-danger">
+                                    <div class="glyphicon glyphicon-fire"></div>
+                                    <span ng-show="form.lastname.$error.required">{{ 'FORM_LASTNAME_REQ' | translate }}</span>
+                                    <span ng-show="form.errors.lastname">{{form.errors.lastname}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button ng-click="save()" class="btn btn-primary" ng-disabled="form.$invalid || $bbcForm.isUnchanged()">{{ 'FORM_SAVE' | translate }}</button>
+                                <button ng-click="$bbcForm.reset(form)" class="btn btn-primary">{{ 'FORM_RESET' | translate }}</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <pre>isDirty: {{ !$bbcForm.isUnchanged() }}</pre>
+            </div>
+        </div>
+    </div>
+</div>
