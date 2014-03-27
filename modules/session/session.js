@@ -9,12 +9,12 @@ angular.module('bbc.session', ['bbc.transport'])
      * @description
      * This service allows the client to access the server session.
      * This can be used to tell the session activity of the Single Page the server and to store data in the session.
-     * For more details see our {@link /session Guide}.
      *
      * For the store of data, the server session to the client appropriate container for disposal.
      * In this Container, the client can store its data during the session.
      * The client only has access to this container. (Sandbox)
      *
+     * For more details see our {@link /session Guide}.
      */
     .factory('$bbcSession', function ($rootScope, $bbcTransport) {
         var pub = {};

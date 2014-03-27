@@ -9,6 +9,7 @@ angular.module('bbc.alert', [])
      *
      * @description
      * Service for angular-ui alert handling which shows different alert boxes in an application.
+     *
      * For more information look at the [guide](/alert).
      *
      */
@@ -162,6 +163,7 @@ angular.module('bbc.alert', [])
      *
      * @description
      * Markup for alert. It is the place holder which contains the DOM-content to show alert messages.
+     *
      * For more information look at the [guide](/alert).
      *
      */

@@ -4,7 +4,7 @@
             <h1>bbc.alert</h1>
         </div>
         <p>{{ 'ALERT_INTRO' | translate }}</p>
-        <br>
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.alert.directive:bbcAlert" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
         <h3>{{ 'METHODS' | translate}}</h3>
         <ul>
             <li>{{ 'ALERT_INFO' | translate }}</li>
@@ -13,15 +13,9 @@
             <li>{{ 'ALERT_DANGER' | translate }}</li>
             <li>{{ 'ALERT_CLOSE' | translate }}</li>
         </ul>
-
         <p>{{ 'ALERT_MESSAGE' | translate }}</p>
-
-        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.alert.directive:bbcAlert" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
-
         <hr/>
-
         <h3>{{ 'EXAMPLE' | translate }}</h3>
-
         <tabset>
             <tab heading="index.html">
                 <div hljs include="'snippet/alert/example.html'"></div>

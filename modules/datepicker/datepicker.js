@@ -13,6 +13,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
      *
      * @description
      * Creates a datepicker. A datepicker is an interactiv calendar to choose a date in an input field.
+     *
      * For more information look at the [guide](/datepicker).
      *
      * @param {string=} [bbc-datepicker='dd.MM.yyyy'] Format string for date presentation.

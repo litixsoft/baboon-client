@@ -9,6 +9,7 @@ angular.module('bbc.integer', [])
     *
     * @description
     * Converts a number to an integer. It convert an empty string to null and a non-number-string to undefined.
+     *
     * For more information look at the [guide](/integer).
     */
     .directive('bbcInteger', function () {

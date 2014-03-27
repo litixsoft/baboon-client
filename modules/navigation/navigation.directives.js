@@ -11,6 +11,7 @@ angular.module('bbc.navigation')
      *
      * @description
      * Creates a navigation with same look and feel on all browsers.
+     *
      * For more information look at the [guide](/nav-home).
      *
      * @param {array} navList The binding to the navigation links in scope.
@@ -75,6 +76,7 @@ angular.module('bbc.navigation')
      *
      * @description
      * Creates a navigation tree with same look and feel on all browsers.
+     *
      * For more information look at the [guide](/nav-home).
      *
      * @param {array} navList The binding to the navigation links in scope.

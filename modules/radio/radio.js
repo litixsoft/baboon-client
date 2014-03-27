@@ -13,6 +13,7 @@ angular.module('bbc.radio', [])
      *
      * @description
      * Creates a radio button with same look and feel on all browser.
+     *
      * For more details see our {@link /radio Guide}.
      *
      */

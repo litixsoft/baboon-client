@@ -8,6 +8,7 @@ angular.module('bbc.checkbox', [])
      *
      * @description
      * Creates a checkbox with same look and feel on all browser.
+     *
      * For more information look at the [guide](/checkbox).
      *
      * @param {string} ng-model The binding to a value in scope.

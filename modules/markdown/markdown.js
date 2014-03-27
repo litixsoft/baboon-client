@@ -8,6 +8,7 @@ angular.module('bbc.markdown', [])
      *
      * @description
      * Converts markdown to HTML.
+     *
      * For more details see our {@link /markdown Guide}.
      *
      */

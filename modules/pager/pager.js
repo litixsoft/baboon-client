@@ -13,6 +13,7 @@ angular.module('bbc.pager', [])
      *
      * @description
      * Creates an pager for custom or server side paging.
+     *
      * For more details see our {@link /pager Guide}.
      *
      */

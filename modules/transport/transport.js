@@ -65,6 +65,8 @@ angular.module('bbc.transport', ['btford.socket-io'])
      * Service for transport. It can either use a socket connection or a rest connection. The option which communication
      * to use is useSocket.
      *
+     * For more information look at the [guide](/transport).
+     *
      */
     .provider('$bbcTransport', function () {
         var config = {};

@@ -3,15 +3,10 @@
         <div class="page-header">
             <h1>bbc.integer</h1>
         </div>
-
         <p>{{ 'INTEGER_INTRO' | translate }}</p>
-        <br>
-
-        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.integer.directive:bbcInteger" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
+        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.integer.directive:bbcInteger" target="_self">{{'API_LINK_TEXT' | translate }}</a>.</p>
         <hr/>
-
         <h3>{{ 'EXAMPLE' | translate }}</h3>
-
         <tabset>
             <tab heading="index.html">
                 <div hljs include="'snippet/integer/example.html'"></div>
@@ -25,11 +20,12 @@
             <div class="panel-heading">{{ 'DEMO' | translate }}</div>
             <div class="panel-body">
                 <p>Please change the number</p>
-                <input type="text" bbc-integer ng-model="val" class="form-control" />
+                <input type="text" bbc-integer ng-model="val" class="form-control"/>
+
                 <p>
-                    <pre>The current value is: {{ val }}</pre>
-                    <pre>The initial type is: {{ initialType }}</pre>
-                    <pre>The current type is: {{ currentType }}</pre>
+                <pre>The current value is: {{ val }}</pre>
+                <pre>The initial type is: {{ initialType }}</pre>
+                <pre>The current type is: {{ currentType }}</pre>
                 </p>
             </div>
         </div>

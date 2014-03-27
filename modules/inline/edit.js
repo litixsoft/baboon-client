@@ -7,6 +7,7 @@ angular.module('bbc.inline.edit', [])
      *
      * @description
      * Service for editing which allow reset the object and populates validation errors. It uses the model to hold actual form data and the master to hold the original data.
+     *
      * For more information look at the [guide](/edit).
      */
     .factory('$bbcInlineEdit', function () {

@@ -11,6 +11,7 @@ angular.module('bbc.sort', [])
      *
      * @description
      * Directive for custom sorting or server side sorting.
+     *
      * For more details see our {@link /sort Guide}.
      *
      */

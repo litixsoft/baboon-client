@@ -67,6 +67,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
      *
      * @description
      * Service displaying a modal popup window.
+     *
      * For more details see our {@link /modal Guide}.
      *
      */

@@ -13,6 +13,7 @@ angular.module('bbc.reset', [])
      *
      * @description
      * Adds an icon to reset the model of an input field.
+     *
      * For more details see our {@link /reset Guide}.
      *
      */
