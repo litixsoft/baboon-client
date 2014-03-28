@@ -47,7 +47,7 @@ module.exports = function (grunt) {
             jshint: '.reports/jshint',
             bower: ['<%= src.bowerrc.directory %>'],
             node_modules: ['node_modules'],
-            docs: ['build/docs']
+            docs: ['.dist/docs']
         },
 
         open: {
