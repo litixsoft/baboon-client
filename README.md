@@ -82,8 +82,8 @@ You can run a coverage task for Baboon-Client with:
 
     $ grunt cover // directory baboon-client
 
-## Running Baboon-Client unit tests, jshint and code coverage for ci systems
-
+## Running tests for ci systems
+You can run unit tests, jshint and code coverage for ci systems with:
     $ grunt ci
 
 ## Generate Documentation
