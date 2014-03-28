@@ -1,41 +1,62 @@
 # baboon client [![Build Status](https://img.shields.io/travis/litixsoft/baboon-client/v0.4.svg)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.png)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.png)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
 
-> A client library for baboon webtoolkit.
+> Baboon-Client is a client library for [baboon webtoolkit](https://github.com/litixsoft/baboon). It also has different directives to simplify tasks in client web development.
 
-## Install
-install global dependencies:
+* Web site: http://www.litixsoft.de/baboon
+* Tutorial: http://www.litixsoft.de/baboon/tutorial
+* API Docs: http://www.litixsoft.de/baboon/api
+* Developer Guide: http://www.litixsoft.de/baboon/guide
 
+# Install
+The installation of a Baboon project is very simple. However, some preparatory work is needed.
+
+## Global dependencies:
+
+Linux / Mac:
+    $ sudo npm install -g bower
+
+Windows:
     $ npm install -g bower
 
+## Create and start your baboon project
 Usual baboon-client standard installation over bower registry:
 
     $ bower install baboon-client
 
 [Learn more about usage of Bower](https://github.com/bower/bower#usage)
 
-**Special installations on GitHub**
-
-Github: master, current development status, release candidate:
-
-	$ bower install https://github.com/litixsoft/baboon-client.git#master
-
-Github: v0.4, very early stage of development, unstable:
-
-	$ bower install https://github.com/litixsoft/baboon-client.git#v0.4
-
-
-## Contributing and test
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please create descriptive commit messages.
+# Contributing
+Instead of us handing out a formal style guide, simply stick to the existing programming style. Please create descriptive commit messages.
 We use a git hook to validate the commit messages against these [rules](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w).
-Lint and test your code using [grunt](http://gruntjs.com/).
+Easily expand Baboon-Client with your own extensions or changes in the functionality of Baboon-Client itself. Use this workflow:
 
-Install global dependencies:
+1. Write your functionality
+2. Write unit tests for your functionality
+3. Create an example of your functionality in the guide
+4. Document your functionality in the documentation section of the guide
+5. All tests should be successful
+6. Check your test coverage (90 - 100%)
+7. Make a pull request
+
+We will check the tests, the example and test coverage. In case your changes are useful and well tested, we will merge your requests.
+
+# Building and Testing Baboon-Client
+This section describes how to set up your development environment to build and test Baboon-Client with the guide.
+
+## Global dependencies:
+
+Linux / Mac:
+
+    $ sudo npm install -g grunt-cli karma bower
+
+Windows:
 
     $ npm install -g grunt-cli karma bower
 
-On linux use administrative rights to install global modules:
 
-    $ sudo npm install -g grunt-cli karma bower
+## Clone Baboon-Client and guide
+The guide is also the reference implementation for Baboon-Client.
+Clone Baboon-Client repository and install the dependent modules with npm and bower.
 
 Clone the baboon-client repository and install the dev dependencies and test suite deps.
 Test baboon-client with grunt.
@@ -44,37 +65,58 @@ Test baboon-client with grunt.
     $ cd baboon-client
     $ npm install
     $ bower install
-    $ grunt test
 
-Alternate you can use the update script
+Alternate you can use the update script:
 
     $ git clone https://github.com/litixsoft/baboon-client.git
     $ cd baboon-client
     $ ./update.sh // in windows use update.bat
-    $ grunt test
 
-Help us with your ideas. Write your code and test it.
-Write tests for your code. All tests must be successful. Make a pull request.
+## Running tests
+You can run all unit tests for Baboon-Client with:
 
+    $ grunt test // directory baboon-client
+
+## Running coverage
+You can run a coverage task for Baboon-Client with:
+
+    $ grunt cover // directory baboon-client
+
+## Running Baboon-Client unit tests, jshint and code coverage for ci systems
+
+    $ grunt ci
 
 ## Generate Documentation
-Clone the baboon-client repository and install the dev dependencies. Generate baboon-client documentation with grunt. This will generate the documentation and starts automatically a webserver which serves the index page.
+You can generate the documentation for baboon-client with:
 
-    $ git clone https://github.com/litixsoft/baboon-client.git
-    $ cd baboon-client
-    $ npm install
-    $ bower install
     $ grunt doc
 
-## Author
+## Running guide and documentation
+You can start the node application and run the guide under http://localhost:3000.
+
+    $ node server.js
+
+# Author
 [Litixsoft GmbH](http://www.litixsoft.de)
 
-## License
+# License
+Copyright (C) 2013-2014 Litixsoft GmbH <info@litixsoft.de>
+Licensed under the MIT license.
 
-Copyright (C) 2013-2014 Litixsoft GmbH info@litixsoft.de Licensed under the MIT license.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE. DEALINGS IN THE SOFTWARE.
