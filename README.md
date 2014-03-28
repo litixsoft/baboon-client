@@ -13,9 +13,11 @@ The installation of a Baboon project is very simple. However, some preparatory w
 ## Global dependencies:
 
 Linux / Mac:
+
     $ sudo npm install -g bower
 
 Windows:
+
     $ npm install -g bower
 
 ## Create and start your baboon project
