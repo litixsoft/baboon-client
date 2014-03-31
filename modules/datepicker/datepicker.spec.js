@@ -193,12 +193,17 @@ describe('bbcDatepicker', function () {
 
     it('monthClick() month be set for selectedDay and view updated ', function () {
         var elementScope = element.isolateScope();
+
+        elementScope.ngModel = new Date(2017,2,15);
+        scope.$digest();
+
         //month from 0 - 11
         elementScope.selectedDay.setMonth(6);
+        elementScope.$digest();
+
         expect(elementScope.selectedDay.getMonth()).toBe(6);
 
         elementScope.monthClick(3);
-        elementScope.$digest();
         expect(elementScope.selectedDay.getMonth()).toBe(3);
     });
 
