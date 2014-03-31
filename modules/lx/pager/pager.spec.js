@@ -76,7 +76,7 @@ describe('lxPager', function () {
         scope.$digest();
         var elementScope = element.isolateScope();
 
-        expect(elementScope.pageSizeOptions).toEqual([1, 2, 3]);
+        expect(elementScope.pageSizeOptions).toEqual([1, 2, 3, 10]);
     });
 
     it('should have a function skip() which returns the skip value', function () {

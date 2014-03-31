@@ -42,6 +42,16 @@ angular.module('lx.pager', [])
                 scope.currentPage = 1;
                 scope.count = 0;
 
+                function addPageSizeToPageSizeOptions (pageSize, pageSizeOptions) {
+                    if (typeof pageSize === 'number' && pageSizeOptions.indexOf(pageSize) === -1) {
+                        // add pageSize to pageSizeOptions
+                        pageSizeOptions.push(pageSize);
+                        pageSizeOptions.sort(function (a, b) {
+                            return a - b;
+                        });
+                    }
+                }
+
                 // get page size options from attrs
                 attrs.$observe('pageSizes', function (value) {
                     var options = scope.$eval(value);
@@ -53,6 +63,11 @@ angular.module('lx.pager', [])
                     } else if (!scope.pageSizeOptions) {
                         scope.pageSizeOptions = defaultPageSizeOptions;
                     }
+
+                    // add current page size to in page size options
+                    if (scope.pageSize) {
+                        addPageSizeToPageSizeOptions(scope.pageSize, scope.pageSizeOptions);
+                    }
                 });
 
                 // get page size options from attrs
@@ -60,17 +75,10 @@ angular.module('lx.pager', [])
                     var pageSize = scope.$eval(value);
 
                     if (typeof pageSize === 'number') {
+                        scope.pageSize = pageSize;
                         scope.pageSizeOptions = scope.pageSizeOptions || defaultPageSizeOptions;
 
-                        if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
-                            // add pageSize to pageSizeOptions
-                            scope.pageSizeOptions.push(pageSize);
-                            scope.pageSizeOptions.sort(function (a, b) {
-                                return a - b;
-                            });
-                        }
-
-                        scope.pageSize = pageSize;
+                        addPageSizeToPageSizeOptions(scope.pageSize, scope.pageSizeOptions);
                     } else if (typeof scope.pageSize !== 'number') {
                         scope.pageSize = defaultPageSize;
                     }
