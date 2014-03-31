@@ -2,13 +2,12 @@
 
 > Baboon-Client is a client library for [baboon webtoolkit](https://github.com/litixsoft/baboon). It also has different directives to simplify tasks in client web development.
 
-* Web site: http://www.litixsoft.de/baboon
-* Tutorial: http://www.litixsoft.de/baboon/tutorial
-* API Docs: http://www.litixsoft.de/baboon/api
-* Developer Guide: http://www.litixsoft.de/baboon/guide
+* Website: http://www.litixsoft.de/baboon-client
+* API Documentation: http://www.litixsoft.de/baboon-client/api
+* Developer Guide: http://www.litixsoft.de/baboon-client/guide
 
 # Install
-The installation of a Baboon project is very simple. However, some preparatory work is needed.
+The installation of Baboon-Client is very simple. However, some preparatory work is needed.
 
 ## Global dependencies:
 
@@ -20,7 +19,7 @@ Windows:
 
     $ npm install -g bower
 
-## Create and start your baboon project
+## Create and start your Baboon-Client project
 Usual baboon-client standard installation over bower registry:
 
     $ bower install baboon-client
