@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('bbc.pager', [])
-    /**
-     * @ngdoc directive
-     * @name bbc.pager.directive:bbcPager
-     * @restrict E
-     * @param {number} count The count of all items.
-     * @param {number=} [currentPage] The current page to display.
-     * @param {number} pageSize The current page size.
-     * @param {Array} pageSizes An array of all page sizes which the user can select.
-     * @param {function(pagingOptions) } onPaging The callback which is called on paging.
-     *
-     * @description
-     * Creates an pager for custom or server side paging.
-     *
-     * For more details see our {@link /pager Guide}.
-     *
-     */
-     .directive('bbcPager', function () {
+/**
+ * @ngdoc directive
+ * @name bbc.pager.directive:bbcPager
+ * @restrict E
+ * @param {number} count The count of all items.
+ * @param {number=} [currentPage] The current page to display.
+ * @param {number} pageSize The current page size.
+ * @param {Array} pageSizes An array of all page sizes which the user can select.
+ * @param {function(pagingOptions) } onPaging The callback which is called on paging.
+ *
+ * @description
+ * Creates an pager for custom or server side paging.
+ *
+ * For more details see our {@link /pager Guide}.
+ *
+ */
+    .directive('bbcPager', function () {
         return {
             restrict: 'E',
             template: '<div class="row">' +
@@ -59,6 +59,16 @@ angular.module('bbc.pager', [])
                 scope.currentPage = 1;
                 scope.count = scope.count || 0;
 
+                function addPageSizeToPageSizeOptions (pageSize, pageSizeOptions) {
+                    if (typeof pageSize === 'number' && pageSizeOptions.indexOf(pageSize) === -1) {
+                        // add pageSize to pageSizeOptions
+                        pageSizeOptions.push(pageSize);
+                        pageSizeOptions.sort(function (a, b) {
+                            return a - b;
+                        });
+                    }
+                }
+
                 // get page size options from attrs
                 attrs.$observe('pageSizes', function (value) {
                     var options = scope.$eval(value);
@@ -70,6 +80,11 @@ angular.module('bbc.pager', [])
                     } else if (!scope.pageSizeOptions) {
                         scope.pageSizeOptions = defaultPageSizeOptions;
                     }
+
+                    // add current page size to in page size options
+                    if (scope.pageSize) {
+                        addPageSizeToPageSizeOptions(scope.pageSize, scope.pageSizeOptions);
+                    }
                 });
 
                 // get page size options from attrs
@@ -77,15 +92,10 @@ angular.module('bbc.pager', [])
                     var pageSize = scope.$eval(value);
 
                     if (typeof pageSize === 'number') {
-                        if (scope.pageSizeOptions.indexOf(pageSize) === -1) {
-                            // add pageSize to pageSizeOptions
-                            scope.pageSizeOptions.push(pageSize);
-                            scope.pageSizeOptions.sort(function (a, b) {
-                                return a - b;
-                            });
-                        }
-
                         scope.pageSize = pageSize;
+                        scope.pageSizeOptions = scope.pageSizeOptions || defaultPageSizeOptions;
+
+                        addPageSizeToPageSizeOptions(scope.pageSize, scope.pageSizeOptions);
                     } else { // if (typeof scope.pageSize !== 'number') {
                         scope.pageSize = defaultPageSize;
                     }

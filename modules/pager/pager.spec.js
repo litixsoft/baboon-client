@@ -68,6 +68,31 @@ describe('bbcPager', function () {
         expect(scope.getData).not.toHaveBeenCalled();
     });
 
+    it('should use the pageSize attribute when specified and add the page size to the page size options', function () {
+        scope.val = 33;
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" page-size="{{ val }}" on-paging="getData(pagingOptions)"></bbc-pager>');
+        compile(element)(scope);
+        scope.$digest();
+        var elementScope = element.isolateScope();
+
+        expect(elementScope.pageSizeOptions).toEqual([1, 5, 10, 25, 33, 100]);
+        expect(elementScope.pageSize).toBe(33);
+        expect(scope.getData).not.toHaveBeenCalled();
+    });
+
+    it('should use the pageSize attribute when specified and add the page size to the given page size options', function () {
+        scope.val = 33;
+        scope.val2 = [1, 2, 3];
+        element = angular.element('<bbc-pager count="count" current-page="currentPage" page-size="{{ val }}" page-sizes="{{ val2 }}" on-paging="getData(pagingOptions)"></bbc-pager>');
+        compile(element)(scope);
+        scope.$digest();
+        var elementScope = element.isolateScope();
+
+        expect(elementScope.pageSizeOptions).toEqual([1, 2, 3, 33]);
+        expect(elementScope.pageSize).toBe(33);
+        expect(scope.getData).not.toHaveBeenCalled();
+    });
+
     it('should parse the page-Sizes if the page-Sizes injected through the attrs', function () {
         scope.val = [1, 2, 3];
         element = angular.element('<bbc-pager count="count" current-page="currentPage" page-sizes="{{ val }}" on-paging="getData(pagingOptions)"></bbc-pager>');
@@ -75,7 +100,7 @@ describe('bbcPager', function () {
         scope.$digest();
         var elementScope = element.isolateScope();
 
-        expect(elementScope.pageSizeOptions).toEqual([1, 2, 3]);
+        expect(elementScope.pageSizeOptions).toEqual([1, 2, 3, 10]);
     });
 
     it('should have a function skip() which returns the skip value', function () {
