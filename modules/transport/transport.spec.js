@@ -88,39 +88,46 @@ describe('bbcTransport', function () {
             mockSocket = {
                 createSocket: function (host, connectTimeout) {
                     return {
-                        host: host,
-                        connectTimeout: connectTimeout,
-                        listeners: {},
-                        addListener: function (event, callback) {
-                            this.listeners[event] = callback;
-                        },
-                        removeListener: function (event, callback) {
-                            if (this.listeners[event]) {
-                                delete this.listeners[event];
-                            }
+                        socket: {
+                            host: host,
+                            connectTimeout: connectTimeout,
+                            listeners: {},
+                            addListener: function (event, callback) {
+                                this.listeners[event] = callback;
+                            },
+                            removeListener: function (event, callback) {
+                                if (this.listeners[event]) {
+                                    delete this.listeners[event];
+                                }
 
-                            callback(null, null);
-                        },
-                        on: function (event, callback) {
-                            this.listeners[event] = callback;
-                        },
-                        emit: function (event, data, callback) {
-                            if (event === 'error') {
-                                this.listeners[event]('handshake unauthorized');
-                            }
-                            if (this.listeners[event]) {
-                                this.listeners[event](null, data);
-                            }
+                                callback(null, null);
+                            },
+                            on: function (event, callback) {
+                                this.listeners[event] = callback;
+                            },
+                            emit: function (event, data, callback) {
+                                if (event === 'error') {
+                                    this.listeners[event]('handshake unauthorized');
+                                }
+                                if (this.listeners[event]) {
+                                    this.listeners[event](null, data);
+                                }
 
-                            if (event === 'callbackErrorTest') {
-                                callback(event);
-                                return;
-                            }
+                                if (event === 'callbackErrorTest') {
+                                    callback(event);
+                                    return;
+                                }
 
-                            callback(null, data);
+                                callback(null, data);
+                            },
+                            forward: function () {
+                                return null;
+                            }
                         },
-                        forward: function () {
-                            return null;
+                        connection: {
+                            socket: {
+                                connected: true
+                            }
                         }
                     };
                 }

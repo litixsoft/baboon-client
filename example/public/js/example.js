@@ -48,9 +48,9 @@ angular.module('example', [
             .when('/pager', { templateUrl: 'partials/pager.html', controller: 'PagerCtrl' })
             .when('/radio', { templateUrl: 'partials/radio.html', controller: 'RadioCtrl' })
             .when('/reset', { templateUrl: 'partials/reset.html', controller: 'ResetCtrl' })
+            .when('/session', { templateUrl: 'partials/session.html', controller: 'SessionCtrl' })
             .when('/sort', { templateUrl: 'partials/sort.html', controller: 'SortCtrl' })
             .when('/transport', { templateUrl: 'partials/transport.html', controller: 'TransportCtrl' })
-            .when('/session', { templateUrl: 'partials/session.html', controller: 'SessionCtrl' })
             .otherwise({ redirectTo: '/' });
 
         $bbcTransportProvider.set();
@@ -87,10 +87,10 @@ angular.module('example', [
             { 'title': 'bbc.navigation', 'link': '/nav-home' },
             { 'title': 'bbc.pager', 'link': '/pager' },
             { 'title': 'bbc.radio', 'link': '/radio' },
-            { 'title': 'bbc.sort', 'link': '/sort' },
-            { 'title': 'bbc.transport', 'link': '/transport' },
             { 'title': 'bbc.reset', 'link': '/reset' },
-            { 'title': 'bbc.session', 'link': '/session' }
+            { 'title': 'bbc.session', 'link': '/session' },
+            { 'title': 'bbc.sort', 'link': '/sort' },
+            { 'title': 'bbc.transport', 'link': '/transport' }
         ];
 
         $scope.isActive = function (route) {
@@ -261,7 +261,7 @@ angular.module('example', [
         $translate.use('en-us');
         $scope.message = '';
         var buttonTextValues = { ok: 'Ok' };
-        var options = { id: 'uniqueId', backdrop: false, buttonTextValues: buttonTextValues }
+        var options = { id: 'uniqueId', backdrop: false, buttonTextValues: buttonTextValues };
 
         $scope.popupYesNo = function() {
             options.callObj = {
@@ -329,13 +329,11 @@ angular.module('example', [
         $rootScope.socketEnabled = false;
     })
     .controller('RestCtrl', function ($scope, $location) {
-
         $scope.isActive = function (route) {
             return route === $location.path();
         };
     })
     .controller('TransportCtrl', function ($rootScope, $scope, $location, $bbcTransport) {
-
         $scope.messages = [];
         $scope.raiseError = false;
 
@@ -379,8 +377,7 @@ angular.module('example', [
             return route === $location.path();
         };
     })
-    .controller('SessionCtrl', function ($scope, $bbcSession, $rootScope) {
-
+    .controller('SessionCtrl', function ($scope, $bbcSession) {
         $scope.activityMessages = [];
 
         $scope.clearActivity = function() {
@@ -389,10 +386,6 @@ angular.module('example', [
 
         $scope.getLastActivity = function() {
             $scope.activityMessages.push({class:'sent', message: 'SENT: ' + 'getLastActivity'});
-
-            if ($rootScope.socketEnabled ) {
-                $rootScope.socketEnabled = false;
-            }
 
             $bbcSession.getLastActivity(function(error, data) {
 
@@ -407,13 +400,8 @@ angular.module('example', [
         };
 
         $scope.setActivity = function() {
-
             var now = new Date();
             $scope.activityMessages.push({class:'sent', message: 'SENT: ' + 'set activity to ' + now});
-
-            if ($rootScope.socketEnabled ) {
-                $rootScope.socketEnabled = false;
-            }
 
             $bbcSession.setActivity(function(error) {
                 if(error) {
@@ -437,15 +425,10 @@ angular.module('example', [
         };
 
         $scope.getData = function () {
-
             if (typeof $scope.data === 'undefined' || typeof $scope.data.key === 'undefined' ||
                 $scope.data.key.length === 0) {
 
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'get all session data'});
-
-                if ($rootScope.socketEnabled ) {
-                    $rootScope.socketEnabled = false;
-                }
 
                 $bbcSession.getData(function (error, result) {
                     if (error) {
@@ -458,12 +441,7 @@ angular.module('example', [
                 });
             }
             else {
-
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'get key: ' + $scope.data.key});
-
-                if ($rootScope.socketEnabled ) {
-                    $rootScope.socketEnabled = false;
-                }
 
                 $bbcSession.getData($scope.data.key, function (error, result) {
                     if (error) {
@@ -485,12 +463,7 @@ angular.module('example', [
                 $scope.dataMessages.push({class:'error', message: 'ERROR: ' + 'for save in session is key and value required'});
             }
             else {
-
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'setData' + 'key:' + $scope.data.key + ' value:' + $scope.data.value});
-
-                if ($rootScope.socketEnabled ) {
-                    $rootScope.socketEnabled = false;
-                }
 
                 $bbcSession.setData($scope.data.key, $scope.data.value, function (error, result) {
                     if(error) {
@@ -509,10 +482,6 @@ angular.module('example', [
 
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'set no key, delete all objects in session.data'});
 
-                if ($rootScope.socketEnabled ) {
-                    $rootScope.socketEnabled = false;
-                }
-
                 $bbcSession.deleteData(function (error, result) {
                     if (error) {
                         $scope.activityMessages.push({class:'error', message: error});
@@ -523,19 +492,14 @@ angular.module('example', [
                 });
             }
             else {
-
-                $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'delete ' + $scope.data.key + ' in session.data'});
-
-                if ($rootScope.socketEnabled ) {
-                    $rootScope.socketEnabled = false;
-                }
+                $scope.dataMessages.push({class: 'sent', message: 'SENT: ' + 'delete ' + $scope.data.key + ' in session.data'});
 
                 $bbcSession.deleteData($scope.data.key, function (error, result) {
                     if (error) {
-                        $scope.activityMessages.push({class:'error', message: error});
+                        $scope.activityMessages.push({class: 'error', message: error});
                     }
                     else {
-                        $scope.dataMessages.push({class:'response', message: 'RESPONSE: ' + result});
+                        $scope.dataMessages.push({class: 'response', message: 'RESPONSE: ' + result});
                     }
                 });
             }

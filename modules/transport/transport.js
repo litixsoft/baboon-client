@@ -1,27 +1,28 @@
 'use strict';
 
 angular.module('bbc.transport', ['btford.socket-io'])
-    /**
-     * @ngdoc object
-     * @name bbc.transport.$bbcSocket
-     *
-     * @description
-     * Service for socket connection.
-     *
-     * @param {object} socketFactory The socket io object
-     */
+/**
+ * @ngdoc object
+ * @name bbc.transport.$bbcSocket
+ *
+ * @description
+ * Service for socket connection.
+ *
+ * @param {object} socketFactory The socket io object
+ */
     .factory('$bbcSocket', function (socketFactory) {
         var pub = {};
 
         function Connection(host, connectTimeout) {
             var connection = io.connect(host, {'connect timeout': connectTimeout});
 
-            pub.connection = connection;
-
-            return socketFactory({
-                // Creates a new socket connection.
-                ioSocket: connection
-            });
+            return {
+                socket: socketFactory({
+                    // Creates a new socket connection.
+                    ioSocket: connection
+                }),
+                connection: connection
+            };
         }
 
         /**
@@ -37,7 +38,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
          */
         pub.createSocket = function (host, connectTimeout) {
             // when 2 is callback in data, rewrite this
-            if(arguments.length !== 2) {
+            if (arguments.length !== 2) {
                 throw new TypeError('Param "host" and "connectTimeout" are required');
             }
 
@@ -57,17 +58,18 @@ angular.module('bbc.transport', ['btford.socket-io'])
         return pub;
     })
 
-    /**
-     * @ngdoc object
-     * @name bbc.transport.$bbcTransport
-     *
-     * @description
-     * Service for transport. It can either use a socket connection or a rest connection. The option which communication
-     * to use is useSocket.
-     *
-     * For more information look at the [guide](/transport).
-     *
-     */
+/**
+ * @ngdoc object
+ * @name bbc.transport.$bbcTransport
+ * @requires $timeout
+ *
+ * @description
+ * Service for transport. It can either use a socket connection or a rest connection. The option which communication
+ * to use is useSocket.
+ *
+ * For more information look at the [guide](/transport).
+ *
+ */
     .provider('$bbcTransport', function () {
         var config = {};
 
@@ -89,7 +91,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
             config.hostname = options.hostname;
             config.port = options.port;
 
-            if(options.hasOwnProperty('useSocket')) {
+            if (options.hasOwnProperty('useSocket')) {
                 config.useSocket = options.useSocket;
             }
             else {
@@ -97,12 +99,16 @@ angular.module('bbc.transport', ['btford.socket-io'])
             }
 
             config.connectTimeout = options.connectTimeout || 5000;
+            config.socketResponseTimeout = options.socketResponseTimeout || 5000;
         };
 
-        this.$get = function ($rootScope, $http, $bbcSocket, $window, $log) {
+        this.$get = function ($rootScope, $http, $bbcSocket, $window, $log, $timeout) {
             var pub = {};
 
             var socket;
+            var socketConnection;
+            var promise = null;
+            var socketTimedOut = false;
 
             // default settings when options is empty
             config.protocol = config.protocol || $window.location.protocol;
@@ -110,7 +116,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
             config.port = config.port || parseInt($window.location.port);
 
             // fix protocol when forgotten :
-            if(config.protocol === 'http' || config.protocol === 'https' ||
+            if (config.protocol === 'http' || config.protocol === 'https' ||
                 config.protocol === 'ws' || config.protocol === 'wss') {
                 config.protocol = config.protocol + ':';
             }
@@ -126,8 +132,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              *
              * @param socket
              */
-            var registerSocketEvents = function(socket) {
-
+            var registerSocketEvents = function (socket) {
                 // socket connect event, change transportSocket to true.
                 socket.on('connecting', function () {
                     $log.info('socket: connecting to ', config.host);
@@ -149,7 +154,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 socket.on('error', function (error) {
                     $log.error('socket: ' + error, error);
 
-                    if(error === 'handshake unauthorized') {
+                    if (error === 'handshake unauthorized') {
                         $log.warn('the transmitted session no longer exists, trigger $sessionInactive event.');
                         $rootScope.$emit('$sessionInactive');
                     }
@@ -159,9 +164,10 @@ angular.module('bbc.transport', ['btford.socket-io'])
             };
 
             // check useSocket
-            if(config.useSocket) {
+            if (config.useSocket) {
                 // create socket instance
-                socket = $bbcSocket.createSocket(config.host, config.connectTimeout);
+                socketConnection = $bbcSocket.createSocket(config.host, config.connectTimeout);
+                socket = socketConnection.socket;
 
                 // register events
                 registerSocketEvents(socket);
@@ -180,10 +186,9 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @param {!(object|function(error, data) )} data - The data object for server.
              * @param {function(error, data) } callback - The callback.
              */
-            pub.emit = function(event, data, callback) {
-
-                // when 2 is callback in data, rewrite this
-                if(arguments.length === 2) {
+            pub.emit = function (event, data, callback) {
+                // when 2nd param is callback, rewrite this
+                if (arguments.length === 2) {
                     callback = data;
                     data = {};
                 }
@@ -205,18 +210,41 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
                 $rootScope.isLoading = true;
 
-                if (config.useSocket && $rootScope.socketEnabled) {
-                    socket.emit(event, data, function(error, result){
+                if (config.useSocket && $rootScope.socketEnabled && event.indexOf('api/session/') < 0) {
+                    promise = $timeout(function () {
+                        socketTimedOut = true;
+                        $rootScope.socketEnabled = false;
+                        socketConnection.connection.socket.disconnect();
+
+                        // emit again via rest
+                        pub.emit(event, data, callback);
+                    }, config.socketResponseTimeout);
+
+                    socket.emit(event, data, function (error, result) {
+                        if (socketTimedOut) {
+                            socketTimedOut = false;
+                            callback();
+                            return;
+                        }
+
+                        $timeout.cancel(promise);
                         $rootScope.isLoading = false;
 
                         var err = null;
-                        if (error){
+
+                        if (error) {
                             err = {data: error};
                         }
+
                         callback(err, result);
                     });
                 }
                 else {
+                    if (config.useSocket && !socketConnection.connection.socket.connected) {
+                        // try reconnect
+                        socketConnection.connection.socket.connect();
+                    }
+
                     $http.post(event, data)
                         .success(function (result) {
                             $rootScope.isLoading = false;
@@ -241,7 +269,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @param {string} event The event to listen to
              * @param {object} scope The scope to forward the events to
              */
-            pub.forward = function(event, scope) {
+            pub.forward = function (event, scope) {
                 if (config.useSocket) {
                     socket.forward(event, scope);
                 }
@@ -258,7 +286,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @param {string} event The event to listen to
              * @param {function(error, data) } callback The function to be called after event is raised
              */
-            pub.on = function(event, callback) {
+            pub.on = function (event, callback) {
                 if (config.useSocket) {
                     socket.on(event, callback);
                 }
@@ -276,7 +304,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @param {string} event The event to listen to
              * @param {function(error, data) } callback The function to be called after the event is raised
              */
-            pub.addListener = function(event, callback) {
+            pub.addListener = function (event, callback) {
                 if (config.useSocket) {
                     socket.addListener(event, callback);
                 }
@@ -294,7 +322,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
              * @param {string} event The event to listen to
              * @param {function(error, data) } callback The function to be called after event is removed from socket
              */
-            pub.removeListener = function(event, callback) {
+            pub.removeListener = function (event, callback) {
                 if (config.useSocket) {
                     socket.removeListener(event, callback);
                 }
