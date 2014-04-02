@@ -29,14 +29,14 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   text-align: center;
   padding: 0 15px;
-  width: 500px;
+  width: 550px;
   position: absolute;
   top: 40px;
   left: 0;
   z-index: 9999;
 
   .bbc-datepicker-body {
-    padding: 20px 0 10px 0;
+    padding: 20px 0;
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;
@@ -44,11 +44,13 @@
     user-select: none;
 
     .bbc-datepicker-year {
-      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
       height: 228px;
       padding: 50px 0;
       position: relative;
       overflow: hidden;
+      float: left;
+      width: 75px;
 
       ul {
         list-style-type: none;
@@ -59,7 +61,7 @@
         position: absolute;
         font-size: 24px;
         left: 50%;
-        margin-left: -12px;
+        margin-left: -10px;
         width: 24px;
         height: 24px;
       }
@@ -68,17 +70,17 @@
         color: #888;
       }
       .bbc-datepicker-year-btn.year-up {
-        color:rgba(255,255,255,0.1);
+        color:rgba(255,255,255,0.2);
         top: 0;
         &:hover{
-          color:rgba(255,255,255,0.2);
+          color:rgba(255,255,255,0.3);
         }
       }
       .bbc-datepicker-year-btn.year-down {
-        color:rgba(255,255,255,0.1);
+        color:rgba(255,255,255,0.2);
         bottom: 3px;
         &:hover{
-          color:rgba(255,255,255,0.2);
+          color:rgba(255,255,255,0.3);
         }
       }
       .bbc-datepicker-year-container {
@@ -95,6 +97,9 @@
       border-right: 1px solid rgba(255, 255, 255, 0.05);
       border-left: 1px solid rgba(0, 0, 0, 0.1);
       padding: 0 5px;
+      float:left;
+      width: 91px;
+      max-width: 91px;
 
       ul {
         list-style-type: none;
@@ -108,8 +113,25 @@
 
     .bbc-datepicker-day {
       border-left: 1px solid rgba(0, 0, 0, 0.1);
+      float:left;
+      padding:0 30px 0 45px;
+      position:relative;
+
+      .bbc-datepicker-month-btn{
+        cursor:pointer;font-size: 24px;color:rgba(255, 255, 255, 0.2);position:absolute;top:50%;
+        &:hover{
+          color:rgba(255, 255, 255, 0.3);;
+        }
+        &.month-down{
+          left:10px;
+        }
+        &.month-up{
+          right:10px;
+        }
+      }
+
       table {
-        width: 100%;
+        width: 95%;
         text-align: center;
 
         thead {
@@ -186,6 +208,13 @@
           box-shadow:0 0 4px rgba(0,0,0,0.9);
         }
       }
+    }
+  }
+  .bbc-datepicker-close-btn{
+    font-size:19px;color:rgba(255, 255, 255, 0.2);position: absolute;right:5px;top:5px;
+    cursor: pointer;
+    &:hover{
+      color:rgba(255, 255, 255, 0.3);
     }
   }
 }
