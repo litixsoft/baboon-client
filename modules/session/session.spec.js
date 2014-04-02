@@ -12,7 +12,7 @@ describe('bbcSession', function () {
         beforeEach(function () {
 
             mockBbcTransport = {
-                emit: function(route, data, callback) {
+                rest: function(route, data, callback) {
 
                     if (arguments.length < 3) {
                         callback = data;
