@@ -7,12 +7,12 @@
     </div>
     <div class="bbc-datepicker" ng-show="visible">
         <div class="row bbc-datepicker-body">
-            <div class="bbc-datepicker-year col-md-2 col-xs-2" unselectable="on">
+            <div class="bbc-datepicker-year" unselectable="on">
                 <div class="bbc-datepicker-year-btn year-up">
-                    <span class="glyphicon glyphicon-circle-arrow-up" ng-mousedown="startScroll('up')" ng-mouseup="stopScroll()"></span>
+                    <span class="glyphicon glyphicon-chevron-up" ng-mousedown="startScroll('up')" ng-mouseup="stopScroll()"></span>
                 </div>
                 <div class="bbc-datepicker-year-btn year-down">
-                    <span class="glyphicon glyphicon-circle-arrow-down" ng-mousedown="startScroll('down')" ng-mouseup="stopScroll()"></span>
+                    <span class="glyphicon glyphicon-chevron-down" ng-mousedown="startScroll('down')" ng-mouseup="stopScroll()"></span>
                 </div>
                 <div class="bbc-datepicker-year-container">
                     <ul>
@@ -20,33 +20,38 @@
                     </ul>
                 </div>
             </div>
-            <div class="bbc-datepicker-month col-md-3 col-xs-3">
+            <div class="bbc-datepicker-month">
                 <ul>
                     <li ng-repeat="month in monthNames" ng-click="monthClick($index)" ng-class="{active: selectedDay.getMonth()===$index}">{{month}}</li>
                 </ul>
             </div>
-            <div class="bbc-datepicker-day col-md-7 col-xs-7">
+            <div class="bbc-datepicker-day">
+
+                <div class="bbc-datepicker-month-btn month-down">
+                    <span class="glyphicon glyphicon-chevron-left"  ng-click="monthClick(selectedDay.getMonth()-1)"></span>
+                </div>
+                <div class="bbc-datepicker-month-btn month-up">
+                    <span class="glyphicon glyphicon-chevron-right"  ng-click="monthClick(selectedDay.getMonth()+1)"></span>
+                </div>
+
                 <table>
                     <thead>
-                    <tr>
-                        <th ng-repeat="name in dayNames">{{name}}</th>
-                    </tr>
+                        <tr>
+                            <th ng-repeat="name in dayNames">{{name}}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="week in month">
-                        <td>{{week.kw}}</td>
-                        <td ng-repeat="day in week.days">
-                            <button class="btn btn-default btn-sm btn-block" ng-click="dayClick(day)" ng-class="{other: !day.in, 'btn-primary' : (day.in && selectedDay.getDate()===day.nr), today: (day.in && today.day===day.nr && today.month===selectedDay.getMonth() && today.year===selectedDay.getFullYear())}">{{day.nr}}</button>
-                        </td>
-                    </tr>
+                        <tr ng-repeat="week in month">
+                            <td>{{week.kw}}</td>
+                            <td ng-repeat="day in week.days">
+                                <button class="btn btn-default btn-sm btn-block" ng-click="dayClick(day)" ng-class="{other: !day.in, 'btn-primary' : (day.in && selectedDay.getDate()===day.nr), today: (day.in && today.day===day.nr && today.month===selectedDay.getMonth() && today.year===selectedDay.getFullYear())}">{{day.nr}}</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+
             </div>
         </div>
-        <div class="row bbc-datepicker-footer">
-            <div class="bbc-datepicker-btn pull-right">
-                <button class="btn btn-default btn-sm" ng-click="visible = !visible">Schließen</button>
-            </div>
-        </div>
+        <span class="glyphicon glyphicon-remove bbc-datepicker-close-btn" ng-click="visible = !visible"></span>
     </div>
 </div>
