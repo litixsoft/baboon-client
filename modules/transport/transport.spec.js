@@ -83,7 +83,7 @@ describe('bbcTransport', function () {
         beforeEach(module('bbc.transport'));
 
         // init mocks
-        beforeEach(function () {
+        beforeEach(function() {
             mockSocket = {
                 createSocket: function (host, connectTimeout) {
                     return {
@@ -118,12 +118,10 @@ describe('bbcTransport', function () {
                                 }
 
                                 if (event === 'callbackTime') {
-                                    setTimeout(function(){
-                                        console.log('################');
+                                    setTimeout(function () {
                                         callback(null, data);
                                     }, 100);
-                                } else{
-
+                                } else {
                                     callback(null, data);
                                 }
                             },
@@ -134,7 +132,12 @@ describe('bbcTransport', function () {
                         connection: {
                             socket: {
                                 connected: true,
-                                connect: function(){}
+                                connect: function () {
+                                    this.connected = true;
+                                },
+                                disconnect: function () {
+                                    this.connected = false;
+                                }
                             }
                         }
                     };
@@ -142,7 +145,8 @@ describe('bbcTransport', function () {
             };
 
             mockRootScope = {
-                $emit: function () {}
+                $emit: function () {},
+                $apply: function () {}
             };
 
             mockHttp = {
@@ -470,34 +474,76 @@ describe('bbcTransport', function () {
             });
         });
 
-        it('fghf', function () {
+        it('should get data when rest is called', function () {
             inject(function ($bbcTransport) {
-                var config = {
-                    protocol: 'http',
-                    hostname: 'localhost2',
-                    port: 4656,
-                    useSocket: true,
-                    connectTimeout: 555,
-                    socketResponseTimeout: 1
-                };
-
-                transportProvider.set(config);
                 transport = $bbcTransport;
             });
 
-//            inject(function($timeout) {
-            mockRootScope.socketEnabled = true;
-//            console.log(mockRootScope.socketEnabled);
-            transport.emit('callbackTime', {}, function(){
-                console.log(mockRootScope.socketEnabled);
+            mockRootScope.socketEnabled = false;
+
+            transport.rest('callbackErrorTest', {}, function () {
+                expect(mockRootScope.isLoading).toBeFalsy();
+            });
+        });
+
+        it('should throw error if emit is called with empty "event" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
             });
 
-            setTimeout(function() {
-            },1000);
+            expect(function () {
+                transport.rest('', {});
+            }).toThrow(new Error('Param "event" is required and must be of type string!'));
+        });
 
-//                $timeout.flush();
+        it('should throw error if emit is called with wrong type of "event" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
 
-//            });
+            expect(function () {
+                transport.rest({}, {});
+            }).toThrow(new Error('Param "event" is required and must be of type string!'));
+        });
+
+        it('should throw error if emit is called with wrong type of "callback" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            expect(function () {
+                transport.rest('test', {});
+            }).toThrow(new Error('Param "callback" is required and must be of type function!'));
+        });
+
+        it('should throw error if emit is called with wrong type of "data" param', function () {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            expect(function () {
+                transport.rest('test', '', {});
+            }).toThrow(new Error('Param "data" parameter must be of type object!'));
+        });
+
+        it('should emit and time out and send request via rest again', function (done) {
+            inject(function ($bbcTransport) {
+                transport = $bbcTransport;
+            });
+
+            inject(function($timeout) {
+                mockRootScope.socketEnabled = true;
+
+                transport.emit('callbackTime', {}, function(){
+                    expect(mockRootScope.socketEnabled).toBeFalsy();
+                });
+
+                $timeout.flush();
+
+                setTimeout(function () {
+                    done();
+                }, 200);
+            });
         });
     });
 });
