@@ -77,7 +77,6 @@ describe('bbcTransport', function () {
     });
 
     describe('provider: $bbcTransport', function () {
-
         var transportProvider, transport, mockSocket, mockRootScope, mockLog, mockHttp;
 
         // init module
@@ -91,26 +90,26 @@ describe('bbcTransport', function () {
                         socket: {
                             host: host,
                             connectTimeout: connectTimeout,
-                            listeners: {},
+                            _listeners: {},
                             addListener: function (event, callback) {
-                                this.listeners[event] = callback;
+                                this._listeners[event] = callback;
                             },
                             removeListener: function (event, callback) {
-                                if (this.listeners[event]) {
-                                    delete this.listeners[event];
+                                if (this._listeners[event]) {
+                                    delete this._listeners[event];
                                 }
 
                                 callback(null, null);
                             },
                             on: function (event, callback) {
-                                this.listeners[event] = callback;
+                                this._listeners[event] = callback;
                             },
                             emit: function (event, data, callback) {
                                 if (event === 'error') {
-                                    this.listeners[event]('handshake unauthorized');
+                                    this._listeners[event]('handshake unauthorized');
                                 }
-                                if (this.listeners[event]) {
-                                    this.listeners[event](null, data);
+                                if (this._listeners[event]) {
+                                    this._listeners[event](null, data);
                                 }
 
                                 if (event === 'callbackErrorTest') {
@@ -118,7 +117,15 @@ describe('bbcTransport', function () {
                                     return;
                                 }
 
-                                callback(null, data);
+                                if (event === 'callbackTime') {
+                                    setTimeout(function(){
+                                        console.log('################');
+                                        callback(null, data);
+                                    }, 100);
+                                } else{
+
+                                    callback(null, data);
+                                }
                             },
                             forward: function () {
                                 return null;
@@ -126,7 +133,8 @@ describe('bbcTransport', function () {
                         },
                         connection: {
                             socket: {
-                                connected: true
+                                connected: true,
+                                connect: function(){}
                             }
                         }
                     };
@@ -460,6 +468,36 @@ describe('bbcTransport', function () {
             transport.emit('callbackErrorTest', {}, function () {
                 expect(mockRootScope.isLoading).toBeFalsy();
             });
+        });
+
+        it('fghf', function () {
+            inject(function ($bbcTransport) {
+                var config = {
+                    protocol: 'http',
+                    hostname: 'localhost2',
+                    port: 4656,
+                    useSocket: true,
+                    connectTimeout: 555,
+                    socketResponseTimeout: 1
+                };
+
+                transportProvider.set(config);
+                transport = $bbcTransport;
+            });
+
+//            inject(function($timeout) {
+            mockRootScope.socketEnabled = true;
+//            console.log(mockRootScope.socketEnabled);
+            transport.emit('callbackTime', {}, function(){
+                console.log(mockRootScope.socketEnabled);
+            });
+
+            setTimeout(function() {
+            },1000);
+
+//                $timeout.flush();
+
+//            });
         });
     });
 });

@@ -175,6 +175,55 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             /**
              * @ngdoc method
+             * @name bbc.transport.$bbcTransport#rest
+             * @methodOf bbc.transport.$bbcTransport
+             *
+             * @description
+             * Emit transport fire event to request post to server.
+             * Rest route is event name.
+             *
+             * @param {!string} event - The rest event route.
+             * @param {!(object|function(error, data) )} data - The data object for server.
+             * @param {function(error, data) } callback - The callback.
+             */
+            pub.rest = function (event, data, callback) {
+                // when 2nd param is callback, rewrite this
+                if (arguments.length === 2) {
+                    callback = data;
+                    data = {};
+                }
+
+                // check event
+                if (typeof event !== 'string' || event.length === 0) {
+                    throw new TypeError('Param "event" is required and must be of type string!');
+                }
+
+                // check data
+                if (typeof data !== 'object') {
+                    throw new TypeError('Param "data" parameter must be of type object!');
+                }
+
+                // check callback
+                if (typeof callback !== 'function') {
+                    throw new TypeError('Param "callback" is required and must be of type function!');
+                }
+
+                $rootScope.isLoading = true;
+
+                $http.post(event, data)
+                    .success(function (result) {
+                        $rootScope.isLoading = false;
+                        callback(null, result);
+                    })
+                    .error(function (data, status, headers, config) {
+                        var error = {data: data, status: status, headers: headers, config: config};
+                        $rootScope.isLoading = false;
+                        callback(error);
+                    });
+            };
+
+            /**
+             * @ngdoc method
              * @name bbc.transport.$bbcTransport#emit
              * @methodOf bbc.transport.$bbcTransport
              *
@@ -210,7 +259,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
                 $rootScope.isLoading = true;
 
-                if (config.useSocket && $rootScope.socketEnabled && event.indexOf('api/session/') < 0) {
+                if (config.useSocket && $rootScope.socketEnabled) {
                     promise = $timeout(function () {
                         socketTimedOut = true;
                         $rootScope.socketEnabled = false;
