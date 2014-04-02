@@ -80,13 +80,13 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     var height = $window.innerHeight;
 
                     if ((rect.bottom + popup.height) > height - 20) {
-                        scope.off.top -= ( (rect.bottom + popup.height) - (height - 20));
+                        scope.off.top = (-1)*( (rect.bottom + popup.height) - (height - 20));
                     }
 
                     scope.datepicker.css('top', scope.off.top + 'px');
 
                     if ((rect.left + popup.width) > width - 20) {
-                        scope.off.left -= ( (rect.left + popup.width) - (width - 20));
+                        scope.off.left = (-1)*( (rect.left + popup.width) - (width - 20));
                     }
 
                     scope.datepicker.css('left', scope.off.left + 'px');
