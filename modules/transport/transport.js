@@ -93,8 +93,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             if (options.hasOwnProperty('useSocket')) {
                 config.useSocket = options.useSocket;
-            }
-            else {
+            } else {
                 config.useSocket = true;
             }
 
