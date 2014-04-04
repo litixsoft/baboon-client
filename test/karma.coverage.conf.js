@@ -1,8 +1,11 @@
+'use strict';
+
 module.exports = function (config) {
     config.set({
         // base path, that will be used to resolve files and exclude
         basePath: '../',
 
+        // testing framework to use (jasmine/mocha/qunit/...)
         frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
@@ -78,8 +81,6 @@ module.exports = function (config) {
             'karma-jasmine',
             'karma-chrome-launcher',
             'karma-firefox-launcher',
-            'karma-ie-launcher',
-            'karma-safari-launcher',
             'karma-coverage',
             'karma-junit-reporter'
         ]
