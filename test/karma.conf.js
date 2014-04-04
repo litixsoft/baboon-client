@@ -11,6 +11,7 @@ module.exports = function (config) {
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'bower_components/showdown/src/showdown.js',
+            'bower_components/showdown/src/extensions/table.js',
             'bower_components/angular-translate/angular-translate.js',
             'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
             'bower_components/angular-socket-io/socket.js',

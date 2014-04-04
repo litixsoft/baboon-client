@@ -7,11 +7,11 @@
 var express = require('express');
 var routes = require('./example/routes');
 var navigation = require('./example/routes/navigation.js');
+var files = require('./example/routes/files.js')();
 var http = require('http');
 var path = require('path');
 var lessMiddleware = require('less-middleware');
 var session = require('./example/routes/session')();
-
 
 
 var app = express();
@@ -71,6 +71,7 @@ app.post('/api/session/getLastActivity', session.getLastActivity);
 app.post('/api/session/getData', session.getData);
 app.post('/api/session/setData', session.setData);
 app.post('/api/session/deleteData', session.deleteData);
+app.post('/api/files/getMarkdown', files.getMarkdown);
 
 app.use('/api/navigation/getTopList', navigation.getTopList);
 app.use('/api/navigation/getSubList', navigation.getSubList);
@@ -108,6 +109,7 @@ io.sockets.on('connection', function (socket) {
         console.log(data);
         callback(null, data);
     });
+
 });
 
 server.listen(app.get('port'), function () {

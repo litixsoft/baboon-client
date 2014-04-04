@@ -27,7 +27,7 @@ angular.module('example', [
         $locationProvider.html5Mode(true);
         $routeProvider
             .when('/', { templateUrl: 'partials/example.html', controller: 'ExampleCtrl' })
-            .when('/alert', { templateUrl: 'partials/alert.html', controller: 'AlertCtrl' })
+            .when('/alert', { templateUrl: 'partials/alert/alert.html', controller: 'AlertCtrl' })
             .when('/cache', { templateUrl: 'partials/cache.html', controller: 'CacheCtrl' })
             .when('/checkbox', { templateUrl: 'partials/checkbox.html', controller: 'CheckboxCtrl' })
             .when('/datepicker', { templateUrl: 'partials/datepicker.html', controller: 'DatepickerCtrl' })
@@ -64,8 +64,12 @@ angular.module('example', [
         $translateProvider.fallbackLanguage('en-us');
     })
     .run(function ($rootScope, $translate) {
+
+        $rootScope.currentLang = $translate.preferredLanguage();
+
         $rootScope.switchLocale = function(locale) {
             $translate.use(locale);
+            $rootScope.currentLang = locale;
         };
     })
     .controller('ExampleCtrl', function ($scope) {
