@@ -125,10 +125,10 @@ module.exports = function (grunt) {
             },
             debug: {
                 configFile: 'test/karma.conf.js',
+                singleRun: false,
                 detectBrowsers: {
                     enabled: false
-                },
-                singleRun: false
+                }
             },
             coverage: {
                 configFile: 'test/karma.coverage.conf.js',
@@ -136,11 +136,11 @@ module.exports = function (grunt) {
             },
             cobertura: {
                 configFile: 'test/karma.coverage.conf.js',
+                colors: false,
                 coverageReporter: {
                     type: 'cobertura',
                     dir: '.reports/coverage'
-                },
-                colors: false
+                }
             }
         },
         changelog: {
@@ -170,7 +170,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('move-doc', function() {
+    grunt.registerTask('move-doc', function () {
         grunt.file.copy('./.dist/docs/index.html', 'example/views/doc/index.html');
         grunt.file.delete('./.dist/docs/index.html');
     });
