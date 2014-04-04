@@ -7,7 +7,7 @@ module.exports = function () {
     pub.getMarkdown = function (req, res) {
 
         var data = req.body;
-        var file = data.root +'/'+data.file+"."+data.lang+"-"+data.lang+"."+data.type;
+        var file = data.file+"."+data.lang+"-"+data.lang+"."+data.type;
 
         fs.readFile(file, 'utf8', function (err,data) {
             if (err) {

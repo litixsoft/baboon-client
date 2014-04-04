@@ -1,0 +1,94 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <div bbc-markdown-file="'sort/sort'" bbc-markdown-lang="currentLang"></div>
+
+        <tabset>
+            <tab heading="index.html">
+<div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <table class="table table-striped">
+        <colgroup>
+            <col style="width:40%;" />
+            <col style="width:30%;" />
+            <col style="width:30%;" />
+        </colgroup>
+        <thead>
+        <tr>
+            <th><bbc-sort sort-opts="sortOpts" field-name="name" on-sorting="sort(sortingOptions)">Name</bbc-sort></th>
+            <th><bbc-sort sort-opts="sortOpts" field-name="city" on-sorting="sort(sortingOptions)">City</bbc-sort></th>
+            <th><bbc-sort sort-opts="sortOpts" field-name="country" on-sorting="sort(sortingOptions)">Country</bbc-sort></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.city }}</td>
+            <td>{{ item.country }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+            </tab>
+            <tab heading="scripts.js">
+<div hljs>
+angular.module('ngAppDemo', ['bbc.sort']).controller('NgAppDemoCtrl', function ($scope) {
+    $scope.sortOpts = {'name': -1};
+
+    $scope.items = [
+        { name: 'John Doe', city: 'New York', country: 'USA' },
+        { name: 'Tina Tester', city: 'Leipzig', country: 'Germany' },
+        { name: 'Sam Sample', city: 'Sydney', country: 'Australia' },
+        { name: 'Max Mustermann', city: 'Toronto', country: 'Kanada' }
+    ];
+
+    $scope.sort = function (sort) {
+        $scope.sortOpts = sort;
+        var key = '';
+        for (var propName in sort) {
+            key = propName;
+            break;
+        }
+
+        $scope.items.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+
+            return sort[key] === -1 ? (x < y) : (x > y);
+        });
+    };
+
+    $scope.sort($scope.sortOpts);
+});
+</div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col style="width:40%;" />
+                        <col style="width:30%;" />
+                        <col style="width:30%;" />
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th><bbc-sort sort-opts="sortOpts" field-name="name" on-sorting="sort(sortingOptions)">Name</bbc-sort></th>
+                        <th><bbc-sort sort-opts="sortOpts" field-name="city" on-sorting="sort(sortingOptions)">{{ 'SORT_CITY' | translate }}</bbc-sort></th>
+                        <th><bbc-sort sort-opts="sortOpts" field-name="country" on-sorting="sort(sortingOptions)">{{ 'SORT_COUNTRY' | translate }}</bbc-sort></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.city }}</td>
+                        <td>{{ item.country }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <div bbc-markdown-file="'reset/reset'" bbc-markdown-lang="currentLang"></div>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <input type="text" class="form-control" ng-model="test" bbc-reset placeholder="Add text..." />
+</div>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.reset']).controller('NgAppDemoCtrl', function ($scope) {
+});
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="test" bbc-reset placeholder="{{ 'INPUT_PLACEHOLDER' | translate }}" />
+                    </div>
+                </div>
+                <pre>Model: {{ test }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -59,8 +59,8 @@ angular.module('bbc.markdown', [])
                 function getMarkdown(){
 
                     var data = {
-                        root: 'example/public/partials/'+scope.bbcMarkdownFile,
-                        file: scope.bbcMarkdownFile,
+                        file: 'example/public/partials/'+scope.bbcMarkdownFile,
+//                        file: scope.bbcMarkdownFile,
                         lang: scope.lang,
                         type: 'md'
                     };

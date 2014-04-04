@@ -1,0 +1,28 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <div bbc-markdown-file="'float/float'" bbc-markdown-lang="currentLang"></div>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/float/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/float/example.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+            <div class="panel-body">
+                <p>Please change the number.</p>
+                <input type="text" bbc-float="2" ng-model="val" class="form-control" />
+                <p>
+                    <pre>The parsed value: {{ val }}</pre>
+                    <pre>The initial type is: {{ initialType }}</pre>
+                    <pre>The current type is: {{ currentType }}</pre>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <div bbc-markdown-file="'checkbox/checkbox'" bbc-markdown-lang="currentLang"></div>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/checkbox/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/checkbox/example.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+            <div class="panel-body">
+                <div>
+                    <bbc-checkbox disabled="disabled" ng-model="model1"></bbc-checkbox>
+                    The box is disabled!
+                </div>
+                <div bbc-checkbox ng-model="model2" title="I'm a tool tip"></div>
+                {{ model2 ? 'I am enabled!' :  'I am disabled!' }}
+            </div>
+        </div>
+    </div>
+</div>

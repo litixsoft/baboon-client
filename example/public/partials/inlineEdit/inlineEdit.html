@@ -1,0 +1,60 @@
+
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <div bbc-markdown-file="'inlineEdit/inlineEdit'" bbc-markdown-lang="currentLang"></div>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/inline/example.html'"></div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs include="'snippet/inline/example.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col style="width:40%;" />
+                        <col style="width:20%;" />
+                        <col style="width:20%;" />
+                        <col style="width:20%;text-align: right;" />
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in items">
+                        <td ng-if="inlineEdit.model != item">{{ item.name }}</td>
+                        <td ng-if="inlineEdit.model == item">
+                            <input type="text" class="form-control" ng-model="inlineEdit.model.name" name="name" required>
+                        </td>
+                        <td ng-if="inlineEdit.model != item">{{ item.city }}</td>
+                        <td ng-if="inlineEdit.model == item">
+                            <input type="text" class="form-control" ng-model="inlineEdit.model.city" name="city" required>
+                        </td>
+                        <td ng-show="inlineEdit.model != item">{{ item.country }}</td>
+                        <td ng-if="inlineEdit.model == item">
+                            <input type="text" class="form-control" ng-model="inlineEdit.model.country" name="country" required>
+                        </td>
+                        <td>
+                            <button ng-show="inlineEdit.model == item" class="btn btn-primary" ng-click="save(item, form)" ng-disabled="form.$invalid || inlineEdit.isUnchanged()">Save</button>
+                            <button ng-show="inlineEdit.model == item" class="btn btn-default" ng-click="inlineEdit.reset(form)" name="reset">Cancel</button>
+                            <button ng-show="inlineEdit.model != item" class="btn btn-default" ng-click="inlineEdit.setModel(item)">Edit</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
