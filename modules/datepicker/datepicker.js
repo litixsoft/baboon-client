@@ -35,6 +35,8 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
             },
             templateUrl: 'datepicker/datepicker.html',
             link: function (scope, element, attrs, ctrls) {
+
+                scope.element = element[0];
                 scope.visible = false;                     // is datepicker popup visible
                 scope.divider = '';                        // the character used to divide the date numbers 12.2.2013
                 scope.placeholder = attrs.placeholder;     // placeholder text for the input
@@ -56,6 +58,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                 var mainPick = element[0]; //document.getElementById(scope.inputID); //get input with datepicker by id (cause angular element parent has selectors)
                 scope.scrollCont = mainPick.getElementsByClassName('bbc-datepicker-year-container')[0];
                 var dateElement = mainPick.getElementsByClassName('bbc-datepicker');
+                scope.dateElement = dateElement[0];
                 scope.datepicker = angular.element(dateElement[0]);
 
                 scope.off = { // datepicker offset in browser window, used to move datepicker if not fully visible in view
@@ -65,19 +68,19 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
 
                 angular.element($window).bind('resize', function () {
                     if (scope.visible) {
-                        scope.checkPosition();
+                        scope.checkPosition(scope.getBoundingClientRectFunc(scope.element),scope.getBoundingClientRectFunc(scope.dateElement),$window.innerWidth,$window.innerHeight);
                     }
                 });
+
+                scope.getBoundingClientRectFunc = function (elm) {
+                    return elm.getBoundingClientRect();
+                };
 
                 /**
                  * moving datepicker if not fully in view
                  *
                  */
-                scope.checkPosition = function () {
-                    var rect = element[0].getBoundingClientRect();
-                    var popup = dateElement[0].getBoundingClientRect();
-                    var width = $window.innerWidth;
-                    var height = $window.innerHeight;
+                scope.checkPosition = function (rect, popup, width, height) {
 
                     if ((rect.bottom + popup.height) > height - 20) {
                         scope.off.top = (-1)*( (rect.bottom + popup.height) - (height - 20));
@@ -431,7 +434,7 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                             left: 0
                         };
 
-                        scope.checkPosition();
+                        scope.checkPosition(scope.getBoundingClientRectFunc(scope.element),scope.getBoundingClientRectFunc(scope.dateElement),$window.innerWidth,$window.innerHeight);
 
                         var offsetTop = ( scope.yearNames.indexOf(scope.selectedDay.getFullYear()) - 2 ) * 24; //selected year offset in the year container
 

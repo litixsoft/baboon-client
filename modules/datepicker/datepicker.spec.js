@@ -9,7 +9,6 @@ describe('bbcDatepicker', function () {
         compile = $compile;
         // init scope
         scope = $rootScope.$new();
-
         element = angular.element('<input id="pick2" name="pick2" ng-model="date2" bbc-datepicker="\'MM/dd/yyyy\'" required="" placeholder="MM/dd/yyyy">');
         compile(element)(scope);
         scope.$digest();
@@ -69,6 +68,46 @@ describe('bbcDatepicker', function () {
         angular.element($window).triggerHandler('resize');
         expect(elementScope.checkPosition).toHaveBeenCalled();
     }));
+
+    it('checkPosition() should return values equal to 0', function () {
+        var elementScope = element.isolateScope();
+
+        spyOn(elementScope, 'checkPosition').and.callThrough();
+
+        var boundingRect1 = {
+            left: '0',
+            bottom: '0'
+        };
+        var boundingRect2 = {
+            height: '300',
+            width: '500'
+        };
+
+        elementScope.checkPosition(boundingRect1,boundingRect2,800, 600);
+        expect(elementScope.checkPosition).toHaveBeenCalled();
+        expect(elementScope.off.top).toBe(5);
+        expect(elementScope.off.left).toBe(0);
+    });
+
+    it('checkPosition() should return values lower than 0', function () {
+        var elementScope = element.isolateScope();
+
+        spyOn(elementScope, 'checkPosition').and.callThrough();
+
+        var boundingRect1 = {
+            left: '500',
+            bottom: '60'
+        };
+        var boundingRect2 = {
+            height: '300',
+            width: '500'
+        };
+
+        elementScope.checkPosition(boundingRect1,boundingRect2,800, 600);
+        expect(elementScope.checkPosition).toHaveBeenCalled();
+        expect(elementScope.off.top).toBeLessThan(0);
+        expect(elementScope.off.left).toBeLessThan(0);
+    });
 
     it('getDivider() should return string with divider', function () {
         var elementScope = element.isolateScope();
