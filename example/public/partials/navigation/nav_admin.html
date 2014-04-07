@@ -1,29 +1,8 @@
 <div class="beige-noise">
     <div class="p-wrapper">
-        <div class="page-header">
-            <h1>bbc.navigation</h1>
-        </div>
 
-        <p>{{ 'NAVIGATION_DIRECTIVE_INTRO' | translate }}</p>
+        <div bbc-markdown-file="'navigation/navigation'" bbc-markdown-lang="currentLang"></div>
 
-        <p>{{ 'NAVIGATION_SERVICE_INTRO' | translate }}</p>
-
-        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.navigation.directive:bbcNavigation" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
-
-        <h3>{{ 'NAVIGATION_LIST_HEADER' | translate }}</h3>
-        <ul>
-            <li>getApp: {{ 'NAVIGATION_LIST_1' | translate }}</li>
-            <li>getRoute: {{ 'NAVIGATION_LIST_2' | translate }}</li>
-            <li>getTree: {{ 'NAVIGATION_LIST_3' | translate }}</li>
-            <li>getList: {{ 'NAVIGATION_LIST_4' | translate }}</li>
-            <li>getTopList: {{ 'NAVIGATION_LIST_5' | translate }}</li>
-            <li>getSubTree: {{ 'NAVIGATION_LIST_6' | translate }}</li>
-            <li>getSubList: {{ 'NAVIGATION_LIST_7' | translate }}</li>
-        </ul>
-
-        <hr />
-
-        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
         <tabset>
             <tab heading="home.html">
                 <div hljs include="'snippet/navigation/example_home.html'"></div>

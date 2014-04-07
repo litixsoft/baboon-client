@@ -1,25 +1,8 @@
 <div class="beige-noise">
     <div class="p-wrapper">
-        <div class="page-header">
-            <h1>bbc.transport</h1>
-        </div>
 
-        <p>{{ 'TRANSPORT_INTRO' | translate }}</p>
+        <div bbc-markdown-file="'transport/transport'" bbc-markdown-lang="currentLang"></div>
 
-        <p>{{ 'API_LINK_DESCRIPTION' | translate }} <a href="/doc#/api/bbc.transport.$bbcTransport" target="_self">{{ 'API_LINK_TEXT' | translate }}</a>.</p>
-
-        <h3>{{ 'TRANSPORT_LIST_HEADER' | translate }}</h3>
-        <ul>
-            <li>emit: {{ 'TRANSPORT_LIST_1' | translate }}</li>
-            <li>forward: {{ 'TRANSPORT_LIST_2' | translate }}</li>
-            <li>on: {{ 'TRANSPORT_LIST_3' | translate }}</li>
-            <li>addListener: {{ 'TRANSPORT_LIST_4' | translate }}</li>
-            <li>removeListener: {{ 'TRANSPORT_LIST_5' | translate }}</li>
-        </ul>
-
-        <hr />
-
-        <p><h3>{{ 'EXAMPLE' | translate }}</h3></p>
         <tabset>
             <tab heading="index.html">
                 <div hljs include="'snippet/transport/example.html'"></div>
