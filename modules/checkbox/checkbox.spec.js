@@ -11,6 +11,7 @@ describe('bbcCheckbox', function () {
         element = angular.element('<bbc-checkbox ng-model="model.val"></bbc-checkbox>');
         compile(element)(scope);
         scope.model = {};
+        scope.checked = {};
         scope.$digest();
     }));
 
@@ -18,9 +19,37 @@ describe('bbcCheckbox', function () {
         expect(scope.model.val).toBeUndefined();
     });
 
-    it('should be true after click', function () {
+    it('should be undefined after click', function () {
         expect(scope.model.val).toBeUndefined();
         element.triggerHandler('click');
+        expect(scope.model.val).toBeUndefined();
+    });
+
+    it('should be true after click', function () {
+        expect(scope.model.val).toBeUndefined();
+        scope.model.val = false;
+        scope.$digest();
+        element.triggerHandler('click');
+        expect(scope.model.val).toBeTruthy();
+    });
+
+    it('should be false after click', function () {
+        expect(scope.model.val).toBeUndefined();
+        scope.model.val = true;
+        scope.$digest();
+        element.triggerHandler('click');
+        expect(scope.model.val).toBeFalsy();
+    });
+
+    it('ngModel should be same Value as ngChecked', function () {
+
+        element = angular.element('<bbc-checkbox ng-model="model.val" ng-checked="checked.val"></bbc-checkbox>');
+        compile(element)(scope);
+        expect(scope.checked.val).toBeUndefined();
+        expect(scope.model.val).toBeUndefined();
+        scope.checked.val = true;
+        scope.$digest();
+        expect(scope.checked.val).toBeTruthy();
         expect(scope.model.val).toBeTruthy();
     });
 

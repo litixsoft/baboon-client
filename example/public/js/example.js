@@ -126,6 +126,8 @@ angular.module('example', [
     .controller('CheckboxCtrl', function ($scope) {
         $scope.model1 = false;
         $scope.model2 = true;
+        $scope.check2 = false;
+        $scope.model3 = true;
     })
     .controller('FloatCtrl', function ($scope) {
         $scope.val = '1.23';
