@@ -341,4 +341,78 @@ describe('bbc.navigation', function () {
             expect(elementScope.navList.length).toBe(0);
         });
     });
+
+
+    describe('bbcNavTreeHelper', function() {
+
+        beforeEach(module('bbc.navigation'));
+
+        var  $scope, location, element, compile;
+
+        beforeEach(function (done) {
+            inject(function ($compile, $rootScope, $location) {
+                compile = $compile;
+                location = $location;
+
+                $scope = $rootScope.$new();
+                $scope.data = {
+                    hide: undefined,
+                    level: 0,
+                    route: '/main'
+                };
+                element = angular.element('<div bbc-nav-tree-helper="data"></div>');
+                compile(element)($scope);
+                done();
+            });
+        });
+
+        it('should be correct initialized', function () {
+            expect($scope.data).toBeDefined();
+            expect($scope.data.hide).toBeUndefined();
+            expect($scope.data.level).toBe(0);
+        });
+
+        it('should not use if-path if value.level > 0 ', function () {
+            $scope.data = {
+                hide: undefined,
+                level: 1,
+                route: '/demo'
+            };
+            $scope.$digest();
+            expect($scope.data.hide).toBeUndefined();
+        });
+
+        it('should get value: bbc-open', function () {
+            $scope.data = {
+                hide: undefined,
+                level: 0,
+                route: '/demo'
+            };
+            location.path('/demo');
+            $scope.$digest();
+            expect($scope.data.hide).toBe('bbc-open');
+        });
+
+        it('should get value: bbc-open even if path is longer', function () {
+            $scope.data = {
+                hide: undefined,
+                level: 0,
+                route: '/demo'
+            };
+            location.path('/demo/enterprise');
+            $scope.$digest();
+            expect($scope.data.hide).toBe('bbc-open');
+        });
+
+        it('should not get value if route and path not match', function () {
+            $scope.data = {
+                hide: undefined,
+                level: 0,
+                route: '/admin'
+            };
+            location.path('/demo');
+            $scope.$digest();
+            expect($scope.data.hide).toBeUndefined();
+        });
+    });
 });
