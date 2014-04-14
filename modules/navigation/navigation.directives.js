@@ -66,22 +66,22 @@ angular.module('bbc.navigation')
             }
         };
     })
-    /**
-     * @ngdoc directive
-     * @name bbc.navigation.directive:bbcNavigationTree
-     * @requires $bbcNavigation
-     * @requires $location
-     * @requires $templateCache
-     * @restrict E
-     *
-     * @description
-     * Creates a navigation tree with same look and feel on all browsers.
-     *
-     * For more information look at the [guide](/nav-home).
-     *
-     * @param {array} navList The binding to the navigation links in scope.
-     *
-     */
+/**
+ * @ngdoc directive
+ * @name bbc.navigation.directive:bbcNavigationTree
+ * @requires $bbcNavigation
+ * @requires $location
+ * @requires $templateCache
+ * @restrict E
+ *
+ * @description
+ * Creates a navigation tree with same look and feel on all browsers.
+ *
+ * For more information look at the [guide](/nav-home).
+ *
+ * @param {array} navList The binding to the navigation links in scope.
+ *
+ */
     .directive('bbcNavigationTree', function($bbcNavigation, $location, $templateCache) {
         return {
             restrict: 'E',
@@ -89,21 +89,36 @@ angular.module('bbc.navigation')
             template:   '<ul class="navlist">'+
                 '<li ng-repeat="data in navList"  ng-include="\'bbc/navigation/tpls/treeview/inner.html\'"></li>'+
                 '</ul>',
-            scope: {
-                orientation: '@'
-            },
             link: function (scope) {
 
                 $templateCache.put('bbc/navigation/tpls/treeview/inner.html',
-                    '<div class="list-item" ng-class="{active: isActive(data.route)}" bbc-nav-tree-helper="data">'+
+                        '<div class="list-item" ng-class="{active: isActive(data.route)}">'+
                         '<div class="opensub {{data.hide}}" ng-show="data.children" ng-click="toggleShow(data)"></div>'+
                         '<div class="nav-icon {{data.icon}}"></div>'+
-                        '<a ng-if="!ngClickable" ng-class="{spacer: data.children.length > 0}" ng-href="{{data.route}}" ng-click="openLink(data[linkAttr])" target="{{data.target}}"><span>{{data.title | translate }}</span></a>'+
+                        '<a ng-if="!ngClickable" ng-class="{spacer: data.children.length > 0}" ng-href="{{data.route}}" target="{{data.target}}"><span>{{data.title | translate }}</span></a>'+
                         '<a ng-if="ngClickable" ng-click="methodAttr({name: data[linkAttr]});"><span translate>{{data[labelAttr]}}</span></a>'+
                         '</div>'+
                         '<ul class="display {{data.hide}}" ng-if="data.children.length">'+
                         '<li ng-repeat="data in data.children" ng-include="\'bbc/navigation/tpls/treeview/inner.html\'"></li>'+
                         '</ul>');
+
+                scope.app = ($bbcNavigation.getApp());
+
+                scope.openAll = function(list) {
+                    var found = false;
+                    angular.forEach(list, function(value){
+                        if(value.children) {
+                            var openLink = scope.openAll(value.children);
+                            if (openLink) {
+                                value.hide = 'bbc-open';
+                            }
+                        }
+                        if(value.route===$location.path()){
+                            found=true;
+                        }
+                    });
+                    return found;
+                };
 
 
                 $bbcNavigation.getTree(function (error, navList) {
@@ -112,6 +127,12 @@ angular.module('bbc.navigation')
                     }
                     else {
                         scope.navList = navList;
+                        angular.forEach(scope.navList,function(value){
+                            if(value.app===scope.app){
+                                value.hide = 'bbc-open';
+                            }
+                        });
+                        scope.openAll(scope.navList);
                     }
                 });
 
@@ -126,33 +147,6 @@ angular.module('bbc.navigation')
                 scope.isActive = function (route) {
                     return route === $location.path();
                 };
-            }
-        };
-    })
-    .directive('bbcNavTreeHelper', function($location) {
-        return {
-            restrict: 'A',
-            scope: {
-                bbcNavTreeHelper: '='
-            },
-            link: function (scope) {
-
-                scope.$watch('bbcNavTreeHelper',function(value){
-
-                    if(value && value.level===0){
-                        var pathName = $location.path();
-                        var appName = pathName.split('/');
-
-                        if(appName.length > 2){
-                            pathName = '/'+appName[1];
-                        }
-
-                        if(value.route === pathName){
-                            value.hide = 'bbc-open';
-                        }
-
-                    }
-                });
             }
         };
     });

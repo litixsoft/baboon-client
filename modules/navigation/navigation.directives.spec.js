@@ -11,7 +11,18 @@ describe('bbc.navigation', function () {
         { title: 'TEST', route: '/test', app: 'unitTest', level: 0 },
         { title: 'TEST-SUB', route: '/test-sub', app: 'unitTest', level: 1 }
     ];
-
+    var navigationMockTreeList = [
+        { title: 'TEST', route: '/test', app: 'unitTest', level: 0, children: [
+            { title: 'TEST-SUB', route: '/test-sub', app: 'unitTest', level: 1 }
+        ] },
+        { title: 'TEST2', route: '/test2', app: 'unitTest2', level: 0 }
+    ];
+//    var navigationMockTreeList2 = [
+//        { title: 'TEST', app: 'unitTest', level: 0, children: [
+//            { title: 'TEST-SUB', app: 'unitTest', level: 1 }
+//        ] },
+//        { title: 'TEST2', app: 'unitTest2', level: 0 }
+//    ];
     describe('navigationList type="top"', function() {
         beforeEach(module('bbc.transport'));
         beforeEach(module('bbc.navigation'));
@@ -258,58 +269,75 @@ describe('bbc.navigation', function () {
                 $navigation = $injector.get('$bbcNavigation');
                 location = $location;
                 $navigation.getTree = function(callback) {
-                    callback(null, navigationMockList);
+                    callback(null, navigationMockTreeList);
                 };
 
                 $scope = $rootScope.$new();
                 element = angular.element('<bbc-navigation-tree></bbc-navigation-tree>');
                 compile(element)($scope);
+                $scope.app = 'unitTest';
+                $scope.$digest();
                 done();
             });
         });
 
         it('should be correct initialized', function () {
-            var elementScope = element.isolateScope();
 
-            expect(elementScope.navList).toBeDefined();
-            expect(elementScope.navList.length).toBe(2);
+            location.path('/test');
+            expect($scope.app).toBe('unitTest');
+            expect($scope.navList).toBeDefined();
+            expect($scope.navList.length).toBe(2);
+//            expect($scope.navList[1].hide).toBe('bbc-open');
+
+        });
+//
+        it('calling $scope.openAll()', function () {
+            spyOn($scope, 'openAll');
+            location.path('/test-sub');
+            $scope.$digest();
+            $scope.openAll(navigationMockTreeList);
+            expect($scope.openAll).toHaveBeenCalled();
+            expect($scope.openAll).toBeTruthy();
         });
 
         it('should attach menus to the scope', function () {
-            var elementScope = element.isolateScope();
+//            var elementScope = element.isolateScope();
 
-            expect(elementScope.navList.length).toBeGreaterThan(0);
+            expect($scope.navList.length).toBeGreaterThan(0);
 
-            expect(elementScope.navList[0].title).toBe('TEST');
-            expect(elementScope.navList[0].route).toBe('/test');
-            expect(elementScope.navList[0].app).toBe('unitTest');
-            expect(elementScope.navList[0].level).toBe(0);
+            expect($scope.navList[0].title).toBe('TEST');
+            expect($scope.navList[0].route).toBe('/test');
+            expect($scope.navList[0].app).toBe('unitTest');
+            expect($scope.navList[0].level).toBe(0);
 
-            expect(elementScope.navList[1].title).toBe('TEST-SUB');
-            expect(elementScope.navList[1].route).toBe('/test-sub');
-            expect(elementScope.navList[1].app).toBe('unitTest');
-            expect(elementScope.navList[1].level).toBe(1);
+            expect($scope.navList[1].title).toBe('TEST2');
+            expect($scope.navList[1].route).toBe('/test2');
+            expect($scope.navList[1].app).toBe('unitTest2');
+            expect($scope.navList[1].level).toBe(0);
         });
 
-        it('should active the correct location', function () {
-            var elementScope = element.isolateScope();
+//        it('should active the correct location', function () {
+//            $scope.toggleShow(data);
+//            location.path('/test/path');
+//            expect($scope.isActive('/test/path')).toBe(true);
+//            expect($scope.isActive('/test/foo')).toBe(false);
+//        });
 
+        it('should active the correct location', function () {
             location.path('/test/path');
-            expect(elementScope.isActive('/test/path')).toBe(true);
-            expect(elementScope.isActive('/test/foo')).toBe(false);
+            expect($scope.isActive('/test/path')).toBe(true);
+            expect($scope.isActive('/test/foo')).toBe(false);
         });
 
         it('should set hid to bbc-open', function() {
             var data = {};
-            var elementScope = element.isolateScope();
-            elementScope.toggleShow(data);
+            $scope.toggleShow(data);
             expect(data.hide).toBe('bbc-open');
         });
 
         it('should set hid to bbc-close', function() {
             var data = {hide: 'bbc-open'};
-            var elementScope = element.isolateScope();
-            elementScope.toggleShow(data);
+            $scope.toggleShow(data);
             expect(data.hide).toBe('bbc-close');
         });
     });
@@ -337,82 +365,8 @@ describe('bbc.navigation', function () {
         });
 
         it('should be attach a empty menuTopList', function () {
-            var elementScope = element.isolateScope();
-            expect(elementScope.navList.length).toBe(0);
+            expect($scope.navList.length).toBe(0);
         });
     });
 
-
-    describe('bbcNavTreeHelper', function() {
-
-        beforeEach(module('bbc.navigation'));
-
-        var  $scope, location, element, compile;
-
-        beforeEach(function (done) {
-            inject(function ($compile, $rootScope, $location) {
-                compile = $compile;
-                location = $location;
-
-                $scope = $rootScope.$new();
-                $scope.data = {
-                    hide: undefined,
-                    level: 0,
-                    route: '/main'
-                };
-                element = angular.element('<div bbc-nav-tree-helper="data"></div>');
-                compile(element)($scope);
-                done();
-            });
-        });
-
-        it('should be correct initialized', function () {
-            expect($scope.data).toBeDefined();
-            expect($scope.data.hide).toBeUndefined();
-            expect($scope.data.level).toBe(0);
-        });
-
-        it('should not use if-path if value.level > 0 ', function () {
-            $scope.data = {
-                hide: undefined,
-                level: 1,
-                route: '/demo'
-            };
-            $scope.$digest();
-            expect($scope.data.hide).toBeUndefined();
-        });
-
-        it('should get value: bbc-open', function () {
-            $scope.data = {
-                hide: undefined,
-                level: 0,
-                route: '/demo'
-            };
-            location.path('/demo');
-            $scope.$digest();
-            expect($scope.data.hide).toBe('bbc-open');
-        });
-
-        it('should get value: bbc-open even if path is longer', function () {
-            $scope.data = {
-                hide: undefined,
-                level: 0,
-                route: '/demo'
-            };
-            location.path('/demo/enterprise');
-            $scope.$digest();
-            expect($scope.data.hide).toBe('bbc-open');
-        });
-
-        it('should not get value if route and path not match', function () {
-            $scope.data = {
-                hide: undefined,
-                level: 0,
-                route: '/admin'
-            };
-            location.path('/demo');
-            $scope.$digest();
-            expect($scope.data.hide).toBeUndefined();
-        });
-    });
 });
