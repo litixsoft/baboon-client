@@ -14,6 +14,7 @@ angular.module('bbc.session', ['bbc.transport'])
  * In this Container, the client can store its data during the session.
  * The client only has access to this container. (Sandbox)
  *
+ *
  * For more details see our {@link /session Guide}.
  */
     .factory('$bbcSession', function ($rootScope, $bbcTransport) {
