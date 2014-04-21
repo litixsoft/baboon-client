@@ -106,8 +106,6 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
             var socket;
             var socketConnection;
-            var promise = null;
-            var socketTimedOut = false;
 
             // default settings when options is empty
             config.protocol = config.protocol || $window.location.protocol;
@@ -215,7 +213,13 @@ angular.module('bbc.transport', ['btford.socket-io'])
                         callback(null, result);
                     })
                     .error(function (data, status, headers, config) {
-                        var error = {data: data, status: status, headers: headers, config: config};
+                        var error = data;
+                        error.restError = {
+                            status: status,
+                            headers: headers,
+                            config: config
+                        };
+
                         $rootScope.isLoading = false;
                         callback(error);
                     });
@@ -232,9 +236,10 @@ angular.module('bbc.transport', ['btford.socket-io'])
              *
              * @param {!string} event - The socket and rest event route.
              * @param {!(object|function(error, data) )} data - The data object for server.
-             * @param {function(error, data) } callback - The callback.
+             * @param {function=} callback - The callback.
              */
             pub.emit = function (event, data, callback) {
+
                 // when 2nd param is callback, rewrite this
                 if (arguments.length === 2) {
                     callback = data;
@@ -258,51 +263,41 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
                 $rootScope.isLoading = true;
 
+                // check if socket enabled
                 if (config.useSocket && $rootScope.socketEnabled) {
-                    promise = $timeout(function () {
+
+                    var socketTimedOut = false;
+
+                    // timeout for socket emit
+                    var promise = $timeout(function () {
                         socketTimedOut = true;
                         $rootScope.socketEnabled = false;
                         socketConnection.connection.socket.disconnect();
 
                         // emit again via rest
-                        pub.emit(event, data, callback);
+                        pub.rest(event, data, callback);
+
+                        // try reconnect
+                        socketConnection.connection.socket.connect();
+
                     }, config.socketResponseTimeout);
 
-                    socket.emit(event, data, function (error, result) {
+                    socket.emit(event, data, function(error, result) {
+
                         if (socketTimedOut) {
                             socketTimedOut = false;
-                            callback();
                             return;
                         }
 
                         $timeout.cancel(promise);
                         $rootScope.isLoading = false;
 
-                        var err = null;
-
-                        if (error) {
-                            err = {data: error};
-                        }
-
-                        callback(err, result);
+                        callback(error, result);
                     });
                 }
                 else {
-                    if (config.useSocket && !socketConnection.connection.socket.connected) {
-                        // try reconnect
-                        socketConnection.connection.socket.connect();
-                    }
-
-                    $http.post(event, data)
-                        .success(function (result) {
-                            $rootScope.isLoading = false;
-                            callback(null, result);
-                        })
-                        .error(function (data, status, headers, config) {
-                            var error = {data: data, status: status, headers: headers, config: config};
-                            $rootScope.isLoading = false;
-                            callback(error);
-                        });
+                    // use rest for transport
+                    pub.rest(event, data, callback);
                 }
             };
 

@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module('bbc.session', ['bbc.transport'])
-    /**
-     * @ngdoc object
-     * @name bbc.session.$bbcSession
-     * @requires $bbcTransport
-     *
-     * @description
-     * This service allows the client to access the server session.
-     * This can be used to tell the session activity of the Single Page the server and to store data in the session.
-     *
-     * For the store of data, the server session to the client appropriate container for disposal.
-     * In this Container, the client can store its data during the session.
-     * The client only has access to this container. (Sandbox)
-     *
-     * For more details see our {@link /session Guide}.
-     */
+/**
+ * @ngdoc object
+ * @name bbc.session.$bbcSession
+ * @requires $bbcTransport
+ *
+ * @description
+ * This service allows the client to access the server session.
+ * This can be used to tell the session activity of the Single Page the server and to store data in the session.
+ *
+ * For the store of data, the server session to the client appropriate container for disposal.
+ * In this Container, the client can store its data during the session.
+ * The client only has access to this container. (Sandbox)
+ *
+ * For more details see our {@link /session Guide}.
+ */
     .factory('$bbcSession', function ($rootScope, $bbcTransport) {
         var pub = {};
 
@@ -41,7 +41,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.rest('api/session/setData', {key: key, value: value}, callback);
+            $bbcTransport.emit('api/session/setData', {key: key, value: value}, callback);
         };
 
         /**
@@ -76,7 +76,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.rest('api/session/deleteData', data, callback);
+            $bbcTransport.emit('api/session/deleteData', data, callback);
         };
 
         /**
@@ -110,7 +110,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.rest('api/session/getData', data, callback);
+            $bbcTransport.emit('api/session/getData', data, callback);
         };
 
         /**
@@ -129,7 +129,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.rest('api/session/getLastActivity', callback);
+            $bbcTransport.emit('api/session/getLastActivity', callback);
         };
 
         /**
@@ -148,7 +148,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.rest('api/session/setActivity', callback);
+            $bbcTransport.emit('api/session/setActivity', callback);
         };
 
         return pub;

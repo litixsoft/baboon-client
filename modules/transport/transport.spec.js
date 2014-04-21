@@ -341,9 +341,9 @@ describe('bbcTransport', function () {
             mockRootScope.socketEnabled = true;
 
             transport.emit('callbackErrorTest', {}, function (error) {
+
                 expect(error).toBeDefined();
-                expect(error.data).toBeDefined();
-                expect(error.data).toEqual('callbackErrorTest');
+                expect(error).toEqual('callbackErrorTest');
 
                 done();
             });
