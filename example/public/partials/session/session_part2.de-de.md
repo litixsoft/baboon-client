@@ -1,3 +1,4 @@
+
 ###setData: Daten im Session-Container speichern
 
 Sie können über den Session-Service vom Client aus Daten in der Serversession speichern. Baboon verwendet zum speichern in der Session den Container data. Alle Daten vom Client werden innerhalb des Containers session.data abgelegt und können auch nur aus diesem gelesen und gelöscht werden. Speichern außerhalb des Containers ist nicht möglich. Ist der Key in der Session bereits vergeben, wird der Wert mit dem neuen Wert überschrieben. Beachten Sie daher den Aufbau Ihrer Namen für Keys und verwenden Sie wenn möglich einen Namespace.

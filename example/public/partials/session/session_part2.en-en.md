@@ -1,3 +1,4 @@
+
 ###setData: Store data in the Session Container
 
 You can save on the session service from the client data in the server session. Baboon used to store the container in the session data. All data from the client are stored within the container session.data and can be read and deleted only from this. Is the Key in the session already exists, the old value is overwritten.
