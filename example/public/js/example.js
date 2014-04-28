@@ -372,7 +372,7 @@ angular.module('example', [
 
             $bbcTransport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
                 if(error){
-                    $scope.messages.push({class: 'error', message: error.data});
+                    $scope.messages.push({class: 'error', message: error.message});
                 } else if(result){
                     $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
                 }
