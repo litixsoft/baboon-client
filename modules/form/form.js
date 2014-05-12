@@ -114,7 +114,7 @@ angular.module('bbc.form', [])
              * Sets the model.
              *
              * @param {object} model The model.
-             * @param {boolean} resetCache Specifies if the $bbcCache should be reset.
+             * @param {boolean} resetCache Specifies if the $bbcCache should be resetted.
              */
             pub.setModel = function (model, resetCache) {
                 if (!pub.model[key] && resetCache) {
