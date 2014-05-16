@@ -1,0 +1,24 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+        <div bbc-markdown-file="'match/match'" bbc-markdown-lang="currentLang"></div>
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/match/example.html'"></div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'DEMO' | translate }}</div>
+            <div class="panel-body">
+                <p>Please change the number</p>
+                <form name="form">
+                    <input type="text" ng-model="model.value1" name="value1" class="form-control" required>
+                    <input type="text" ng-model="model.value2" name="value2" class="form-control" required bbc-match="model.value1">
+                    <label ng-show="form.value2.$dirty && form.value2.$invalid" class="label label-danger">
+                        <div class="glyphicon glyphicon-fire"></div>
+                        <span ng-show="form.value2.$error.match">Value does not match.</span>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,7 @@ angular.module('example', [
         'bbc.checkbox',
         'bbc.radio',
         'bbc.markdown',
+        'bbc.match',
         'bbc.sort',
         'bbc.inline.edit',
         'bbc.reset',
@@ -36,6 +37,7 @@ angular.module('example', [
             .when('/form', { templateUrl: 'partials/form/form.html', controller: 'FormCtrl' })
             .when('/integer', { templateUrl: 'partials/integer/integer.html', controller: 'IntegerCtrl' })
             .when('/markdown', { templateUrl: 'partials/markdown/markdown.html', controller: 'MarkdownCtrl' })
+            .when('/match', { templateUrl: 'partials/match/match.html', controller: 'MatchCtrl' })
             .when('/modal', { templateUrl: 'partials/modal/modal.html', controller: 'ModalCtrl' })
             .when('/nav-home', { templateUrl: 'partials/navigation/nav_home.html', controller: 'NavHomeCtrl' })
             .when('/nav-home/nav-products', { templateUrl: 'partials/navigation/nav_home.html', controller: 'NavHomeCtrl'})
@@ -87,6 +89,7 @@ angular.module('example', [
             { 'title': 'bbc.inline.edit', 'link': '/edit' },
             { 'title': 'bbc.integer', 'link': '/integer' },
             { 'title': 'bbc.markdown', 'link': '/markdown' },
+            { 'title': 'bbc.match', 'link': '/match' },
             { 'title': 'bbc.modal', 'link': '/modal' },
             { 'title': 'bbc.navigation', 'link': '/nav-home' },
             { 'title': 'bbc.pager', 'link': '/pager' },
@@ -185,6 +188,9 @@ angular.module('example', [
     })
     .controller('MarkdownCtrl', function ($scope) {
         $scope.markdown = '###Hallo'
+    })
+    .controller('MatchCtrl', function ($scope) {
+        $scope.model = {};
     })
     .controller('SortCtrl', function ($scope) {
         $scope.sortOpts = {'name': -1};
