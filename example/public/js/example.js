@@ -113,11 +113,11 @@ angular.module('example', [
     .controller('CacheCtrl', function ($scope, $bbcCache) {
         $scope.bbcCache = $bbcCache;
         $scope.addToCache = function(user) {
-            $bbcCache['_user'] = user;
+            $bbcCache._user = user;
         };
 
         $scope.clearCache = function() {
-            delete $bbcCache['_user'];
+            delete $bbcCache._user;
         };
     })
     .controller('DatepickerCtrl', function ($scope) {
@@ -141,13 +141,17 @@ angular.module('example', [
         });
     })
     .controller('FormCtrl', function ($scope, $bbcForm) {
-        $scope.$bbcForm = $bbcForm('formEdit', '_id');
-        var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
-        $scope.$bbcForm.setModel(person);
+        $scope.$bbcForm = $bbcForm('customer', '_id');
+        var newCustomer = { _id: 1, firstname: 'John', lastname: 'Doe' };
+        $scope.$bbcForm.setModel(newCustomer);
 
         $scope.save = function() {
             if($scope.$bbcForm.model.lastname !== 'Doe') {
                 $scope.$bbcForm.populateValidation($scope.form, [{ property: 'lastname', message: 'Lastname must be Doe.' }]);
+            }
+
+            if (!$scope.form.$invalid) {
+                $scope.$bbcForm.setModel($scope.$bbcForm.model, true);
             }
         };
     })
@@ -187,7 +191,7 @@ angular.module('example', [
         };
     })
     .controller('MarkdownCtrl', function ($scope) {
-        $scope.markdown = '###Hallo'
+        $scope.markdown = '###Hallo';
     })
     .controller('MatchCtrl', function ($scope) {
         $scope.model = {};
@@ -238,7 +242,7 @@ angular.module('example', [
                     break;
                 }
             }
-        }
+        };
     })
     .controller('ResetCtrl', function () {
     })
@@ -378,7 +382,7 @@ angular.module('example', [
 
             $bbcTransport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
                 if(error){
-                    $scope.messages.push({class: 'error', message: error.data});
+                    $scope.messages.push({class: 'error', message: error.message});
                 } else if(result){
                     $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
                 }

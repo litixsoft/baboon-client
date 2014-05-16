@@ -1,87 +1,108 @@
 <div class="beige-noise">
     <div class="p-wrapper">
 
-        <div bbc-markdown-file="'form/form_part1'" bbc-markdown-lang="currentLang"></div>
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/form/form_part1'"></bbc-markdown-files>
+
         <tabset>
             <tab heading="script.js">
                 <div hljs>
-angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
-    $scope.$bbcForm = $bbcForm('formEdit', '_id');
-});
+angular.module('ngAppDemo', ['bbc.form'])
+    .controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+        $scope.$bbcForm = $bbcForm('customer', '_id');
+    });
                 </div>
             </tab>
         </tabset>
 
-        <div bbc-markdown-file="'form/form_part2'" bbc-markdown-lang="currentLang"></div>
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/form/form_part2'"></bbc-markdown-files>
+
         <tabset>
             <tab heading="script.js">
                 <div hljs>
-angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
-    $scope.$bbcForm = $bbcForm('formEdit', '_id');
-    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
-    $scope.$bbcForm.setModel(person); // add
-    $scope.$bbcForm.setModel(person, true); // remove
-});
+angular.module('ngAppDemo', ['bbc.form'])
+    .controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+        $scope.$bbcForm = $bbcForm('customer', '_id');
+        var newCustomer = { _id: 1, firstname: 'John', lastname: 'Doe' };
+
+        // set the model to newCustomer and save the changes in the cache
+        $scope.$bbcForm.setModel(newCustomer);
+
+        // set the model to newCustomer and clear the cache of this form
+        // this is usually done when saving the data
+        $scope.$bbcForm.setModel(newCustomer, true);
+    });
                 </div>
             </tab>
         </tabset>
 
-        <div bbc-markdown-file="'form/form_part3'" bbc-markdown-lang="currentLang"></div>
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/form/form_part3'"></bbc-markdown-files>
+
         <tabset>
             <tab heading="script.js">
                 <div hljs>
-angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
-$scope.$bbcForm = $bbcForm('formEdit', '_id');
-var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
-$scope.$bbcForm.setModel(person); // add
+angular.module('ngAppDemo', ['bbc.form'])
+    .controller('NgAppDemoCtrl', function ($scope, $bbcForm, $routeParams) {
+        $scope.$bbcForm = $bbcForm('customer', '_id');
 
-if (!$scope.$bbcForm.hasLoadedModelFromCache(1)) {
-    // load person...
-    $scope.lxForm.setModel(person);
-}
-                </div>
-            </tab>
-        </tabset>
-
-        <div bbc-markdown-file="'form/form_part4'" bbc-markdown-lang="currentLang"></div>
-        <tabset>
-            <tab heading="script.js">
-                <div hljs>
-angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
-    $scope.$bbcForm = $bbcForm('formEdit', '_id');
-    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
-    $scope.$bbcForm.setModel(person);
-    var isDirty = !$scope.$bbcForm.isUnchanged();
-    console.log(isDirty); // false
-    person.firstname = 'Jane';
-    isDirty = !$scope.$bbcForm.isUnchanged();
-    console.log(isDirty); // true
-});
-                </div>
-            </tab>
-        </tabset>
-
-        <div bbc-markdown-file="'form/form_part5'" bbc-markdown-lang="currentLang"></div>
-        <tabset>
-            <tab heading="script.js">
-                <div hljs>
-angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
-    $scope.$bbcForm = $bbcForm('formEdit', '_id');
-    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
-    $scope.$bbcForm.setModel(person);
-
-    $scope.save = function() {
-        if($scope.person.lastname !== 'Doe') {
-            $scope.$bbcForm.populateValidation($scope.form,
-                    [{ property: 'lastname', message: 'Lastname must be Doe.' }]);
+        // this is often used when you open an edit form and
+        // you want to check if the form data is already in the cache
+        // normally you pass the id via the $routeParams
+        if (!$scope.$bbcForm.hasLoadedModelFromCache($routeParams.id)) {
+            // load customer from db
         }
-    };
-});
+    });
                 </div>
             </tab>
         </tabset>
 
-        <div bbc-markdown-file="'form/form_part6'" bbc-markdown-lang="currentLang"></div>
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/form/form_part4'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form'])
+    .controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+        $scope.$bbcForm = $bbcForm('customer', '_id');
+        var newCustomer = { _id: 1, firstname: 'John', lastname: 'Doe' };
+        $scope.$bbcForm.setModel(newCustomer);
+
+        var isDirty = !$scope.$bbcForm.isUnchanged();
+        console.log(isDirty); // false
+
+        newCustomer.firstname = 'Jane';
+        isDirty = !$scope.$bbcForm.isUnchanged();
+        console.log(isDirty); // true
+    });
+                </div>
+            </tab>
+        </tabset>
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/form/form_part5'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.form'])
+    .controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
+        $scope.$bbcForm = $bbcForm('customer', '_id');
+        var newCustomer = { _id: 1, firstname: 'John', lastname: 'Doe' };
+        $scope.$bbcForm.setModel(newCustomer);
+
+        $scope.save = function() {
+            if($scope.$bbcForm.model.lastname !== 'Doe') {
+                $scope.$bbcForm.populateValidation(
+                    $scope.form,
+                    [{ property: 'lastname', message: 'Lastname must be Doe.' }]
+                );
+            }
+        };
+    });
+                </div>
+            </tab>
+        </tabset>
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/form/form_part6'"></bbc-markdown-files>
+
         <tabset>
             <tab heading="index.html">
                 <div hljs>
@@ -116,9 +137,9 @@ angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function (
             <tab heading="script.js">
                 <div hljs>
 angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function ($scope, $bbcForm) {
-    $scope.$bbcForm = $bbcForm('formEdit', '_id');
-    var person = { _id: 1, firstname: 'John', lastname: 'Doe' };
-    $scope.$bbcForm.setModel(person);
+    $scope.$bbcForm = $bbcForm('customer', '_id');
+    var newCustomer = { _id: 1, firstname: 'John', lastname: 'Doe' };
+    $scope.$bbcForm.setModel(newCustomer);
 });
                 </div>
             </tab>
@@ -157,6 +178,7 @@ angular.module('ngAppDemo', ['bbc.form']).controller('NgAppDemoCtrl', function (
                     </fieldset>
                 </form>
                 <pre>isDirty: {{ !$bbcForm.isUnchanged() }}</pre>
+                <pre>isValid: {{ !form.$invalid }}</pre>
             </div>
         </div>
     </div>
