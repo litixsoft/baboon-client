@@ -72,7 +72,7 @@ angular.module('bbc.navigation', [])
              * @param {function(error, data) } callback The callback function.
              */
             pub.getTree = function (callback) {
-                $bbcTransport.emit('/api/navigation/getTree',{current: app}, callback);
+                $bbcTransport.emit('/api/lib/navigation/getTree',{current: app}, callback);
             };
 
             /**
@@ -86,7 +86,7 @@ angular.module('bbc.navigation', [])
              * @param {function(error, data) } callback The callback function.
              */
             pub.getList = function (callback) {
-                $bbcTransport.emit('/api/navigation/getList',{current: app}, callback);
+                $bbcTransport.emit('/api/lib/navigation/getList',{current: app}, callback);
             };
 
             /**
@@ -100,7 +100,7 @@ angular.module('bbc.navigation', [])
              * @param {function(error, data) } callback The callback function.
              */
             pub.getTopList = function (callback) {
-                $bbcTransport.emit('/api/navigation/getTopList',{current: app}, callback);
+                $bbcTransport.emit('/api/lib/navigation/getTopList',{current: app}, callback);
             };
 
             /**
@@ -114,7 +114,7 @@ angular.module('bbc.navigation', [])
              * @param {function(error, data) } callback The callback function.
              */
             pub.getSubTree = function (callback) {
-                $bbcTransport.emit('/api/navigation/getSubTree',{current: app, top: route}, callback);
+                $bbcTransport.emit('/api/lib/navigation/getSubTree',{current: app, top: route}, callback);
             };
 
             /**
@@ -128,7 +128,7 @@ angular.module('bbc.navigation', [])
              * @param {function(error, data) } callback The callback function.
              */
             pub.getSubList = function (callback) {
-                $bbcTransport.emit('/api/navigation/getSubList',{current: app, top: route}, callback);
+                $bbcTransport.emit('/api/lib/navigation/getSubList',{current: app, top: route}, callback);
             };
 
             return pub;
