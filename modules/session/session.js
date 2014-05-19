@@ -152,5 +152,25 @@ angular.module('bbc.session', ['bbc.transport'])
             $bbcTransport.emit('api/lib/session/setActivity', callback);
         };
 
+
+        /**
+         * @ngdoc method
+         * @name bbc.session.$bbcSession#getUserDataForClient
+         * @methodOf bbc.session.$bbcSession
+         *
+         * @description
+         * Get user data for client in session
+         *
+         * @param {function=} callback The callback function.
+         */
+        pub.getUserDataForClient = function (callback) {
+
+            if (typeof callback !== 'function') {
+                throw new Error('error: Parameter callback must be function type');
+            }
+
+            $bbcTransport.emit('api/lib/session/getUserDataForClient', callback);
+        };
+
         return pub;
     });
