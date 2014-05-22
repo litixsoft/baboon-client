@@ -66,15 +66,15 @@ app.post('/api/echo', function(req, res) {
     }
 });
 
-app.post('/api/lib/session/setActivity', session.setActivity);
-app.post('/api/lib/session/getLastActivity', session.getLastActivity);
-app.post('/api/lib/session/getData', session.getData);
-app.post('/api/lib/session/setData', session.setData);
-app.post('/api/lib/session/deleteData', session.deleteData);
-app.post('/api/lib/files/getMarkdown', files.getMarkdown);
+app.post('/api/session/setActivity', session.setActivity);
+app.post('/api/session/getLastActivity', session.getLastActivity);
+app.post('/api/session/getData', session.getData);
+app.post('/api/session/setData', session.setData);
+app.post('/api/session/deleteData', session.deleteData);
+app.post('/api/files/getMarkdown', files.getMarkdown);
 
-app.use('/api/lib/navigation/getTopList', navigation.getTopList);
-app.use('/api/lib/navigation/getSubList', navigation.getSubList);
+app.use('/api/navigation/getTopList', navigation.getTopList);
+app.use('/api/navigation/getSubList', navigation.getSubList);
 
 app.get('/doc', function(req, res) {
     //res.sendfile(path.join(__dirname, '.dist/docs/index.html'));

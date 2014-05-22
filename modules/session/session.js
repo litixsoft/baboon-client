@@ -42,7 +42,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.emit('api/lib/session/setData', {key: key, value: value}, callback);
+            $bbcTransport.emit('api/session/setData', {key: key, value: value}, callback);
         };
 
         /**
@@ -77,7 +77,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.emit('api/lib/session/deleteData', data, callback);
+            $bbcTransport.emit('api/session/deleteData', data, callback);
         };
 
         /**
@@ -111,7 +111,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.emit('api/lib/session/getData', data, callback);
+            $bbcTransport.emit('api/session/getData', data, callback);
         };
 
         /**
@@ -130,7 +130,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.emit('api/lib/session/getLastActivity', callback);
+            $bbcTransport.emit('api/session/getLastActivity', callback);
         };
 
         /**
@@ -149,7 +149,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.emit('api/lib/session/setActivity', callback);
+            $bbcTransport.emit('api/session/setActivity', callback);
         };
 
 
@@ -169,7 +169,7 @@ angular.module('bbc.session', ['bbc.transport'])
                 throw new Error('error: Parameter callback must be function type');
             }
 
-            $bbcTransport.emit('api/lib/session/getUserDataForClient', callback);
+            $bbcTransport.emit('api/session/getUserDataForClient', callback);
         };
 
         return pub;
