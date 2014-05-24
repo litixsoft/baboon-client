@@ -349,7 +349,7 @@ angular.module('example', [
             return route === $location.path();
         };
     })
-    .controller('TransportCtrl', function ($rootScope, $scope, $location, $bbcTransport) {
+    .controller('TransportCtrl', function ($rootScope, $scope, $location, $bbcTransport, $log) {
         $scope.messages = [];
         $scope.raiseError = false;
 
@@ -382,6 +382,7 @@ angular.module('example', [
 
             $bbcTransport.emit('api/echo', {message: $scope.message, error: $scope.raiseError}, function(error, result) {
                 if(error){
+                    $log.error(error);
                     $scope.messages.push({class: 'error', message: error.message});
                 } else if(result){
                     $scope.messages.push({class: 'response', message: 'RESPONSE: ' + result.message});
@@ -393,8 +394,15 @@ angular.module('example', [
             return route === $location.path();
         };
     })
-    .controller('SessionCtrl', function ($scope, $bbcSession) {
+    .controller('SessionCtrl', function ($rootScope, $scope, $bbcSession) {
         $scope.activityMessages = [];
+
+        var socketOff = function() {
+
+            if ($rootScope.socketEnabled) {
+                $rootScope.socketEnabled = false
+            }
+        };
 
         $scope.clearActivity = function() {
             $scope.activityMessages = [];
@@ -403,13 +411,14 @@ angular.module('example', [
         $scope.getLastActivity = function() {
             $scope.activityMessages.push({class:'sent', message: 'SENT: ' + 'getLastActivity'});
 
+            socketOff();
             $bbcSession.getLastActivity(function(error, data) {
 
                 if(error) {
                     $scope.activityMessages.push({class:'error', message: error});
                 }
                 else {
-                    var now = new Date(data.activity);
+                    var now = new Date(data);
                     $scope.activityMessages.push({class: 'response', message: 'RESPONSE: ' + 'last activity is ' + now});
                 }
             });
@@ -419,17 +428,13 @@ angular.module('example', [
             var now = new Date();
             $scope.activityMessages.push({class:'sent', message: 'SENT: ' + 'set activity to ' + now});
 
+            socketOff();
             $bbcSession.setActivity(function(error) {
                 if(error) {
                     $scope.activityMessages.push({class:'error', message: error});
                 }
                 else {
                     $scope.activityMessages.push({class: 'response', message: 'RESPONSE: true'});
-
-                    $scope.apply = function() {
-                        $scope.data.key = '';
-                        $scope.data.value = '';
-                    };
                 }
             });
         };
@@ -446,6 +451,7 @@ angular.module('example', [
 
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'get all session data'});
 
+                socketOff();
                 $bbcSession.getData(function (error, result) {
                     if (error) {
                         $scope.dataMessages.push({class:'error', message: error});
@@ -459,6 +465,7 @@ angular.module('example', [
             else {
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'get key: ' + $scope.data.key});
 
+                socketOff();
                 $bbcSession.getData($scope.data.key, function (error, result) {
                     if (error) {
                         $scope.dataMessages.push({class:'error', message: error});
@@ -481,6 +488,7 @@ angular.module('example', [
             else {
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'setData' + 'key:' + $scope.data.key + ' value:' + $scope.data.value});
 
+                socketOff();
                 $bbcSession.setData($scope.data.key, $scope.data.value, function (error, result) {
                     if(error) {
                         $scope.activityMessages.push({class:'error', message: error});
@@ -498,6 +506,7 @@ angular.module('example', [
 
                 $scope.dataMessages.push({class:'sent', message: 'SENT: ' + 'set no key, delete all objects in session.data'});
 
+                socketOff();
                 $bbcSession.deleteData(function (error, result) {
                     if (error) {
                         $scope.activityMessages.push({class:'error', message: error});
@@ -510,6 +519,7 @@ angular.module('example', [
             else {
                 $scope.dataMessages.push({class: 'sent', message: 'SENT: ' + 'delete ' + $scope.data.key + ' in session.data'});
 
+                socketOff();
                 $bbcSession.deleteData($scope.data.key, function (error, result) {
                     if (error) {
                         $scope.activityMessages.push({class: 'error', message: error});

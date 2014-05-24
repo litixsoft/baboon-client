@@ -13,13 +13,18 @@ var path = require('path');
 var lessMiddleware = require('less-middleware');
 var session = require('./example/routes/session')();
 
-
 var app = express();
 var server = require('http').createServer(app)
 var io = require('socket.io').listen(server);
 
+var sender = function(status, result, res) {
+    var json = JSON.stringify(result);
+    res.set('Content-Type', 'application/json');
+    res.send(status, json);
+};
+
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3010);
 app.set('views', path.join(__dirname, 'example', 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -47,9 +52,6 @@ app.use(express.errorHandler());
 
 app.post('/api/echo', function(req, res) {
 
-    console.log('## REST: received from the client:');
-    console.log(req.body);
-
     if(req.body.error) {
 
         var error = {
@@ -59,10 +61,10 @@ app.post('/api/echo', function(req, res) {
             message: 'Fake echo test error'
         };
 
-        res.json(error.statusCode, error);
+        sender(error.statusCode, error, res);
     }
     else {
-        res.json(200, req.body);
+        sender(200, req.body, res);
     }
 });
 

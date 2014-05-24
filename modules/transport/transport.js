@@ -209,19 +209,33 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
                 $http.post(event, data)
                     .success(function (result) {
+
+                        if (typeof result !== 'object') {
+                            result = JSON.parse(result);
+                        }
+
                         $rootScope.isLoading = false;
                         callback(null, result);
                     })
                     .error(function (data, status, headers, config) {
-                        var error = data;
+                        $rootScope.isLoading = false;
+
+                        var error = {};
+
+                        if (typeof data !== 'object') {
+                            error = new Error(JSON.parse(data));
+                        }
+                        else {
+                            error = data;
+                        }
+
                         error.restError = {
                             status: status,
                             headers: headers,
                             config: config
                         };
 
-                        $rootScope.isLoading = false;
-                        callback(error);
+                        callback(error, null);
                     });
             };
 

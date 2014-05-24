@@ -2,6 +2,13 @@
 
 module.exports = function () {
     var pub = {};
+    var SessionError = require('./errors').SessionError;
+
+    var sender = function(status, result, res) {
+        var json = JSON.stringify(result);
+        res.set('Content-Type', 'application/json');
+        res.send(status, json);
+    };
 
     pub.checkSession = function (req, res, callback) {
         // check if session exists
@@ -23,8 +30,7 @@ module.exports = function () {
     // check session and set activity
     pub.setActivity = function (req, res) {
         pub.checkSession(req, res, function () {
-            // send ok
-            res.json(200,{});
+            sender(200, true, res);
         });
     };
 
@@ -33,11 +39,11 @@ module.exports = function () {
 
         if (!req.session.hasOwnProperty('activity')) {
             pub.checkSession(req, res, function() {
-                res.json(200, {activity:req.session.activity});
+                sender(200, req.session.activity, res);
             });
         }
         else {
-            res.json(200, {activity:req.session.activity});
+            sender(200, req.session.activity, res);
         }
     };
 
@@ -55,14 +61,13 @@ module.exports = function () {
         } else {
             // check own key
             if (!req.session.data.hasOwnProperty(key)) {
-                res.json(400, key + ' not found in session');
-                return;
+                return sender(400, new SessionError(key + ' not found in session', 400), res);
             } else {
                 obj[key] = req.session.data[key];
             }
         }
 
-        res.json(200, obj);
+        return sender(200, obj, res);
     };
 
     // set session data
@@ -75,7 +80,7 @@ module.exports = function () {
         // save key value in session
         req.session.data[req.body.key] = req.body.value;
 
-        res.json(200, req.body.key + ' is saved in session');
+        sender(200, req.body.key + ' is saved in session', res);
     };
 
     // delete session data
@@ -88,18 +93,17 @@ module.exports = function () {
 
         if (typeof key === 'undefined') {
             req.session.data = {};
-            res.json(200, 'container session.data deleted');
-            return;
+            return sender(200, 'container session.data deleted', res);
         }
 
         // check own key
         if (!req.session.data.hasOwnProperty(key)) {
-            res.json(400, key + ' not found in session');
+            return sender(400, new SessionError(key + ' not found in session', 400), res);
         }
         else {
             // delete key value in session
             delete req.session.data[key];
-            res.json(200, key + ' is deleted in session');
+            return sender(200, key + ' is deleted in session', res);
         }
     };
 
