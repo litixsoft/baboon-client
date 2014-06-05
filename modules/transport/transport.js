@@ -118,8 +118,16 @@ angular.module('bbc.transport', ['btford.socket-io'])
                 config.protocol = config.protocol + ':';
             }
 
-            // create the host url
-            config.host = config.protocol + '//' + config.hostname + ':' + config.port;
+            if (!config.port || config.port === 443 || config.port === 80) {
+
+                // create the host url without port
+                config.host = config.protocol + '//' + config.hostname;
+            }
+            else {
+
+                // create the host url with port
+                config.host = config.protocol + '//' + config.hostname + ':' + config.port;
+            }
 
             // default socket is not enabled
             $rootScope.socketEnabled = false;
