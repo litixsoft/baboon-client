@@ -95,8 +95,8 @@ angular.module('bbc.navigation')
                         '<div class="list-item" ng-class="{active: isActive(data.route)}">'+
                         '<div class="opensub {{data.hide}}" ng-show="data.children" ng-click="toggleShow(data)"></div>'+
                         '<div class="nav-icon {{data.icon}}"></div>'+
-                        '<a ng-if="!ngClickable" ng-class="{spacer: data.children.length > 0}" ng-href="{{data.route}}" target="{{data.target}}"><span>{{data.title | translate }}</span></a>'+
-                        '<a ng-if="ngClickable" ng-click="methodAttr({name: data[linkAttr]});"><span translate>{{data[labelAttr]}}</span></a>'+
+                        '<a ng-if="!data.norouting" ng-class="{spacer: data.children.length > 0}" ng-href="{{data.route}}" target="{{data.target}}"><span>{{data.title | translate }}</span></a>'+
+                        '<a ng-if="data.norouting" ng-class="{spacer: data.children.length > 0}" ng-click="openRedirect(data);" style="cursor:pointer;"><span>{{data.title | translate }}</span></a>'+
                         '</div>'+
                         '<ul class="display {{data.hide}}" ng-if="data.children.length">'+
                         '<li ng-repeat="data in data.children" ng-include="\'bbc/navigation/tpls/treeview/inner.html\'"></li>'+
@@ -120,6 +120,41 @@ angular.module('bbc.navigation')
                     return found;
                 };
 
+                scope.findFirstLink = function (list, _level){
+                    var level =  _level || 0;
+                    var childs = 0;
+
+                    for(var link in list){
+                        if(level===0){
+                            level = list[link].level;
+                        }
+                        if(!list[link].norouting){
+                            if(level === list[link].level){
+                                return list[link].route;
+                            } else {
+                                childs++;
+                            }
+                        }
+                    }
+                    if(childs > 0){
+                        return scope.findFirstLink(list, (level+1));
+                    }
+                };
+
+                scope.openRedirect = function(list) {
+                    var redirect = scope.findFirstLink(list.children);
+                    var currentApp = $bbcNavigation.getApp();
+                    if(redirect){
+                        list.hide = 'bbc-open';
+                        if(list.app !== currentApp){
+                            window.location = redirect;
+                        } else {
+                            $location.path(redirect);
+                        }
+                    } else {
+                        window.location = '/';
+                    }
+                };
 
                 $bbcNavigation.getTree(function (error, navList) {
                     if (error || navList.length === 0) {
