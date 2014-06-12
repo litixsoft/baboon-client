@@ -1,0 +1,42 @@
+.bbc-radio {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.bbc-radio > .radio-button {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #b9b9b9;
+  border-radius: 50%;
+}
+
+.bbc-radio > .radio-button > input[type=radio] {
+  display: none;
+}
+.bbc-radio > .title {
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  margin-left: 5px;
+}
+.bbc-radio > .title > label {
+  display: inline-block;
+  padding-top: -5px;
+  font-weight: normal;
+}
+.bbc-radio > .radio-button > input[type=radio] + label span {
+  display: inline-block;
+  position: relative;
+  top: -0.27em;
+  left: 0.16em;
+  border-radius: 50%;
+}
+.bbc-radio > .radio-button > input[type=radio]:checked + label span {
+  background-color: #000;
+}
+.bbc-radio > .radio-button > label > span.radio-checked {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+}

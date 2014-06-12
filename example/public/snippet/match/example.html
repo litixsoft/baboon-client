@@ -1,0 +1,8 @@
+<form name="form">
+    <input type="text" ng-model="model.value1" name="value1">
+    <input type="text" ng-model="model.value2" name="value2" bbc-match="model.value1">
+    <label ng-show="form.value2.$dirty && form.value2.$invalid" class="label label-danger">
+        <div class="glyphicon glyphicon-fire"></div>
+        <span ng-show="form.value2.$error.match">Value does not match.</span>
+    </label>
+</form>

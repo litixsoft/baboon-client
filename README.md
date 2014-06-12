@@ -1,40 +1,63 @@
-# baboon client [![Build Status](https://travis-ci.org/litixsoft/baboon-client.svg?branch=master)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.png)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.png)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
+# baboon client [![Build Status](https://travis-ci.org/litixsoft/baboon-client.svg?branch=v0.4)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.svg?theme=shields.io)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.svg?theme=shields.io)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
 
-> A client library for baboon webtoolkit.
+> Baboon-Client is a client library for [baboon webtoolkit](https://github.com/litixsoft/baboon). It also has different directives to simplify tasks in client web development.
 
-## Install
-Install global dependencies:
+* Website: http://www.litixsoft.de/baboon-client
+* API Documentation: http://www.litixsoft.de/baboon-client/api
+* Developer Guide: http://www.litixsoft.de/baboon-client/guide
+
+# Install
+The installation of Baboon-Client is very simple. However, some preparatory work is needed.
+
+## Global dependencies:
+
+Linux / Mac:
+
+    $ sudo npm install -g bower
+
+Windows:
 
     $ npm install -g bower
 
+## Create and start your Baboon-Client project
 Usual baboon-client standard installation over bower registry:
 
     $ bower install baboon-client
 
 [Learn more about usage of Bower](https://github.com/bower/bower#usage)
 
-**Special installations on GitHub**
+# Contributing
+Instead of us handing out a formal style guide, simply stick to the existing programming style. Please create descriptive commit messages.
+We use a git hook to validate the commit messages against these [rules](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w).
+Easily expand Baboon-Client with your own extensions or changes in the functionality of Baboon-Client itself. Use this workflow:
 
-Github: master, current development status, release candidate:
+1. Write your functionality
+2. Write unit tests for your functionality
+3. Create an example of your functionality in the guide
+4. Document your functionality in the documentation section of the guide
+5. All tests should be successful
+6. Check your test coverage (90 - 100%)
+7. Make a pull request
 
-	$ bower install https://github.com/litixsoft/baboon-client.git#master
+We will check the tests, the example and test coverage. In case your changes are useful and well tested, we will merge your requests.
 
-Github: develop, very early stage of development, unstable:
+# Building and Testing Baboon-Client
+This section describes how to set up your development environment to build and test Baboon-Client with the guide.
 
-	$ bower install https://github.com/litixsoft/baboon-client.git#develop
+## Global dependencies:
 
-
-## Contributing and test
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](http://gruntjs.com/).
-
-install global dependencies:
-
-    $ npm install -g grunt-cli karma bower
-
-On linux use administrative rights to install global modules:
+Linux / Mac:
 
     $ sudo npm install -g grunt-cli karma bower
 
+Windows:
+
+    $ npm install -g grunt-cli karma bower
+
+
+## Clone Baboon-Client and guide
+The guide is also the reference implementation for Baboon-Client.
+Clone Baboon-Client repository and install the dependent modules with npm and bower.
 
 Clone the baboon-client repository and install the dev dependencies and test suite deps.
 Test baboon-client with grunt.
@@ -43,71 +66,59 @@ Test baboon-client with grunt.
     $ cd baboon-client
     $ npm install
     $ bower install
-    $ grunt test
 
-Help us with your ideas. Write your code and test it.
-Write tests for your code. All tests must be successful. Make a pull request.
+Alternate you can use the update script:
 
-## Release History
-### v0.3.2
-* fix logging to console in lx.alert when type is 'error'
+    $ git clone https://github.com/litixsoft/baboon-client.git
+    $ cd baboon-client
+    $ ./update.sh // in windows use update.bat
 
-### v0.3.1
-* add directive lxReset (adds a x-Button to clear an input)
-* fix error in lxDatepicker directive
-* change type 'error' to 'danger' in lxAlert to match new bootstrap v3.0.0 css classes
-* add new param buttonTextValues to lxModal when opening a new modal window to override the text values of the buttons
-* update angular to v1.2.12
+## Running tests
+You can run all unit tests for Baboon-Client with:
 
-### v0.3.0
-* add function transport.on() to listen to socket events
-* add lxDatepicker directive
-* add lx-radio and lx-checkbox directives to have radio buttons and checkboxes that looks the same in every browser and OS
-* highlight the active link in the menu
-* make menu responsive
-* fix error in lx.pager that button 'next Page' and 'last Page' are enabled when current page is greater than number of pages
-* navigation now uses names instead of numbers to find children
+    $ grunt test // directory baboon-client
 
-### v0.2.9
-* update angular to v1.2.2
-* update angular-translate to v1.1.1
-* add transport.rest() to make rest only calls over the transport layer
-* update navigation and session to use transport.rest()
-* add .jshintrc
+## Running coverage
+You can run a coverage task for Baboon-Client with:
 
-### v0.2.8
-* update api/v1
-* remove auth
+    $ grunt cover // directory baboon-client
 
-### v0.2.7
-* remove passport auth
+## Running tests for ci systems
+You can run unit tests, jshint and code coverage for ci systems with:
 
-### v0.2.6
-* integrate charts
-* update design
-* update auth
-* bugfixes
-* refactoring
+    $ grunt ci
 
-### v0.2.5
-* sync with baboon actual version
+## Generate Documentation
+You can generate the documentation for baboon-client with:
 
-### v0.0.2
-* include and rename module
-* tests
+    $ grunt doc
 
-### v0.0.1
-* initial structure
+## Running guide and documentation
+You can start the node application and run the guide under http://localhost:3000.
 
-## Author
+    $ node server.js
+
+# Author
 [Litixsoft GmbH](http://www.litixsoft.de)
 
-## License
+# License
+Copyright (C) 2013-2014 Litixsoft GmbH <info@litixsoft.de>
+Licensed under the MIT license.
 
-Copyright (C) 2013-2014 Litixsoft GmbH info@litixsoft.de Licensed under the MIT license.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE. DEALINGS IN THE SOFTWARE.

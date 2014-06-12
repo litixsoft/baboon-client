@@ -1,0 +1,77 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/session/session_part1'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/session/activityDemo.html'"></div>
+            </tab>
+            <tab heading="index.js">
+                <div hljs include="'snippet/session/activityDemo.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+
+                <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
+                    <li ng-repeat="item in activityMessages">
+                        <span class="{{item.class}}">{{ item.message }}</span>
+                    </li>
+                </ul>
+                <div class="col-md-12" style="margin-top: 1em">
+                    <div class="btn-group">
+                        <button class="btn btn-default" ng-click="setActivity()">Set activity</button>
+                        <button class="btn btn-default" ng-click="getLastActivity()">Get last activity</button>
+                        <button class="btn btn-default" ng-click="clearActivity()"><span
+                                class="glyphicon glyphicon-trash"></span> Clear log
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/session/session_part2'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs include="'snippet/session/getSetDemo.html'"></div>
+            </tab>
+            <tab heading="index.js">
+                <div hljs include="'snippet/session/getSetDemo.js'"></div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+
+                <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
+                    <li ng-repeat="item in dataMessages">
+                        <span class="{{item.class}}">{{ item.message }}</span>
+                    </li>
+                </ul>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input ng-model="data.key" class="form-control" placeholder="session key">
+                        <input ng-model="data.value" class="form-control" placeholder="session value">
+
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="margin-top: 1em">
+                    <div class="btn-group">
+                        <button class="btn btn-default" ng-click="setData()">Set To Session</button>
+                        <button class="btn btn-default" ng-click="getData()">Get SessionData</button>
+                        <button class="btn btn-default" ng-click="deleteData()">Delete SessionData</button>
+                        <button class="btn btn-default" ng-click="clearData()"><span
+                                class="glyphicon glyphicon-trash"></span> Clear Log
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

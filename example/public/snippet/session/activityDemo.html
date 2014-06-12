@@ -1,0 +1,24 @@
+<div class="panel panel-info" ng-controller="SessionCtrl">
+    <div class="panel-heading">Demo</div>
+    <div class="panel-body">
+
+        <ul style="min-height: 100px; padding: 0.5em; margin: 1em; list-style: none">
+            <li ng-repeat="item in activityMessages">
+                <span>{{ item.message }}</span>
+            </li>
+        </ul>
+        <div class="col-md-12" style="margin-top: 1em">
+            <div class="btn-group">
+                <button class="btn btn-default" ng-click="setActivity()">
+                    Set activity
+                </button>
+                <button class="btn btn-default" ng-click="getLastActivity()">
+                    Get last activity
+                </button>
+                <button class="btn btn-default" ng-click="clearActivity()">
+                    <span class="glyphicon glyphicon-trash"></span> Clear log
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

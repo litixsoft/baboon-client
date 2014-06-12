@@ -1,0 +1,157 @@
+<div class="beige-noise">
+    <div class="p-wrapper">
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/modal/modal_part1'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <button class="btn btn-default" ng-click="popupYesNo()">Yes/No Window</button>
+    <button class="btn btn-default" ng-click="popupOkClose()">Ok/Close Window</button>
+    <button class="btn btn-default" ng-click="popupModal()">Modal Window</button>
+</div>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function ($scope) {
+    $scope.message = '';
+    var buttonTextValues = { yes: 'Yes', no: 'No', close: 'Close', ok: 'Ok' };
+    var options = { id: 'uniqueId', headline: 'Title bar', message: 'The message text.',
+                    backdrop: false, buttonTextValues: buttonTextValues }
+
+    $scope.popupYesNo = function(){
+        options.callObj = {
+            cbYes: function () {
+                $scope.message = 'Yes has been clicked.';
+            },
+            cbNo: function () {
+                $scope.message = 'No has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+
+    $scope.popupOkClose = function(){
+        options.callObj = {
+            cbOk: function () {
+                $scope.message = 'Ok has been clicked.';
+            },
+            cbClose: function () {
+                $scope.message = 'Close has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+
+    $scope.popupModal = function(){
+        options.backdrop = true;
+            options.callObj = {
+            cbOk: function () {
+                $scope.message = 'Ok has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <button class="btn btn-default" ng-click="popupYesNo()">{{ 'MODAL_YES_NO_TEXT' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupOkClose()">{{ 'MODAL_OK_CLOSE_TEXT' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupModal()">{{ 'MODAL_OK_TEXT' | translate }}</button>
+                </div>
+                <div class="col-md-12">
+                    <pre style="text-align: left;">{{ message }}</pre>
+                </div>
+            </div>
+        </div>
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/modal/modal_part2'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <button class="btn btn-default" ng-click="popupWithCancel()">Modal Window</button>
+</div>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function ($scope) {
+    $scope.popupWithCancel = function(){
+        $bbcModal.open({
+            id: 'uniqueId',
+            headline: 'Title bar',
+            message: 'The message text.',
+            backdrop: true });
+
+        setTimeout(function() {
+            $bbcModal.cancel();
+        }, 1000);
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <p>{{ 'MODAL_CANCEL_DEMO_TEXT' | translate }}</p>
+                    <button class="btn btn-default" ng-click="popupWithCancel()">{{ 'MODAL_OK_TEXT' | translate }}</button>
+                </div>
+            </div>
+        </div>
+
+        <bbc-markdown-files bbc-markdown-lang="currentLang" bbc-markdown-file="'partials/modal/modal_part3'"></bbc-markdown-files>
+
+        <tabset>
+            <tab heading="index.html">
+                <div hljs>
+<div ng-controller="NgAppDemoCtrl">
+    <button class="btn btn-default" ng-click="popupModalUpdate()">Modal Window</button>
+</div>
+                </div>
+            </tab>
+            <tab heading="script.js">
+                <div hljs>
+angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function ($scope) {
+    var options = { id: 'uniqueId', headline: 'Title bar', message: 'The message text.',
+                    backdrop: false, buttonTextValues: { ok: 'Ok' } }
+
+    $scope.popupModalUpdate = function() {
+        options.backdrop = true;
+        options.callObj = {
+            cbOk: function () {
+                $scope.message = 'Popup has been closed.';
+            }
+        };
+        $bbcModal.open(options);
+
+        setTimeout(function(){
+            $bbcModal.update('uniqueId', 'The updated message is now available.');
+        }, 2000);
+    };
+});
+                </div>
+            </tab>
+        </tabset>
+        <div class="panel panel-default">
+            <div class="panel-heading">Demo</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <p>{{ 'MODAL_UPDATE_DEMO_TEXT' | translate }}</p>
+                    <button class="btn btn-default" ng-click="popupModalUpdate()">{{ 'MODAL_OK_TEXT' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

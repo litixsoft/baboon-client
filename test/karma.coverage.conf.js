@@ -1,8 +1,11 @@
+'use strict';
+
 module.exports = function (config) {
     config.set({
         // base path, that will be used to resolve files and exclude
         basePath: '../',
 
+        // testing framework to use (jasmine/mocha/qunit/...)
         frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
@@ -10,7 +13,13 @@ module.exports = function (config) {
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-            'build/tmp/templates/**/*.js',
+            'bower_components/showdown/src/showdown.js',
+            'bower_components/showdown/src/extensions/table.js',
+            'bower_components/angular-translate/angular-translate.js',
+            'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+            'bower_components/angular-socket-io/socket.js',
+            'test/mocks/appMocks.js',
+            'modules/navigation/navigation.js',
             'modules/**/*.js'
         ],
 
@@ -25,7 +34,7 @@ module.exports = function (config) {
 
         coverageReporter: {
             type: 'html',
-            dir: 'build/reports/coverage'
+            dir: '.reports/coverage'
         },
 
         // web server port
@@ -72,8 +81,6 @@ module.exports = function (config) {
             'karma-jasmine',
             'karma-chrome-launcher',
             'karma-firefox-launcher',
-            'karma-ie-launcher',
-            'karma-safari-launcher',
             'karma-coverage',
             'karma-junit-reporter'
         ]

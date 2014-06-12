@@ -1,5 +1,7 @@
 'use strict';
 
+//var path = require('path');
+
 module.exports = function (grunt) {
     var path = require('path');
 
@@ -18,48 +20,69 @@ module.exports = function (grunt) {
         return '';
     }
 
-    // load all grunt tasks
+    // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
+
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
 
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        jshint_files_to_test: ['Gruntfile.js', 'modules/**/*.js'],
-        banner: '/*!\n' +
-            ' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
-            ' *\n' +
-            ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-            ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
-            ' */\n\n',
-        // Before generating any new files, remove any previously-created files..
-        clean: {
-            karma: ['build/reports/tests'],
-            lint: ['build/reports/lint'],
-            coverage: ['build/reports/coverage'],
-            tmp: ['build/tmp']
+        src: {
+            jshint: {
+                files: [
+                    'modules/**/*.js',
+                    'Gruntfile.js',
+                    '!modules/**/*.tpl.js'
+                ]
+            },
+            bowerrc: grunt.file.readJSON('.bowerrc'),
+            tmpMod: '.tmp/modules'
         },
+
+        // Empties folders to start fresh
+        clean: {
+            coverage: '.reports/coverage',
+            test: '.reports/test',
+            jshint: '.reports/jshint',
+            bower: ['<%= src.bowerrc.directory %>'],
+            node_modules: ['node_modules'],
+            docs: ['.dist/docs']
+        },
+
+        open: {
+            coverage: {
+                path: function () {
+                    return path.join(__dirname, getCoverageReport('.reports/coverage/'));
+                }
+            }
+        },
+        // Make sure code styles are up to par and there are no obvious mistakes
+
         jshint: {
             options: {
-                jshintrc: true
+                jshintrc: true,
+                reporter: require('jshint-stylish')
             },
-            test: '<%= jshint_files_to_test %>',
+            test: {
+                src: '<%= src.jshint.files %>'
+            },
             jslint: {
                 options: {
                     reporter: 'jslint',
-                    reporterOutput: 'build/reports/lint/jshint.xml'
+                    reporterOutput: '.reports/lint/jshint.xml'
                 },
                 files: {
-                    src: '<%= jshint_files_to_test %>'
+                    src: '<%= src.jshint.files %>'
                 }
             },
             checkstyle: {
                 options: {
                     reporter: 'checkstyle',
-                    reporterOutput: 'build/reports/lint/jshint_checkstyle.xml'
+                    reporterOutput: '.reports/lint/jshint_checkstyle.xml'
                 },
                 files: {
-                    src: '<%= jshint_files_to_test %>'
+                    src: '<%= src.jshint.files %>'
                 }
             }
         },
@@ -72,16 +95,12 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['modules/**/*.html'],
+                        cwd: 'modules/',
+                        src: ['**/*.html'],
                         ext: '.tpl.js',
-                        dest: 'build/tmp/templates/'
+                        dest: 'modules/'
                     }
                 ]
-            }
-        },
-        open: {
-            coverage: {
-                path: path.join(__dirname, getCoverageReport('build/reports/coverage/'))
             }
         },
         karma: {
@@ -100,16 +119,16 @@ module.exports = function (grunt) {
                 colors: false,
                 reporters: ['mocha', 'junit'],
                 junitReporter: {
-                    outputFile: 'build/reports/tests/baboon-client.xml',
+                    outputFile: '.reports/tests/baboon-client.xml',
                     suite: 'baboon_client'
                 }
             },
             debug: {
                 configFile: 'test/karma.conf.js',
+                singleRun: false,
                 detectBrowsers: {
                     enabled: false
-                },
-                singleRun: false
+                }
             },
             coverage: {
                 configFile: 'test/karma.coverage.conf.js',
@@ -117,22 +136,96 @@ module.exports = function (grunt) {
             },
             cobertura: {
                 configFile: 'test/karma.coverage.conf.js',
+                colors: false,
                 coverageReporter: {
                     type: 'cobertura',
-                    dir: 'build/reports/coverage'
-                },
-                colors: false
+                    dir: '.reports/coverage'
+                }
+            }
+        },
+        changelog: {
+            options: {
+            }
+        },
+        bump: {
+            options: {
+                updateConfigs: ['pkg'],
+                commitFiles: ['-a'],
+                commitMessage: 'chore: release v%VERSION%',
+                push: false
+            }
+        },
+        ngdocs: {
+            options: {
+                dest: '.dist/docs',
+                html5Mode: false,
+                navTemplate: 'docs/html/nav.html',
+                title: 'baboon client',
+                image: 'docs/img/baboon.png'
+            },
+            api: {
+                src: ['modules/**/*.js', '!modules/**/*.spec.js', '!modules/**/*.tpl.js', 'docs/content/api/*.ngdoc'],
+                title: 'API Reference'
             }
         }
     });
 
-    // Register tasks.
-    grunt.registerTask('lint', ['jshint:test']);
-    grunt.registerTask('debug', ['clean:tmp', 'html2js', 'karma:debug']);
-    grunt.registerTask('test', ['clean:tmp', 'html2js', 'jshint:test', 'karma:unit']);
-    grunt.registerTask('demo', ['clean:tmp', 'html2js', 'jshint:test', 'karma:chrome']);
-    grunt.registerTask('cover', ['clean:tmp', 'html2js', 'clean:coverage', 'jshint:test', 'karma:coverage', 'open:coverage']);
-    grunt.registerTask('ci', ['clean', 'html2js', 'jshint:jslint', 'jshint:checkstyle', 'karma:ci', 'karma:coverage', 'karma:cobertura']);
+    grunt.registerTask('move-doc', function () {
+        grunt.file.copy('./.dist/docs/index.html', 'example/views/doc/index.html');
+        grunt.file.delete('./.dist/docs/index.html');
+    });
+
+    grunt.registerTask('doc', ['clean:docs', 'ngdocs', 'move-doc']);
+
+    grunt.registerTask('git:commitHook', 'Install git commit hook', function () {
+        grunt.file.copy('validate-commit-msg.js', '.git/hooks/commit-msg');
+        require('fs').chmodSync('.git/hooks/commit-msg', '0755');
+        grunt.log.ok('Registered git hook: commit-msg');
+    });
+
+    grunt.registerTask('lint', [
+        'newer:jshint:test'
+    ]);
+
+    grunt.registerTask('build', [
+        'newer:html2js'
+    ]);
+
+    grunt.registerTask('test', [
+        'git:commitHook',
+        'build',
+        'lint',
+        'karma:unit'
+    ]);
+
+    grunt.registerTask('cover', [
+        'build',
+        'clean:coverage',
+        'lint',
+        'karma:coverage',
+        'open:coverage'
+    ]);
+
+    grunt.registerTask('ci', [
+        'clean:coverage',
+        'clean:test',
+        'clean:jshint',
+        'html2js',
+        'jshint:test',
+        'jshint:checkstyle',
+        'karma:ci',
+        'karma:coverage',
+        'karma:cobertura'
+    ]);
+
+    grunt.registerTask('release', 'Bump version, update changelog and tag version', function (version) {
+        grunt.task.run([
+            'bump:' + (version || 'patch') + ':bump-only',
+            'build',
+            'changelog',
+            'bump-commit'
+        ]);
+    });
 
     // Default task.
     grunt.registerTask('default', ['test']);
