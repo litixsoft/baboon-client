@@ -1,3 +1,12 @@
+<a name="0.4.1"></a>
+### 0.4.1 (2014-06-13)
+
+
+#### Features
+
+* update bower dependencies ([b1f620c8](https://github.com/litixsoft/baboon-client/commit/b1f620c804457440df783b12845e8d8934a86b93))
+
+
 ## v0.3.0
 * add function transport.on() to listen to socket events
 * add lxDatepicker directive
