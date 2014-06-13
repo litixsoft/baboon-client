@@ -1,74 +1,74 @@
 {
-  "name": "baboon-client",
-  "version": "0.4.0",
-  "author": {
-    "name": "Litixsoft GmbH",
-    "email": "info@litixsoft.de"
-  },
-  "maintainers": [
-    {
-      "name": "Timo Liebetrau",
-      "email": "t.liebetrau@litixsoft.de"
+    "name": "baboon-client",
+    "version": "0.4.0",
+    "author": {
+        "name": "Litixsoft GmbH",
+        "email": "info@litixsoft.de"
     },
-    {
-      "name": "Dominic Sachs",
-      "email": "d.sachs@litixsoft.de"
+    "maintainers": [
+        {
+            "name": "Timo Liebetrau",
+            "email": "t.liebetrau@litixsoft.de"
+        },
+        {
+            "name": "Dominic Sachs",
+            "email": "d.sachs@litixsoft.de"
+        },
+        {
+            "name": "Marco Kannenberg",
+            "email": "m.kannenberg@litixsoft.de"
+        },
+        {
+            "name": "Andreas Krummsdorf",
+            "email": "a.krummsdorf@litixsoft.de"
+        },
+        {
+            "name": "Sven Bernstein",
+            "email": "s.bernstein@litixsoft.de"
+        }
+    ],
+    "description": "Baboon Web Toolkit, client library.",
+    "keywords": [
+        "baboon",
+        "client",
+        "library"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/litixsoft/baboon-client",
+    "ignore": [
+        ".reports",
+        ".tmp",
+        ".dist",
+        "bower_components",
+        "docs",
+        "example",
+        "modules/**/*.spec.js",
+        "modules/**/*.html",
+        "node_modules",
+        "test",
+        ".*",
+        "Gruntfile.js",
+        "package.json",
+        "server.js",
+        "update.*",
+        "validate-commit-msg.js"
+    ],
+    "dependencies": {
+        "angular": "1.2.16",
+        "angular-animate": "1.2.16",
+        "angular-bootstrap": "~0.11.0",
+        "angular-route": "1.2.16",
+        "angular-socket-io": "~0.6.0",
+        "angular-translate": "~2.2.0",
+        "angular-translate-loader-static-files": "~2.2.0",
+        "bootstrap": "~3.1.1",
+        "showdown": "https://github.com/zwirn1981/showdown.git#master"
     },
-    {
-      "name": "Marco Kannenberg",
-      "email": "m.kannenberg@litixsoft.de"
-    },
-    {
-      "name": "Andreas Krummsdorf",
-      "email": "a.krummsdorf@litixsoft.de"
-    },
-    {
-      "name": "Sven Bernstein",
-      "email": "s.bernstein@litixsoft.de"
+    "devDependencies": {
+        "angular-highlightjs": "~0.3.0",
+        "angular-mocks": "1.2.16",
+        "es5-shim": "~3.4.0",
+        "json3": "~3.3.1",
+        "highlightjs": "~8.0.0"
     }
-  ],
-  "description": "Baboon Web Toolkit, client library.",
-  "keywords": [
-    "baboon",
-    "client",
-    "library"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/litixsoft/baboon-client",
-  "ignore": [
-    ".reports",
-    ".tmp",
-    ".dist",
-    "bower_components",
-    "docs",
-    "example",
-    "modules/**/*.spec.js",
-    "modules/**/*.html",
-    "node_modules",
-    "test",
-    ".*",
-    "Gruntfile.js",
-    "package.json",
-    "server.js",
-    "update.*",
-    "validate-commit-msg.js"
-  ],
-  "dependencies": {
-    "angular": "1.2.14",
-    "angular-animate": "1.2.14",
-    "angular-bootstrap": "~0.10.0",
-    "angular-route": "1.2.14",
-    "bootstrap": "~3.0.0",
-    "showdown": "https://github.com/zwirn1981/showdown.git#master",
-    "angular-socket-io": "~0.4.0",
-    "angular-translate": "~2.0.0",
-    "angular-translate-loader-static-files": "~2.0.0"
-  },
-  "devDependencies": {
-    "angular-mocks": "1.2.14",
-    "es5-shim": "~2.1.0",
-    "json3": "~3.2.6",
-    "highlightjs": "~8.0.0",
-    "angular-highlightjs": "~0.2.5"
-  }
 }
