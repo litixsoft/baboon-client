@@ -1,3 +1,12 @@
+<a name="0.4.2"></a>
+### 0.4.2 (2014-06-18)
+
+
+#### Features
+
+* update to angular 1.2.18 ([13258444](https://github.com/litixsoft/baboon-client/commit/132584440db4be1f910cac5856134949b934f381))
+
+
 <a name="0.4.1"></a>
 ### 0.4.1 (2014-06-13)
 
