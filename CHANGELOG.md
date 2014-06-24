@@ -1,3 +1,14 @@
+<a name="0.4.3"></a>
+### 0.4.3 (2014-06-24)
+
+
+#### Features
+
+* **bbc.checkbox:**
+  * works now with ng-disabled ([82c99578](https://github.com/litixsoft/baboon-client/commit/82c99578875215a364a3a07e9be113cf2c40b92d))
+  * works now with ng-disabled ([b8e6c0a8](https://github.com/litixsoft/baboon-client/commit/b8e6c0a86ce03d265e36831f3598e715d2ce3fc5))
+
+
 <a name="0.4.2"></a>
 ### 0.4.2 (2014-06-18)
 
