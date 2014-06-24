@@ -27,5 +27,6 @@
     "FORM_RESET": "Reset",
     "FORM_FIRSTNAME": "Firstname",
     "FORM_LASTNAME": "Lastname",
-    "FORM_LASTNAME_REQ": "Lastname is required."
+    "FORM_LASTNAME_REQ": "Lastname is required.",
+    "SWITCH_NG_DISABLED": "switch disabled status"
 }

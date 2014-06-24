@@ -29,5 +29,6 @@
     "FORM_LASTNAME": "Nachname",
     "FORM_LASTNAME_REQ": "Der Nachname muss angegeben werden.",
     "INTRO_TEXT": "Baboon-Client ist eine clientseitige Bibliothek für",
-    "INTRO_TEXT2": "Es beinhaltet verschiedene AngularJS Directiven um Aufgaben in der clientseitigen Web-Entwicklung zu vereinfachen."
+    "INTRO_TEXT2": "Es beinhaltet verschiedene AngularJS Directiven um Aufgaben in der clientseitigen Web-Entwicklung zu vereinfachen.",
+    "SWITCH_NG_DISABLED": "disabled Status umschalten"
 }

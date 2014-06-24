@@ -20,13 +20,23 @@
                     {{ 'DISABLED' | translate }}
                 </div>
                 <div>
+                    <bbc-checkbox ng-disabled="true" ng-model="model4"></bbc-checkbox>
+                    {{ 'DISABLED' | translate }}
+                </div>
+                <div>
+                    <bbc-checkbox ng-disabled="model.isDisabled" ng-model="model5"></bbc-checkbox>
+                    {{ model5 ? ('ACTIVATED' | translate) :  ('DEACTIVATED' | translate) }}
+
+                    <bbc-checkbox style="margin-left: 30px;" ng-model="model.isDisabled"></bbc-checkbox>
+                    {{ 'SWITCH_NG_DISABLED' | translate }}
+                    <span style="margin-left: 30px;">disabled: {{ model.isDisabled | json}}</span>
+                </div>
+                <div>
                     <bbc-checkbox ng-model="model2" ng-checked="check2" title="I'm a tool tip"></bbc-checkbox>
                     {{ model2 ? ('ACTIVATED' | translate) :  ('DEACTIVATED' | translate) }}
                 </div>
                 <div bbc-checkbox ng-model="model3" title="I'm a tool tip"></div>
                 {{ model3 ? ('ACTIVATED' | translate) :  ('DEACTIVATED' | translate) }}
-
-
             </div>
         </div>
     </div>

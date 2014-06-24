@@ -66,6 +66,7 @@
         "grunt-html2js": "~0.2.7",
         "grunt-karma": "~0.8.3",
         "grunt-newer": "~0.7.0",
+        "grunt-ngdocs": "litixsoft/grunt-ngdocs",
         "grunt-open": "~0.2.3",
         "karma-detect-browsers": "*",
         "karma-coverage": "*",
@@ -73,9 +74,8 @@
         "karma-junit-reporter": "*",
         "karma-mocha-reporter": "*",
         "less-middleware": "^0.1.15",
-        "load-grunt-tasks": "0.5.0",
-        "time-grunt": "~0.3.2",
-        "grunt-ngdocs": "litixsoft/grunt-ngdocs"
+        "load-grunt-tasks": "0.6.0",
+        "time-grunt": "~0.3.2"
     },
     "dependencies": {
         "socket.io": "^0.9.16"
