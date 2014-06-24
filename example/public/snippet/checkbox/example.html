@@ -1,14 +1,24 @@
 <div ng-controller="NgAppDemoCtrl" class="panel-body">
     <div>
         <bbc-checkbox disabled="disabled" ng-model="model1"></bbc-checkbox>
-        The box is disabled!
+        I am disabled!
+    </div>
+    <div>
+        <bbc-checkbox ng-disabled="true" ng-model="model4"></bbc-checkbox>
+        I am disabled!
+    </div>
+    <div>
+        <bbc-checkbox ng-disabled="model.isDisabled" ng-model="model5"></bbc-checkbox>
+        {{ model5 ? 'I am enabled!' : 'I am disabled!' }}
+
+        <bbc-checkbox style="margin-left: 30px;" ng-model="model.isDisabled"></bbc-checkbox>
+        switch disabled status
+        <span style="margin-left: 30px;">disabled: {{ model.isDisabled | json }}</span>
     </div>
     <div>
         <bbc-checkbox ng-model="model2" ng-checked="check2" title="I'm a tool tip"></bbc-checkbox>
-        {{ model2 ? 'I am enabled!' :  'I am disabled!' }}
+        {{ model2 ? 'I am enabled!' : 'I am disabled!' }}
     </div>
     <div bbc-checkbox ng-model="model3" title="I'm a tool tip"></div>
-    {{ model3 ? 'I am enabled!' :  'I am disabled!' }}
-
-
+    {{ model3 ? 'I am enabled!' : 'I am disabled!' }}
 </div>

@@ -1,0 +1,12 @@
+<div ng-controller="NgAppDemoCtrl" class="panel-body">
+    <div class="form-group">
+        <bbc-radio ng-model="m" name="group" label="1" value="1" ng-disabled="disabled"></bbc-radio>
+        <bbc-radio ng-model="m" name="group" label="2" value="2" ng-disabled="disabled"></bbc-radio>
+        <bbc-radio ng-model="m" name="group" label="3" value="3" ng-disabled="disabled"></bbc-radio>
+        <button class="btn btn-default" ng-click="clickMe()">
+            {{ disabled ? 'Enable' : 'Disable' }}
+        </button>
+    </div>
+
+    <pre>Value: {{ m }}</pre>
+</div>

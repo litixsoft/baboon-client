@@ -3,4 +3,9 @@ angular.module('NgAppDemo', ['bbc.checkbox']).controller('NgAppDemoCtrl', functi
     $scope.model2 = true;
     $scope.check2 = false;
     $scope.model3 = true;
+    $scope.model4 = true;
+    $scope.model5 = true;
+    $scope.model = {
+        isDisabled: true
+    };
 });
