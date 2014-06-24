@@ -117,7 +117,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             };
 
             self.modalInstance = $modal.open({
-                backdrop: options.backdrop,
+                backdrop: options.backdrop || true,
                 modalFade: true,
                 controller: 'BbcModalCtrl',
                 windowClass: 'bbc-modal-msg',
