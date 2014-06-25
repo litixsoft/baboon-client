@@ -1,3 +1,17 @@
+<a name="0.4.4"></a>
+### 0.4.4 (2014-06-25)
+
+
+#### Bug Fixes
+
+* **bbc.checkbox:** checkbox was selected when ng-model was undefined ([a4723758](https://github.com/litixsoft/baboon-client/commit/a4723758f518a40439d08ca15921a874bd0e099b))
+
+
+#### Features
+
+* **bbc.modal:** backdrop default value is set to true ([a57a7a9e](https://github.com/litixsoft/baboon-client/commit/a57a7a9ef40a6b5229ffb021dd968fc667455666))
+
+
 <a name="0.4.3"></a>
 ### 0.4.3 (2014-06-24)
 
