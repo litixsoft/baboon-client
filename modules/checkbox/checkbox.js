@@ -28,18 +28,18 @@ angular.module('bbc.checkbox', [])
             link: function (scope, element, attrs) {
                 scope.$watch('ngChecked', function () {
                     if (scope.ngChecked !== undefined) {
-                        element.children('span').toggleClass('glyphicon-ok', scope.ngChecked);
+                        element.children('span').toggleClass('glyphicon-ok', !!scope.ngChecked);
                         scope.ngModel = scope.ngChecked;
                     }
                 });
 
                 scope.$watch('ngModel', function () {
-                    element.children('span').toggleClass('glyphicon-ok', scope.ngModel);
+                    element.children('span').toggleClass('glyphicon-ok', !!scope.ngModel);
                 });
 
                 var clickEventBound = false;
                 var clickHandler = function () {
-                    element.children('span').toggleClass('glyphicon-ok ', scope.ngModel);
+                    element.children('span').toggleClass('glyphicon-ok ', !!scope.ngModel);
 
                     if (scope.ngModel !== undefined) {
                         scope.ngModel = !scope.ngModel;
