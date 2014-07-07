@@ -54,19 +54,19 @@
         "validate-commit-msg.js"
     ],
     "dependencies": {
-        "angular": "1.2.18",
-        "angular-animate": "1.2.18",
+        "angular": "1.2.19",
+        "angular-animate": "1.2.19",
         "angular-bootstrap": "~0.11.0",
-        "angular-route": "1.2.18",
+        "angular-route": "1.2.19",
         "angular-socket-io": "~0.6.0",
         "angular-translate": "~2.2.0",
         "angular-translate-loader-static-files": "~2.2.0",
-        "bootstrap": "~3.1.1",
+        "bootstrap": "~3.2.0",
         "showdown": "https://github.com/zwirn1981/showdown.git#master"
     },
     "devDependencies": {
         "angular-highlightjs": "~0.3.0",
-        "angular-mocks": "1.2.18",
+        "angular-mocks": "1.2.19",
         "es5-shim": "~3.4.0",
         "json3": "~3.3.1",
         "highlightjs": "~8.0.0"
