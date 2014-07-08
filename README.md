@@ -1,6 +1,10 @@
-# baboon client [![Build Status](https://travis-ci.org/litixsoft/baboon-client.svg?branch=v0.4)](https://travis-ci.org/litixsoft/baboon-client) [![david-dm](https://david-dm.org/litixsoft/baboon-client.svg?theme=shields.io)](https://david-dm.org/litixsoft/baboon-client/) [![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.svg?theme=shields.io)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
-
+# baboon client
 > Baboon-Client is a client library for [baboon webtoolkit](https://github.com/litixsoft/baboon). It also has different directives to simplify tasks in client web development.
+
+> [![Bower version](https://badge.fury.io/bo/baboon-client.svg)](http://badge.fury.io/bo/baboon-client)
+[![Build Status](https://secure.travis-ci.org/litixsoft/baboon-client.svg?branch=master)](https://travis-ci.org/litixsoft/baboon-client)
+[![david-dm](https://david-dm.org/litixsoft/baboon-client.svg?theme=shields.io)](https://david-dm.org/litixsoft/baboon-client/)
+[![david-dm](https://david-dm.org/litixsoft/baboon-client/dev-status.svg?theme=shields.io)](https://david-dm.org/litixsoft/baboon-client#info=devDependencies&view=table)
 
 * Website: http://www.litixsoft.de/baboon-client
 * API Documentation: http://www.litixsoft.de/baboon-client/api
