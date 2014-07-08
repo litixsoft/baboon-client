@@ -1,5 +1,5 @@
-.dist/**
-.reports/**
-bower_components/**
-build/**
-node_modules/**
+.dist/**/
+.reports/**/
+bower_components/**/
+build/**/
+node_modules/**/
