@@ -1,3 +1,12 @@
+<a name="0.4.6"></a>
+### 0.4.6 (2014-07-08)
+
+
+#### Bug Fixes
+
+* add margin to bbc-checkbox to fix style error in combination with twitter bootst ([842a8333](https://github.com/litixsoft/baboon-client/commit/842a83339f4368f64c71e00274726582a198065f))
+
+
 <a name="0.4.5"></a>
 ### 0.4.5 (2014-07-07)
 
