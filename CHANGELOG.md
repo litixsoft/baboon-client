@@ -1,3 +1,12 @@
+<a name="0.4.7"></a>
+### 0.4.7 (2014-07-14)
+
+
+#### Features
+
+* update to Angular.JS 1.2.20 ([e11cd633](https://github.com/litixsoft/baboon-client/commit/e11cd6337b169cc1e554e83b1ecbcabca3d93efa))
+
+
 <a name="0.4.6"></a>
 ### 0.4.6 (2014-07-08)
 
