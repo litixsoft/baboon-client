@@ -286,6 +286,7 @@ angular.module('example', [
 
         $scope.popupYesNo = function() {
             options.buttonOrder = null;
+            options.buttonMinWidth = null;
             options.callObj = {
                 cbYes: function () {
                     $scope.message = buttonTextValues.yes + ' ' + message;
@@ -299,6 +300,7 @@ angular.module('example', [
 
         $scope.popupOkClose = function(){
             options.buttonOrder = null;
+            options.buttonMinWidth = null;
             options.callObj = {
                 cbOk: function () {
                     $scope.message = buttonTextValues.ok + ' ' + message;
@@ -313,6 +315,7 @@ angular.module('example', [
         $scope.popupModal = function(){
             options.backdrop = true;
             options.buttonOrder = null;
+            options.buttonMinWidth = null;
             options.callObj = {
                 cbOk: function () {
                     $scope.message = buttonTextValues.ok + ' ' + message;
@@ -324,6 +327,7 @@ angular.module('example', [
         $scope.popupWithCancel = function(){
             options.backdrop = true;
             options.buttonOrder = null;
+            options.buttonMinWidth = null;
             $bbcModal.open(options);
 
             setTimeout(function() {
@@ -334,6 +338,7 @@ angular.module('example', [
         $scope.popupModalUpdate = function() {
             options.backdrop = true;
             options.buttonOrder = null;
+            options.buttonMinWidth = null;
             options.callObj = {
                 cbOk: function () {
                     $scope.message = buttonTextValues.ok + ' ' + message;
@@ -347,7 +352,21 @@ angular.module('example', [
         };
 
         $scope.popupYesNoWithButtonOrder = function() {
+            options.buttonMinWidth = null;
             options.buttonOrder = 'windows';
+            options.callObj = {
+                cbYes: function () {
+                    $scope.message = 'Yes has been clicked.';
+                },
+                cbNo: function () {
+                    $scope.message = 'No has been clicked.';
+                }
+            };
+            $bbcModal.open(options);
+        };
+
+        $scope.popupYesNoWithMinButtonWidth = function() {
+            options.buttonMinWidth = 50;
             options.callObj = {
                 cbYes: function () {
                     $scope.message = 'Yes has been clicked.';

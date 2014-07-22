@@ -7,10 +7,11 @@
             <tab heading="index.html">
                 <div hljs>
 <div ng-controller="NgAppDemoCtrl">
-    <button class="btn btn-default" ng-click="popupYesNo()">Yes/No Window</button>
-    <button class="btn btn-default" ng-click="popupOkClose()">Ok/Close Window</button>
-    <button class="btn btn-default" ng-click="popupModal()">Modal Window</button>
-    <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">Yes/No Window</button>
+    <button class="btn btn-default" ng-click="popupYesNo()">Yes/No Popup</button>
+    <button class="btn btn-default" ng-click="popupOkClose()">Ok/Close Popup</button>
+    <button class="btn btn-default" ng-click="popupModal()">Modal Popup</button>
+    <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">Windows style</button>
+    <button class="btn btn-default" ng-click="popupYesNoWithMinButtonWidth()">Min width</button>
 </div>
                 </div>
             </tab>
@@ -68,6 +69,19 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
         };
         $bbcModal.open(options);
     };
+
+    $scope.popupYesNoWithMinButtonWidth = function() {
+        options.buttonMinWidth = 50;
+        options.callObj = {
+            cbYes: function () {
+                $scope.message = 'Yes has been clicked.';
+            },
+            cbNo: function () {
+                $scope.message = 'No has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
 });
                 </div>
             </tab>
@@ -80,7 +94,8 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
                     <button class="btn btn-default" ng-click="popupYesNo()">{{ 'MODAL_YES_NO_TEXT' | translate }}</button>
                     <button class="btn btn-default" ng-click="popupOkClose()">{{ 'MODAL_OK_CLOSE_TEXT' | translate }}</button>
                     <button class="btn btn-default" ng-click="popupModal()">{{ 'MODAL_OK_TEXT' | translate }}</button>
-                    <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">Yes/No Window</button>
+                    <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">{{ 'MODAL_YES_NO_TEXT_BUTTON_ORDER' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupYesNoWithMinButtonWidth()">{{ 'MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH' | translate }}</button>
                 </div>
                 <div class="col-md-12">
                     <pre style="text-align: left;">{{ message }}</pre>

@@ -11,7 +11,7 @@
     "DEACTIVATED": "I am deactivated!",
     "DATE": "Date",
     "MODAL_YES_NO_TEXT": "Yes/No Popup",
-    "MODAL_OK_CLOSE_TEXT": "Ok/Close",
+    "MODAL_OK_CLOSE_TEXT": "Ok/Close Popup",
     "MODAL_OK_TEXT": "Modal Popup",
     "MODAL_CANCEL_DEMO_TEXT": "One second after opening the popup, it closes automatically.",
     "MODAL_UPDATE_DEMO_TEXT": "Two seconds after the opening of the popup the message is updated.",
@@ -28,5 +28,7 @@
     "FORM_FIRSTNAME": "Firstname",
     "FORM_LASTNAME": "Lastname",
     "FORM_LASTNAME_REQ": "Lastname is required.",
-    "SWITCH_NG_DISABLED": "switch disabled status"
+    "SWITCH_NG_DISABLED": "switch disabled status",
+    "MODAL_YES_NO_TEXT_BUTTON_ORDER": "Windows style",
+    "MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH": "Min width"
 }

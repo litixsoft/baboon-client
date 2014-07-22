@@ -112,6 +112,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
                 message: options.message,
                 callObj: options.callObj,
                 buttonOrder: options.buttonOrder || 'unix',
+                buttonMinWidth: options.buttonMinWidth || 100,
                 buttonTextValues: options.buttonTextValues
             };
 
