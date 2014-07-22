@@ -1,3 +1,14 @@
+<a name="0.4.8"></a>
+### 0.4.8 (2014-07-22)
+
+
+#### Features
+
+* **$bbcModal:**
+  * add option buttonMinWidth to set the min-width in pixel ([810d58c5](https://github.com/litixsoft/baboon-client/commit/810d58c5a257a2cf42f266a8679bf9aed709ae13))
+  * add option buttonOrder when open a new modal window ([a7447fd4](https://github.com/litixsoft/baboon-client/commit/a7447fd4cd1fda3159cf01c4ba575a06a40ed781))
+
+
 <a name="0.4.7"></a>
 ### 0.4.7 (2014-07-14)
 
