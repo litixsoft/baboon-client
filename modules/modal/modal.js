@@ -2,7 +2,6 @@
 
 angular.module('bbc.modal', ['modal/msgBox.html'])
     .controller('BbcModalCtrl', function ($rootScope, $scope, $modalInstance, modalOptions) {
-
         $scope.modalOptions = modalOptions;
 
         $rootScope.$on($scope.modalOptions.msgId, function (ev, msg) {
@@ -13,8 +12,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
 
         if (typeof($scope.modalOptions.callObj) === 'function') {
             $scope.modalOptions.actionOk = $scope.modalOptions.callObj;
-        }
-        else if (typeof($scope.modalOptions.callObj) === 'object') {
+        } else if (typeof($scope.modalOptions.callObj) === 'object') {
             $scope.modalOptions.actionOk = $scope.modalOptions.callObj.cbOk;
             $scope.modalOptions.actionClose = $scope.modalOptions.callObj.cbClose;
             $scope.modalOptions.actionYes = $scope.modalOptions.callObj.cbYes;
@@ -32,7 +30,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionYes === 'function') {
                 $scope.modalOptions.actionYes.call();
             }
-            $scope.cancel ();
+            $scope.cancel();
         };
 
         /** Executes the NO action and closes the modal window */
@@ -40,7 +38,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionNo === 'function') {
                 $scope.modalOptions.actionNo.call();
             }
-            $scope.cancel ();
+            $scope.cancel();
         };
 
         /** Executes the OK action and closes the modal window */
@@ -48,7 +46,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionOk === 'function') {
                 $scope.modalOptions.actionOk.call();
             }
-            $scope.cancel ();
+            $scope.cancel();
         };
 
         /** Executes the CLOSE action and closes the modal window */
@@ -56,21 +54,21 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             if (typeof $scope.modalOptions.actionOk === 'function') {
                 $scope.modalOptions.actionClose.call();
             }
-            $scope.cancel ();
+            $scope.cancel();
         };
     })
-    /**
-     * @ngdoc service
-     * @name bbc.modal.$bbcModal
-     * @requires $rootScope
-     * @requires $modal
-     *
-     * @description
-     * Service displaying a modal popup window.
-     *
-     * For more details see our {@link /modal Guide}.
-     *
-     */
+/**
+ * @ngdoc service
+ * @name bbc.modal.$bbcModal
+ * @requires $rootScope
+ * @requires $modal
+ *
+ * @description
+ * Service displaying a modal popup window.
+ *
+ * For more details see our {@link /modal Guide}.
+ *
+ */
     .service('$bbcModal', function ($rootScope, $modal) {
         var pub = {};
 
@@ -113,6 +111,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
                 headline: options.headline,
                 message: options.message,
                 callObj: options.callObj,
+                buttonOrder: options.buttonOrder || 'unix',
                 buttonTextValues: options.buttonTextValues
             };
 

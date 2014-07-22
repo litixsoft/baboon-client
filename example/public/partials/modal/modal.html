@@ -10,6 +10,7 @@
     <button class="btn btn-default" ng-click="popupYesNo()">Yes/No Window</button>
     <button class="btn btn-default" ng-click="popupOkClose()">Ok/Close Window</button>
     <button class="btn btn-default" ng-click="popupModal()">Modal Window</button>
+    <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">Yes/No Window</button>
 </div>
                 </div>
             </tab>
@@ -21,7 +22,7 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
     var options = { id: 'uniqueId', headline: 'Title bar', message: 'The message text.',
                     backdrop: false, buttonTextValues: buttonTextValues }
 
-    $scope.popupYesNo = function(){
+    $scope.popupYesNo = function() {
         options.callObj = {
             cbYes: function () {
                 $scope.message = 'Yes has been clicked.';
@@ -33,7 +34,7 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
         $bbcModal.open(options);
     };
 
-    $scope.popupOkClose = function(){
+    $scope.popupOkClose = function() {
         options.callObj = {
             cbOk: function () {
                 $scope.message = 'Ok has been clicked.';
@@ -45,11 +46,24 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
         $bbcModal.open(options);
     };
 
-    $scope.popupModal = function(){
+    $scope.popupModal = function() {
         options.backdrop = true;
             options.callObj = {
             cbOk: function () {
                 $scope.message = 'Ok has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
+
+    $scope.popupYesNoWithButtonOrder = function() {
+        options.buttonOrder = 'windows';
+        options.callObj = {
+            cbYes: function () {
+                $scope.message = 'Yes has been clicked.';
+            },
+            cbNo: function () {
+                $scope.message = 'No has been clicked.';
             }
         };
         $bbcModal.open(options);
@@ -66,6 +80,7 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
                     <button class="btn btn-default" ng-click="popupYesNo()">{{ 'MODAL_YES_NO_TEXT' | translate }}</button>
                     <button class="btn btn-default" ng-click="popupOkClose()">{{ 'MODAL_OK_CLOSE_TEXT' | translate }}</button>
                     <button class="btn btn-default" ng-click="popupModal()">{{ 'MODAL_OK_TEXT' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">Yes/No Window</button>
                 </div>
                 <div class="col-md-12">
                     <pre style="text-align: left;">{{ message }}</pre>
