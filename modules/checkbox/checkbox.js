@@ -19,8 +19,8 @@ angular.module('bbc.checkbox', [])
             restrict: 'EA',
             replace: true,
             scope: {
-                ngModel: '=',
-                ngChecked: '='
+                ngModel: '=?',
+                ngChecked: '=?'
             },
             template: '<div class="bbc-checkbox" ng-class="{\'disabled\': disabled}">' +
                 '<span class="glyphicon"></span>' +
