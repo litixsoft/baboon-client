@@ -62,4 +62,3 @@ angular.module('bbc.checkbox', [])
             }
         };
     });
-
