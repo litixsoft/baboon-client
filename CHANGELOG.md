@@ -1,3 +1,12 @@
+<a name="0.4.9"></a>
+### 0.4.9 (2014-07-29)
+
+
+#### Bug Fixes
+
+* **bbcCheckbox:** make scope variables optional so that the directive will work when there is no n ([edbc2530](https://github.com/litixsoft/baboon-client/commit/edbc25308e1b317e480ff123189a4ab66814fcf0))
+
+
 <a name="0.4.8"></a>
 ### 0.4.8 (2014-07-22)
 
