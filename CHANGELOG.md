@@ -1,3 +1,12 @@
+<a name="0.4.10"></a>
+### 0.4.10 (2014-08-04)
+
+
+#### Features
+
+* **$bbcModal:** add option size ([7e4375b4](https://github.com/litixsoft/baboon-client/commit/7e4375b4d6ab05370957b4ebaa314b08067344cc))
+
+
 <a name="0.4.9"></a>
 ### 0.4.9 (2014-07-29)
 
