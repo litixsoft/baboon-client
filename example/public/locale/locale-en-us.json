@@ -30,5 +30,6 @@
     "FORM_LASTNAME_REQ": "Lastname is required.",
     "SWITCH_NG_DISABLED": "switch disabled status",
     "MODAL_YES_NO_TEXT_BUTTON_ORDER": "Windows style",
-    "MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH": "Min width"
+    "MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH": "Min width",
+    "MODAL_YES_NO_TEXT_BUTTON_SIZE": "With size"
 }

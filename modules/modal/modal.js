@@ -97,7 +97,10 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
          * @param {string} options.message The message of the modal window.
          * @param {object|function} options.callObj A function with a callback for the ok button or an object with different callbacks for different buttons, which are called on button click.
          *                                          The callbacks determine which buttons are displayed. Possible values for the object: cbOk, cbClose, cbYes and cbNo.
+         * @param {number} options.buttonMinWidth The min-width of the buttons. Default is 100.
+         * @param {string} options.buttonOrder When set to 'windows', the ok and yes button are left to the close and no button. Default is 'unix'. Then the ok and yes button are right to the close and no button.
          * @param {object} options.buttonTextValues An object with display values for the buttons.
+         * @param {number} options.size Optional size of modal window. Allowed values: 'sm' (small) or 'lg' (large). Requires Bootstrap 3.1.0 or later.
          *
          * @description
          * Opens the modal window.
@@ -119,6 +122,7 @@ angular.module('bbc.modal', ['modal/msgBox.html'])
             self.modalInstance = $modal.open({
                 backdrop: options.backdrop || true,
                 modalFade: true,
+                size: options.size,
                 controller: 'BbcModalCtrl',
                 windowClass: 'bbc-modal-msg',
                 resolve: {

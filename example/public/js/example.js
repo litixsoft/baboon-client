@@ -287,6 +287,7 @@ angular.module('example', [
         $scope.popupYesNo = function() {
             options.buttonOrder = null;
             options.buttonMinWidth = null;
+            options.size = '';
             options.callObj = {
                 cbYes: function () {
                     $scope.message = buttonTextValues.yes + ' ' + message;
@@ -301,6 +302,7 @@ angular.module('example', [
         $scope.popupOkClose = function(){
             options.buttonOrder = null;
             options.buttonMinWidth = null;
+            options.size = '';
             options.callObj = {
                 cbOk: function () {
                     $scope.message = buttonTextValues.ok + ' ' + message;
@@ -316,6 +318,7 @@ angular.module('example', [
             options.backdrop = true;
             options.buttonOrder = null;
             options.buttonMinWidth = null;
+            options.size = '';
             options.callObj = {
                 cbOk: function () {
                     $scope.message = buttonTextValues.ok + ' ' + message;
@@ -328,6 +331,7 @@ angular.module('example', [
             options.backdrop = true;
             options.buttonOrder = null;
             options.buttonMinWidth = null;
+            options.size = '';
             $bbcModal.open(options);
 
             setTimeout(function() {
@@ -339,6 +343,7 @@ angular.module('example', [
             options.backdrop = true;
             options.buttonOrder = null;
             options.buttonMinWidth = null;
+            options.size = '';
             options.callObj = {
                 cbOk: function () {
                     $scope.message = buttonTextValues.ok + ' ' + message;
@@ -354,6 +359,7 @@ angular.module('example', [
         $scope.popupYesNoWithButtonOrder = function() {
             options.buttonMinWidth = null;
             options.buttonOrder = 'windows';
+            options.size = '';
             options.callObj = {
                 cbYes: function () {
                     $scope.message = 'Yes has been clicked.';
@@ -367,12 +373,27 @@ angular.module('example', [
 
         $scope.popupYesNoWithMinButtonWidth = function() {
             options.buttonMinWidth = 50;
+            options.size = '';
             options.callObj = {
                 cbYes: function () {
                     $scope.message = 'Yes has been clicked.';
                 },
                 cbNo: function () {
                     $scope.message = 'No has been clicked.';
+                }
+            };
+            $bbcModal.open(options);
+        };
+
+        $scope.popupWithSize = function() {
+            options.buttonMinWidth = 50;
+            options.size = 'sm';
+            options.callObj = {
+                cbYes: function () {
+                    $scope.message = buttonTextValues.yes + ' ' + message;
+                },
+                cbNo: function () {
+                    $scope.message = buttonTextValues.no + ' ' + message;
                 }
             };
             $bbcModal.open(options);

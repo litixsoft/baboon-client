@@ -12,6 +12,7 @@
     <button class="btn btn-default" ng-click="popupModal()">Modal Popup</button>
     <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">Windows style</button>
     <button class="btn btn-default" ng-click="popupYesNoWithMinButtonWidth()">Min width</button>
+    <button class="btn btn-default" ng-click="popupWithSize()">With size</button>
 </div>
                 </div>
             </tab>
@@ -82,6 +83,19 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
         };
         $bbcModal.open(options);
     };
+
+    $scope.popupWithSize = function() {
+        options.size = 'sm';
+        options.callObj = {
+            cbYes: function () {
+                $scope.message = 'Yes has been clicked.';
+            },
+            cbNo: function () {
+                $scope.message = 'No has been clicked.';
+            }
+        };
+        $bbcModal.open(options);
+    };
 });
                 </div>
             </tab>
@@ -96,6 +110,7 @@ angular.module('ngAppDemo', ['bbc.modal']).controller('NgAppDemoCtrl', function 
                     <button class="btn btn-default" ng-click="popupModal()">{{ 'MODAL_OK_TEXT' | translate }}</button>
                     <button class="btn btn-default" ng-click="popupYesNoWithButtonOrder()">{{ 'MODAL_YES_NO_TEXT_BUTTON_ORDER' | translate }}</button>
                     <button class="btn btn-default" ng-click="popupYesNoWithMinButtonWidth()">{{ 'MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH' | translate }}</button>
+                    <button class="btn btn-default" ng-click="popupWithSize()">{{ 'MODAL_YES_NO_TEXT_BUTTON_SIZE' | translate }}</button>
                 </div>
                 <div class="col-md-12">
                     <pre style="text-align: left;">{{ message }}</pre>

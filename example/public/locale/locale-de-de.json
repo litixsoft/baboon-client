@@ -32,5 +32,6 @@
     "INTRO_TEXT2": "Es beinhaltet verschiedene AngularJS Directiven um Aufgaben in der clientseitigen Web-Entwicklung zu vereinfachen.",
     "SWITCH_NG_DISABLED": "disabled Status umschalten",
     "MODAL_YES_NO_TEXT_BUTTON_ORDER": "Windows Stil",
-    "MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH": "Minimale Breite"
+    "MODAL_YES_NO_TEXT_BUTTON_MIN_WIDTH": "Minimale Breite",
+    "MODAL_YES_NO_TEXT_BUTTON_SIZE": "Mit Größe"
 }
