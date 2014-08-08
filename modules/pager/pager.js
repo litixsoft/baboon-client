@@ -182,8 +182,8 @@ angular.module('bbc.pager', [])
                 /**
                  * Trigger reload if currentPage changes.
                  */
-                scope.$watch('currentPage', function (oldValue, newValue) {
-                    if (oldValue !== newValue) {
+                scope.$watch('currentPage', function (newValue, oldValue) {
+                    if (newValue > 0 && newValue !== oldValue) {
                         scope.refresh();
                     }
                 });

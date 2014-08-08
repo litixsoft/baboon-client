@@ -324,5 +324,35 @@ describe('bbcPager', function () {
             expect(spy).toHaveBeenCalled();
             expect(spy.calls.count()).toEqual(1);
         });
+
+        it('should not refresh the data when the current page is not a number', function () {
+            element = angular.element('<bbc-pager count="count" current-page="currentPage" on-paging="getData(pagingOptions)"></bbc-pager>');
+            compile(element)(scope);
+            scope.$digest();
+
+            var elementScope = element.isolateScope();
+            spyOn(elementScope, 'refresh');
+            var spy = elementScope.refresh;
+            scope.currentPage = 'a';
+            elementScope.$digest();
+
+            expect(spy).not.toHaveBeenCalled();
+            expect(spy.calls.count()).toEqual(0);
+        });
+
+        it('should not refresh the data when the current page is less than 0', function () {
+            element = angular.element('<bbc-pager count="count" current-page="currentPage" on-paging="getData(pagingOptions)"></bbc-pager>');
+            compile(element)(scope);
+            scope.$digest();
+
+            var elementScope = element.isolateScope();
+            spyOn(elementScope, 'refresh');
+            var spy = elementScope.refresh;
+            scope.currentPage = -10;
+            elementScope.$digest();
+
+            expect(spy).not.toHaveBeenCalled();
+            expect(spy.calls.count()).toEqual(0);
+        });
     });
 });
