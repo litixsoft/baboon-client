@@ -1,3 +1,12 @@
+<a name="0.4.11"></a>
+### 0.4.11 (2014-08-10)
+
+
+#### Bug Fixes
+
+* **bbcPager:** only trigger loading of data when the currentPage is a number an greater than 0 ([9a91a04b](https://github.com/litixsoft/baboon-client/commit/9a91a04b5581d812f89b58ecdbda6c28a865b1ab))
+
+
 <a name="0.4.10"></a>
 ### 0.4.10 (2014-08-04)
 
