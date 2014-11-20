@@ -1,3 +1,12 @@
+<a name="0.5.0"></a>
+## 0.5.0 (2014-11-20)
+
+
+#### Features
+
+* update to angular.js 1.3.3 ([56767411](https://github.com/litixsoft/baboon-client/commit/5676741120114f07ecb565b055ec6c30162233d2))
+
+
 <a name="0.4.11"></a>
 ### 0.4.11 (2014-08-10)
 
