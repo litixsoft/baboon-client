@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('bbc.float', [])
-    /**
-     * @ngdoc directive
-     * @name bbc.float.directive:bbcFloat
-     * @restrict A
-     * @element input
-     *
-     * @description
-     * Convert and round any number to a float by given decimal places. It replaces a decimal comma with an decimal point. An non-float-input returns undefined.
-     *
-     * For more information look at the [guide](/float).
-     *
-     * @param {number=} [bbc-float=2] Number of decimal places.
-     *
-     */
+/**
+ * @ngdoc directive
+ * @name bbc.float.directive:bbcFloat
+ * @restrict A
+ * @element input
+ *
+ * @description
+ * Convert and round any number to a float by given decimal places. It replaces a decimal comma with an decimal point. An non-float-input returns undefined.
+ *
+ * For more information look at the [guide](/float).
+ *
+ * @param {number=} [bbc-float=2] Number of decimal places.
+ *
+ */
     .directive('bbcFloat', function () {
         var FLOAT_REGEXP = /^\-?\d+((\.|,)?(\d+)?)?$/;
 
@@ -24,7 +24,7 @@ angular.module('bbc.float', [])
             var mul_div = parseInt('1' + zeros, 10);
             var increment = parseFloat('.' + zeros + '01');
 
-            if (( (number * (mul_div * 10)) % 10) >= 5) {
+            if (number * (mul_div * 10) % 10 >= 5) {
                 number += increment;
             }
 
@@ -34,7 +34,7 @@ angular.module('bbc.float', [])
         return {
             restrict: 'A',
             require: 'ngModel',
-            link: function (scope, elm, attrs, ctrl) {
+            link: function (scope, elm, attrs, ngModel) {
                 var numberOfDigits = 2;
 
                 // get the number of digits from attr
@@ -46,35 +46,24 @@ angular.module('bbc.float', [])
                     }
                 });
 
-                ctrl.$parsers.push(function (viewValue) {
+                ngModel.$validators.bbcfloat = function (value) {
+                    return value === null || value === undefined ? true : FLOAT_REGEXP.test(value);
+                };
+
+                ngModel.$parsers.push(function (viewValue) {
                     if (!viewValue) {
-                        // reset validation
-                        ctrl.$setValidity('float', true);
                         return null;
                     }
 
                     if (FLOAT_REGEXP.test(viewValue)) {
-                        // it is valid
-                        ctrl.$setValidity('float', true);
-
                         return typeof viewValue === 'number' ? roundToDecimal(viewValue, numberOfDigits) : roundToDecimal(parseFloat(viewValue.replace(',', '.')), numberOfDigits);
-                    } else {
-                        // it is invalid, return undefined (no model update)
-                        ctrl.$setValidity('float', false);
-
-                        return undefined;
                     }
+
+                    return NaN;
                 });
 
-                ctrl.$formatters.unshift(function (modelValue) {
-                    if(modelValue === undefined || modelValue === null) {
-                        ctrl.$setValidity('float', true);
-                        return modelValue;
-                    }
-
-                    ctrl.$setValidity('float', !isNaN(modelValue));
-
-                    if (!isNaN(modelValue)) {
+                ngModel.$formatters.unshift(function (modelValue) {
+                    if (!isNaN(modelValue) && modelValue !== null) {
                         modelValue = parseFloat(modelValue).toFixed(numberOfDigits).replace('.', ',');
                     }
 

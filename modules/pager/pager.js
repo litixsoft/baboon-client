@@ -20,30 +20,30 @@ angular.module('bbc.pager', [])
     .directive('bbcPager', function () {
         return {
             restrict: 'E',
-            template: '<div class="row">' +
-                '<div class="btn-toolbar bbc-pager">' +
-                '<div class="btn-group">' +
-                '<button class="btn btn-primary" ng-click="firstPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-step-backward"></span></button>' +
-                '<button class="btn btn-primary" ng-click="previousPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-backward"></span></button>' +
-                '</div>' +
-                '<div class="btn-group">' +
-                '<input class="form-control count-control" type="text" ng-model="currentPage">' +
-                '</div>' +
-                '<div class="btn-group">' +
-                '<button class="btn btn-primary" ng-disabled="true">of {{numberOfPages()}}</button>' +
-                '</div>' +
-                '<div class="btn-group">' +
-                '<button class="btn btn-primary" ng-click="nextPage()" ng-disabled="currentPage >= numberOfPages()"><span class="glyphicon glyphicon-forward"></span></button>' +
-                '<button class="btn btn-primary" ng-click="lastPage()" ng-disabled="currentPage >= numberOfPages()"><span class="glyphicon glyphicon-step-forward"></span></button>' +
-                '</div>' +
-                '<div class="btn-group">' +
-                '<select class="form-control" ng-model="pageSize" ng-options="p for p in pageSizeOptions"></select>' +
-                '</div>' +
-                '<div class="btn-group">' +
-                '<button class="btn btn-primary" ng-disabled="true">{{count}} items</button>' +
-                '</div>' +
-                '</div>' +
-                '</div>',
+            template: '<div>' +
+            '<div class="btn-toolbar bbc-pager">' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-primary" ng-click="firstPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-step-backward"></span></button>' +
+            '<button class="btn btn-primary" ng-click="previousPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-backward"></span></button>' +
+            '</div>' +
+            '<div class="btn-group">' +
+            '<input class="form-control count-control" type="text" ng-model="currentPage">' +
+            '</div>' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-primary" ng-disabled="true">of {{numberOfPages()}}</button>' +
+            '</div>' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-primary" ng-click="nextPage()" ng-disabled="currentPage >= numberOfPages()"><span class="glyphicon glyphicon-forward"></span></button>' +
+            '<button class="btn btn-primary" ng-click="lastPage()" ng-disabled="currentPage >= numberOfPages()"><span class="glyphicon glyphicon-step-forward"></span></button>' +
+            '</div>' +
+            '<div class="btn-group">' +
+            '<select class="form-control" ng-model="pageSize" ng-options="p for p in pageSizeOptions"></select>' +
+            '</div>' +
+            '<div class="btn-group">' +
+            '<button class="btn btn-primary" ng-disabled="true">{{count}} items</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>',
             replace: true,
             scope: {
                 count: '=',
@@ -56,6 +56,7 @@ angular.module('bbc.pager', [])
                 // default values
                 var defaultPageSizeOptions = [1, 5, 10, 25, 100];
                 var defaultPageSize = 10;
+                scope.pageSize = defaultPageSize;
                 scope.currentPage = 1;
                 scope.count = scope.count || 0;
 

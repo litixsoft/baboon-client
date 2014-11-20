@@ -37,7 +37,7 @@ angular.module('bbc.checkbox', [])
                     element.children('span').toggleClass('glyphicon-ok', !!scope.ngModel);
                 });
 
-                var clickEventBound = false;
+                var clickEventBound = true;
                 var clickHandler = function () {
                     element.children('span').toggleClass('glyphicon-ok ', !!scope.ngModel);
 
@@ -46,6 +46,8 @@ angular.module('bbc.checkbox', [])
                         scope.$apply();
                     }
                 };
+
+                element.on('click', clickHandler);
 
                 attrs.$observe('disabled', function (value) {
                     if (value) {

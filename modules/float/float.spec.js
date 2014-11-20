@@ -69,7 +69,7 @@ describe('bbcFloat', function () {
 
         it('should pass with undefined', function() {
             form.val.$setViewValue(undefined);
-            expect(scope.model.val).toBeNull();
+            expect(scope.model.val).toBeUndefined();
             expect(form.val.$valid).toBe(true);
         });
 
