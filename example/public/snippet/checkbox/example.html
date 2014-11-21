@@ -21,4 +21,6 @@
     </div>
     <div bbc-checkbox ng-model="model3" title="I'm a tool tip"></div>
     {{ model3 ? 'I am enabled!' : 'I am disabled!' }}
+    <div bbc-checkbox ng-model="model6" title="I'm a tool tip">undefined init value</div>
+    {{ model6 ? ('ACTIVATED' | translate) :  ('DEACTIVATED' | translate) }}
 </div>

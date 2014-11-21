@@ -23,8 +23,8 @@ angular.module('bbc.checkbox', [])
                 ngChecked: '=?'
             },
             template: '<div class="bbc-checkbox" ng-class="{\'disabled\': disabled}">' +
-                '<span class="glyphicon"></span>' +
-                '</div>',
+            '<span class="glyphicon"></span>' +
+            '</div>',
             link: function (scope, element, attrs) {
                 scope.$watch('ngChecked', function () {
                     if (scope.ngChecked !== undefined) {
@@ -39,12 +39,9 @@ angular.module('bbc.checkbox', [])
 
                 var clickEventBound = true;
                 var clickHandler = function () {
-                    element.children('span').toggleClass('glyphicon-ok ', !!scope.ngModel);
-
-                    if (scope.ngModel !== undefined) {
-                        scope.ngModel = !scope.ngModel;
-                        scope.$apply();
-                    }
+                    var newModel = !!scope.ngModel;
+                    scope.ngModel = !newModel;
+                    scope.$apply();
                 };
 
                 element.on('click', clickHandler);

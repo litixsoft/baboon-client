@@ -19,10 +19,34 @@ describe('bbcCheckbox', function () {
         expect(scope.model.val).toBeUndefined();
     });
 
-    it('should be undefined after click', function () {
+    it('should be true after click when model value is initially undefined', function () {
         expect(scope.model.val).toBeUndefined();
         element.triggerHandler('click');
+        expect(scope.model.val).toBeTruthy();
+    });
+
+    it('should be true after click when model value is initially null', function () {
         expect(scope.model.val).toBeUndefined();
+        scope.model.val = null;
+        scope.$digest();
+        element.triggerHandler('click');
+        expect(scope.model.val).toBeTruthy();
+    });
+
+    it('should be true after click when model value is initially an empty string', function () {
+        expect(scope.model.val).toBeUndefined();
+        scope.model.val = '';
+        scope.$digest();
+        element.triggerHandler('click');
+        expect(scope.model.val).toBeTruthy();
+    });
+
+    it('should be true after click when model value is initially number 0', function () {
+        expect(scope.model.val).toBeUndefined();
+        scope.model.val = 0;
+        scope.$digest();
+        element.triggerHandler('click');
+        expect(scope.model.val).toBeTruthy();
     });
 
     it('should be true after click', function () {
