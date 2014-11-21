@@ -1,3 +1,12 @@
+<a name="0.5.1"></a>
+### 0.5.1 (2014-11-21)
+
+
+#### Bug Fixes
+
+* **bbcCheckbox:** Works now correct when the initial value is falsy ([b493fa5c](https://github.com/litixsoft/baboon-client/commit/b493fa5c3f6a3d9fadc78a8fd3acc24bf505ed64))
+
+
 <a name="0.5.0"></a>
 ## 0.5.0 (2014-11-20)
 
