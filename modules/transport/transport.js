@@ -231,7 +231,11 @@ angular.module('bbc.transport', ['btford.socket-io'])
                         var error = {};
 
                         if (typeof data !== 'object') {
-                            error = new Error(JSON.parse(data));
+                            error = JSON.parse(data);
+
+                            if (typeof error === 'string') {
+                                error = new Error(error);
+                            }
                         }
                         else {
                             error = data;
