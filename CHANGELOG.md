@@ -1,3 +1,12 @@
+<a name="0.5.2"></a>
+### 0.5.2 (2015-09-05)
+
+
+#### Bug Fixes
+
+* **$bbcTransport:** do not wrap rest errors in Error object if they are already an object ([085cdf0d](https://github.com/litixsoft/baboon-client/commit/085cdf0d3a8b438e4b1b33828245efd6d2122662))
+
+
 <a name="0.5.1"></a>
 ### 0.5.1 (2014-11-21)
 
