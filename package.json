@@ -1,7 +1,7 @@
 {
     "name": "baboon-client",
     "description": "Baboon Web Toolkit, client library.",
-    "version": "0.5.2",
+    "version": "0.5.3",
     "homepage": "https://github.com/litixsoft/baboon-client",
     "author": {
         "name": "Litixsoft GmbH",
@@ -55,7 +55,7 @@
         "test": "grunt test"
     },
     "devDependencies": {
-        "ejs": "^1.0.0",
+        "ejs": "^2.5.5",
         "express": "^3.5.1",
         "jshint-stylish": "^1.0.0",
         "grunt": "^0.4.5",
