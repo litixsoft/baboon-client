@@ -35,7 +35,6 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
             },
             templateUrl: 'datepicker/datepicker.html',
             link: function (scope, element, attrs, ctrls) {
-
                 scope.element = element[0];
                 scope.visible = false;                     // is datepicker popup visible
                 scope.divider = '';                        // the character used to divide the date numbers 12.2.2013
@@ -288,6 +287,10 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     return scope.month;
                 }
 
+                function update () {
+                    createDays(scope.selectedDay);
+                }
+
                 /**
                  * scrolls the year container in the assigned direction, recursive
                  *
@@ -467,11 +470,6 @@ angular.module('bbc.datepicker', ['datepicker/datepicker.html'])
                     }
                     createDays(scope.selectedDay);
                 });
-
-
-                function update () {
-                    createDays(scope.selectedDay);
-                }
             }
         };
     });

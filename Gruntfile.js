@@ -1,9 +1,9 @@
 'use strict';
 
-//var path = require('path');
+var path = require('path');
 
 module.exports = function (grunt) {
-    var path = require('path');
+    // var path = require('path');
 
     /**
      * Gets the index.html file from the code coverage folder.
@@ -29,13 +29,11 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         src: {
-            jshint: {
-                files: [
-                    'modules/**/*.js',
-                    'Gruntfile.js',
-                    '!modules/**/*.tpl.js'
-                ]
-            },
+            jshint: [
+                'modules/**/*.js',
+                'Gruntfile.js',
+                '!modules/**/*.tpl.js'
+            ],
             bowerrc: grunt.file.readJSON('.bowerrc'),
             tmpMod: '.tmp/modules'
         },
@@ -61,11 +59,11 @@ module.exports = function (grunt) {
 
         jshint: {
             options: {
-                jshintrc: true,
+                jshintrc: '.jshintrc',
                 reporter: require('jshint-stylish')
             },
             test: {
-                src: '<%= src.jshint.files %>'
+                src: '<%= src.jshint %>'
             },
             jslint: {
                 options: {
@@ -73,7 +71,7 @@ module.exports = function (grunt) {
                     reporterOutput: '.reports/lint/jshint.xml'
                 },
                 files: {
-                    src: '<%= src.jshint.files %>'
+                    src: '<%= src.jshint %>'
                 }
             },
             checkstyle: {
@@ -82,7 +80,7 @@ module.exports = function (grunt) {
                     reporterOutput: '.reports/lint/jshint_checkstyle.xml'
                 },
                 files: {
-                    src: '<%= src.jshint.files %>'
+                    src: '<%= src.jshint %>'
                 }
             }
         },

@@ -9,24 +9,12 @@
     },
     "maintainers": [
         {
-            "name": "Timo Liebetrau",
-            "email": "t.liebetrau@litixsoft.de"
-        },
-        {
-            "name": "Dominic Sachs",
-            "email": "d.sachs@litixsoft.de"
-        },
-        {
-            "name": "Marco Kannenberg",
-            "email": "m.kannenberg@litixsoft.de"
-        },
-        {
-            "name": "Andreas Krummsdorf",
-            "email": "a.krummsdorf@litixsoft.de"
-        },
-        {
             "name": "Sven Bernstein",
             "email": "s.bernstein@litixsoft.de"
+        },
+        {
+            "name": "Thomas Scheibe",
+            "email": "th.scheibe@litixsoft.de"
         }
     ],
     "repository": {
@@ -44,7 +32,7 @@
         "fullstack web application framework",
         "baboon client library"
     ],
-    "license": "The MIT License (MIT)",
+    "license": "MIT",
     "licenses": [
         {
             "type": "MIT",
@@ -54,31 +42,37 @@
     "scripts": {
         "test": "grunt test"
     },
+    "dependencies": {
+        "socket.io": "~2.0.3"
+    },
     "devDependencies": {
-        "ejs": "^2.5.5",
-        "express": "^3.5.1",
-        "jshint-stylish": "^1.0.0",
-        "grunt": "^0.4.5",
-        "grunt-bump": "^0.0.16",
-        "grunt-contrib-clean": "^0.6.0",
-        "grunt-contrib-jshint": "^0.10.0",
-        "grunt-conventional-changelog": "^1.1.0",
-        "grunt-html2js": "^0.2.9",
-        "grunt-karma": "^0.9.0",
-        "grunt-newer": "^0.8.0",
+        "ejs": "~2.5.5",
+        "express": "~3.5.1",
+        "grunt": "~1.0.1",
+        "grunt-bump": "~0.8.0",
+        "grunt-contrib-clean": "~1.0.0",
+        "grunt-contrib-jshint": "~1.1.0",
+        "grunt-conventional-changelog": "~6.1.0",
+        "grunt-html2js": "~0.2.9",
+        "grunt-karma": "~0.9.0",
+        "grunt-newer": "~0.8.0",
         "grunt-ngdocs": "litixsoft/grunt-ngdocs",
-        "grunt-open": "^0.2.3",
-        "jasmine-core": "^2.1.2",
-        "karma-detect-browsers": "*",
+        "grunt-open": "~0.2.3",
+        "jasmine-core": "~2.1.2",
+        "jshint-stylish": "~2.2.1",
+        "karma": "~0.9.0",
+        "karma-chrome-launcher": "^2.2.0",
         "karma-coverage": "*",
-        "karma-jasmine": "^0.3.0",
+        "karma-detect-browsers": "*",
+        "karma-firefox-launcher": "^1.1.0",
+        "karma-ie-launcher": "^1.0.0",
+        "karma-jasmine": "~0.3.0",
         "karma-junit-reporter": "*",
         "karma-mocha-reporter": "*",
-        "less-middleware": "^0.1.15",
-        "load-grunt-tasks": "^1.0.0",
-        "time-grunt": "^1.0.0"
-    },
-    "dependencies": {
-        "socket.io": "^0.9.16"
+        "karma-phantomjs-launcher": "^1.0.4",
+        "karma-safari-launcher": "^1.0.0",
+        "less-middleware": "~0.1.15",
+        "load-grunt-tasks": "~3.5.2",
+        "time-grunt": "~1.4.0"
     }
 }
