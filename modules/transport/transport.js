@@ -122,9 +122,7 @@ angular.module('bbc.transport', ['btford.socket-io'])
 
                 // create the host url without port
                 config.host = config.protocol + '//' + config.hostname;
-            }
-            else {
-
+            } else {
                 // create the host url with port
                 config.host = config.protocol + '//' + config.hostname + ':' + config.port;
             }

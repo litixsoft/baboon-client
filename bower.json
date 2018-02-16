@@ -25,6 +25,10 @@
         {
             "name": "Sven Bernstein",
             "email": "s.bernstein@litixsoft.de"
+        },
+        {
+            "name": "Thomas Scheibe",
+            "email": "th.scheibe@litixsoft.de"
         }
     ],
     "description": "Baboon Web Toolkit, client library.",
